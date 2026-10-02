@@ -6,3 +6,4 @@ dist
 *.pem
 *.key
 *.tgz
+.DS_Store
