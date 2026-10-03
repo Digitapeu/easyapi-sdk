@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1ConnectionsData } from "@digitap/easyapi/models/operations";
+import { PostV1ConnectionsData } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1ConnectionsData = {
   sessionId: "<id>",

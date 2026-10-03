@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1FxConvertRequest } from "@digitap/easyapi/models/operations";
+import { GetV1FxConvertRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1FxConvertRequest = {
   from: "<value>",

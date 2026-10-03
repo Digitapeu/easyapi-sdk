@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1BankAccountsIdTransactionsRequest } from "@digitap/easyapi/models/operations";
+import { GetV1BankAccountsIdTransactionsRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1BankAccountsIdTransactionsRequest = {
   id: "fb874140-0739-4beb-af54-368f88063d41",
