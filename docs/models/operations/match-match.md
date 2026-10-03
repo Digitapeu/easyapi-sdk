@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { MatchMatch } from "@digitap/easyapi/models/operations";
+import { MatchMatch } from "@digitap.eu/easyapi/models/operations";
 
 let value: MatchMatch = {
   confidence: "exact",

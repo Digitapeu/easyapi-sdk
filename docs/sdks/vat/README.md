@@ -16,7 +16,7 @@ Validate an EU VAT number against VIES
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_vat_vies_countryCode_vatNumber" method="get" path="/v1/vat/vies/{countryCode}/{vatNumber}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -36,8 +36,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { vatValidateVies } from "@digitap/easyapi/funcs/vat-validate-vies.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { vatValidateVies } from "@digitap.eu/easyapi/funcs/vat-validate-vies.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

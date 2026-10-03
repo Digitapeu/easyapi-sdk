@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1BankIbanIbanResult } from "@digitap/easyapi/models/operations";
+import { GetV1BankIbanIbanResult } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1BankIbanIbanResult = {
   iban: "BE96390075085906",

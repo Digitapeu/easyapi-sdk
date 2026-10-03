@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { DeleteV1ConnectionsIdResponse } from "@digitap/easyapi/models/operations";
+import { DeleteV1ConnectionsIdResponse } from "@digitap.eu/easyapi/models/operations";
 
 let value: DeleteV1ConnectionsIdResponse = {
   headers: {

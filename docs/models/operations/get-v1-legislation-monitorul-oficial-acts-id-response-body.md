@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { GetV1LegislationMonitorulOficialActsIdResponseBody } from "@digitap/easyapi/models/operations";
+import { GetV1LegislationMonitorulOficialActsIdResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1LegislationMonitorulOficialActsIdResponseBody = {
   data: {
