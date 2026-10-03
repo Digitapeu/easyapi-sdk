@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompanyCuiBalanceYearData } from "@digitap/easyapi/models/operations";
+import { GetV1CompanyCuiBalanceYearData } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1CompanyCuiBalanceYearData = {
   cui: "<value>",

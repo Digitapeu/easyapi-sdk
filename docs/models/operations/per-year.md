@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PerYear } from "@digitap/easyapi/models/operations";
+import { PerYear } from "@digitap.eu/easyapi/models/operations";
 
 let value: PerYear = {
   year: 340339,

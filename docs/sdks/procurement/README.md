@@ -21,7 +21,7 @@ List a company's public procurement contracts by CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_company_cui_contracts" method="get" path="/v1/procurement/company/{cui}/contracts" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -45,8 +45,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementListCompanyContracts } from "@digitap/easyapi/funcs/procurement-list-company-contracts.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementListCompanyContracts } from "@digitap.eu/easyapi/funcs/procurement-list-company-contracts.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -102,7 +102,7 @@ List a company's public procurement tenders by CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_company_cui_tenders" method="get" path="/v1/procurement/company/{cui}/tenders" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -126,8 +126,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementListCompanyTenders } from "@digitap/easyapi/funcs/procurement-list-company-tenders.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementListCompanyTenders } from "@digitap.eu/easyapi/funcs/procurement-list-company-tenders.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -183,7 +183,7 @@ List a company's public procurement direct purchases by CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_company_cui_direct_purchases" method="get" path="/v1/procurement/company/{cui}/direct-purchases" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -207,8 +207,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementListCompanyDirectPurchases } from "@digitap/easyapi/funcs/procurement-list-company-direct-purchases.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementListCompanyDirectPurchases } from "@digitap.eu/easyapi/funcs/procurement-list-company-direct-purchases.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -264,7 +264,7 @@ List public procurement contracts for a CPV code
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_cpv_cpv_contracts" method="get" path="/v1/procurement/cpv/{cpv}/contracts" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -288,8 +288,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementListCpvContracts } from "@digitap/easyapi/funcs/procurement-list-cpv-contracts.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementListCpvContracts } from "@digitap.eu/easyapi/funcs/procurement-list-cpv-contracts.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -345,7 +345,7 @@ Get market analysis for a CPV code
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_cpv_cpv_analysis" method="get" path="/v1/procurement/cpv/{cpv}/analysis" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -367,8 +367,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementGetCpvAnalysis } from "@digitap/easyapi/funcs/procurement-get-cpv-analysis.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementGetCpvAnalysis } from "@digitap.eu/easyapi/funcs/procurement-get-cpv-analysis.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -422,7 +422,7 @@ Get a single public procurement contract's detail by number
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_procurement_contracts_number" method="get" path="/v1/procurement/contracts/{number}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -442,8 +442,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { procurementGetContract } from "@digitap/easyapi/funcs/procurement-get-contract.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { procurementGetContract } from "@digitap.eu/easyapi/funcs/procurement-get-contract.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
