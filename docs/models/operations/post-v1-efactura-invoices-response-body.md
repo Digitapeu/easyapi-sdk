@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { PostV1EfacturaInvoicesResponseBody } from "@digitap/easyapi/models/operations";
+import { PostV1EfacturaInvoicesResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1EfacturaInvoicesResponseBody = {
   data: {

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1SpvDocumentsIdResponse } from "@digitap/easyapi/models/operations";
+import { GetV1SpvDocumentsIdResponse } from "@digitap.eu/easyapi/models/operations";
 
 // No examples available for this model
 ```

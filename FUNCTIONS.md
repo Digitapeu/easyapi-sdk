@@ -19,8 +19,8 @@ specific category of applications.
 ## Example
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { healthCheck } from "@digitap/easyapi/funcs/health-check.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { healthCheck } from "@digitap.eu/easyapi/funcs/health-check.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

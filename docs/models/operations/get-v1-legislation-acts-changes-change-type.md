@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1LegislationActsChangesChangeType } from "@digitap/easyapi/models/operations";
+import { GetV1LegislationActsChangesChangeType } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1LegislationActsChangesChangeType = "updated";
 
