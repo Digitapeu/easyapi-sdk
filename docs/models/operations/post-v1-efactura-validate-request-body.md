@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1EfacturaValidateRequestBody } from "@digitap/easyapi/models/operations";
+import { PostV1EfacturaValidateRequestBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1EfacturaValidateRequestBody = {
   xml: "<value>",

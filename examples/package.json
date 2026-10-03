@@ -1,5 +1,5 @@
 {
-  "name": "@digitap/easyapi-examples",
+  "name": "@digitap.eu/easyapi-examples",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -13,6 +13,6 @@
     "tsx": "^4.19.2"
   },
   "dependencies": {
-    "@digitap/easyapi": "file:.."
+    "@digitap.eu/easyapi": "file:.."
   }
 }

@@ -19,7 +19,7 @@ Request a gov connection (returns the dashboard consent URL)
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_connections" method="post" path="/v1/connections" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -43,8 +43,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { connectionsCreate } from "@digitap/easyapi/funcs/connections-create.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { connectionsCreate } from "@digitap.eu/easyapi/funcs/connections-create.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -101,7 +101,7 @@ List the tenant's gov connections
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_connections" method="get" path="/v1/connections" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -121,8 +121,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { connectionsList } from "@digitap/easyapi/funcs/connections-list.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { connectionsList } from "@digitap.eu/easyapi/funcs/connections-list.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -173,7 +173,7 @@ Get one gov connection's metadata
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_connections_id" method="get" path="/v1/connections/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -193,8 +193,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { connectionsGet } from "@digitap/easyapi/funcs/connections-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { connectionsGet } from "@digitap.eu/easyapi/funcs/connections-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -246,7 +246,7 @@ Revoke a gov connection and wipe its vault credential
 
 <!-- UsageSnippet language="typescript" operationID="delete_v1_connections_id" method="delete" path="/v1/connections/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -266,8 +266,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { connectionsRevoke } from "@digitap/easyapi/funcs/connections-revoke.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { connectionsRevoke } from "@digitap.eu/easyapi/funcs/connections-revoke.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

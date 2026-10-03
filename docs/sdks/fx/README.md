@@ -17,7 +17,7 @@ List the latest BNR reference rates
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_fx_rates" method="get" path="/v1/fx/rates" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -37,8 +37,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { fxListRates } from "@digitap/easyapi/funcs/fx-list-rates.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { fxListRates } from "@digitap.eu/easyapi/funcs/fx-list-rates.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -89,7 +89,7 @@ Convert an amount between currencies at the latest rates
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_fx_convert" method="get" path="/v1/fx/convert" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -113,8 +113,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { fxConvert } from "@digitap/easyapi/funcs/fx-convert.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { fxConvert } from "@digitap.eu/easyapi/funcs/fx-convert.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

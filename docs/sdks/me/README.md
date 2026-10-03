@@ -16,7 +16,7 @@ Get the resolved business, tier, effective scopes, and limits
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_me" method="get" path="/v1/me" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -36,8 +36,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { meGet } from "@digitap/easyapi/funcs/me-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { meGet } from "@digitap.eu/easyapi/funcs/me-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

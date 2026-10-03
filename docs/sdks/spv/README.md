@@ -18,7 +18,7 @@ List SPV inbox messages
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_spv_messages" method="get" path="/v1/spv/messages" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -38,8 +38,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { spvListMessages } from "@digitap/easyapi/funcs/spv-list-messages.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { spvListMessages } from "@digitap.eu/easyapi/funcs/spv-list-messages.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ Download one SPV document as a binary stream
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_spv_documents_id" method="get" path="/v1/spv/documents/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -112,8 +112,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { spvDownloadDocument } from "@digitap/easyapi/funcs/spv-download-document.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { spvDownloadDocument } from "@digitap.eu/easyapi/funcs/spv-download-document.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,7 +165,7 @@ Fetch the e-TVA pre-completed VAT return for a period
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_spv_etva_decont" method="get" path="/v1/spv/etva-decont" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -185,8 +185,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { spvGetEtvaDecont } from "@digitap/easyapi/funcs/spv-get-etva-decont.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { spvGetEtvaDecont } from "@digitap.eu/easyapi/funcs/spv-get-etva-decont.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
