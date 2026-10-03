@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { BuyerContact } from "@digitap/easyapi/models/operations";
+import { BuyerContact } from "@digitap.eu/easyapi/models/operations";
 
 let value: BuyerContact = {};
 ```
