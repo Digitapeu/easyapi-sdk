@@ -55,7 +55,6 @@ typescript:
     license: MIT
   additionalScripts:
     check-regen: ./scripts/check-regen.sh
-    prepack: npm run build && node ./scripts/strip-generator-wording.mjs
     test: bun test
     typecheck: tsc -p tsconfig.json --noEmit
   alwaysIncludeInboundAndOutbound: false
