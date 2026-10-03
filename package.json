@@ -10,6 +10,7 @@
     "node": ">=20"
   },
   "license": "MIT",
+  "type": "module",
   "tshy": {
     "compiler": "tsgo",
     "sourceDialects": [
@@ -26,14 +27,13 @@
       "./*": "./src/*.ts"
     }
   },
-  "type": "module",
   "sideEffects": false,
   "scripts": {
     "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tshy",
     "prepublishOnly": "npm run build",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "bun test"
+    "test": "bun test",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {},
   "devDependencies": {
