@@ -17,6 +17,11 @@
         "type": "http",
         "scheme": "bearer",
         "description": "Your API key"
+      },
+      "dpop": {
+        "type": "http",
+        "scheme": "DPoP",
+        "description": "DPoP-bound access token"
       }
     }
   },
@@ -268,6 +273,77 @@
                             "rateLimitPerMin"
                           ],
                           "additionalProperties": false
+                        },
+                        "authentication": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "method": {
+                                  "type": "string",
+                                  "const": "api_key"
+                                },
+                                "keyId": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                }
+                              },
+                              "required": [
+                                "method",
+                                "keyId"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "method": {
+                                  "type": "string",
+                                  "const": "dpop"
+                                },
+                                "keyId": {
+                                  "type": "string",
+                                  "format": "uuid"
+                                },
+                                "credentialId": {
+                                  "type": "string",
+                                  "format": "uuid",
+                                  "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                                },
+                                "generation": {
+                                  "type": "integer",
+                                  "minimum": -9007199254740991,
+                                  "maximum": 9007199254740991,
+                                  "exclusiveMinimum": 0
+                                },
+                                "publicKeyThumbprint": {
+                                  "type": "string",
+                                  "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                                }
+                              },
+                              "required": [
+                                "method",
+                                "keyId",
+                                "credentialId",
+                                "generation",
+                                "publicKeyThumbprint"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "method": {
+                                  "type": "string",
+                                  "const": "mcp_oauth"
+                                }
+                              },
+                              "required": [
+                                "method"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
                         }
                       },
                       "required": [
@@ -275,7 +351,8 @@
                         "businessName",
                         "tier",
                         "scopes",
-                        "limits"
+                        "limits",
+                        "authentication"
                       ],
                       "additionalProperties": false
                     }
@@ -419,8 +496,50 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ]
       }
     },
     "/v1/company/{cui}": {
@@ -782,6 +901,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -795,6 +948,14 @@
               "maxLength": 12,
               "pattern": "^[0-9]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -1077,6 +1238,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -1099,6 +1294,14 @@
               "type": "string",
               "pattern": "^\\d{4}$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -1405,6 +1608,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -1418,6 +1655,14 @@
               "maxLength": 12,
               "pattern": "^[0-9]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -1725,6 +1970,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -1738,6 +2017,14 @@
               "maxLength": 12,
               "pattern": "^[0-9]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -2250,6 +2537,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -2295,6 +2616,14 @@
               ],
               "default": "strong"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "justice:read"
@@ -2681,6 +3010,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "requestBody": {
@@ -2710,6 +3073,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "company:read"
       }
     },
@@ -2981,6 +3352,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -3003,6 +3408,14 @@
               "maxLength": 20,
               "pattern": "^[A-Za-z0-9]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -3254,8 +3667,50 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "company:read"
       }
     },
@@ -3567,6 +4022,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -3596,6 +4085,14 @@
               "type": "number",
               "exclusiveMinimum": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -3820,6 +4317,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -3831,6 +4362,14 @@
               "type": "string",
               "maxLength": 120
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "justice:read"
@@ -4224,6 +4763,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -4262,6 +4835,14 @@
               "type": "string",
               "maxLength": 200
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "justice:read"
@@ -4655,6 +5236,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -4711,6 +5326,14 @@
               "type": "string",
               "pattern": "^(\\d{4})-(\\d{2})-(\\d{2})(?:T(\\d{2}):(\\d{2})(?::(\\d{2}))?(?:\\.\\d{1,3})?(?:Z|[+-]\\d{2}:\\d{2})?)?$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "justice:read"
@@ -5063,6 +5686,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -5085,6 +5742,14 @@
               "minLength": 1,
               "maxLength": 40
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "justice:read"
@@ -5583,6 +6248,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -5635,6 +6334,14 @@
               "maximum": 200,
               "default": 50
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -5905,6 +6612,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -5945,6 +6686,14 @@
               "type": "string",
               "format": "date-time"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -6453,6 +7202,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -6465,6 +7248,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -6852,6 +7643,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -6864,6 +7689,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -7206,6 +8039,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -7218,6 +8085,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -7614,6 +8489,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -7673,6 +8582,14 @@
               "maximum": 200,
               "default": 50
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -7943,6 +8860,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -7983,6 +8934,14 @@
               "type": "string",
               "format": "date-time"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -8480,6 +9439,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -8492,6 +9485,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -8781,6 +9782,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -8793,6 +9828,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -9180,6 +10223,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -9201,6 +10278,14 @@
               "type": "string",
               "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -9530,6 +10615,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -9587,6 +10706,14 @@
               "maximum": 200,
               "default": 50
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -9857,6 +10984,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -9897,6 +11058,14 @@
               "type": "string",
               "format": "date-time"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -10244,6 +11413,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -10256,6 +11459,14 @@
               "minLength": 1,
               "maxLength": 128
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "legislation:read"
@@ -10493,6 +11704,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -10514,6 +11759,14 @@
               "exclusiveMinimum": 0,
               "maximum": 100
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "search:read"
@@ -10814,7 +12067,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown",
+            "description": "authentication_unavailable | feature_state_unknown",
             "content": {
               "application/json": {
                 "schema": {
@@ -10831,7 +12084,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "feature_state_unknown"
+                          "enum": [
+                            "authentication_unavailable",
+                            "feature_state_unknown"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -10890,6 +12146,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "connections:write"
       },
       "get": {
@@ -11144,8 +12408,50 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "connections:read"
       }
     },
@@ -11458,6 +12764,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -11469,6 +12809,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "connections:read"
@@ -11754,6 +13102,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -11765,6 +13147,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "connections:write"
@@ -12097,7 +13487,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | validator_unavailable | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | validator_unavailable | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -12115,6 +13505,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "validator_unavailable",
                             "vault_unavailable"
@@ -12929,6 +14320,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "efactura:send"
       }
     },
@@ -13265,7 +14664,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -13283,6 +14682,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -13311,6 +14711,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "efactura:read"
@@ -13642,7 +15050,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -13660,6 +15068,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -13688,6 +15097,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "efactura:read"
@@ -13990,7 +15407,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -14008,6 +15425,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -14063,6 +15481,14 @@
               "type": "string",
               "pattern": "^[A-Za-z0-9_-]{1,128}$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "efactura:read"
@@ -14413,7 +15839,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -14431,6 +15857,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -14468,6 +15895,14 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "efactura:read"
@@ -15028,7 +16463,7 @@
             }
           },
           "503": {
-            "description": "validator_unavailable",
+            "description": "authentication_unavailable | validator_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -15045,7 +16480,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "validator_unavailable"
+                          "enum": [
+                            "authentication_unavailable",
+                            "validator_unavailable"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -15096,6 +16534,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "efactura:validate"
       }
     },
@@ -15432,7 +16878,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -15450,6 +16896,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -15489,6 +16936,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "etransport:send"
       }
     },
@@ -15820,7 +17275,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -15838,6 +17293,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -15888,6 +17344,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "etransport:send"
       },
       "get": {
@@ -16228,7 +17692,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -16246,6 +17710,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -16274,6 +17739,14 @@
               "type": "string",
               "minLength": 1
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "etransport:read"
@@ -16574,7 +18047,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown",
+            "description": "authentication_unavailable | feature_state_unknown",
             "content": {
               "application/json": {
                 "schema": {
@@ -16591,7 +18064,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "feature_state_unknown"
+                          "enum": [
+                            "authentication_unavailable",
+                            "feature_state_unknown"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -16628,6 +18104,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "reges:write"
       }
     },
@@ -16926,7 +18410,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown",
+            "description": "authentication_unavailable | feature_state_unknown",
             "content": {
               "application/json": {
                 "schema": {
@@ -16943,7 +18427,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "feature_state_unknown"
+                          "enum": [
+                            "authentication_unavailable",
+                            "feature_state_unknown"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -16991,6 +18478,14 @@
             }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "reges:write"
       }
     },
@@ -17283,7 +18778,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown",
+            "description": "authentication_unavailable | feature_state_unknown",
             "content": {
               "application/json": {
                 "schema": {
@@ -17300,7 +18795,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "feature_state_unknown"
+                          "enum": [
+                            "authentication_unavailable",
+                            "feature_state_unknown"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -17326,6 +18824,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "reges:read"
@@ -17611,7 +19117,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown",
+            "description": "authentication_unavailable | feature_state_unknown",
             "content": {
               "application/json": {
                 "schema": {
@@ -17628,7 +19134,10 @@
                       ],
                       "properties": {
                         "code": {
-                          "const": "feature_state_unknown"
+                          "enum": [
+                            "authentication_unavailable",
+                            "feature_state_unknown"
+                          ]
                         },
                         "message": {
                           "type": "string"
@@ -17653,6 +19162,14 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "reges:read"
@@ -17912,6 +19429,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -17924,6 +19475,14 @@
               "minLength": 5,
               "maxLength": 34
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -18216,6 +19775,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -18229,6 +19822,14 @@
               "maxLength": 12,
               "pattern": "^[0-9]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -18491,8 +20092,50 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "company:read"
       }
     },
@@ -18773,8 +20416,50 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "bank:read"
       }
     },
@@ -19109,6 +20794,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -19120,6 +20839,14 @@
               "type": "string",
               "format": "uuid"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "bank:read"
@@ -19514,6 +21241,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -19545,6 +21306,14 @@
               "minLength": 1,
               "maxLength": 40
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "bank:read"
@@ -19896,6 +21665,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -19968,6 +21771,14 @@
               "minimum": 0,
               "default": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -20319,6 +22130,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -20391,6 +22236,14 @@
               "minimum": 0,
               "default": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -20742,6 +22595,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -20814,6 +22701,14 @@
               "minimum": 0,
               "default": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -21165,6 +23060,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -21215,6 +23144,14 @@
               "minimum": 0,
               "default": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -21513,6 +23450,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -21563,6 +23534,14 @@
               "minimum": 0,
               "default": 0
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -21968,6 +23947,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -21980,6 +23993,14 @@
               "minLength": 1,
               "maxLength": 256
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "procurement:read"
@@ -22337,7 +24358,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -22355,6 +24376,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -22393,6 +24415,14 @@
             "schema": {
               "type": "string"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "spv:read"
@@ -22695,7 +24725,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -22713,6 +24743,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -22741,6 +24772,14 @@
               "type": "string",
               "minLength": 1
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "spv:read"
@@ -23064,7 +25103,7 @@
             }
           },
           "503": {
-            "description": "feature_state_unknown | vault_unavailable",
+            "description": "authentication_unavailable | feature_state_unknown | vault_unavailable",
             "content": {
               "application/json": {
                 "schema": {
@@ -23082,6 +25121,7 @@
                       "properties": {
                         "code": {
                           "enum": [
+                            "authentication_unavailable",
                             "feature_state_unknown",
                             "vault_unavailable"
                           ]
@@ -23119,6 +25159,14 @@
               "type": "string",
               "pattern": "^\\d{4}-\\d{2}$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "spv:read"
@@ -23419,6 +25467,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -23452,6 +25534,14 @@
               "maxLength": 200,
               "pattern": "^[A-Za-z0-9._-]+$"
             }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
           }
         ],
         "x-required-scope": "company:read"
@@ -23718,6 +25808,40 @@
                 }
               }
             }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "parameters": [
@@ -23743,7 +25867,1213 @@
             }
           }
         ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
         "x-required-scope": "company:read"
+      }
+    },
+    "/v1/auth/enroll": {
+      "post": {
+        "summary": "Enroll a signer for a parent API key (switches it to DPoP authentication)",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "post_v1_auth_enroll",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "credential": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            },
+                            "keyId": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "publicKeyThumbprint": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                            },
+                            "generation": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "exclusiveMinimum": 0
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "verifiedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "rotatedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "revokedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "keyId",
+                            "publicKeyThumbprint",
+                            "generation",
+                            "createdAt",
+                            "verifiedAt",
+                            "rotatedAt",
+                            "revokedAt"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "credential"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "credential": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            },
+                            "keyId": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "publicKeyThumbprint": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                            },
+                            "generation": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "exclusiveMinimum": 0
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "verifiedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "rotatedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "revokedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "keyId",
+                            "publicKeyThumbprint",
+                            "generation",
+                            "createdAt",
+                            "verifiedAt",
+                            "rotatedAt",
+                            "revokedAt"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "credential"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "validation_error"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "unauthorized"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "conflict"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "rate_limited"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "internal_error"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "credentialId": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                  },
+                  "publicKey": {
+                    "type": "object",
+                    "properties": {
+                      "kty": {
+                        "type": "string",
+                        "const": "EC"
+                      },
+                      "crv": {
+                        "type": "string",
+                        "const": "P-256"
+                      },
+                      "x": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                      },
+                      "y": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                      }
+                    },
+                    "required": [
+                      "kty",
+                      "crv",
+                      "x",
+                      "y"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "enrollmentProof": {
+                    "type": "string",
+                    "maxLength": 4096,
+                    "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+                  }
+                },
+                "required": [
+                  "credentialId",
+                  "publicKey",
+                  "enrollmentProof"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        }
+      }
+    },
+    "/oauth/sdk/token": {
+      "post": {
+        "summary": "SDK machine token (client_credentials with a signed client assertion and a DPoP proof)",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "post_oauth_sdk_token",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "access_token": {
+                      "type": "string",
+                      "pattern": "^sdk_at_[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                    },
+                    "token_type": {
+                      "type": "string",
+                      "const": "DPoP"
+                    },
+                    "expires_in": {
+                      "type": "number",
+                      "const": 300
+                    },
+                    "scope": {
+                      "type": "string",
+                      "maxLength": 1024
+                    }
+                  },
+                  "required": [
+                    "access_token",
+                    "token_type",
+                    "expires_in",
+                    "scope"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            },
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "OAuth error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "enum": [
+                        "invalid_request",
+                        "invalid_client",
+                        "invalid_scope",
+                        "unsupported_grant_type",
+                        "invalid_dpop_proof",
+                        "use_dpop_nonce",
+                        "temporarily_unavailable",
+                        "rate_limited",
+                        "server_error"
+                      ]
+                    },
+                    "error_description": {
+                      "type": "string",
+                      "maxLength": 256
+                    }
+                  },
+                  "required": [
+                    "error"
+                  ],
+                  "additionalProperties": false
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": true,
+            "description": "DPoP proof JWT for this request (RFC 9449)",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "grant_type": {
+                    "type": "string",
+                    "const": "client_credentials"
+                  },
+                  "client_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                  },
+                  "client_assertion_type": {
+                    "type": "string",
+                    "const": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer"
+                  },
+                  "client_assertion": {
+                    "type": "string",
+                    "maxLength": 4096,
+                    "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+                  },
+                  "scope": {
+                    "type": "string",
+                    "maxLength": 1024
+                  }
+                },
+                "required": [
+                  "grant_type",
+                  "client_id",
+                  "client_assertion_type",
+                  "client_assertion"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/v1/auth/credentials/{credentialId}/rotate": {
+      "post": {
+        "summary": "Rotate the signer of a DPoP credential (old signer authorizes, new signer proves possession)",
+        "tags": [
+          "auth"
+        ],
+        "operationId": "post_v1_auth_credentials_credentialId_rotate",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "credential": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                            },
+                            "keyId": {
+                              "type": "string",
+                              "format": "uuid"
+                            },
+                            "publicKeyThumbprint": {
+                              "type": "string",
+                              "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                            },
+                            "generation": {
+                              "type": "integer",
+                              "minimum": -9007199254740991,
+                              "maximum": 9007199254740991,
+                              "exclusiveMinimum": 0
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "verifiedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "rotatedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            },
+                            "revokedAt": {
+                              "anyOf": [
+                                {
+                                  "type": "string",
+                                  "format": "date-time"
+                                },
+                                {
+                                  "type": "null"
+                                }
+                              ]
+                            }
+                          },
+                          "required": [
+                            "id",
+                            "keyId",
+                            "publicKeyThumbprint",
+                            "generation",
+                            "createdAt",
+                            "verifiedAt",
+                            "rotatedAt",
+                            "revokedAt"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "credential"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "validation_error"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "unauthorized"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "edge_binding_rejected"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "conflict"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "rate_limited"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "internal_error"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "error"
+                  ],
+                  "properties": {
+                    "error": {
+                      "type": "object",
+                      "required": [
+                        "code",
+                        "message"
+                      ],
+                      "properties": {
+                        "code": {
+                          "const": "authentication_unavailable"
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "details": {
+                          "type": "object",
+                          "additionalProperties": true
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "credentialId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid",
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expectedGeneration": {
+                    "type": "integer",
+                    "minimum": -9007199254740991,
+                    "maximum": 9007199254740991,
+                    "exclusiveMinimum": 0
+                  },
+                  "publicKey": {
+                    "type": "object",
+                    "properties": {
+                      "kty": {
+                        "type": "string",
+                        "const": "EC"
+                      },
+                      "crv": {
+                        "type": "string",
+                        "const": "P-256"
+                      },
+                      "x": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                      },
+                      "y": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9_-]{42}[AEIMQUYcgkosw048]$"
+                      }
+                    },
+                    "required": [
+                      "kty",
+                      "crv",
+                      "x",
+                      "y"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "rotationAuthorization": {
+                    "type": "string",
+                    "maxLength": 4096,
+                    "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+                  },
+                  "replacementProof": {
+                    "type": "string",
+                    "maxLength": 4096,
+                    "pattern": "^[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9_-]+$"
+                  }
+                },
+                "required": [
+                  "expectedGeneration",
+                  "publicKey",
+                  "rotationAuthorization",
+                  "replacementProof"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "dpop": []
+          }
+        ]
       }
     }
   }

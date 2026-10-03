@@ -1027,6 +1027,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/auth/enroll": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Enroll a signer for a parent API key (switches it to DPoP authentication) */
+        post: operations["post_v1_auth_enroll"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/oauth/sdk/token": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SDK machine token (client_credentials with a signed client assertion and a DPoP proof) */
+        post: operations["post_oauth_sdk_token"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/auth/credentials/{credentialId}/rotate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Rotate the signer of a DPoP credential (old signer authorizes, new signer proves possession) */
+        post: operations["post_v1_auth_credentials_credentialId_rotate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1139,6 +1190,24 @@ export interface operations {
                             limits: {
                                 rateLimitPerMin: number;
                             };
+                            authentication: {
+                                /** @constant */
+                                method: "api_key";
+                                /** Format: uuid */
+                                keyId: string;
+                            } | {
+                                /** @constant */
+                                method: "dpop";
+                                /** Format: uuid */
+                                keyId: string;
+                                /** Format: uuid */
+                                credentialId: string;
+                                generation: number;
+                                publicKeyThumbprint: string;
+                            } | {
+                                /** @constant */
+                                method: "mcp_oauth";
+                            };
                         };
                     };
                 };
@@ -1207,6 +1276,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -1386,6 +1473,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_company_cui_balance_year: {
@@ -1521,6 +1626,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -1668,6 +1791,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -1826,6 +1967,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -2034,6 +2193,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     post_v1_company_batch: {
@@ -2212,6 +2389,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_vat_vies_countryCode_vatNumber: {
@@ -2353,6 +2548,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_fx_rates: {
@@ -2469,6 +2682,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -2640,6 +2871,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_justice_courts: {
@@ -2750,6 +2999,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -2913,6 +3180,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -3086,6 +3371,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_justice_hearings: {
@@ -3232,6 +3535,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -3409,6 +3730,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_bills_changes: {
@@ -3531,6 +3870,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -3719,6 +4076,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_bills_id_stages: {
@@ -3869,6 +4244,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -4030,6 +4423,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_acts: {
@@ -4181,6 +4592,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_acts_changes: {
@@ -4303,6 +4732,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -4500,6 +4947,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_acts_id_versions: {
@@ -4621,6 +5086,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -4792,6 +5275,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_monitorul_oficial_issues: {
@@ -4938,6 +5439,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_legislation_monitorul_oficial_changes: {
@@ -5060,6 +5579,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -5226,6 +5763,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_search: {
@@ -5359,6 +5914,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_connections: {
@@ -5459,6 +6032,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -5632,7 +6223,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown */
+            /** @description authentication_unavailable | feature_state_unknown */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -5640,8 +6231,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "feature_state_unknown";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "feature_state_unknown";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -5786,6 +6377,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -5941,6 +6550,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -6271,7 +6898,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | validator_unavailable | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | validator_unavailable | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -6280,7 +6907,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "validator_unavailable" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "validator_unavailable" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -6464,7 +7091,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -6473,7 +7100,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -6656,7 +7283,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -6665,7 +7292,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -6844,7 +7471,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -6853,7 +7480,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -7040,7 +7667,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -7049,7 +7676,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -7272,7 +7899,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description validator_unavailable */
+            /** @description authentication_unavailable | validator_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -7280,8 +7907,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "validator_unavailable";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "validator_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -7470,7 +8097,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -7479,7 +8106,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -7665,7 +8292,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -7674,7 +8301,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -7865,7 +8492,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -7874,7 +8501,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8044,7 +8671,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown */
+            /** @description authentication_unavailable | feature_state_unknown */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -8052,8 +8679,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "feature_state_unknown";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "feature_state_unknown";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8225,7 +8852,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown */
+            /** @description authentication_unavailable | feature_state_unknown */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -8233,8 +8860,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "feature_state_unknown";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "feature_state_unknown";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8387,7 +9014,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown */
+            /** @description authentication_unavailable | feature_state_unknown */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -8395,8 +9022,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "feature_state_unknown";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "feature_state_unknown";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8545,7 +9172,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown */
+            /** @description authentication_unavailable | feature_state_unknown */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -8553,8 +9180,8 @@ export interface operations {
                 content: {
                     "application/json": {
                         error: {
-                            /** @constant */
-                            code: "feature_state_unknown";
+                            /** @enum {unknown} */
+                            code: "authentication_unavailable" | "feature_state_unknown";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8681,6 +9308,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -8834,6 +9479,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_bank_institutions: {
@@ -8948,6 +9611,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -9075,6 +9756,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -9239,6 +9938,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -9423,6 +10140,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_procurement_company_cui_contracts: {
@@ -9577,6 +10312,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -9747,6 +10500,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_procurement_company_cui_direct_purchases: {
@@ -9901,6 +10672,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -10069,6 +10858,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_procurement_cpv_cpv_analysis: {
@@ -10211,6 +11018,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -10384,6 +11209,24 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -10571,7 +11414,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -10580,7 +11423,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -10755,7 +11598,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -10764,7 +11607,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -10946,7 +11789,7 @@ export interface operations {
                     };
                 };
             };
-            /** @description feature_state_unknown | vault_unavailable */
+            /** @description authentication_unavailable | feature_state_unknown | vault_unavailable */
             503: {
                 headers: {
                     [name: string]: unknown;
@@ -10955,7 +11798,7 @@ export interface operations {
                     "application/json": {
                         error: {
                             /** @enum {unknown} */
-                            code: "feature_state_unknown" | "vault_unavailable";
+                            code: "authentication_unavailable" | "feature_state_unknown" | "vault_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
@@ -11110,6 +11953,24 @@ export interface operations {
                     };
                 };
             };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
         };
     };
     get_v1_stats_matrix: {
@@ -11244,6 +12105,511 @@ export interface operations {
                         error: {
                             /** @constant */
                             code: "upstream_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    post_v1_auth_enroll: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    credentialId: string;
+                    publicKey: {
+                        /** @constant */
+                        kty: "EC";
+                        /** @constant */
+                        crv: "P-256";
+                        x: string;
+                        y: string;
+                    };
+                    enrollmentProof: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            credential: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                keyId: string;
+                                publicKeyThumbprint: string;
+                                generation: number;
+                                /** Format: date-time */
+                                createdAt: string;
+                                verifiedAt: string | null;
+                                rotatedAt: string | null;
+                                revokedAt: string | null;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            credential: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                keyId: string;
+                                publicKeyThumbprint: string;
+                                generation: number;
+                                /** Format: date-time */
+                                createdAt: string;
+                                verifiedAt: string | null;
+                                rotatedAt: string | null;
+                                revokedAt: string | null;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description validation_error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "validation_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "unauthorized";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "conflict";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description rate_limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "rate_limited";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description internal_error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+        };
+    };
+    post_oauth_sdk_token: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description DPoP proof JWT for this request (RFC 9449) */
+                DPoP: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/x-www-form-urlencoded": {
+                    /** @constant */
+                    grant_type: "client_credentials";
+                    /** Format: uuid */
+                    client_id: string;
+                    /** @constant */
+                    client_assertion_type: "urn:ietf:params:oauth:client-assertion-type:jwt-bearer";
+                    client_assertion: string;
+                    scope?: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        access_token: string;
+                        /** @constant */
+                        token_type: "DPoP";
+                        /** @constant */
+                        expires_in: 300;
+                        scope: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            429: {
+                headers: {
+                    "Retry-After"?: string;
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+            /** @description OAuth error */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {string} */
+                        error: "invalid_request" | "invalid_client" | "invalid_scope" | "unsupported_grant_type" | "invalid_dpop_proof" | "use_dpop_nonce" | "temporarily_unavailable" | "rate_limited" | "server_error";
+                        error_description?: string;
+                    };
+                };
+            };
+        };
+    };
+    post_v1_auth_credentials_credentialId_rotate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                credentialId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    expectedGeneration: number;
+                    publicKey: {
+                        /** @constant */
+                        kty: "EC";
+                        /** @constant */
+                        crv: "P-256";
+                        x: string;
+                        y: string;
+                    };
+                    rotationAuthorization: string;
+                    replacementProof: string;
+                };
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        data: {
+                            credential: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                keyId: string;
+                                publicKeyThumbprint: string;
+                                generation: number;
+                                /** Format: date-time */
+                                createdAt: string;
+                                verifiedAt: string | null;
+                                rotatedAt: string | null;
+                                revokedAt: string | null;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description validation_error */
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "validation_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "unauthorized";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description edge_binding_rejected */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "edge_binding_rejected";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description conflict */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "conflict";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description rate_limited */
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "rate_limited";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description internal_error */
+            500: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "internal_error";
+                            message: string;
+                            details?: {
+                                [key: string]: unknown;
+                            };
+                        };
+                    };
+                };
+            };
+            /** @description authentication_unavailable */
+            503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        error: {
+                            /** @constant */
+                            code: "authentication_unavailable";
                             message: string;
                             details?: {
                                 [key: string]: unknown;
