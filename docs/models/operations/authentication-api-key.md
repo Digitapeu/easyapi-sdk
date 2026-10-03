@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AuthenticationAPIKey } from "@digitap/easyapi/models/operations";
+import { AuthenticationAPIKey } from "@digitap.eu/easyapi/models/operations";
 
 let value: AuthenticationAPIKey = {
   method: "api_key",

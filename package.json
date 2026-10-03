@@ -1,5 +1,5 @@
 {
-  "name": "@digitap/easyapi",
+  "name": "@digitap.eu/easyapi",
   "version": "0.2.0",
   "author": "Daniel Tamas",
   "bin": {
@@ -11,7 +11,6 @@
   },
   "files": [
     "dist",
-    "src",
     "LICENSE",
     "README.md"
   ],
@@ -20,7 +19,7 @@
   "tshy": {
     "compiler": "tsgo",
     "sourceDialects": [
-      "@digitap/easyapi/source"
+      "@digitap.eu/easyapi/source"
     ],
     "exports": {
       ".": "./src/index.ts",
@@ -37,10 +36,7 @@
   "scripts": {
     "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tshy",
-    "prepublishOnly": "npm run build",
-    "check-regen": "./scripts/check-regen.sh",
-    "test": "bun test",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "prepublishOnly": "npm run build"
   },
   "peerDependencies": {},
   "devDependencies": {
@@ -56,7 +52,7 @@
   "exports": {
     ".": {
       "import": {
-        "@digitap/easyapi/source": "./src/index.ts",
+        "@digitap.eu/easyapi/source": "./src/index.ts",
         "types": "./dist/esm/index.d.ts",
         "default": "./dist/esm/index.js"
       },
@@ -68,7 +64,7 @@
     "./package.json": "./package.json",
     "./types": {
       "import": {
-        "@digitap/easyapi/source": "./src/types/index.ts",
+        "@digitap.eu/easyapi/source": "./src/types/index.ts",
         "types": "./dist/esm/types/index.d.ts",
         "default": "./dist/esm/types/index.js"
       },
@@ -79,7 +75,7 @@
     },
     "./models/errors": {
       "import": {
-        "@digitap/easyapi/source": "./src/models/errors/index.ts",
+        "@digitap.eu/easyapi/source": "./src/models/errors/index.ts",
         "types": "./dist/esm/models/errors/index.d.ts",
         "default": "./dist/esm/models/errors/index.js"
       },
@@ -90,7 +86,7 @@
     },
     "./models": {
       "import": {
-        "@digitap/easyapi/source": "./src/models/index.ts",
+        "@digitap.eu/easyapi/source": "./src/models/index.ts",
         "types": "./dist/esm/models/index.d.ts",
         "default": "./dist/esm/models/index.js"
       },
@@ -101,7 +97,7 @@
     },
     "./models/operations": {
       "import": {
-        "@digitap/easyapi/source": "./src/models/operations/index.ts",
+        "@digitap.eu/easyapi/source": "./src/models/operations/index.ts",
         "types": "./dist/esm/models/operations/index.d.ts",
         "default": "./dist/esm/models/operations/index.js"
       },
@@ -112,7 +108,7 @@
     },
     "./*.js": {
       "import": {
-        "@digitap/easyapi/source": "./src/*.ts",
+        "@digitap.eu/easyapi/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },
@@ -123,7 +119,7 @@
     },
     "./*": {
       "import": {
-        "@digitap/easyapi/source": "./src/*.ts",
+        "@digitap.eu/easyapi/source": "./src/*.ts",
         "types": "./dist/esm/*.d.ts",
         "default": "./dist/esm/*.js"
       },

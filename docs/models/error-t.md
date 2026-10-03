@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ErrorT } from "@digitap/easyapi/models";
+import { ErrorT } from "@digitap.eu/easyapi/models";
 
 let value: ErrorT = {
   code: "not_found",
