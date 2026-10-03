@@ -9,6 +9,12 @@
   "engines": {
     "node": ">=20"
   },
+  "files": [
+    "dist",
+    "src",
+    "LICENSE",
+    "README.md"
+  ],
   "license": "MIT",
   "type": "module",
   "tshy": {
@@ -33,6 +39,7 @@
     "build": "tshy",
     "prepublishOnly": "npm run build",
     "test": "bun test",
+    "check-regen": "./scripts/check-regen.sh",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {},

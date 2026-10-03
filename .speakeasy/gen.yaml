@@ -48,8 +48,14 @@ typescript:
     description: TypeScript SDK and CLI for the easyapi Romanian government services API, with DPoP-bound machine authentication.
     engines:
       node: '>=20'
+    files:
+      - dist
+      - src
+      - LICENSE
+      - README.md
     license: MIT
   additionalScripts:
+    check-regen: ./scripts/check-regen.sh
     test: bun test
     typecheck: tsc -p tsconfig.json --noEmit
   alwaysIncludeInboundAndOutbound: false
