@@ -19,7 +19,7 @@ List or search the canonical ECRIS court identifiers
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_justice_courts" method="get" path="/v1/justice/courts" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -39,8 +39,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { justiceListCourts } from "@digitap/easyapi/funcs/justice-list-courts.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { justiceListCourts } from "@digitap.eu/easyapi/funcs/justice-list-courts.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -92,7 +92,7 @@ Search court cases by party, number, object, or court
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_justice_cases" method="get" path="/v1/justice/cases" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -112,8 +112,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { justiceSearchCases } from "@digitap/easyapi/funcs/justice-search-cases.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { justiceSearchCases } from "@digitap.eu/easyapi/funcs/justice-search-cases.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -165,7 +165,7 @@ Search the litigation change-feed since a given timestamp
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_justice_cases_changes" method="get" path="/v1/justice/cases/changes" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -187,8 +187,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { justiceListCaseChanges } from "@digitap/easyapi/funcs/justice-list-case-changes.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { justiceListCaseChanges } from "@digitap.eu/easyapi/funcs/justice-list-case-changes.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -242,7 +242,7 @@ Get the hearing docket for a court on a date
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_justice_hearings" method="get" path="/v1/justice/hearings" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -262,8 +262,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { justiceListHearings } from "@digitap/easyapi/funcs/justice-list-hearings.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { justiceListHearings } from "@digitap.eu/easyapi/funcs/justice-list-hearings.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
