@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Scope } from "@digitap/easyapi/models/operations";
+import { Scope } from "@digitap.eu/easyapi/models/operations";
 
 let value: Scope = "connections:read";
 
