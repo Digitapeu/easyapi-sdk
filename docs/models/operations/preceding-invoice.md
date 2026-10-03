@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PrecedingInvoice } from "@digitap/easyapi/models/operations";
+import { PrecedingInvoice } from "@digitap.eu/easyapi/models/operations";
 
 let value: PrecedingInvoice = {
   number: "<value>",

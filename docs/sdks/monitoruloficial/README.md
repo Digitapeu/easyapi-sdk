@@ -16,7 +16,7 @@ List Monitorul Oficial issues
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_monitorul_oficial_issues" method="get" path="/v1/legislation/monitorul-oficial/issues" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -38,8 +38,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationMonitorulOficialListIssues } from "@digitap/easyapi/funcs/legislation-monitorul-oficial-list-issues.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationMonitorulOficialListIssues } from "@digitap.eu/easyapi/funcs/legislation-monitorul-oficial-list-issues.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -93,7 +93,7 @@ Poll the Monitorul Oficial change-feed since a given timestamp
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_monitorul_oficial_changes" method="get" path="/v1/legislation/monitorul-oficial/changes" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -117,8 +117,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationMonitorulOficialListChanges } from "@digitap/easyapi/funcs/legislation-monitorul-oficial-list-changes.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationMonitorulOficialListChanges } from "@digitap.eu/easyapi/funcs/legislation-monitorul-oficial-list-changes.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -174,7 +174,7 @@ Get an act as it appeared in Monitorul Oficial
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_monitorul_oficial_acts_id" method="get" path="/v1/legislation/monitorul-oficial/acts/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -194,8 +194,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationMonitorulOficialGetAct } from "@digitap/easyapi/funcs/legislation-monitorul-oficial-get-act.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationMonitorulOficialGetAct } from "@digitap.eu/easyapi/funcs/legislation-monitorul-oficial-get-act.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

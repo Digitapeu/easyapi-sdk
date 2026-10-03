@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { PatchV1EtransportDeclarationsUitResponseBody } from "@digitap/easyapi/models/operations";
+import { PatchV1EtransportDeclarationsUitResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: PatchV1EtransportDeclarationsUitResponseBody = {
   data: {
