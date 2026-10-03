@@ -71,7 +71,7 @@ List operations that page return an async iterator of pages:
 
 ```ts
 for await (const page of await easyapi.legislation.acts.list({})) {
-  console.log(page.result.data);
+  console.log(page.result.data.items);
 }
 ```
 
@@ -171,15 +171,16 @@ Unified Romanian Government Services API: One API and one key for Romanian gover
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [@easyapi/sdk](#easyapisdk)
+* [@digitap/easyapi](#digitapeasyapi)
   * [Install](#install)
-  * [Set up a credential](#set-up-a-credential)
-  * [First request](#first-request)
+  * [Quickstart: API key](#quickstart-api-key)
+  * [Quickstart: machine credential](#quickstart-machine-credential)
+  * [Pagination](#pagination)
+  * [Errors](#errors)
+  * [Retries and idempotency](#retries-and-idempotency)
   * [Profiles and environment](#profiles-and-environment)
   * [Rotation, revocation, recovery](#rotation-revocation-recovery)
-  * [Errors](#errors)
   * [IP binding](#ip-binding)
-  * [Runtime support](#runtime-support)
   * [Limitations](#limitations)
   * [Development](#development)
   * [SDK Installation](#sdk-installation)
@@ -188,7 +189,7 @@ Unified Romanian Government Services API: One API and one key for Romanian gover
   * [Authentication](#authentication)
   * [Available Resources and Operations](#available-resources-and-operations)
   * [Standalone functions](#standalone-functions)
-  * [Pagination](#pagination)
+  * [Pagination](#pagination-1)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
@@ -199,6 +200,10 @@ Unified Romanian Government Services API: One API and one key for Romanian gover
 
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
+
+> [!TIP]
+> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+
 
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
@@ -762,4 +767,5 @@ const sdk = new EasyApi({ debugLogger: console });
 ```
 <!-- End Debugging [debug] -->
 
-<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+
