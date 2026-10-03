@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1GeoParcelsData } from "@digitap/easyapi/models/operations";
+import { GetV1GeoParcelsData } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1GeoParcelsData = {
   parcels: [],
