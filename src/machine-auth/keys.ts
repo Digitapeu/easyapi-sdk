@@ -7,7 +7,7 @@ import {
   sign,
   type KeyObject,
 } from "node:crypto";
-import { SdkPublicKeySchema, type SdkPublicKey } from "../contract/sdk-auth.js";
+import { SdkPublicKeySchema, type SdkPublicKey } from "./contract/sdk-auth.js";
 import { ConfigError } from "./errors.js";
 
 export interface Signer {

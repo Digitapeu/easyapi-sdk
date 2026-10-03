@@ -1,14 +1,14 @@
 import { dirname } from "node:path";
-import type { SdkProfile } from "../../contract/sdk-auth.js";
-import { parseCredentialEnvelope } from "../auth-api.js";
-import { ApiError, ConfigError, EasyApiError, OAuthError, SetupError } from "../errors.js";
-import { acquireLock, removePrivateFile, writePrivateFile } from "../fsx.js";
-import { generateSigner, type Signer } from "../keys.js";
-import { ensureConfigDirs, keyFilePath, readProfile, writeProfile, type ProfileLocation } from "../profile-store.js";
-import { rotatePath, rotationProofs } from "../proofs.js";
-import { loadKeyFile, locateFromOptions, type ResolveOptions } from "../resolve.js";
-import { Session } from "../session.js";
-import type { CliContext } from "./context.js";
+import type { SdkProfile } from "../machine-auth/contract/sdk-auth.js";
+import { parseCredentialEnvelope } from "../machine-auth/auth-api.js";
+import { ApiError, ConfigError, MachineAuthError, OAuthError, SetupError } from "../machine-auth/errors.js";
+import { acquireLock, removePrivateFile, writePrivateFile } from "../machine-auth/fsx.js";
+import { generateSigner, type Signer } from "../machine-auth/keys.js";
+import { ensureConfigDirs, keyFilePath, readProfile, writeProfile, type ProfileLocation } from "../machine-auth/profile-store.js";
+import { rotatePath, rotationProofs } from "../machine-auth/proofs.js";
+import { loadKeyFile, locateFromOptions, type ResolveOptions } from "../machine-auth/resolve.js";
+import { Session } from "../machine-auth/session.js";
+import { cliClient, type CliContext } from "./context.js";
 import { fetchMe, judgeIdentity } from "./me.js";
 
 type Verified = SdkProfile & { generation: number };
@@ -35,9 +35,9 @@ const sessionFor = (ctx: CliContext, profile: SdkProfile, signer: Signer): Sessi
   });
 
 /** Does this signer authenticate at exactly this generation? "unknown" covers anything inconclusive. */
-async function probe(session: Session, profile: SdkProfile, signer: Signer, generation: number): Promise<"match" | "mismatch" | "unknown"> {
+async function probe(ctx: CliContext, profile: SdkProfile, signer: Signer, generation: number): Promise<"match" | "mismatch" | "unknown"> {
   try {
-    const verdict = judgeIdentity(await fetchMe(session), { credentialId: profile.credentialId, thumbprint: signer.thumbprint, generation });
+    const verdict = judgeIdentity(await fetchMe(cliClient(ctx, { baseUrl: profile.publicOrigin, credentialId: profile.credentialId, signer })), { credentialId: profile.credentialId, thumbprint: signer.thumbprint, generation });
     return verdict.kind;
   } catch (error) {
     const rejected = (error instanceof OAuthError && (error.error === "invalid_client" || error.error === "invalid_dpop_proof")) ||
@@ -63,7 +63,7 @@ async function rotateLocked(ctx: CliContext, location: ProfileLocation): Promise
   const kept = `Both keys and the profile were kept (${location.profilePath}); run \`easyapi rotate\` again to resume.`;
 
   // A previous run may have committed on the server and then lost the response.
-  if (resumed && await probe(sessionFor(ctx, current, candidate.signer), current, candidate.signer, nextGeneration) === "match") {
+  if (resumed && await probe(ctx, current, candidate.signer, nextGeneration) === "match") {
     return finalize(ctx, location, current, candidate, nextGeneration);
   }
 
@@ -74,23 +74,23 @@ async function rotateLocked(ctx: CliContext, location: ProfileLocation): Promise
     } catch (error) {
       if (error instanceof ApiError && error.status === 409) {
         // Another rotation may have won, or ours committed earlier: only the new key can tell.
-        if (await probe(sessionFor(ctx, current, candidate.signer), current, candidate.signer, nextGeneration) === "match") break;
+        if (await probe(ctx, current, candidate.signer, nextGeneration) === "match") break;
         throw new SetupError(`rotation conflict: the credential changed on the server (${error.message}). ${kept}`);
       }
       // Even a 4xx is not trusted on its own: the runtime may have replayed a request the server had
       // already committed, and the replay is what got rejected. Authenticated state decides.
-      if (await probe(sessionFor(ctx, current, candidate.signer), current, candidate.signer, nextGeneration) === "match") break;
+      if (await probe(ctx, current, candidate.signer, nextGeneration) === "match") break;
       if (error instanceof ApiError && error.status < 500 && error.status !== 429) {
         throw new SetupError(`rotation was rejected (${error.code}: ${error.message}). ${kept}`);
       }
-      const oldStillCurrent = await probe(sessionFor(ctx, current, oldSigner), current, oldSigner, current.generation) === "match";
+      const oldStillCurrent = await probe(ctx, current, oldSigner, current.generation) === "match";
       if (oldStillCurrent && attempt === 0) continue;
       throw new SetupError(`rotation outcome is unknown (${describe(error)}). ${kept}`);
     }
     break;
   }
 
-  if (await probe(sessionFor(ctx, current, candidate.signer), current, candidate.signer, nextGeneration) !== "match") {
+  if (await probe(ctx, current, candidate.signer, nextGeneration) !== "match") {
     throw new SetupError(`the new key was not accepted at generation ${nextGeneration}. ${kept}`);
   }
   finalize(ctx, location, current, candidate, nextGeneration);
@@ -130,12 +130,12 @@ async function postRotation(ctx: CliContext, oldSession: Session, current: Verif
     expectedGeneration: current.generation,
     now: ctx.now ?? Date.now,
   });
-  const response = await oldSession.request({
-    method: "POST",
-    rawPath: rotatePath(current.credentialId),
-    body: { expectedGeneration: current.generation, publicKey: newSigner.publicJwk, ...proofs },
+  const body = await oldSession.postSigned(rotatePath(current.credentialId), {
+    expectedGeneration: current.generation,
+    publicKey: newSigner.publicJwk,
+    ...proofs,
   });
-  const credential = parseCredentialEnvelope(response.body);
+  const credential = parseCredentialEnvelope(body);
   if (credential.generation !== current.generation + 1 || credential.publicKeyThumbprint !== newSigner.thumbprint) {
     throw new SetupError("the server acknowledged a different rotation than the one requested");
   }
@@ -162,4 +162,4 @@ function finalize(ctx: CliContext, location: ProfileLocation, current: Verified,
   ctx.io.out(`Rotated: profile "${location.profileName}", credential ${current.credentialId}, generation ${generation - 1} -> ${generation}`);
 }
 
-const describe = (error: unknown): string => (error instanceof EasyApiError ? error.message : "unexpected error");
+const describe = (error: unknown): string => (error instanceof MachineAuthError ? error.message : "unexpected error");

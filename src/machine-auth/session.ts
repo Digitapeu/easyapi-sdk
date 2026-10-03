@@ -2,10 +2,9 @@ import {
   SdkTokenRequestSchema,
   SdkTokenResponseSchema,
   type SdkOAuthError,
-} from "../contract/sdk-auth.js";
+} from "./contract/sdk-auth.js";
 import {
   AbortedError,
-  NetworkError,
   OAuthError,
   TimeoutError,
   UnexpectedResponseError,
@@ -13,23 +12,14 @@ import {
 import {
   Deadline,
   errorFromResponse,
-  isJson,
   parseJson,
-  retryAfterSeconds,
   send,
   type FetchLike,
   type RawResponse,
 } from "./http.js";
 import type { Signer } from "./keys.js";
-import { SDK_VERSION } from "./generated/metadata.js";
-import { TOKEN_PATH, clientAssertion, resourceDpopProof, tokenDpopProof, type Clock } from "./proofs.js";
-
-export interface ApiResponse<T> {
-  status: number;
-  headers: Headers;
-  /** Parsed JSON for JSON content types; raw bytes for everything else (PDF, ZIP, octet-stream). */
-  body: T;
-}
+import { SDK_VERSION } from "./defaults.js";
+import { TOKEN_PATH, assertCanonicalPath, clientAssertion, resourceDpopProof, tokenDpopProof, type Clock } from "./proofs.js";
 
 export interface SessionConfig {
   origin: string;
@@ -38,19 +28,14 @@ export interface SessionConfig {
   fetch?: FetchLike;
   now?: Clock;
   scopes?: readonly string[];
-  /** Overall budget of one `request()`, retries included. */
+  /** Budget of one token exchange or one `postSigned()` call. */
   timeoutMs?: number;
 }
 
-export interface SessionRequest {
-  method: string;
-  /** Already expanded and canonical (see `expandPath`). */
-  rawPath: string;
-  query?: URLSearchParams;
-  body?: unknown;
-  idempotencyKey?: string;
-  signal?: AbortSignal | undefined;
-  timeoutMs?: number;
+/** Headers that authenticate one resource request; the proof is bound to its method, URL and token. */
+export interface ResourceAuthHeaders {
+  Authorization: string;
+  DPoP: string;
 }
 
 const DEFAULT_TIMEOUT_MS = 30_000;
@@ -59,7 +44,6 @@ const TOKEN_TIMEOUT_MS = 15_000;
 const RENEW_MARGIN_SECONDS = 30;
 const MAX_SAFE_RETRIES = 2;
 const NONCE_PATTERN = /^[\x21-\x7E]{1,512}$/;
-const RETRYABLE_STATUS = new Set([429, 502, 503, 504]);
 const RETRYABLE_OAUTH: ReadonlySet<SdkOAuthError["error"]> = new Set(["rate_limited", "temporarily_unavailable"]);
 
 function wait(ms: number, signal: AbortSignal | undefined): Promise<void> {
@@ -93,7 +77,7 @@ function raceCancel<T>(shared: Promise<T>, deadline: Deadline, signal: AbortSign
   });
 }
 
-/** Full jitter on a doubling base; an explicit Retry-After wins. */
+/** Full jitter on a doubling base; an explicit Retry-After wins. Used for token-exchange retries only. */
 const backoffMs = (attempt: number, retryAfter: number | undefined): number =>
   retryAfter !== undefined ? retryAfter * 1000 : Math.random() * Math.min(250 * 2 ** attempt, 2000);
 
@@ -115,80 +99,58 @@ export class Session {
     this.now = config.now ?? Date.now;
   }
 
-  async request(input: SessionRequest): Promise<ApiResponse<unknown>> {
-    const method = input.method.toUpperCase();
-    const isSafeRead = method === "GET" || method === "HEAD";
-    const deadline = new Deadline(input.timeoutMs ?? this.config.timeoutMs ?? DEFAULT_TIMEOUT_MS);
-    const query = input.query?.toString();
-    const url = this.config.origin + input.rawPath + (query ? `?${query}` : "");
-    let retries = 0;
-    let nonceRetried = false;
-
-    for (;;) {
-      let response: RawResponse;
-      try {
-        const token = await this.token(deadline, input.signal);
-        response = await send(this.fetchImpl, url, {
-          method,
-          deadline,
-          signal: input.signal,
-          headers: this.resourceHeaders(token, method, input),
-          ...(input.body === undefined ? {} : { body: JSON.stringify(input.body) }),
-        });
-      } catch (error) {
-        if (isSafeRead && error instanceof NetworkError && retries < MAX_SAFE_RETRIES && await this.pause(retries, undefined, deadline, input.signal)) {
-          retries += 1;
-          continue;
-        }
-        throw error;
-      }
-
-      this.rememberNonce(response.headers, "resource");
-      if (response.status < 300) return this.parseSuccess(response);
-
-      const failure = errorFromResponse(response, "product");
-      const challenge = response.headers.get("www-authenticate") ?? "";
-      if (response.status === 401 && !nonceRetried && /use_dpop_nonce/i.test(challenge) && this.resourceNonce !== undefined) {
-        // Rejected before any handler ran, so replaying with a fresh proof is safe for every method.
-        nonceRetried = true;
-        continue;
-      }
-      if (isSafeRead && retries < MAX_SAFE_RETRIES) {
-        const expiredToken = response.status === 401 && /invalid_token/i.test(challenge);
-        if (expiredToken) this.cached = undefined;
-        if ((expiredToken || RETRYABLE_STATUS.has(response.status)) &&
-            await this.pause(retries, retryAfterSeconds(response.headers), deadline, input.signal)) {
-          retries += 1;
-          continue;
-        }
-      }
-      throw failure;
-    }
-  }
-
-  private resourceHeaders(token: string, method: string, input: SessionRequest): Record<string, string> {
-    const headers: Record<string, string> = {
+  /**
+   * Authorization and DPoP headers for one resource request. A fresh proof (new jti) is signed on every
+   * call, so a retried attempt never reuses a proof the server has already seen.
+   */
+  async authorize(method: string, url: URL, deadline: Deadline, signal: AbortSignal | undefined): Promise<ResourceAuthHeaders> {
+    // Throws before signing anything that the gateway would refuse to verify.
+    assertCanonicalPath(url.pathname);
+    const token = await this.token(deadline, signal);
+    return {
       Authorization: `DPoP ${token}`,
       DPoP: resourceDpopProof(this.config.signer, {
-        method, origin: this.config.origin, rawPath: input.rawPath, accessToken: token, now: this.now,
+        method, origin: url.origin, rawPath: url.pathname, accessToken: token, now: this.now,
         ...(this.resourceNonce === undefined ? {} : { nonce: this.resourceNonce }),
       }),
-      Accept: "application/json, */*;q=0.5",
-      "User-Agent": this.userAgent,
     };
-    if (input.body !== undefined) headers["Content-Type"] = "application/json";
-    // The same key on every attempt, so a replay cannot create a second effect.
-    if (input.idempotencyKey !== undefined) headers["Idempotency-Key"] = input.idempotencyKey;
-    return headers;
   }
 
-  private parseSuccess(response: RawResponse): ApiResponse<unknown> {
-    if (!isJson(response.headers)) return { status: response.status, headers: response.headers, body: response.body };
-    const body = response.body.length === 0 ? undefined : parseJson(response.body);
-    if (body === undefined && response.body.length > 0) {
-      throw new UnexpectedResponseError("the server returned malformed JSON in a success response", response.status);
+  /** Records the resource server's `DPoP-Nonce` so the next proof carries it. */
+  rememberResourceNonce(headers: Headers): void {
+    this.rememberNonce(headers, "resource");
+  }
+
+  hasResourceNonce(): boolean {
+    return this.resourceNonce !== undefined;
+  }
+
+  /** Forgets the cached access token, e.g. after the server called it expired or revoked. */
+  invalidateToken(): void {
+    this.cached = undefined;
+  }
+
+  /**
+   * One DPoP-authenticated JSON POST to an operation the generated client does not expose (credential
+   * rotation). Replays exactly once when the server answers with a nonce challenge.
+   */
+  async postSigned(rawPath: string, body: unknown): Promise<unknown> {
+    const deadline = new Deadline(this.config.timeoutMs ?? DEFAULT_TIMEOUT_MS);
+    const url = new URL(this.config.origin + rawPath);
+    for (let nonceRetried = false; ; nonceRetried = true) {
+      const auth = await this.authorize("POST", url, deadline, undefined);
+      const response = await send(this.fetchImpl, url.href, {
+        method: "POST",
+        deadline,
+        headers: { ...auth, "Content-Type": "application/json", Accept: "application/json", "User-Agent": this.userAgent },
+        body: JSON.stringify(body),
+      });
+      this.rememberNonce(response.headers, "resource");
+      if (response.status < 300) return parseJson(response.body);
+      const challenge = response.headers.get("www-authenticate") ?? "";
+      if (!nonceRetried && response.status === 401 && /use_dpop_nonce/i.test(challenge) && this.resourceNonce !== undefined) continue;
+      throw errorFromResponse(response, "product");
     }
-    return { status: response.status, headers: response.headers, body };
   }
 
   private rememberNonce(headers: Headers, kind: "token" | "resource"): void {
@@ -264,7 +226,7 @@ export class Session {
         "User-Agent": this.userAgent,
         DPoP: tokenDpopProof(signer, { origin, now: this.now, ...(this.tokenNonce === undefined ? {} : { nonce: this.tokenNonce }) }),
       },
-      body: new URLSearchParams(form).toString(),
+      body: new URLSearchParams(Object.entries(form).flatMap(([key, value]) => (value === undefined ? [] : [[key, value]]))).toString(),
     });
   }
 }

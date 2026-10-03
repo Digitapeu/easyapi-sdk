@@ -1,4 +1,4 @@
-import { SetupError } from "../errors.js";
+import { SetupError } from "../machine-auth/errors.js";
 
 /** Reads one line from the terminal without echoing it. Refuses to run without a TTY. */
 export function readSecretFromTty(prompt: string): Promise<string> {

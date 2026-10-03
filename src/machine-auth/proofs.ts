@@ -6,7 +6,7 @@ import {
   SdkResourceDpopClaimsSchema,
   SdkRotationClaimsSchema,
   SdkTokenDpopClaimsSchema,
-} from "../contract/sdk-auth.js";
+} from "./contract/sdk-auth.js";
 import { InvalidRequestError } from "./errors.js";
 import { randomJti, sha256Base64Url, signJwt, type Signer } from "./keys.js";
 
@@ -91,6 +91,15 @@ export function rotationProofs(oldSigner: Signer, newSigner: Signer, input: {
   };
 }
 
+// Written as a code-point check because a regex character class over C0 controls trips no-control-regex.
+const hasControlCharacter = (text: string): boolean => {
+  for (const char of text) {
+    const code = char.codePointAt(0) ?? 0;
+    if (code <= 0x1f || code === 0x7f) return true;
+  }
+  return false;
+};
+
 /**
  * Rejects the path shapes the gateway refuses on machine-authenticated routes (contract section 6), so a
  * path that could be normalized differently by a proxy is never signed.
@@ -103,7 +112,7 @@ export function assertCanonicalPath(rawPath: string): void {
   if (rawPath.includes("//")) fail("duplicate slashes");
   if (rawPath.includes("\\")) fail("backslash");
   if (/[?#]/.test(rawPath)) fail("query or fragment in path");
-  if (/[\u0000-\u001f\u007f]/.test(rawPath)) fail("control character");
+  if (hasControlCharacter(rawPath)) fail("control character");
   if (/%(?![0-9a-fA-F]{2})/.test(rawPath)) fail("malformed percent escape");
   if (/%(2f|5c)/i.test(rawPath)) fail("encoded path separator");
   if (/%(0[0-9a-f]|1[0-9a-f]|7f)/i.test(rawPath)) fail("encoded control character");
@@ -111,15 +120,4 @@ export function assertCanonicalPath(rawPath: string): void {
     const decoded = segment.replace(/%2e/gi, ".");
     if (decoded === "." || decoded === "..") fail("dot segment");
   }
-}
-
-/** Substitutes `{name}` placeholders, escaping each value exactly once. */
-export function expandPath(template: string, params: Record<string, string | number> | undefined): string {
-  const rawPath = template.replace(/\{([A-Za-z0-9_]+)\}/g, (_match, name: string) => {
-    const value = params?.[name];
-    if (value === undefined || String(value) === "") throw new InvalidRequestError(`missing path parameter "${name}"`);
-    return encodeURIComponent(String(value));
-  });
-  assertCanonicalPath(rawPath);
-  return rawPath;
 }

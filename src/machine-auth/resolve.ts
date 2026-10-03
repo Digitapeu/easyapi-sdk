@@ -4,11 +4,11 @@ import {
   SdkCredentialIdSchema,
   SdkPublicOriginSchema,
   type SdkProfile,
-} from "../contract/sdk-auth.js";
+} from "./contract/sdk-auth.js";
 import { ConfigError } from "./errors.js";
 import { readPrivateFile } from "./fsx.js";
 import { signerFromKey, signerFromPem, type Signer } from "./keys.js";
-import { DEFAULT_BASE_URL } from "./generated/metadata.js";
+import { DEFAULT_BASE_URL } from "./defaults.js";
 import { defaultConfigRoot, locateProfile, readProfile, type ProfileLocation } from "./profile-store.js";
 
 export interface ResolveOptions {
@@ -54,15 +54,15 @@ export function parseOrigin(value: string): string {
 
 /** Explicit option, then environment. The saved profile and package default are applied by the caller. */
 export function overrideOrigin(options: ResolveOptions, env: NodeJS.ProcessEnv): string | undefined {
-  const value = nonEmpty(options.baseUrl) ?? nonEmpty(env.EASYAPI_BASE_URL);
+  const value = nonEmpty(options.baseUrl) ?? nonEmpty(env["EASYAPI_BASE_URL"]);
   return value === undefined ? undefined : parseOrigin(value);
 }
 
 export function locateFromOptions(options: ResolveOptions, runtime: Runtime): ProfileLocation {
   const { env, cwd, platform } = runtime;
-  const configRoot = nonEmpty(options.configDir) ?? nonEmpty(env.EASYAPI_CONFIG_DIR) ?? defaultConfigRoot(env, platform);
+  const configRoot = nonEmpty(options.configDir) ?? nonEmpty(env["EASYAPI_CONFIG_DIR"]) ?? defaultConfigRoot(env, platform);
   return locateProfile({
-    profileName: nonEmpty(options.profile) ?? nonEmpty(env.EASYAPI_PROFILE) ?? "default",
+    profileName: nonEmpty(options.profile) ?? nonEmpty(env["EASYAPI_PROFILE"]) ?? "default",
     configRoot,
     cwd,
   });
@@ -87,8 +87,8 @@ export function loadKeyFile(path: string, cwd: string): Signer {
 export function resolveIdentity(options: ResolveOptions, runtime: Runtime = currentRuntime()): ResolvedIdentity {
   const { env, cwd } = runtime;
   const location = locateFromOptions(options, runtime);
-  const idOverride = nonEmpty(options.credentialId) ?? nonEmpty(env.EASYAPI_CREDENTIAL_ID);
-  const keyPathOverride = nonEmpty(options.privateKeyPath) ?? nonEmpty(env.EASYAPI_PRIVATE_KEY_PATH);
+  const idOverride = nonEmpty(options.credentialId) ?? nonEmpty(env["EASYAPI_CREDENTIAL_ID"]);
+  const keyPathOverride = nonEmpty(options.privateKeyPath) ?? nonEmpty(env["EASYAPI_PRIVATE_KEY_PATH"]);
   const keyMaterial = options.privateKey;
   const hasKeyOverride = keyPathOverride !== undefined || keyMaterial !== undefined;
   const originOverride = overrideOrigin(options, env);

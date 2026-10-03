@@ -1,7 +1,7 @@
 import { parseArgs } from "node:util";
-import { EasyApiError } from "../errors.js";
-import { SDK_VERSION } from "../generated/metadata.js";
-import type { ResolveOptions } from "../resolve.js";
+import { MachineAuthError } from "../machine-auth/errors.js";
+import { SDK_VERSION } from "../machine-auth/defaults.js";
+import type { ResolveOptions } from "../machine-auth/resolve.js";
 import { defaultContext, type CliContext } from "./context.js";
 import { runRotate } from "./rotate.js";
 import { runSetup } from "./setup.js";
@@ -97,7 +97,7 @@ export async function runCli(argv: readonly string[], ctx: CliContext = defaultC
       ctx.io.err(`error: ${error.message}\nRun \`easyapi help\` for usage.`);
       return 2;
     }
-    ctx.io.err(`error: ${error instanceof EasyApiError ? error.message : "unexpected failure"}`);
+    ctx.io.err(`error: ${error instanceof MachineAuthError ? error.message : "unexpected failure"}`);
     return 1;
   }
 }

@@ -1,9 +1,9 @@
-import { z } from "zod";
-import { SdkCredentialViewSchema, SdkPublicKeySchema, type SdkCredentialView } from "../contract/sdk-auth.js";
+import { z } from "zod/v3";
+import { SdkCredentialViewSchema, SdkPublicKeySchema, type SdkCredentialView } from "./contract/sdk-auth.js";
 import { UnexpectedResponseError } from "./errors.js";
 import { Deadline, errorFromResponse, parseJson, send, type FetchLike } from "./http.js";
 import type { Signer } from "./keys.js";
-import { SDK_VERSION } from "./generated/metadata.js";
+import { SDK_VERSION } from "./defaults.js";
 import { ENROLL_PATH, enrollmentProof, type Clock } from "./proofs.js";
 
 const CredentialEnvelopeSchema = z.object({ data: z.object({ credential: SdkCredentialViewSchema }) });

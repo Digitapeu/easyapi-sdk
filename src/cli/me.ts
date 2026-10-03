@@ -1,23 +1,28 @@
-import { z } from "zod";
-import { MeAuthenticationSchema } from "../../contract/sdk-auth.js";
-import { SetupError, UnexpectedResponseError } from "../errors.js";
-import type { Session } from "../session.js";
+import { EasyAPIError } from "../models/errors/easy-api-error.js";
+import { UnexpectedClientError } from "../models/errors/http-client-errors.js";
+import type { GetV1MeData } from "../models/operations/get-v1-me.js";
+import { ApiError, MachineAuthError, SetupError } from "../machine-auth/errors.js";
+import { retryAfterSeconds } from "../machine-auth/http.js";
+import type { EasyApi } from "../sdk/sdk.js";
 
-const MeEnvelopeSchema = z.object({
-  data: z.object({
-    businessName: z.string(),
-    tier: z.object({ code: z.string() }).passthrough(),
-    scopes: z.array(z.string()),
-    authentication: MeAuthenticationSchema.optional(),
-  }).passthrough(),
-});
-export type MeData = z.infer<typeof MeEnvelopeSchema>["data"];
+export type MeData = GetV1MeData;
 
-export async function fetchMe(session: Session): Promise<MeData> {
-  const response = await session.request({ method: "GET", rawPath: "/v1/me" });
-  const parsed = MeEnvelopeSchema.safeParse(response.body);
-  if (!parsed.success) throw new UnexpectedResponseError("GET /v1/me returned an unexpected response", response.status);
-  return parsed.data.data;
+/** Maps what the generated client throws back to the machine-auth errors the CLI flows match on. */
+function toCliError(error: unknown): unknown {
+  if (error instanceof UnexpectedClientError && error.cause instanceof MachineAuthError) return error.cause;
+  if (error instanceof EasyAPIError) {
+    const code = "error" in error && typeof error.error === "object" && error.error !== null && "code" in error.error ? String(error.error.code) : "unknown";
+    return new ApiError(error.message, error.statusCode, code, undefined, retryAfterSeconds(error.headers));
+  }
+  return error;
+}
+
+export async function fetchMe(client: EasyApi): Promise<MeData> {
+  try {
+    return (await client.me.get()).result.data;
+  } catch (error) {
+    throw toCliError(error);
+  }
 }
 
 export type Verdict = { kind: "match"; generation: number } | { kind: "mismatch"; reason: string };

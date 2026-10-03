@@ -1,5 +1,5 @@
-import { z } from "zod";
-import { SdkOAuthErrorSchema } from "../contract/sdk-auth.js";
+import { z } from "zod/v3";
+import { SdkOAuthErrorSchema } from "./contract/sdk-auth.js";
 import {
   AbortedError,
   ApiError,
@@ -11,7 +11,7 @@ import {
   describeCause,
 } from "./errors.js";
 
-export type FetchLike = (input: string, init?: RequestInit) => Promise<Response>;
+export type FetchLike = (input: string | URL | Request, init?: RequestInit) => Promise<Response>;
 
 export class Deadline {
   readonly at: number;

@@ -1,10 +1,10 @@
 import { randomUUID } from "node:crypto";
-import type { SdkProfile } from "../../contract/sdk-auth.js";
-import { enroll } from "../auth-api.js";
-import { ApiError, ConfigError, EasyApiError, OAuthError, SetupError } from "../errors.js";
-import { acquireLock, writePrivateFile } from "../fsx.js";
-import { DEFAULT_BASE_URL } from "../generated/metadata.js";
-import { generateSigner, type Signer } from "../keys.js";
+import type { SdkProfile } from "../machine-auth/contract/sdk-auth.js";
+import { enroll } from "../machine-auth/auth-api.js";
+import { ApiError, ConfigError, MachineAuthError, OAuthError, SetupError } from "../machine-auth/errors.js";
+import { acquireLock, writePrivateFile } from "../machine-auth/fsx.js";
+import { DEFAULT_BASE_URL } from "../machine-auth/defaults.js";
+import { generateSigner, type Signer } from "../machine-auth/keys.js";
 import {
   assertValidProfile,
   ensureConfigDirs,
@@ -12,10 +12,9 @@ import {
   readProfile,
   writeProfile,
   type ProfileLocation,
-} from "../profile-store.js";
-import { loadKeyFile, locateFromOptions, overrideOrigin, type ResolveOptions } from "../resolve.js";
-import { Session } from "../session.js";
-import type { CliContext } from "./context.js";
+} from "../machine-auth/profile-store.js";
+import { loadKeyFile, locateFromOptions, overrideOrigin, type ResolveOptions } from "../machine-auth/resolve.js";
+import { cliClient, type CliContext } from "./context.js";
 import { fetchMe, judgeIdentity, requireMatch } from "./me.js";
 
 const API_KEY_PATTERN = /^[\x21-\x7E]{8,512}$/;
@@ -44,22 +43,12 @@ async function setupLocked(ctx: CliContext, location: ProfileLocation, originOve
 }
 
 async function obtainBootstrapKey(ctx: CliContext): Promise<string> {
-  const fromEnv = ctx.env.EASYAPI_API_KEY;
+  const fromEnv = ctx.env["EASYAPI_API_KEY"];
   const entered = fromEnv !== undefined && fromEnv !== "" ? fromEnv : await ctx.io.readSecret("easyapi API key (input hidden): ");
   const key = entered.trim();
   if (!API_KEY_PATTERN.test(key)) throw new SetupError("that value does not look like an API key; nothing was saved");
   return key;
 }
-
-const sessionFor = (ctx: CliContext, profile: SdkProfile, signer: Signer): Session =>
-  new Session({
-    origin: profile.publicOrigin,
-    credentialId: profile.credentialId,
-    signer,
-    timeoutMs: ctx.timeoutMs,
-    ...(ctx.fetch === undefined ? {} : { fetch: ctx.fetch }),
-    ...(ctx.now === undefined ? {} : { now: ctx.now }),
-  });
 
 async function enrollFresh(ctx: CliContext, location: ProfileLocation, origin: string): Promise<void> {
   // The bootstrap key is collected first so an aborted prompt leaves no orphan key behind.
@@ -121,7 +110,7 @@ async function resumeSetup(ctx: CliContext, location: ProfileLocation, profile: 
 
 /** Token exchange, then /v1/me, then the two profile writes of the contract (generation, then verified). */
 async function verifyAndFinish(ctx: CliContext, location: ProfileLocation, profile: SdkProfile, signer: Signer): Promise<void> {
-  const me = await fetchMe(sessionFor(ctx, profile, signer));
+  const me = await fetchMe(cliClient(ctx, { baseUrl: profile.publicOrigin, credentialId: profile.credentialId, signer }));
   const generation = requireMatch(
     judgeIdentity(me, {
       credentialId: profile.credentialId,
@@ -174,4 +163,4 @@ function explainVerificationFailure(error: unknown, location: ProfileLocation, s
   return new SetupError(`verification did not complete (${describe(error)}). ${next} ${kept}`);
 }
 
-const describe = (error: unknown): string => (error instanceof EasyApiError ? error.message : "unexpected error");
+const describe = (error: unknown): string => (error instanceof MachineAuthError ? error.message : "unexpected error");

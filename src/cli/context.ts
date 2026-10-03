@@ -1,6 +1,9 @@
-import type { FetchLike } from "../http.js";
-import type { Clock } from "../proofs.js";
-import { currentRuntime, type Runtime } from "../resolve.js";
+import { HTTPClient } from "../lib/http.js";
+import { clientForIdentity, type MachineIdentity } from "../machine-auth/client.js";
+import type { EasyApi } from "../sdk/sdk.js";
+import type { FetchLike } from "../machine-auth/http.js";
+import type { Clock } from "../machine-auth/proofs.js";
+import { currentRuntime, type Runtime } from "../machine-auth/resolve.js";
 import { readSecretFromTty } from "./prompt.js";
 
 export interface CliIo {
@@ -25,3 +28,14 @@ export const defaultContext = (): CliContext => ({
   },
   timeoutMs: 30_000,
 });
+
+/** The generated client for one identity, wired to the CLI's injectable fetch, clock and timeout. */
+export const cliClient = (ctx: CliContext, identity: MachineIdentity): EasyApi =>
+  clientForIdentity(identity, {
+    ...(ctx.fetch === undefined ? {} : { fetch: ctx.fetch }),
+    ...(ctx.now === undefined ? {} : { now: ctx.now }),
+    sdk: {
+      timeoutMs: ctx.timeoutMs,
+      ...(ctx.fetch === undefined ? {} : { httpClient: new HTTPClient({ fetcher: ctx.fetch }) }),
+    },
+  });

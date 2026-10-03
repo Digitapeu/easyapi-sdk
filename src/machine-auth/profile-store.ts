@@ -1,6 +1,6 @@
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
-import { SdkProfileNameSchema, SdkProfileSchema, type SdkProfile } from "../contract/sdk-auth.js";
+import { SdkProfileNameSchema, SdkProfileSchema, type SdkProfile } from "./contract/sdk-auth.js";
 import { ConfigError } from "./errors.js";
 import { ensurePrivateDir, readPrivateFile, writePrivateFile } from "./fsx.js";
 
@@ -18,7 +18,7 @@ export function defaultConfigRoot(env: NodeJS.ProcessEnv, platform: NodeJS.Platf
     throw new ConfigError("Windows is not supported yet: key and profile files cannot be protected by POSIX permissions");
   }
   if (platform === "darwin") return join(home, "Library", "Application Support", "easyapi");
-  const xdg = env.XDG_CONFIG_HOME;
+  const xdg = env["XDG_CONFIG_HOME"];
   // XDG says a relative value is invalid and must be ignored.
   return join(xdg !== undefined && xdg.startsWith("/") ? xdg : join(home, ".config"), "easyapi");
 }
