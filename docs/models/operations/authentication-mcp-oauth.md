@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AuthenticationMcpOauth } from "@digitap/easyapi/models/operations";
+import { AuthenticationMcpOauth } from "@digitap.eu/easyapi/models/operations";
 
 let value: AuthenticationMcpOauth = {
   method: "mcp_oauth",

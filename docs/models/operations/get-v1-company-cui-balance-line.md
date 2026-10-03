@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompanyCuiBalanceLine } from "@digitap/easyapi/models/operations";
+import { GetV1CompanyCuiBalanceLine } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1CompanyCuiBalanceLine = {
   indicator: "<value>",
