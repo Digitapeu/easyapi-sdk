@@ -39,9 +39,9 @@
   "devDependencies": {
     "@types/node": "24.19.1",
     "@typescript/native-preview": "7.0.0-dev.20260302.1",
-    "oxlint": "^1.60.0",
-    "tshy": "^3.3.2",
-    "typescript": "~5.8.3"
+    "oxlint": "1.86.0",
+    "tshy": "3.3.2",
+    "typescript": "5.8.3"
   },
   "dependencies": {
     "zod": "^3.25.65 || ^4.0.0"
