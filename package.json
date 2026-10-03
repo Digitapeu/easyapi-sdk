@@ -37,10 +37,10 @@
     "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tshy",
     "prepublishOnly": "npm run build",
-    "prepack": "npm run build && node ./scripts/strip-generator-wording.mjs",
     "test": "bun test",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "check-regen": "./scripts/check-regen.sh"
+    "check-regen": "./scripts/check-regen.sh",
+    "prepack": "npm run build && node ./scripts/strip-generator-wording.mjs"
   },
   "peerDependencies": {},
   "devDependencies": {
