@@ -11,7 +11,6 @@
   },
   "files": [
     "dist",
-    "src",
     "LICENSE",
     "README.md"
   ],
@@ -39,6 +38,7 @@
     "build": "tshy",
     "prepublishOnly": "npm run build",
     "check-regen": "./scripts/check-regen.sh",
+    "prepack": "npm run build && node ./scripts/strip-generator-wording.mjs",
     "test": "bun test",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
