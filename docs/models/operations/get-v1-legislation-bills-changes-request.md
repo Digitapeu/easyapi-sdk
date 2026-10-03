@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1LegislationBillsChangesRequest } from "@digitap/easyapi/models/operations";
+import { GetV1LegislationBillsChangesRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1LegislationBillsChangesRequest = {
   since: new Date("2025-02-14T18:14:33.465Z"),

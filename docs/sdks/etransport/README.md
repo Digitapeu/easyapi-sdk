@@ -18,7 +18,7 @@ Create an e-Transport declaration
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_etransport_declarations" method="post" path="/v1/etransport/declarations" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -42,8 +42,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { etransportCreate } from "@digitap/easyapi/funcs/etransport-create.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { etransportCreate } from "@digitap.eu/easyapi/funcs/etransport-create.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -100,7 +100,7 @@ Modify an e-Transport declaration by UIT
 
 <!-- UsageSnippet language="typescript" operationID="patch_v1_etransport_declarations_uit" method="patch" path="/v1/etransport/declarations/{uit}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -124,8 +124,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { etransportModify } from "@digitap/easyapi/funcs/etransport-modify.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { etransportModify } from "@digitap.eu/easyapi/funcs/etransport-modify.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -182,7 +182,7 @@ Query an e-Transport declaration by UIT
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_etransport_declarations_uit" method="get" path="/v1/etransport/declarations/{uit}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -202,8 +202,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { etransportGet } from "@digitap/easyapi/funcs/etransport-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { etransportGet } from "@digitap.eu/easyapi/funcs/etransport-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

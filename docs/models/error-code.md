@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ErrorCode } from "@digitap/easyapi/models";
+import { ErrorCode } from "@digitap.eu/easyapi/models";
 
 let value: ErrorCode = "connect_in_progress";
 
