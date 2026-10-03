@@ -1,0 +1,15 @@
+configVersion: 2.0.0
+generation:
+  sdkClassName: EasyApi
+  maintainOpenAPIOrder: true
+typescript:
+  version: 0.2.0
+  packageName: "@easyapi/sdk"
+  author: Daniel Tamas
+  moduleFormat: dual
+  flattenGlobalSecurity: true
+  maxMethodParams: 2
+  additionalPackageJSON:
+    license: MIT
+    engines:
+      node: ">=20"

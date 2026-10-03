@@ -7,3 +7,4 @@ dist
 *.key
 *.tgz
 .DS_Store
+.speakeasy-tmp.json

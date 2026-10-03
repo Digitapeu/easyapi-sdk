@@ -1,0 +1,802 @@
+overlay: 1.0.0
+info:
+  title: easyapi SDK overlay
+  version: 1.0.0
+actions:
+  - target: '$.servers'
+    description: 'Replace the placeholder server with production'
+    remove: true
+  - target: '$'
+    description: 'Production server and global tags'
+    update:
+      servers:
+        - url: https://easyapi.ro
+          description: Production
+      tags:
+        - name: health
+          description: 'Service reachability (database, Redis, ANAF).'
+        - name: me
+          description: 'The calling business: tier, scopes and limits.'
+        - name: company
+          description: 'Company identity, VAT status, balance sheets and litigation by CUI.'
+        - name: vat
+          description: 'EU VAT number validation through VIES.'
+        - name: fx
+          description: 'BNR reference exchange rates and conversion.'
+        - name: justice
+          description: 'ECRIS courts, court cases, hearings and the litigation change feed.'
+        - name: legislation
+          description: 'Parliamentary bills, consolidated acts and Monitorul Oficial.'
+        - name: search
+          description: 'Company name search.'
+        - name: connections
+          description: 'Gov connections (ANAF, REGES, bank) a tenant has authorized.'
+        - name: efactura
+          description: 'e-Factura invoice upload, clearance state, downloads and validation.'
+        - name: etransport
+          description: 'e-Transport declarations.'
+        - name: reges
+          description: 'REGES employment contracts, async jobs and employees.'
+        - name: bank
+          description: 'IBAN lookup and open-banking accounts, balances and transactions.'
+        - name: procurement
+          description: 'Public procurement contracts, tenders, direct purchases and CPV analysis.'
+        - name: spv
+          description: 'SPV inbox messages, documents and the e-TVA return.'
+        - name: geo
+          description: 'Cadastral parcel lookup.'
+        - name: stats
+          description: 'TEMPO statistical matrices.'
+        - name: auth
+          description: 'DPoP machine-credential enrollment and token exchange (handled by the SDK session layer).'
+  - target: '$.components.securitySchemes.dpop'
+    description: 'DPoP is applied at runtime by an SDK hook, not by the generator'
+    remove: true
+  - target: '$.paths.*.*.security[?(@.dpop)]'
+    description: 'Drop the DPoP alternative from every operation security requirement'
+    remove: true
+  - target: '$.paths.*.*.parameters[?(@.name==''DPoP'')]'
+    description: 'The DPoP proof header is set by the SDK hook, not by callers'
+    remove: true
+  - target: '$.paths[''/v1/search''].get.responses[''200''].content[''application/json''].schema.properties.data.not'
+    description: 'The always-501 search endpoint declares a never-matching 200 body, which the generator cannot model; leave the body untyped'
+    remove: true
+  - target: '$.paths[''/oauth/sdk/token''].post'
+    description: 'Machine-auth operation: called by the SDK DPoP session layer, not exposed'
+    update:
+      x-speakeasy-ignore: true
+  - target: '$.paths[''/v1/auth/credentials/{credentialId}/rotate''].post'
+    description: 'Machine-auth operation: called by the SDK DPoP session layer, not exposed'
+    update:
+      x-speakeasy-ignore: true
+  - target: '$.paths[''/v1/auth/enroll''].post'
+    description: 'Machine-auth operation: called by the SDK DPoP session layer, not exposed'
+    update:
+      x-speakeasy-ignore: true
+  - target: '$.paths[''/v1/health''].get'
+    description: 'health.check'
+    update:
+      x-speakeasy-group: health
+      x-speakeasy-name-override: check
+  - target: '$.paths[''/v1/me''].get'
+    description: 'me.get'
+    update:
+      x-speakeasy-group: me
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/company/{cui}''].get'
+    description: 'company.get'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/company/{cui}/balance''].get'
+    description: 'company.balance'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: balance
+  - target: '$.paths[''/v1/company/{cui}/balance/{year}''].get'
+    description: 'company.balanceByYear'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: balanceByYear
+  - target: '$.paths[''/v1/company/{cui}/vat-status''].get'
+    description: 'company.vatStatus'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: vatStatus
+  - target: '$.paths[''/v1/company/{cui}/litigation''].get'
+    description: 'company.litigation'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: litigation
+  - target: '$.paths[''/v1/company/batch''].post'
+    description: 'company.batchGet'
+    update:
+      x-speakeasy-group: company
+      x-speakeasy-name-override: batchGet
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/vat/vies/{countryCode}/{vatNumber}''].get'
+    description: 'vat.validateVies'
+    update:
+      x-speakeasy-group: vat
+      x-speakeasy-name-override: validateVies
+  - target: '$.paths[''/v1/fx/rates''].get'
+    description: 'fx.listRates'
+    update:
+      x-speakeasy-group: fx
+      x-speakeasy-name-override: listRates
+  - target: '$.paths[''/v1/fx/convert''].get'
+    description: 'fx.convert'
+    update:
+      x-speakeasy-group: fx
+      x-speakeasy-name-override: convert
+  - target: '$.paths[''/v1/justice/courts''].get'
+    description: 'justice.listCourts'
+    update:
+      x-speakeasy-group: justice
+      x-speakeasy-name-override: listCourts
+  - target: '$.paths[''/v1/justice/cases''].get'
+    description: 'justice.searchCases'
+    update:
+      x-speakeasy-group: justice
+      x-speakeasy-name-override: searchCases
+  - target: '$.paths[''/v1/justice/cases/changes''].get'
+    description: 'justice.listCaseChanges'
+    update:
+      x-speakeasy-group: justice
+      x-speakeasy-name-override: listCaseChanges
+  - target: '$.paths[''/v1/justice/hearings''].get'
+    description: 'justice.listHearings'
+    update:
+      x-speakeasy-group: justice
+      x-speakeasy-name-override: listHearings
+  - target: '$.paths[''/v1/legislation/bills''].get'
+    description: 'legislation.bills.list'
+    update:
+      x-speakeasy-group: legislation.bills
+      x-speakeasy-name-override: list
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/bills/changes''].get'
+    description: 'legislation.bills.listChanges'
+    update:
+      x-speakeasy-group: legislation.bills
+      x-speakeasy-name-override: listChanges
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/bills/{id}''].get'
+    description: 'legislation.bills.get'
+    update:
+      x-speakeasy-group: legislation.bills
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/legislation/bills/{id}/stages''].get'
+    description: 'legislation.bills.listStages'
+    update:
+      x-speakeasy-group: legislation.bills
+      x-speakeasy-name-override: listStages
+  - target: '$.paths[''/v1/legislation/bills/{id}/documents''].get'
+    description: 'legislation.bills.listDocuments'
+    update:
+      x-speakeasy-group: legislation.bills
+      x-speakeasy-name-override: listDocuments
+  - target: '$.paths[''/v1/legislation/acts''].get'
+    description: 'legislation.acts.list'
+    update:
+      x-speakeasy-group: legislation.acts
+      x-speakeasy-name-override: list
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/acts/changes''].get'
+    description: 'legislation.acts.listChanges'
+    update:
+      x-speakeasy-group: legislation.acts
+      x-speakeasy-name-override: listChanges
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/acts/{id}''].get'
+    description: 'legislation.acts.get'
+    update:
+      x-speakeasy-group: legislation.acts
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/legislation/acts/{id}/versions''].get'
+    description: 'legislation.acts.listVersions'
+    update:
+      x-speakeasy-group: legislation.acts
+      x-speakeasy-name-override: listVersions
+  - target: '$.paths[''/v1/legislation/acts/{id}/versions/{version}''].get'
+    description: 'legislation.acts.getVersion'
+    update:
+      x-speakeasy-group: legislation.acts
+      x-speakeasy-name-override: getVersion
+  - target: '$.paths[''/v1/legislation/monitorul-oficial/issues''].get'
+    description: 'legislation.monitorulOficial.listIssues'
+    update:
+      x-speakeasy-group: legislation.monitorulOficial
+      x-speakeasy-name-override: listIssues
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/monitorul-oficial/changes''].get'
+    description: 'legislation.monitorulOficial.listChanges'
+    update:
+      x-speakeasy-group: legislation.monitorulOficial
+      x-speakeasy-name-override: listChanges
+      x-speakeasy-pagination:
+        type: cursor
+        inputs:
+          - name: cursor
+            in: parameters
+            type: cursor
+        outputs:
+          nextCursor: $.data.next_cursor
+          results: $.data.items
+  - target: '$.paths[''/v1/legislation/monitorul-oficial/acts/{id}''].get'
+    description: 'legislation.monitorulOficial.getAct'
+    update:
+      x-speakeasy-group: legislation.monitorulOficial
+      x-speakeasy-name-override: getAct
+  - target: '$.paths[''/v1/search''].get'
+    description: 'search.companies'
+    update:
+      x-speakeasy-group: search
+      x-speakeasy-name-override: companies
+  - target: '$.paths[''/v1/connections''].post'
+    description: 'connections.create'
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: create
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/connections''].get'
+    description: 'connections.list'
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: list
+  - target: '$.paths[''/v1/connections/{id}''].get'
+    description: 'connections.get'
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/connections/{id}''].delete'
+    description: 'connections.revoke'
+    update:
+      x-speakeasy-group: connections
+      x-speakeasy-name-override: revoke
+  - target: '$.paths[''/v1/efactura/invoices''].post'
+    description: 'efactura.upload'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: upload
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/efactura/invoices/{id}''].get'
+    description: 'efactura.status'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: status
+  - target: '$.paths[''/v1/efactura/invoices/{id}/download''].get'
+    description: 'efactura.download'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: download
+  - target: '$.paths[''/v1/efactura/invoices/{id}/zip''].get'
+    description: 'efactura.downloadZip'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: downloadZip
+  - target: '$.paths[''/v1/efactura/messages''].get'
+    description: 'efactura.listMessages'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: listMessages
+  - target: '$.paths[''/v1/efactura/validate''].post'
+    description: 'efactura.validate'
+    update:
+      x-speakeasy-group: efactura
+      x-speakeasy-name-override: validate
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/etransport/declarations''].post'
+    description: 'etransport.create'
+    update:
+      x-speakeasy-group: etransport
+      x-speakeasy-name-override: create
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/etransport/declarations/{uit}''].patch'
+    description: 'etransport.modify'
+    update:
+      x-speakeasy-group: etransport
+      x-speakeasy-name-override: modify
+  - target: '$.paths[''/v1/etransport/declarations/{uit}''].get'
+    description: 'etransport.get'
+    update:
+      x-speakeasy-group: etransport
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/reges/contracts''].post'
+    description: 'reges.contracts.create'
+    update:
+      x-speakeasy-group: reges.contracts
+      x-speakeasy-name-override: create
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/reges/contracts/{id}/terminate''].post'
+    description: 'reges.contracts.terminate'
+    update:
+      x-speakeasy-group: reges.contracts
+      x-speakeasy-name-override: terminate
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: false
+          description: Makes the write safe to replay; the same key with an identical body returns the first response.
+          schema:
+            type: string
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+        retryConnectionErrors: false
+  - target: '$.paths[''/v1/reges/jobs/{id}''].get'
+    description: 'reges.jobs.get'
+    update:
+      x-speakeasy-group: reges.jobs
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/reges/employees''].get'
+    description: 'reges.employees.list'
+    update:
+      x-speakeasy-group: reges.employees
+      x-speakeasy-name-override: list
+  - target: '$.paths[''/v1/bank/iban/{iban}''].get'
+    description: 'bank.validateIban'
+    update:
+      x-speakeasy-group: bank
+      x-speakeasy-name-override: validateIban
+  - target: '$.paths[''/v1/bank/treasury/{cui}''].get'
+    description: 'bank.getTreasury'
+    update:
+      x-speakeasy-group: bank
+      x-speakeasy-name-override: getTreasury
+  - target: '$.paths[''/v1/bank/institutions''].get'
+    description: 'bank.listInstitutions'
+    update:
+      x-speakeasy-group: bank
+      x-speakeasy-name-override: listInstitutions
+  - target: '$.paths[''/v1/bank/accounts''].get'
+    description: 'bank.accounts.list'
+    update:
+      x-speakeasy-group: bank.accounts
+      x-speakeasy-name-override: list
+  - target: '$.paths[''/v1/bank/accounts/{id}/balances''].get'
+    description: 'bank.accounts.getBalances'
+    update:
+      x-speakeasy-group: bank.accounts
+      x-speakeasy-name-override: getBalances
+  - target: '$.paths[''/v1/bank/accounts/{id}/transactions''].get'
+    description: 'bank.accounts.listTransactions'
+    update:
+      x-speakeasy-group: bank.accounts
+      x-speakeasy-name-override: listTransactions
+  - target: '$.paths[''/v1/procurement/company/{cui}/contracts''].get'
+    description: 'procurement.listCompanyContracts'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: listCompanyContracts
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: offset
+            in: parameters
+            type: offset
+          - name: limit
+            in: parameters
+            type: limit
+        outputs:
+          results: $.data.contracts
+  - target: '$.paths[''/v1/procurement/company/{cui}/tenders''].get'
+    description: 'procurement.listCompanyTenders'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: listCompanyTenders
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: offset
+            in: parameters
+            type: offset
+          - name: limit
+            in: parameters
+            type: limit
+        outputs:
+          results: $.data.contracts
+  - target: '$.paths[''/v1/procurement/company/{cui}/direct-purchases''].get'
+    description: 'procurement.listCompanyDirectPurchases'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: listCompanyDirectPurchases
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: offset
+            in: parameters
+            type: offset
+          - name: limit
+            in: parameters
+            type: limit
+        outputs:
+          results: $.data.contracts
+  - target: '$.paths[''/v1/procurement/cpv/{cpv}/contracts''].get'
+    description: 'procurement.listCpvContracts'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: listCpvContracts
+      x-speakeasy-pagination:
+        type: offsetLimit
+        inputs:
+          - name: offset
+            in: parameters
+            type: offset
+          - name: limit
+            in: parameters
+            type: limit
+        outputs:
+          results: $.data.contracts
+  - target: '$.paths[''/v1/procurement/cpv/{cpv}/analysis''].get'
+    description: 'procurement.getCpvAnalysis'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: getCpvAnalysis
+  - target: '$.paths[''/v1/procurement/contracts/{number}''].get'
+    description: 'procurement.getContract'
+    update:
+      x-speakeasy-group: procurement
+      x-speakeasy-name-override: getContract
+  - target: '$.paths[''/v1/spv/messages''].get'
+    description: 'spv.listMessages'
+    update:
+      x-speakeasy-group: spv
+      x-speakeasy-name-override: listMessages
+  - target: '$.paths[''/v1/spv/documents/{id}''].get'
+    description: 'spv.downloadDocument'
+    update:
+      x-speakeasy-group: spv
+      x-speakeasy-name-override: downloadDocument
+  - target: '$.paths[''/v1/spv/etva-decont''].get'
+    description: 'spv.getEtvaDecont'
+    update:
+      x-speakeasy-group: spv
+      x-speakeasy-name-override: getEtvaDecont
+  - target: '$.paths[''/v1/geo/parcels''].get'
+    description: 'geo.getParcel'
+    update:
+      x-speakeasy-group: geo
+      x-speakeasy-name-override: getParcel
+  - target: '$.paths[''/v1/stats/matrix''].get'
+    description: 'stats.getMatrix'
+    update:
+      x-speakeasy-group: stats
+      x-speakeasy-name-override: getMatrix
+  - target: '$.paths.*.get'
+    description: 'Retry reads on throttling and transient upstream failures; the SDK honors Retry-After automatically'
+    update:
+      x-speakeasy-retries:
+        strategy: backoff
+        backoff:
+          initialInterval: 500
+          maxInterval: 30000
+          maxElapsedTime: 60000
+          exponent: 1.5
+        statusCodes:
+          - '429'
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
+  - target: '$.components'
+    description: 'Shared error envelope schemas so the generator emits one typed error class per status'
+    update:
+      schemas:
+        ErrorBody:
+          title: ErrorBody
+          type: object
+          required: [code, message]
+          properties:
+            code:
+              type: string
+              description: Stable machine-readable error code.
+            message:
+              type: string
+              description: Human-readable message.
+              x-speakeasy-error-message: true
+            details:
+              type: object
+              additionalProperties: true
+        BadRequestError:
+          title: BadRequestError
+          description: HTTP 400 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        UnauthorizedError:
+          title: UnauthorizedError
+          description: HTTP 401 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        ForbiddenError:
+          title: ForbiddenError
+          description: HTTP 403 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        NotFoundError:
+          title: NotFoundError
+          description: HTTP 404 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        ConflictError:
+          title: ConflictError
+          description: HTTP 409 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        RateLimitedError:
+          title: RateLimitedError
+          description: HTTP 429 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        InternalServerError:
+          title: InternalServerError
+          description: HTTP 500 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        NotImplementedError:
+          title: NotImplementedError
+          description: HTTP 501 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        BadGatewayError:
+          title: BadGatewayError
+          description: HTTP 502 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+        ServiceUnavailableError:
+          title: ServiceUnavailableError
+          description: HTTP 503 error envelope.
+          type: object
+          required: [error]
+          properties:
+            error:
+              $ref: '#/components/schemas/ErrorBody'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''400''].content[''application/json''].schema'
+    description: '400: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''400''].content[''application/json'']'
+    description: '400: reference the shared BadRequestError'
+    update:
+      schema:
+        $ref: '#/components/schemas/BadRequestError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''401''].content[''application/json''].schema'
+    description: '401: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''401''].content[''application/json'']'
+    description: '401: reference the shared UnauthorizedError'
+    update:
+      schema:
+        $ref: '#/components/schemas/UnauthorizedError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''403''].content[''application/json''].schema'
+    description: '403: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''403''].content[''application/json'']'
+    description: '403: reference the shared ForbiddenError'
+    update:
+      schema:
+        $ref: '#/components/schemas/ForbiddenError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''404''].content[''application/json''].schema'
+    description: '404: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''404''].content[''application/json'']'
+    description: '404: reference the shared NotFoundError'
+    update:
+      schema:
+        $ref: '#/components/schemas/NotFoundError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''409''].content[''application/json''].schema'
+    description: '409: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''409''].content[''application/json'']'
+    description: '409: reference the shared ConflictError'
+    update:
+      schema:
+        $ref: '#/components/schemas/ConflictError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''429''].content[''application/json''].schema'
+    description: '429: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''429''].content[''application/json'']'
+    description: '429: reference the shared RateLimitedError'
+    update:
+      schema:
+        $ref: '#/components/schemas/RateLimitedError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''500''].content[''application/json''].schema'
+    description: '500: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''500''].content[''application/json'']'
+    description: '500: reference the shared InternalServerError'
+    update:
+      schema:
+        $ref: '#/components/schemas/InternalServerError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''501''].content[''application/json''].schema'
+    description: '501: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''501''].content[''application/json'']'
+    description: '501: reference the shared NotImplementedError'
+    update:
+      schema:
+        $ref: '#/components/schemas/NotImplementedError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''502''].content[''application/json''].schema'
+    description: '502: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''502''].content[''application/json'']'
+    description: '502: reference the shared BadGatewayError'
+    update:
+      schema:
+        $ref: '#/components/schemas/BadGatewayError'
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''503''].content[''application/json''].schema'
+    description: '503: drop the inline envelope schema'
+    remove: true
+  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''503''].content[''application/json'']'
+    description: '503: reference the shared ServiceUnavailableError'
+    update:
+      schema:
+        $ref: '#/components/schemas/ServiceUnavailableError'
