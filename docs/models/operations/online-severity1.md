@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OnlineSeverity1 } from "@digitap/easyapi/models/operations";
+import { OnlineSeverity1 } from "@digitap.eu/easyapi/models/operations";
 
 let value: OnlineSeverity1 = "error";
 

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1CompanyCuiResponse } from "@digitap/easyapi/models/operations";
+import { GetV1CompanyCuiResponse } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1CompanyCuiResponse = {
   headers: {

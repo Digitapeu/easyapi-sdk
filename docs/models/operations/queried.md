@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Queried } from "@digitap/easyapi/models/operations";
+import { Queried } from "@digitap.eu/easyapi/models/operations";
 
 let value: Queried = {
   party: "<value>",

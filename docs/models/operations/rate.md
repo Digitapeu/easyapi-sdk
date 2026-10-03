@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Rate } from "@digitap/easyapi/models/operations";
+import { Rate } from "@digitap.eu/easyapi/models/operations";
 
 let value: Rate = {
   currency: "Costa Rican Colon",

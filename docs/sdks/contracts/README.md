@@ -15,7 +15,7 @@ Register a REGES employment contract, async
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_reges_contracts" method="post" path="/v1/reges/contracts" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { regesContractsCreate } from "@digitap/easyapi/funcs/reges-contracts-create.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { regesContractsCreate } from "@digitap.eu/easyapi/funcs/reges-contracts-create.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -99,7 +99,7 @@ Terminate a REGES employment contract, async
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_reges_contracts_id_terminate" method="post" path="/v1/reges/contracts/{id}/terminate" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -127,8 +127,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { regesContractsTerminate } from "@digitap/easyapi/funcs/reges-contracts-terminate.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { regesContractsTerminate } from "@digitap.eu/easyapi/funcs/reges-contracts-terminate.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

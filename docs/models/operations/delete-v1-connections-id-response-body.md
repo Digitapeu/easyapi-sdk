@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { DeleteV1ConnectionsIdResponseBody } from "@digitap/easyapi/models/operations";
+import { DeleteV1ConnectionsIdResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: DeleteV1ConnectionsIdResponseBody = {
   data: {
