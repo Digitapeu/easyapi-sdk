@@ -38,8 +38,8 @@
     "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tshy",
     "prepublishOnly": "npm run build",
-    "test": "bun test",
     "check-regen": "./scripts/check-regen.sh",
+    "test": "bun test",
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {},
