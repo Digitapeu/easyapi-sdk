@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1CompanyBatchRequestBody } from "@digitap/easyapi/models/operations";
+import { PostV1CompanyBatchRequestBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1CompanyBatchRequestBody = {
   cuis: [

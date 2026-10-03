@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1EtransportDeclarationsUitRequest } from "@digitap/easyapi/models/operations";
+import { PatchV1EtransportDeclarationsUitRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: PatchV1EtransportDeclarationsUitRequest = {
   uit: "<value>",
