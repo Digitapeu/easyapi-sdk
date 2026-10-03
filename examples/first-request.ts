@@ -1,12 +1,12 @@
-import { createClient } from "@easyapi/sdk";
+import { fromMachineCredential } from "@digitap/easyapi";
 
 // Reads the profile written by `easyapi setup` (or EASYAPI_* variables) and calls two endpoints.
-const client = createClient();
+const easyapi = await fromMachineCredential();
 
-const me = await client.me();
+const { data: me } = (await easyapi.me.get()).result;
 console.log(`${me.businessName} on tier ${me.tier.code}; scopes: ${me.scopes.join(", ")}`);
 
 if (me.scopes.includes("company:read")) {
-  const company = await client.company.get("43020532");
-  console.log(`${company.name} (VAT active: ${company.vat.vatActive})`);
+  const vat = await easyapi.company.vatStatus("43020532");
+  console.log(vat.result);
 }

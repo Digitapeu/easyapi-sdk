@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { createInterface } from "node:readline";
 
-const cli = new URL("../dist/esm/src/cli/bin.js", import.meta.url).pathname;
+const cli = new URL("../dist/esm/cli/bin.js", import.meta.url).pathname;
 const server = spawn("bun", [new URL("../test/harness/serve.ts", import.meta.url).pathname], { stdio: ["ignore", "pipe", "inherit"] });
 const workdir = mkdtempSync(join(tmpdir(), "easyapi-e2e-"));
 
