@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1SpvEtvaDecontData } from "@digitap/easyapi/models/operations";
+import { GetV1SpvEtvaDecontData } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1SpvEtvaDecontData = {
   cif: "<value>",

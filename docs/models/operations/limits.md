@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Limits } from "@digitap/easyapi/models/operations";
+import { Limits } from "@digitap.eu/easyapi/models/operations";
 
 let value: Limits = {
   rateLimitPerMin: 567422,

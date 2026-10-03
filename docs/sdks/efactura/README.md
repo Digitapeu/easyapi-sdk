@@ -21,7 +21,7 @@ Upload a UBL/JSON invoice to e-Factura
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_efactura_invoices" method="post" path="/v1/efactura/invoices" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -44,8 +44,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaUpload } from "@digitap/easyapi/funcs/efactura-upload.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaUpload } from "@digitap.eu/easyapi/funcs/efactura-upload.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -101,7 +101,7 @@ Get an invoice's e-Factura clearance state
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_efactura_invoices_id" method="get" path="/v1/efactura/invoices/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -121,8 +121,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaStatus } from "@digitap/easyapi/funcs/efactura-status.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaStatus } from "@digitap.eu/easyapi/funcs/efactura-status.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -174,7 +174,7 @@ Get a signed download URL for an invoice's e-Factura result
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_efactura_invoices_id_download" method="get" path="/v1/efactura/invoices/{id}/download" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -194,8 +194,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaDownload } from "@digitap/easyapi/funcs/efactura-download.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaDownload } from "@digitap.eu/easyapi/funcs/efactura-download.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -247,7 +247,7 @@ Download an invoice's e-Factura result zip through a signed link
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_efactura_invoices_id_zip" method="get" path="/v1/efactura/invoices/{id}/zip" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -272,8 +272,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaDownloadZip } from "@digitap/easyapi/funcs/efactura-download-zip.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaDownloadZip } from "@digitap.eu/easyapi/funcs/efactura-download-zip.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -330,7 +330,7 @@ List e-Factura messages for a connected company
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_efactura_messages" method="get" path="/v1/efactura/messages" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -350,8 +350,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaListMessages } from "@digitap/easyapi/funcs/efactura-list-messages.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaListMessages } from "@digitap.eu/easyapi/funcs/efactura-list-messages.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -404,7 +404,7 @@ Validate a UBL invoice offline, and with ?online=true also at ANAF (no ANAF conn
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_efactura_validate" method="post" path="/v1/efactura/validate" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -428,8 +428,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { efacturaValidate } from "@digitap/easyapi/funcs/efactura-validate.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { efacturaValidate } from "@digitap.eu/easyapi/funcs/efactura-validate.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

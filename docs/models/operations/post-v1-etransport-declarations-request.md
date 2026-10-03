@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PostV1EtransportDeclarationsRequest } from "@digitap/easyapi/models/operations";
+import { PostV1EtransportDeclarationsRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1EtransportDeclarationsRequest = {
   body: {

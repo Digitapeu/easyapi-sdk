@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { PatchV1EtransportDeclarationsUitResponse } from "@digitap/easyapi/models/operations";
+import { PatchV1EtransportDeclarationsUitResponse } from "@digitap.eu/easyapi/models/operations";
 
 let value: PatchV1EtransportDeclarationsUitResponse = {
   headers: {

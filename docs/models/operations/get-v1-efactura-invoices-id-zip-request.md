@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1EfacturaInvoicesIdZipRequest } from "@digitap/easyapi/models/operations";
+import { GetV1EfacturaInvoicesIdZipRequest } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1EfacturaInvoicesIdZipRequest = {
   id: "e4176d09-932d-4249-a66a-84d0baf9d137",

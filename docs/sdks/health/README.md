@@ -16,7 +16,7 @@ Report db/redis/ANAF reachability
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_health" method="get" path="/v1/health" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi();
 
@@ -34,8 +34,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { healthCheck } from "@digitap/easyapi/funcs/health-check.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { healthCheck } from "@digitap.eu/easyapi/funcs/health-check.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

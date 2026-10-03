@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { GetV1EfacturaInvoicesIdDownloadResponseBody } from "@digitap/easyapi/models/operations";
+import { GetV1EfacturaInvoicesIdDownloadResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1EfacturaInvoicesIdDownloadResponseBody = {
   data: {
