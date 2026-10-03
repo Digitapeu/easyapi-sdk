@@ -44,7 +44,7 @@
     "typescript": "5.8.3"
   },
   "dependencies": {
-    "zod": "4.6.5"
+    "zod": "^3.25.65 || ^4.0.0"
   },
   "exports": {
     ".": {
