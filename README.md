@@ -1,4 +1,4 @@
-# @digitap/easyapi
+# @digitap.eu/easyapi
 
 TypeScript SDK and `easyapi` CLI for the easyapi Romanian government services API (ANAF, e-Factura,
 e-Transport, REGES, company data). Two ways to authenticate:
@@ -11,13 +11,13 @@ e-Transport, REGES, company data). Two ways to authenticate:
 ## Install
 
 ```sh
-npm i @digitap/easyapi
+npm i @digitap.eu/easyapi
 ```
 
 ## Quickstart: API key
 
 ```ts
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyapi = new EasyApi({ apiKey: process.env.EASYAPI_KEY });
 
@@ -36,7 +36,7 @@ npx easyapi setup
 Then:
 
 ```ts
-import { fromMachineCredential } from "@digitap/easyapi";
+import { fromMachineCredential } from "@digitap.eu/easyapi";
 
 const easyapi = await fromMachineCredential({ profile: "default" }); // options > EASYAPI_* env > saved profile
 
@@ -81,7 +81,7 @@ Non-2xx answers throw a typed error (`ErrorEnvelope`, a subclass of `EasyAPIErro
 `message` (the API's `error.message`), `error.code` (stable machine-readable code), `error.details`,
 `headers` (so `error.headers.get("retry-after")` gives the delay in seconds on a 429), `body` and
 `rawResponse`. Transport failures throw `ConnectionError`, `RequestTimeoutError` or `RequestAbortedError`
-(from `@digitap/easyapi/models/errors`).
+(from `@digitap.eu/easyapi/models/errors`).
 
 Machine-credential clients can additionally throw these (all extend `MachineAuthError`, none contains
 secrets): `OAuthError` (token endpoint, e.g. `invalid_client`), `RedirectRefusedError` (a 3xx on a
@@ -171,7 +171,7 @@ Unified Romanian Government Services API: One API and one key for Romanian gover
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [@digitap/easyapi](#digitapeasyapi)
+* [@digitap.eu/easyapi](#digitapeueasyapi)
   * [Install](#install)
   * [Quickstart: API key](#quickstart-api-key)
   * [Quickstart: machine credential](#quickstart-machine-credential)
@@ -247,7 +247,7 @@ For supported JavaScript runtimes, please consult [RUNTIMES.md](RUNTIMES.md).
 ### Example
 
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi();
 
@@ -275,7 +275,7 @@ This SDK supports the following security scheme globally:
 
 To authenticate with the API the `apiKey` parameter must be set when initializing the SDK client instance. For example:
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -525,7 +525,7 @@ syntax.
 Here's an example of one such pagination call:
 
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -551,7 +551,7 @@ Some of the endpoints in this SDK support retries.  If you use the SDK without a
 
 To change the default retry strategy for a single API call, simply provide a retryConfig object to the call:
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi();
 
@@ -578,7 +578,7 @@ run();
 
 If you'd like to override the default retry strategy for all operations that support retries, you can provide a retryConfig at SDK initialization:
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   retryConfig: {
@@ -620,8 +620,8 @@ run();
 
 ### Example
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
-import * as errors from "@digitap/easyapi/models/errors";
+import { EasyApi } from "@digitap.eu/easyapi";
+import * as errors from "@digitap.eu/easyapi/models/errors";
 
 const easyApi = new EasyApi();
 
@@ -680,7 +680,7 @@ run();
 
 The default server can be overridden globally by passing a URL to the `serverURL: string` optional parameter when initializing the SDK client instance. For example:
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   serverURL: "https://easyapi.ro",
@@ -716,9 +716,9 @@ The following example shows how to:
 - use the `"requestError"` hook to log errors
 
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 import { ProxyAgent } from "undici";
-import { HTTPClient } from "@digitap/easyapi/lib/http";
+import { HTTPClient } from "@digitap.eu/easyapi/lib/http";
 
 const dispatcher = new ProxyAgent("http://proxy.example.com:8080");
 
@@ -761,7 +761,7 @@ You can pass a logger that matches `console`'s interface as an SDK option.
 > Beware that debug logging will reveal secrets, like API tokens in headers, in log messages printed to a console or files. It's recommended to use this feature only during local development and not in production.
 
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const sdk = new EasyApi({ debugLogger: console });
 ```

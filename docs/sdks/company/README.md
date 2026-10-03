@@ -21,7 +21,7 @@ Look up a company's identity and VAT status by CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_company_cui" method="get" path="/v1/company/{cui}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -41,8 +41,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyGet } from "@digitap/easyapi/funcs/company-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyGet } from "@digitap.eu/easyapi/funcs/company-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -94,7 +94,7 @@ Get a company's ANAF bilanț for a single filing year
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_balance_year" method="get" path="/v1/company/{cui}/balance/{year}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -114,8 +114,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyBalanceByYear } from "@digitap/easyapi/funcs/company-balance-by-year.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyBalanceByYear } from "@digitap.eu/easyapi/funcs/company-balance-by-year.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -168,7 +168,7 @@ Get a company's last filed bilanț years in one call
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_balance" method="get" path="/v1/company/{cui}/balance" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -188,8 +188,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyBalance } from "@digitap/easyapi/funcs/company-balance.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyBalance } from "@digitap.eu/easyapi/funcs/company-balance.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -241,7 +241,7 @@ Get a company's focused VAT/registry status by CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_vat_status" method="get" path="/v1/company/{cui}/vat-status" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -261,8 +261,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyVatStatus } from "@digitap/easyapi/funcs/company-vat-status.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyVatStatus } from "@digitap.eu/easyapi/funcs/company-vat-status.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -314,7 +314,7 @@ Find ECRIS court cases matching this company's legal name
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_litigation" method="get" path="/v1/company/{cui}/litigation" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -336,8 +336,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyLitigation } from "@digitap/easyapi/funcs/company-litigation.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyLitigation } from "@digitap.eu/easyapi/funcs/company-litigation.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -391,7 +391,7 @@ Look up up to 100 companies by CUI in one call
 
 <!-- UsageSnippet language="typescript" operationID="post_v1_company_batch" method="post" path="/v1/company/batch" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -415,8 +415,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { companyBatchGet } from "@digitap/easyapi/funcs/company-batch-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyBatchGet } from "@digitap.eu/easyapi/funcs/company-batch-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

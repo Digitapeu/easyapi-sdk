@@ -98,7 +98,7 @@ typescript:
   moduleFormat: dual
   multipartArrayFormat: standard
   outputModelSuffix: output
-  packageName: '@digitap/easyapi'
+  packageName: '@digitap.eu/easyapi'
   preApplyUnionDiscriminators: true
   preserveModelFieldNames: false
   privateIdentifierPrefix: '#'

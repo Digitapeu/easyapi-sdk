@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { TypeCode } from "@digitap/easyapi/models/operations";
+import { TypeCode } from "@digitap.eu/easyapi/models/operations";
 
 let value: TypeCode = "751";
 ```

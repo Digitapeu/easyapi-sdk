@@ -1,7 +1,7 @@
 
 
 {
-  "name": "@digitap/easyapi",
+  "name": "@digitap.eu/easyapi",
   "version": "0.2.0",
   "exports": {
     ".": "./src/index.ts",    

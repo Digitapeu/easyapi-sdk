@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Match } from "@digitap/easyapi/models/operations";
+import { Match } from "@digitap.eu/easyapi/models/operations";
 
 let value: Match = {
   case: {

@@ -18,7 +18,7 @@ List consolidated normative acts
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_acts" method="get" path="/v1/legislation/acts" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -40,8 +40,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationActsList } from "@digitap/easyapi/funcs/legislation-acts-list.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationActsList } from "@digitap.eu/easyapi/funcs/legislation-acts-list.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -95,7 +95,7 @@ Poll the acts change-feed since a given timestamp
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_acts_changes" method="get" path="/v1/legislation/acts/changes" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -119,8 +119,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationActsListChanges } from "@digitap/easyapi/funcs/legislation-acts-list-changes.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationActsListChanges } from "@digitap.eu/easyapi/funcs/legislation-acts-list-changes.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -176,7 +176,7 @@ Get an act's current consolidated form
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_acts_id" method="get" path="/v1/legislation/acts/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -196,8 +196,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationActsGet } from "@digitap/easyapi/funcs/legislation-acts-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationActsGet } from "@digitap.eu/easyapi/funcs/legislation-acts-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -249,7 +249,7 @@ List an act's point-in-time versions
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_acts_id_versions" method="get" path="/v1/legislation/acts/{id}/versions" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -269,8 +269,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationActsListVersions } from "@digitap/easyapi/funcs/legislation-acts-list-versions.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationActsListVersions } from "@digitap.eu/easyapi/funcs/legislation-acts-list-versions.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -322,7 +322,7 @@ Get an act's body as it read on a given version date
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_legislation_acts_id_versions_version" method="get" path="/v1/legislation/acts/{id}/versions/{version}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -342,8 +342,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { legislationActsGetVersion } from "@digitap/easyapi/funcs/legislation-acts-get-version.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { legislationActsGetVersion } from "@digitap.eu/easyapi/funcs/legislation-acts-get-version.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

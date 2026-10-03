@@ -1,4 +1,4 @@
-import { fromMachineCredential } from "@digitap/easyapi";
+import { fromMachineCredential } from "@digitap.eu/easyapi";
 
 // Reads the profile written by `easyapi setup` (or EASYAPI_* variables) and calls two endpoints.
 const easyapi = await fromMachineCredential();
