@@ -6,13 +6,13 @@
 import dotenv from "dotenv";
 dotenv.config();
 /**
- * Example usage of the @digitap/easyapi SDK
+ * Example usage of the @digitap.eu/easyapi SDK
  *
  * To run this example from the examples directory:
  * npm run build && npx tsx healthCheck.example.ts
  */
 
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi();
 

@@ -16,7 +16,7 @@ Search company names (deferred — always 501 in v1)
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_search" method="get" path="/v1/search" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -36,8 +36,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { searchCompanies } from "@digitap/easyapi/funcs/search-companies.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { searchCompanies } from "@digitap.eu/easyapi/funcs/search-companies.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

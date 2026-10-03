@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { ErrorEnvelope } from "@digitap/easyapi/models/errors";
+import { ErrorEnvelope } from "@digitap.eu/easyapi/models/errors";
 
 // No examples available for this model
 ```

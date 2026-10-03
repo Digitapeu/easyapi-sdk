@@ -14,7 +14,7 @@ Get a REGES async job's status
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_reges_jobs_id" method="get" path="/v1/reges/jobs/{id}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -34,8 +34,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { regesJobsGet } from "@digitap/easyapi/funcs/reges-jobs-get.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { regesJobsGet } from "@digitap.eu/easyapi/funcs/reges-jobs-get.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.

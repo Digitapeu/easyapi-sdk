@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { GetV1ProcurementCompanyCuiDirectPurchasesResponseBody } from "@digitap/easyapi/models/operations";
+import { GetV1ProcurementCompanyCuiDirectPurchasesResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1ProcurementCompanyCuiDirectPurchasesResponseBody = {
   data: {
