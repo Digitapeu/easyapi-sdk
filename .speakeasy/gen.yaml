@@ -53,7 +53,10 @@ typescript:
       - LICENSE
       - README.md
     license: MIT
-  additionalScripts: {}
+  additionalScripts:
+    check-regen: ./scripts/check-regen.sh
+    test: bun test
+    typecheck: tsc -p tsconfig.json --noEmit
   alwaysIncludeInboundAndOutbound: false
   apiPromiseHelpers: false
   author: Daniel Tamas

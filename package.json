@@ -36,11 +36,10 @@
   "scripts": {
     "lint": "oxlint --max-warnings=0 --deny-warnings --no-error-on-unmatched-pattern src",
     "build": "tshy",
-    "prepack": "npm run build && node ./scripts/strip-generator-wording.mjs",
+    "prepublishOnly": "npm run build",
     "check-regen": "./scripts/check-regen.sh",
     "test": "bun test",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "prepublishOnly": "npm run build"
+    "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {},
   "devDependencies": {
