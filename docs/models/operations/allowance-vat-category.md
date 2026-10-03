@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { AllowanceVatCategory } from "@digitap/easyapi/models/operations";
+import { AllowanceVatCategory } from "@digitap.eu/easyapi/models/operations";
 
 let value: AllowanceVatCategory = "K";
 ```

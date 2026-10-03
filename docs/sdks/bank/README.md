@@ -18,7 +18,7 @@ Validate an IBAN's structure and resolve its RO bank code
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_bank_iban_iban" method="get" path="/v1/bank/iban/{iban}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -38,8 +38,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { bankValidateIban } from "@digitap/easyapi/funcs/bank-validate-iban.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { bankValidateIban } from "@digitap.eu/easyapi/funcs/bank-validate-iban.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -91,7 +91,7 @@ Look up ANAF treasury IBANs for a CUI
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_bank_treasury_cui" method="get" path="/v1/bank/treasury/{cui}" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -111,8 +111,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { bankGetTreasury } from "@digitap/easyapi/funcs/bank-get-treasury.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { bankGetTreasury } from "@digitap.eu/easyapi/funcs/bank-get-treasury.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
@@ -164,7 +164,7 @@ List the bank institutions available for a connection
 
 <!-- UsageSnippet language="typescript" operationID="get_v1_bank_institutions" method="get" path="/v1/bank/institutions" -->
 ```typescript
-import { EasyApi } from "@digitap/easyapi";
+import { EasyApi } from "@digitap.eu/easyapi";
 
 const easyApi = new EasyApi({
   apiKey: "<YOUR_BEARER_TOKEN_HERE>",
@@ -184,8 +184,8 @@ run();
 The standalone function version of this method:
 
 ```typescript
-import { EasyApiCore } from "@digitap/easyapi/core.js";
-import { bankListInstitutions } from "@digitap/easyapi/funcs/bank-list-institutions.js";
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { bankListInstitutions } from "@digitap.eu/easyapi/funcs/bank-list-institutions.js";
 
 // Use `EasyApiCore` for best tree-shaking performance.
 // You can create one instance of it to use across an application.
