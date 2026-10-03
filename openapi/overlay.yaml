@@ -113,13 +113,6 @@ actions:
     update:
       x-speakeasy-group: company
       x-speakeasy-name-override: batchGet
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -129,7 +122,10 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/vat/vies/{countryCode}/{vatNumber}''].get'
     description: 'vat.validateVies'
     update:
@@ -294,13 +290,6 @@ actions:
     update:
       x-speakeasy-group: connections
       x-speakeasy-name-override: create
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -310,7 +299,10 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/connections''].get'
     description: 'connections.list'
     update:
@@ -331,13 +323,6 @@ actions:
     update:
       x-speakeasy-group: efactura
       x-speakeasy-name-override: upload
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -347,7 +332,10 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/efactura/invoices/{id}''].get'
     description: 'efactura.status'
     update:
@@ -373,13 +361,6 @@ actions:
     update:
       x-speakeasy-group: efactura
       x-speakeasy-name-override: validate
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -389,19 +370,15 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/etransport/declarations''].post'
     description: 'etransport.create'
     update:
       x-speakeasy-group: etransport
       x-speakeasy-name-override: create
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -411,7 +388,10 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/etransport/declarations/{uit}''].patch'
     description: 'etransport.modify'
     update:
@@ -427,13 +407,6 @@ actions:
     update:
       x-speakeasy-group: reges.contracts
       x-speakeasy-name-override: create
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -443,19 +416,15 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/reges/contracts/{id}/terminate''].post'
     description: 'reges.contracts.terminate'
     update:
       x-speakeasy-group: reges.contracts
       x-speakeasy-name-override: terminate
-      parameters:
-        - name: Idempotency-Key
-          in: header
-          required: false
-          description: Makes the write safe to replay; the same key with an identical body returns the first response.
-          schema:
-            type: string
       x-speakeasy-retries:
         strategy: backoff
         backoff:
@@ -465,7 +434,10 @@ actions:
           exponent: 1.5
         statusCodes:
           - '429'
-        retryConnectionErrors: false
+          - '502'
+          - '503'
+          - '504'
+        retryConnectionErrors: true
   - target: '$.paths[''/v1/reges/jobs/{id}''].get'
     description: 'reges.jobs.get'
     update:
@@ -621,182 +593,7 @@ actions:
           - '503'
           - '504'
         retryConnectionErrors: true
-  - target: '$.components'
-    description: 'Shared error envelope schemas so the generator emits one typed error class per status'
+  - target: '$.components.schemas.ErrorEnvelope.properties.error.properties.message'
+    description: 'Use the envelope message as the generated error message'
     update:
-      schemas:
-        ErrorBody:
-          title: ErrorBody
-          type: object
-          required: [code, message]
-          properties:
-            code:
-              type: string
-              description: Stable machine-readable error code.
-            message:
-              type: string
-              description: Human-readable message.
-              x-speakeasy-error-message: true
-            details:
-              type: object
-              additionalProperties: true
-        BadRequestError:
-          title: BadRequestError
-          description: HTTP 400 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        UnauthorizedError:
-          title: UnauthorizedError
-          description: HTTP 401 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        ForbiddenError:
-          title: ForbiddenError
-          description: HTTP 403 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        NotFoundError:
-          title: NotFoundError
-          description: HTTP 404 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        ConflictError:
-          title: ConflictError
-          description: HTTP 409 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        RateLimitedError:
-          title: RateLimitedError
-          description: HTTP 429 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        InternalServerError:
-          title: InternalServerError
-          description: HTTP 500 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        NotImplementedError:
-          title: NotImplementedError
-          description: HTTP 501 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        BadGatewayError:
-          title: BadGatewayError
-          description: HTTP 502 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-        ServiceUnavailableError:
-          title: ServiceUnavailableError
-          description: HTTP 503 error envelope.
-          type: object
-          required: [error]
-          properties:
-            error:
-              $ref: '#/components/schemas/ErrorBody'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''400''].content[''application/json''].schema'
-    description: '400: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''400''].content[''application/json'']'
-    description: '400: reference the shared BadRequestError'
-    update:
-      schema:
-        $ref: '#/components/schemas/BadRequestError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''401''].content[''application/json''].schema'
-    description: '401: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''401''].content[''application/json'']'
-    description: '401: reference the shared UnauthorizedError'
-    update:
-      schema:
-        $ref: '#/components/schemas/UnauthorizedError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''403''].content[''application/json''].schema'
-    description: '403: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''403''].content[''application/json'']'
-    description: '403: reference the shared ForbiddenError'
-    update:
-      schema:
-        $ref: '#/components/schemas/ForbiddenError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''404''].content[''application/json''].schema'
-    description: '404: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''404''].content[''application/json'']'
-    description: '404: reference the shared NotFoundError'
-    update:
-      schema:
-        $ref: '#/components/schemas/NotFoundError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''409''].content[''application/json''].schema'
-    description: '409: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''409''].content[''application/json'']'
-    description: '409: reference the shared ConflictError'
-    update:
-      schema:
-        $ref: '#/components/schemas/ConflictError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''429''].content[''application/json''].schema'
-    description: '429: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''429''].content[''application/json'']'
-    description: '429: reference the shared RateLimitedError'
-    update:
-      schema:
-        $ref: '#/components/schemas/RateLimitedError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''500''].content[''application/json''].schema'
-    description: '500: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''500''].content[''application/json'']'
-    description: '500: reference the shared InternalServerError'
-    update:
-      schema:
-        $ref: '#/components/schemas/InternalServerError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''501''].content[''application/json''].schema'
-    description: '501: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''501''].content[''application/json'']'
-    description: '501: reference the shared NotImplementedError'
-    update:
-      schema:
-        $ref: '#/components/schemas/NotImplementedError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''502''].content[''application/json''].schema'
-    description: '502: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''502''].content[''application/json'']'
-    description: '502: reference the shared BadGatewayError'
-    update:
-      schema:
-        $ref: '#/components/schemas/BadGatewayError'
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''503''].content[''application/json''].schema'
-    description: '503: drop the inline envelope schema'
-    remove: true
-  - target: '$.paths.*.*[?(@.operationId != ''post_oauth_sdk_token'' && @.operationId != ''post_v1_auth_credentials_credentialId_rotate'' && @.operationId != ''post_v1_auth_enroll'')].responses[''503''].content[''application/json'']'
-    description: '503: reference the shared ServiceUnavailableError'
-    update:
-      schema:
-        $ref: '#/components/schemas/ServiceUnavailableError'
+      x-speakeasy-error-message: true
