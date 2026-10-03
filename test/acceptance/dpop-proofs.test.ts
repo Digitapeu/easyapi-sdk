@@ -65,12 +65,12 @@ describe("vector: every emitted DPoP proof matches the client profile", () => {
 
       const runtime = { env: clientEnv(box.dir, gateway.origin), cwd: process.cwd(), platform: process.platform as NodeJS.Platform };
       const client = createClient({ fetch: tappedFetch(attempts) }, runtime);
-      gateway.onResource("GET", "/v1/company/43020532", (res) => {
+      gateway.onResource("GET", "/v1/company/43020532/litigation", (res) => {
         res.writeHead(200, { "Content-Type": "application/json" });
         res.end(JSON.stringify({ data: { cui: "43020532" } }));
       });
       // A read with a query string: the proof's htu must exclude it.
-      await client.request("get", "/v1/company/{cui}", { path: { cui: "43020532" }, query: { vat: true } });
+      await client.request("get", "/v1/company/{cui}/litigation", { path: { cui: "43020532" }, query: { court: "Bucharest" } });
 
       const rotate = cliRun(clientEnv(box.dir, gateway.origin));
       rotate.ctx.fetch = tappedFetch(attempts);

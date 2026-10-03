@@ -25,7 +25,9 @@ beforeAll(async () => {
 afterAll(() => gateway.close());
 
 const sh = (args: string[], cwd: string, env?: Record<string, string>): { code: number; out: string; err: string } => {
-  const run = Bun.spawnSync(args, { cwd, env: { ...process.env, ...env } });
+  const run = Bun.spawnSync(args, { cwd, env: { ...process.env, ...env }, stdout: "pipe", stderr: "pipe" });
+  expect(run.stdout).toBeDefined();
+  expect(run.stderr).toBeDefined();
   return { code: run.exitCode, out: run.stdout.toString(), err: run.stderr.toString() };
 };
 

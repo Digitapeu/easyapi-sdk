@@ -1,6 +1,7 @@
 import { mkdtempSync, mkdirSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { expect } from "bun:test";
 import type { CliContext } from "../../src/cli/context.js";
 import { runCli } from "../../src/cli/main.js";
 import { SetupError } from "../../src/errors.js";

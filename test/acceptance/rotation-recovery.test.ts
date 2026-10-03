@@ -122,9 +122,11 @@ describe("vector: rotation races and lost responses", () => {
         generation: startGeneration + 1,
       });
       // The locally saved fingerprint is the fingerprint the server just verified.
-      expect(winner.publicKeyThumbprint).toBe(
-        me.authentication && "publicKeyThumbprint" in me.authentication ? me.authentication.publicKeyThumbprint : undefined,
-      );
+      const thumbprint =
+        me.authentication && "publicKeyThumbprint" in me.authentication ? me.authentication.publicKeyThumbprint : undefined;
+      expect(thumbprint).toBeDefined();
+      if (thumbprint === undefined) throw new Error("missing publicKeyThumbprint in /v1/me response");
+      expect(winner.publicKeyThumbprint).toBe(thumbprint);
 
       // The loser's saved identity is retained (old generation + pending candidate),
       // not overwritten with the winner's state.
