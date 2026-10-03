@@ -53,6 +53,7 @@ typescript:
       - LICENSE
       - README.md
     license: MIT
+  additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   apiPromiseHelpers: false
   author: Daniel Tamas
