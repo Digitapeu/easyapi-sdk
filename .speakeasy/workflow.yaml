@@ -1,12 +1,14 @@
 workflowVersion: 1.0.0
 speakeasyVersion: 1.800.1
 sources:
-  easyapi:
-    inputs:
-      - location: ./openapi/openapi.json
-    overlays:
-      - location: ./openapi/overlay.yaml
+    easyapi:
+        inputs:
+            - location: ./openapi/openapi.json
+        overlays:
+            - location: ./openapi/overlay.yaml
+        registry:
+            location: registry.speakeasyapi.dev/digitap/easyapi/easyapi
 targets:
-  sdk:
-    target: typescript
-    source: easyapi
+    sdk:
+        target: typescript
+        source: easyapi

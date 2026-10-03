@@ -2,14 +2,104 @@ configVersion: 2.0.0
 generation:
   sdkClassName: EasyApi
   maintainOpenAPIOrder: true
+  usageSnippets:
+    optionalPropertyRendering: withExample
+    sdkInitStyle: constructor
+  useClassNamesForArrayFields: true
+  fixes:
+    nameResolutionDec2023: true
+    nameResolutionFeb2025: true
+    parameterOrderingFeb2024: true
+    requestResponseComponentNamesFeb2024: true
+    securityFeb2025: true
+    sharedErrorComponentsApr2025: true
+    sharedNestedComponentsJan2026: true
+    nameOverrideFeb2026: true
+  auth:
+    oAuth2ClientCredentialsEnabled: false
+    oAuth2PasswordEnabled: false
+    hoistGlobalSecurity: true
+  inferSSEOverload: true
+  sdkHooksConfigAccess: true
+  schemas:
+    allOfMergeStrategy: shallowMerge
+  requestBodyFieldName: body
+  versioningStrategy: automatic
+  persistentEdits:
+    enabled: "true"
+  tests:
+    generateTests: false
+    generateNewTests: true
+    skipResponseBodyAssertions: false
 typescript:
   version: 0.2.0
-  packageName: "@easyapi/sdk"
-  author: Daniel Tamas
-  moduleFormat: dual
-  flattenGlobalSecurity: true
-  maxMethodParams: 2
+  acceptHeaderEnum: false
+  additionalDependencies:
+    dependencies: {}
+    devDependencies:
+      '@types/node': 24.19.1
+    peerDependencies: {}
   additionalPackageJSON:
-    license: MIT
+    bin:
+      easyapi: ./dist/esm/cli/bin.js
+    description: TypeScript SDK and CLI for the easyapi Romanian government services API, with DPoP-bound machine authentication.
     engines:
-      node: ">=20"
+      node: '>=20'
+    license: MIT
+  additionalScripts:
+    test: bun test
+    typecheck: tsc -p tsconfig.json --noEmit
+  alwaysIncludeInboundAndOutbound: false
+  apiPromiseHelpers: false
+  author: Daniel Tamas
+  baseErrorName: EasyAPIError
+  clientServerStatusCodesAsErrors: true
+  constFieldsAlwaysOptional: false
+  defaultErrorName: EasyAPIDefaultError
+  enableCustomCodeRegions: false
+  enableMCPServer: false
+  enableReactQuery: false
+  enumFormat: union
+  eventStreamClassName: EventStream
+  exportZodModelNamespace: false
+  fixEnumNameSanitization: false
+  flatAdditionalProperties: true
+  flattenGlobalSecurity: true
+  flatteningOrder: parameters-first
+  formStringArrayEncodeMode: array
+  forwardCompatibleEnumsByDefault: true
+  forwardCompatibleUnionsByDefault: tagged-only
+  generateExamples: true
+  imports:
+    option: openapi
+    paths:
+      callbacks: models/callbacks
+      errors: models/errors
+      operations: models/operations
+      shared: models
+      webhooks: models/webhooks
+  inferUnionDiscriminators: true
+  inputModelSuffix: input
+  jsonpath: rfc9535
+  laxMode: lax
+  legacyFileNaming: false
+  maxMethodParams: 2
+  methodArguments: infer-optional-args
+  modelPropertyCasing: camel
+  moduleFormat: dual
+  multipartArrayFormat: standard
+  outputModelSuffix: output
+  packageName: '@digitap/easyapi'
+  preApplyUnionDiscriminators: true
+  preserveModelFieldNames: false
+  privateIdentifierPrefix: '#'
+  requestExtras: false
+  responseFormat: flat
+  sseFlatResponse: false
+  templateVersion: v2
+  unionStrategy: populated-fields
+  usageSDKInitImports: []
+  useIndexModules: true
+  useOxlint: true
+  useTsgo: true
+  zodVersion: v4-mini

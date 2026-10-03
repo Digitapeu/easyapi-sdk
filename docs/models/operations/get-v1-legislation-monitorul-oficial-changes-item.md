@@ -1,0 +1,27 @@
+# GetV1LegislationMonitorulOficialChangesItem
+
+## Example Usage
+
+```typescript
+import { GetV1LegislationMonitorulOficialChangesItem } from "@digitap/easyapi/models/operations";
+
+let value: GetV1LegislationMonitorulOficialChangesItem = {
+  id: "<id>",
+  collection: "acts",
+  changeType: "created",
+  previousHash: "<value>",
+  newHash: "<value>",
+  observedAt: new Date("2026-10-21T06:04:13.398Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                               | Type                                                                                                                                                | Required                                                                                                                                            | Description                                                                                                                                         |
+| --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`                                                                                                                                                | *string*                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |
+| `collection`                                                                                                                                        | [operations.GetV1LegislationMonitorulOficialChangesCollection](../../models/operations/get-v1-legislation-monitorul-oficial-changes-collection.md)  | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |
+| `changeType`                                                                                                                                        | [operations.GetV1LegislationMonitorulOficialChangesChangeType](../../models/operations/get-v1-legislation-monitorul-oficial-changes-change-type.md) | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |
+| `previousHash`                                                                                                                                      | *string*                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |
+| `newHash`                                                                                                                                           | *string*                                                                                                                                            | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |
+| `observedAt`                                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                       | :heavy_check_mark:                                                                                                                                  | N/A                                                                                                                                                 |

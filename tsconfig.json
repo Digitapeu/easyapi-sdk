@@ -1,36 +1,41 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": [
-      "ES2023",
-      "DOM"
-    ],
-    "types": [
-      "node",
-      "bun"
-    ],
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
+    "incremental": false,
+    "target": "ES2020",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+
+    "module": "Node16",
+    "moduleResolution": "Node16",
+
+    "allowJs": true,
+
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "rootDir": "src",
+    "outDir": ".",
+    
+
+    // https://github.com/tsconfig/bases/blob/a1bf7c0fa2e094b068ca3e1448ca2ece4157977e/bases/strictest.json
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": false,
-    "noImplicitOverride": true,
+    "allowUnusedLabels": false,
+    "allowUnreachableCode": false,
+    "exactOptionalPropertyTypes": true,
+    "useUnknownInCatchVariables": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "isolatedModules": true,
+    "checkJs": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "declaration": true,
-    "rootDir": ".",
-    "noEmit": true,
-    "paths": {
-      "@easyapi/sdk": [
-        "./src/index.ts"
-      ]
-    }
+    "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src",
-    "contract",
-    "test",
-    "examples"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "src/__tests__"]
 }

@@ -1,0 +1,30 @@
+speakeasyVersion: 1.800.1
+sources:
+    easyapi:
+        sourceNamespace: easyapi
+        sourceRevisionDigest: sha256:aa8094cf688bfc7293d9052ad752dbc7afac372121f6b943fb6624565496d714
+        sourceBlobDigest: sha256:ec5c2adc6a0594ee9fb689b4012db1ed7d135763f0baeff81c1b001d2c55cbd7
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    sdk:
+        source: easyapi
+        sourceNamespace: easyapi
+        sourceRevisionDigest: sha256:aa8094cf688bfc7293d9052ad752dbc7afac372121f6b943fb6624565496d714
+        sourceBlobDigest: sha256:ec5c2adc6a0594ee9fb689b4012db1ed7d135763f0baeff81c1b001d2c55cbd7
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: 1.800.1
+    sources:
+        easyapi:
+            inputs:
+                - location: ./openapi/openapi.json
+            overlays:
+                - location: ./openapi/overlay.yaml
+            registry:
+                location: registry.speakeasyapi.dev/digitap/easyapi/easyapi
+    targets:
+        sdk:
+            target: typescript
+            source: easyapi

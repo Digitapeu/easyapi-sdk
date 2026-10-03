@@ -1,5 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": { "types": ["node"], "outDir": "dist/esm", "noEmit": false },
-  "include": ["src", "contract"]
-}
