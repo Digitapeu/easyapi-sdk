@@ -156,8 +156,10 @@ deployment from its own allowed egress address.
 
 ```sh
 npm install
-npm run build && npm run typecheck
-npm test            # bun test; the suite runs under Bun
+npm run build && npx tsc -p tsconfig.json --noEmit
+bun test            # the suite runs under Bun
+scripts/check-regen.sh   # fails when regeneration changes a tracked file
+scripts/pack.sh          # build, strip generator wording, pack the tarball to publish
 ```
 
 MIT licensed.
