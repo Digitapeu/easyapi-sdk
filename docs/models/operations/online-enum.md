@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OnlineEnum } from "@digitap/easyapi/models/operations";
+import { OnlineEnum } from "@digitap.eu/easyapi/models/operations";
 
 let value: OnlineEnum = "false";
 ```
