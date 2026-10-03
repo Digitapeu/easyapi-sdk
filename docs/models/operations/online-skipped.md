@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { OnlineSkipped } from "@digitap/easyapi/models/operations";
+import { OnlineSkipped } from "@digitap.eu/easyapi/models/operations";
 
 let value: OnlineSkipped = {
   status: "skipped",

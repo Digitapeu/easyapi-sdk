@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { GetV1LegislationBillsData } from "@digitap/easyapi/models/operations";
+import { GetV1LegislationBillsData } from "@digitap.eu/easyapi/models/operations";
 
 let value: GetV1LegislationBillsData = {
   items: [

@@ -1,6 +1,6 @@
-# @digitap/easyapi Examples
+# @digitap.eu/easyapi Examples
 
-This directory contains example scripts demonstrating how to use the @digitap/easyapi SDK.
+This directory contains example scripts demonstrating how to use the @digitap.eu/easyapi SDK.
 
 ## Prerequisites
 

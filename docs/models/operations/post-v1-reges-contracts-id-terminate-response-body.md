@@ -5,7 +5,7 @@ Success
 ## Example Usage
 
 ```typescript
-import { PostV1RegesContractsIdTerminateResponseBody } from "@digitap/easyapi/models/operations";
+import { PostV1RegesContractsIdTerminateResponseBody } from "@digitap.eu/easyapi/models/operations";
 
 let value: PostV1RegesContractsIdTerminateResponseBody = {
   data: {

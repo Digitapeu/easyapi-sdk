@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Json } from "@digitap/easyapi/models/operations";
+import { Json } from "@digitap.eu/easyapi/models/operations";
 
 let value: Json = {
   format: "json",

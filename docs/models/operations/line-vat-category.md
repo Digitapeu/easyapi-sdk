@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { LineVatCategory } from "@digitap/easyapi/models/operations";
+import { LineVatCategory } from "@digitap.eu/easyapi/models/operations";
 
 let value: LineVatCategory = "Z";
 ```

@@ -3,7 +3,7 @@
 ## Example Usage
 
 ```typescript
-import { Tier } from "@digitap/easyapi/models/operations";
+import { Tier } from "@digitap.eu/easyapi/models/operations";
 
 let value: Tier = {
   code: "<value>",
