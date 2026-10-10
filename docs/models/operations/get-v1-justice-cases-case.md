@@ -26,8 +26,15 @@ let value: GetV1JusticeCasesCase = {
       date: "2024-01-28",
       time: "<value>",
       solution: "<value>",
+      panel: "<value>",
+      solutionSummary: "<value>",
+      pronouncedAt: "<value>",
+      documentType: "<value>",
+      documentNumber: "<value>",
+      documentDate: "<value>",
     },
   ],
+  appeals: [],
 };
 ```
 
@@ -46,3 +53,4 @@ let value: GetV1JusticeCasesCase = {
 | `subject`                                                                                        | *string*                                                                                         | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `parties`                                                                                        | [operations.GetV1JusticeCasesParty](../../models/operations/get-v1-justice-cases-party.md)[]     | :heavy_check_mark:                                                                               | N/A                                                                                              |
 | `hearings`                                                                                       | [operations.GetV1JusticeCasesHearing](../../models/operations/get-v1-justice-cases-hearing.md)[] | :heavy_check_mark:                                                                               | N/A                                                                                              |
+| `appeals`                                                                                        | [operations.GetV1JusticeCasesAppeal](../../models/operations/get-v1-justice-cases-appeal.md)[]   | :heavy_check_mark:                                                                               | N/A                                                                                              |

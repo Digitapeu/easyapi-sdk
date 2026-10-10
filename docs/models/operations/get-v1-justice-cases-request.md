@@ -16,3 +16,5 @@ let value: GetV1JusticeCasesRequest = {};
 | `party`            | *string*           | :heavy_minus_sign: | N/A                |
 | `object`           | *string*           | :heavy_minus_sign: | N/A                |
 | `court`            | *string*           | :heavy_minus_sign: | N/A                |
+| `registeredFrom`   | *string*           | :heavy_minus_sign: | N/A                |
+| `registeredTo`     | *string*           | :heavy_minus_sign: | N/A                |

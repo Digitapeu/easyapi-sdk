@@ -51,6 +51,18 @@ export type GetV1CompanyCuiLitigationHearing = {
   date: string | null;
   time: string | null;
   solution: string | null;
+  panel: string | null;
+  solutionSummary: string | null;
+  pronouncedAt: string | null;
+  documentType: string | null;
+  documentNumber: string | null;
+  documentDate: string | null;
+};
+
+export type GetV1CompanyCuiLitigationAppeal = {
+  filedAt: string | null;
+  filedBy: string | null;
+  type: string | null;
 };
 
 export type GetV1CompanyCuiLitigationCase = {
@@ -65,6 +77,7 @@ export type GetV1CompanyCuiLitigationCase = {
   subject: string | null;
   parties: Array<GetV1CompanyCuiLitigationCaseParty>;
   hearings: Array<GetV1CompanyCuiLitigationHearing>;
+  appeals: Array<GetV1CompanyCuiLitigationAppeal>;
 };
 
 export const Confidence = {
@@ -211,6 +224,12 @@ export const GetV1CompanyCuiLitigationHearing$inboundSchema: z.ZodMiniType<
   date: types.nullable(types.string()),
   time: types.nullable(types.string()),
   solution: types.nullable(types.string()),
+  panel: types.nullable(types.string()),
+  solutionSummary: types.nullable(types.string()),
+  pronouncedAt: types.nullable(types.string()),
+  documentType: types.nullable(types.string()),
+  documentNumber: types.nullable(types.string()),
+  documentDate: types.nullable(types.string()),
 });
 
 export function getV1CompanyCuiLitigationHearingFromJSON(
@@ -220,6 +239,26 @@ export function getV1CompanyCuiLitigationHearingFromJSON(
     jsonString,
     (x) => GetV1CompanyCuiLitigationHearing$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1CompanyCuiLitigationHearing' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationAppeal$inboundSchema: z.ZodMiniType<
+  GetV1CompanyCuiLitigationAppeal,
+  unknown
+> = z.object({
+  filedAt: types.nullable(types.string()),
+  filedBy: types.nullable(types.string()),
+  type: types.nullable(types.string()),
+});
+
+export function getV1CompanyCuiLitigationAppealFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompanyCuiLitigationAppeal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1CompanyCuiLitigationAppeal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyCuiLitigationAppeal' from JSON`,
   );
 }
 
@@ -243,6 +282,7 @@ export const GetV1CompanyCuiLitigationCase$inboundSchema: z.ZodMiniType<
   hearings: z.array(
     z.lazy(() => GetV1CompanyCuiLitigationHearing$inboundSchema),
   ),
+  appeals: z.array(z.lazy(() => GetV1CompanyCuiLitigationAppeal$inboundSchema)),
 });
 
 export function getV1CompanyCuiLitigationCaseFromJSON(

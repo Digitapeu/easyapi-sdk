@@ -203,6 +203,10 @@ Unified Romanian Government Services API: One API and one key for Romanian gover
 <!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
+> [!TIP]
+> To finish publishing your SDK to npm and others you must [run your first generation action](https://www.speakeasy.com/docs/github-setup#step-by-step-guide).
+
+
 The SDK can be installed with either [npm](https://www.npmjs.com/), [pnpm](https://pnpm.io/), [bun](https://bun.sh/) or [yarn](https://classic.yarnpkg.com/en/) package managers.
 
 ### NPM
@@ -409,7 +413,7 @@ run();
 
 ### [Search](docs/sdks/search/README.md)
 
-* [companies](docs/sdks/search/README.md#companies) - Search company names (deferred — always 501 in v1)
+* [companies](docs/sdks/search/README.md#companies) - Search companies by name
 
 ### [Spv](docs/sdks/spv/README.md)
 
@@ -500,7 +504,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`regesContractsTerminate`](docs/sdks/contracts/README.md#terminate) - Terminate a REGES employment contract, async
 - [`regesEmployeesList`](docs/sdks/employees/README.md#list) - List REGES employees for a connected company (CNP masked)
 - [`regesJobsGet`](docs/sdks/jobs/README.md#get) - Get a REGES async job's status
-- [`searchCompanies`](docs/sdks/search/README.md#companies) - Search company names (deferred — always 501 in v1)
+- [`searchCompanies`](docs/sdks/search/README.md#companies) - Search companies by name
 - [`spvDownloadDocument`](docs/sdks/spv/README.md#downloaddocument) - Download one SPV document as a binary stream
 - [`spvGetEtvaDecont`](docs/sdks/spv/README.md#getetvadecont) - Fetch the e-TVA pre-completed VAT return for a period
 - [`spvListMessages`](docs/sdks/spv/README.md#listmessages) - List SPV inbox messages
@@ -767,3 +771,5 @@ const sdk = new EasyApi({ debugLogger: console });
 
 
 
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->

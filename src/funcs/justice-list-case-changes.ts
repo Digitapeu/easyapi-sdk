@@ -100,6 +100,8 @@ async function $do(
     "number": payload.number,
     "object": payload.object,
     "party": payload.party,
+    "registeredFrom": payload.registeredFrom,
+    "registeredTo": payload.registeredTo,
   });
 
   const headers = new Headers(compactMap({

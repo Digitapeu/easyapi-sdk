@@ -7,18 +7,52 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
+import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
 export type GetV1SearchRequest = {
+  /**
+   * Company name or part of it (1-200 characters).
+   */
   q: string;
+  /**
+   * Maximum rows requested from the provider (1-50, default 20); a page can hold fewer.
+   */
   limit?: number | undefined;
+  /**
+   * Restrict to one county (judet).
+   */
+  county?: string | undefined;
+  /**
+   * Passed to the provider (0-10000). Pages may overlap or repeat entries; results are a relevance-ordered sample, not an enumerable list.
+   */
+  offset?: number | undefined;
+};
+
+export type GetV1SearchResult = {
+  cui: string;
+  name: string;
+  registrationNumber: string;
+  county: string;
+  locality: string;
+  legalForm: string;
+  insolvent: boolean;
+  status: string | null;
+};
+
+export type GetV1SearchData = {
+  results: Array<GetV1SearchResult>;
+  count: number;
+  source: "demoanaf";
+  naturalPersonsExcluded: true;
+  checkedAt: Date;
 };
 
 /**
  * Success
  */
 export type GetV1SearchResponseBody = {
-  data: any;
+  data: GetV1SearchData;
 };
 
 export type GetV1SearchResponse = {
@@ -30,6 +64,8 @@ export type GetV1SearchResponse = {
 export type GetV1SearchRequest$Outbound = {
   q: string;
   limit?: number | undefined;
+  county?: string | undefined;
+  offset?: number | undefined;
 };
 
 /** @internal */
@@ -39,6 +75,8 @@ export const GetV1SearchRequest$outboundSchema: z.ZodMiniType<
 > = z.object({
   q: z.string(),
   limit: z.optional(z.int()),
+  county: z.optional(z.string()),
+  offset: z.optional(z.int()),
 });
 
 export function getV1SearchRequestToJSON(
@@ -50,11 +88,58 @@ export function getV1SearchRequestToJSON(
 }
 
 /** @internal */
+export const GetV1SearchResult$inboundSchema: z.ZodMiniType<
+  GetV1SearchResult,
+  unknown
+> = z.object({
+  cui: types.string(),
+  name: types.string(),
+  registrationNumber: types.string(),
+  county: types.string(),
+  locality: types.string(),
+  legalForm: types.string(),
+  insolvent: types.boolean(),
+  status: types.nullable(types.string()),
+});
+
+export function getV1SearchResultFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1SearchResult, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1SearchResult$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1SearchResult' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1SearchData$inboundSchema: z.ZodMiniType<
+  GetV1SearchData,
+  unknown
+> = z.object({
+  results: z.array(z.lazy(() => GetV1SearchResult$inboundSchema)),
+  count: types.number(),
+  source: types.literal("demoanaf"),
+  naturalPersonsExcluded: types.literal(true),
+  checkedAt: types.date(),
+});
+
+export function getV1SearchDataFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1SearchData, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1SearchData$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1SearchData' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetV1SearchResponseBody$inboundSchema: z.ZodMiniType<
   GetV1SearchResponseBody,
   unknown
 > = z.object({
-  data: z.any(),
+  data: z.lazy(() => GetV1SearchData$inboundSchema),
 });
 
 export function getV1SearchResponseBodyFromJSON(

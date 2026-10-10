@@ -6,11 +6,11 @@ Company name search.
 
 ### Available Operations
 
-* [companies](#companies) - Search company names (deferred — always 501 in v1)
+* [companies](#companies) - Search companies by name
 
 ## companies
 
-Search company names (deferred — always 501 in v1)
+Search companies by name
 
 ### Example Usage
 
@@ -23,7 +23,9 @@ const easyApi = new EasyApi({
 });
 
 async function run() {
-  const result = await easyApi.search.companies("<value>");
+  const result = await easyApi.search.companies({
+    q: "<value>",
+  });
 
   console.log(result);
 }
@@ -46,7 +48,9 @@ const easyApi = new EasyApiCore({
 });
 
 async function run() {
-  const res = await searchCompanies(easyApi, "<value>");
+  const res = await searchCompanies(easyApi, {
+    q: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -62,8 +66,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `q`                                                                                                                                                                            | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `limit`                                                                                                                                                                        | *number*                                                                                                                                                                       | :heavy_minus_sign:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `request`                                                                                                                                                                      | [operations.GetV1SearchRequest](../../models/operations/get-v1-search-request.md)                                                                                              | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
@@ -78,6 +81,6 @@ run();
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.ErrorEnvelope       | 400, 401, 403              | application/json           |
 | errors.ErrorEnvelope       | 429                        | application/json           |
-| errors.ErrorEnvelope       | 500, 501                   | application/json           |
+| errors.ErrorEnvelope       | 500, 502                   | application/json           |
 | errors.ErrorEnvelope       | 503                        | application/json           |
 | errors.EasyAPIDefaultError | 4XX, 5XX                   | \*/\*                      |
