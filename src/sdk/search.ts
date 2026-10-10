@@ -10,17 +10,15 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Search extends ClientSDK {
   /**
-   * Search company names (deferred — always 501 in v1)
+   * Search companies by name
    */
   async companies(
-    q: string,
-    limit?: number | undefined,
+    request: operations.GetV1SearchRequest,
     options?: RequestOptions,
   ): Promise<operations.GetV1SearchResponse> {
     return unwrapAsync(searchCompanies(
       this,
-      q,
-      limit,
+      request,
       options,
     ));
   }

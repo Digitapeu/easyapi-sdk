@@ -21,7 +21,13 @@ let value: GetV1SearchResponse = {
     ],
   },
   result: {
-    data: "<value>",
+    data: {
+      results: [],
+      count: 105356,
+      source: "demoanaf",
+      naturalPersonsExcluded: true,
+      checkedAt: new Date("2024-08-15T06:35:46.022Z"),
+    },
   },
 };
 ```

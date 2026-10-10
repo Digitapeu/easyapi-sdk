@@ -15,6 +15,8 @@ export type GetV1JusticeCasesChangesRequest = {
   party?: string | undefined;
   object?: string | undefined;
   court?: string | undefined;
+  registeredFrom?: string | undefined;
+  registeredTo?: string | undefined;
   modifiedSince: string;
   modifiedUntil?: string | undefined;
 };
@@ -28,6 +30,18 @@ export type GetV1JusticeCasesChangesHearing = {
   date: string | null;
   time: string | null;
   solution: string | null;
+  panel: string | null;
+  solutionSummary: string | null;
+  pronouncedAt: string | null;
+  documentType: string | null;
+  documentNumber: string | null;
+  documentDate: string | null;
+};
+
+export type GetV1JusticeCasesChangesAppeal = {
+  filedAt: string | null;
+  filedBy: string | null;
+  type: string | null;
 };
 
 export type GetV1JusticeCasesChangesCase = {
@@ -42,6 +56,7 @@ export type GetV1JusticeCasesChangesCase = {
   subject: string | null;
   parties: Array<GetV1JusticeCasesChangesParty>;
   hearings: Array<GetV1JusticeCasesChangesHearing>;
+  appeals: Array<GetV1JusticeCasesChangesAppeal>;
 };
 
 export type GetV1JusticeCasesChangesData = {
@@ -71,6 +86,8 @@ export type GetV1JusticeCasesChangesRequest$Outbound = {
   party?: string | undefined;
   object?: string | undefined;
   court?: string | undefined;
+  registeredFrom?: string | undefined;
+  registeredTo?: string | undefined;
   modifiedSince: string;
   modifiedUntil?: string | undefined;
 };
@@ -84,6 +101,8 @@ export const GetV1JusticeCasesChangesRequest$outboundSchema: z.ZodMiniType<
   party: z.optional(z.string()),
   object: z.optional(z.string()),
   court: z.optional(z.string()),
+  registeredFrom: z.optional(z.string()),
+  registeredTo: z.optional(z.string()),
   modifiedSince: z.string(),
   modifiedUntil: z.optional(z.string()),
 });
@@ -125,6 +144,12 @@ export const GetV1JusticeCasesChangesHearing$inboundSchema: z.ZodMiniType<
   date: types.nullable(types.string()),
   time: types.nullable(types.string()),
   solution: types.nullable(types.string()),
+  panel: types.nullable(types.string()),
+  solutionSummary: types.nullable(types.string()),
+  pronouncedAt: types.nullable(types.string()),
+  documentType: types.nullable(types.string()),
+  documentNumber: types.nullable(types.string()),
+  documentDate: types.nullable(types.string()),
 });
 
 export function getV1JusticeCasesChangesHearingFromJSON(
@@ -134,6 +159,26 @@ export function getV1JusticeCasesChangesHearingFromJSON(
     jsonString,
     (x) => GetV1JusticeCasesChangesHearing$inboundSchema.parse(JSON.parse(x)),
     `Failed to parse 'GetV1JusticeCasesChangesHearing' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1JusticeCasesChangesAppeal$inboundSchema: z.ZodMiniType<
+  GetV1JusticeCasesChangesAppeal,
+  unknown
+> = z.object({
+  filedAt: types.nullable(types.string()),
+  filedBy: types.nullable(types.string()),
+  type: types.nullable(types.string()),
+});
+
+export function getV1JusticeCasesChangesAppealFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1JusticeCasesChangesAppeal, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => GetV1JusticeCasesChangesAppeal$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1JusticeCasesChangesAppeal' from JSON`,
   );
 }
 
@@ -155,6 +200,7 @@ export const GetV1JusticeCasesChangesCase$inboundSchema: z.ZodMiniType<
   hearings: z.array(
     z.lazy(() => GetV1JusticeCasesChangesHearing$inboundSchema),
   ),
+  appeals: z.array(z.lazy(() => GetV1JusticeCasesChangesAppeal$inboundSchema)),
 });
 
 export function getV1JusticeCasesChangesCaseFromJSON(

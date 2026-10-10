@@ -26,6 +26,19 @@ let value: GetV1CompanyCuiLitigationCase = {
       date: "2024-10-16",
       time: "<value>",
       solution: "<value>",
+      panel: "<value>",
+      solutionSummary: "<value>",
+      pronouncedAt: "<value>",
+      documentType: "<value>",
+      documentNumber: "<value>",
+      documentDate: null,
+    },
+  ],
+  appeals: [
+    {
+      filedAt: "<value>",
+      filedBy: "<value>",
+      type: "<value>",
     },
   ],
 };
@@ -46,3 +59,4 @@ let value: GetV1CompanyCuiLitigationCase = {
 | `subject`                                                                                                              | *string*                                                                                                               | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `parties`                                                                                                              | [operations.GetV1CompanyCuiLitigationCaseParty](../../models/operations/get-v1-company-cui-litigation-case-party.md)[] | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
 | `hearings`                                                                                                             | [operations.GetV1CompanyCuiLitigationHearing](../../models/operations/get-v1-company-cui-litigation-hearing.md)[]      | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |
+| `appeals`                                                                                                              | [operations.GetV1CompanyCuiLitigationAppeal](../../models/operations/get-v1-company-cui-litigation-appeal.md)[]        | :heavy_check_mark:                                                                                                     | N/A                                                                                                                    |

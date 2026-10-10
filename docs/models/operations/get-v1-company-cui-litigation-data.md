@@ -31,11 +31,24 @@ let value: GetV1CompanyCuiLitigationData = {
             date: "2024-10-16",
             time: "<value>",
             solution: "<value>",
+            panel: "<value>",
+            solutionSummary: "<value>",
+            pronouncedAt: "<value>",
+            documentType: "<value>",
+            documentNumber: "<value>",
+            documentDate: null,
+          },
+        ],
+        appeals: [
+          {
+            filedAt: "<value>",
+            filedBy: "<value>",
+            type: "<value>",
           },
         ],
       },
       match: {
-        confidence: "weak",
+        confidence: "exact",
         party: {
           name: "<value>",
           role: "<value>",

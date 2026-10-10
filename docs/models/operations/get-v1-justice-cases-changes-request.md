@@ -18,5 +18,7 @@ let value: GetV1JusticeCasesChangesRequest = {
 | `party`            | *string*           | :heavy_minus_sign: | N/A                |
 | `object`           | *string*           | :heavy_minus_sign: | N/A                |
 | `court`            | *string*           | :heavy_minus_sign: | N/A                |
+| `registeredFrom`   | *string*           | :heavy_minus_sign: | N/A                |
+| `registeredTo`     | *string*           | :heavy_minus_sign: | N/A                |
 | `modifiedSince`    | *string*           | :heavy_check_mark: | N/A                |
 | `modifiedUntil`    | *string*           | :heavy_minus_sign: | N/A                |

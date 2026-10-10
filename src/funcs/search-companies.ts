@@ -29,14 +29,13 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Search company names (deferred — always 501 in v1)
+ * Search companies by name
  *
  * If set, this operation will use {@link Security.apiKey} from the global security.
  */
 export function searchCompanies(
   client: EasyApiCore,
-  q: string,
-  limit?: number | undefined,
+  request: operations.GetV1SearchRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,16 +53,14 @@ export function searchCompanies(
 > {
   return new APIPromise($do(
     client,
-    q,
-    limit,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: EasyApiCore,
-  q: string,
-  limit?: number | undefined,
+  request: operations.GetV1SearchRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -82,13 +79,8 @@ async function $do(
     APICall,
   ]
 > {
-  const input: operations.GetV1SearchRequest = {
-    q: q,
-    limit: limit,
-  };
-
   const parsed = safeParse(
-    input,
+    request,
     (value) => z.parse(operations.GetV1SearchRequest$outboundSchema, value),
     "Input validation failed",
   );
@@ -101,7 +93,9 @@ async function $do(
   const path = pathToFunc("/v1/search")();
 
   const query = encodeFormQuery({
+    "county": payload.county,
     "limit": payload.limit,
+    "offset": payload.offset,
     "q": payload.q,
   });
 
@@ -187,7 +181,7 @@ async function $do(
     }),
     M.jsonErr([400, 401, 403], errors.ErrorEnvelope$inboundSchema),
     M.jsonErr(429, errors.ErrorEnvelope$inboundSchema, { hdrs: true }),
-    M.jsonErr([500, 501], errors.ErrorEnvelope$inboundSchema),
+    M.jsonErr([500, 502], errors.ErrorEnvelope$inboundSchema),
     M.jsonErr(503, errors.ErrorEnvelope$inboundSchema, { hdrs: true }),
     M.fail("4XX"),
     M.fail("5XX"),

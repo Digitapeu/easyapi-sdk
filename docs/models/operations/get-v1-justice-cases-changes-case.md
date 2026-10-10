@@ -22,6 +22,7 @@ let value: GetV1JusticeCasesChangesCase = {
     },
   ],
   hearings: [],
+  appeals: [],
 };
 ```
 
@@ -40,3 +41,4 @@ let value: GetV1JusticeCasesChangesCase = {
 | `subject`                                                                                                       | *string*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 | `parties`                                                                                                       | [operations.GetV1JusticeCasesChangesParty](../../models/operations/get-v1-justice-cases-changes-party.md)[]     | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 | `hearings`                                                                                                      | [operations.GetV1JusticeCasesChangesHearing](../../models/operations/get-v1-justice-cases-changes-hearing.md)[] | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `appeals`                                                                                                       | [operations.GetV1JusticeCasesChangesAppeal](../../models/operations/get-v1-justice-cases-changes-appeal.md)[]   | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
