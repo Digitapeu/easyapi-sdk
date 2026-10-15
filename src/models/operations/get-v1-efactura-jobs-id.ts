@@ -264,7 +264,7 @@ export type GetV1EfacturaJobsIdActorKind = OpenEnum<
   typeof GetV1EfacturaJobsIdActorKind
 >;
 
-export type EfacturaGetV1EfacturaJobsIdRequest = {
+export type EfacturaJobsGetV1EfacturaJobsIdRequest = {
   evidenceVersion: number;
   state: GetV1EfacturaJobsIdState;
   refusalReason: GetV1EfacturaJobsIdRequestRefusalReason | null;
@@ -277,7 +277,7 @@ export type EfacturaGetV1EfacturaJobsIdRequest = {
 export type GetV1EfacturaJobsIdResend = {
   eligible: boolean;
   refusalReason: GetV1EfacturaJobsIdRefusalReason | null;
-  request: EfacturaGetV1EfacturaJobsIdRequest | null;
+  request: EfacturaJobsGetV1EfacturaJobsIdRequest | null;
 };
 
 export type GetV1EfacturaJobsIdData = {
@@ -544,29 +544,27 @@ export const GetV1EfacturaJobsIdActorKind$inboundSchema: z.ZodMiniType<
 > = openEnums.inboundSchema(GetV1EfacturaJobsIdActorKind);
 
 /** @internal */
-export const EfacturaGetV1EfacturaJobsIdRequest$inboundSchema: z.ZodMiniType<
-  EfacturaGetV1EfacturaJobsIdRequest,
-  unknown
-> = z.object({
-  evidenceVersion: types.number(),
-  state: GetV1EfacturaJobsIdState$inboundSchema,
-  refusalReason: types.nullable(
-    GetV1EfacturaJobsIdRequestRefusalReason$inboundSchema,
-  ),
-  actorKind: GetV1EfacturaJobsIdActorKind$inboundSchema,
-  actorRole: types.nullable(types.string()),
-  requestedAt: types.date(),
-  decidedAt: types.nullable(types.date()),
-});
+export const EfacturaJobsGetV1EfacturaJobsIdRequest$inboundSchema:
+  z.ZodMiniType<EfacturaJobsGetV1EfacturaJobsIdRequest, unknown> = z.object({
+    evidenceVersion: types.number(),
+    state: GetV1EfacturaJobsIdState$inboundSchema,
+    refusalReason: types.nullable(
+      GetV1EfacturaJobsIdRequestRefusalReason$inboundSchema,
+    ),
+    actorKind: GetV1EfacturaJobsIdActorKind$inboundSchema,
+    actorRole: types.nullable(types.string()),
+    requestedAt: types.date(),
+    decidedAt: types.nullable(types.date()),
+  });
 
-export function efacturaGetV1EfacturaJobsIdRequestFromJSON(
+export function efacturaJobsGetV1EfacturaJobsIdRequestFromJSON(
   jsonString: string,
-): SafeParseResult<EfacturaGetV1EfacturaJobsIdRequest, SDKValidationError> {
+): SafeParseResult<EfacturaJobsGetV1EfacturaJobsIdRequest, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      EfacturaGetV1EfacturaJobsIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EfacturaGetV1EfacturaJobsIdRequest' from JSON`,
+      EfacturaJobsGetV1EfacturaJobsIdRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EfacturaJobsGetV1EfacturaJobsIdRequest' from JSON`,
   );
 }
 
@@ -578,7 +576,7 @@ export const GetV1EfacturaJobsIdResend$inboundSchema: z.ZodMiniType<
   eligible: types.boolean(),
   refusalReason: types.nullable(GetV1EfacturaJobsIdRefusalReason$inboundSchema),
   request: types.nullable(
-    z.lazy(() => EfacturaGetV1EfacturaJobsIdRequest$inboundSchema),
+    z.lazy(() => EfacturaJobsGetV1EfacturaJobsIdRequest$inboundSchema),
   ),
 });
 

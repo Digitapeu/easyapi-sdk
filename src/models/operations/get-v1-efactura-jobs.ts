@@ -273,7 +273,7 @@ export type GetV1EfacturaJobsActorKind = OpenEnum<
   typeof GetV1EfacturaJobsActorKind
 >;
 
-export type EfacturaGetV1EfacturaJobsRequest = {
+export type EfacturaJobsGetV1EfacturaJobsRequest = {
   evidenceVersion: number;
   state: GetV1EfacturaJobsState;
   refusalReason: GetV1EfacturaJobsRequestRefusalReason | null;
@@ -286,7 +286,7 @@ export type EfacturaGetV1EfacturaJobsRequest = {
 export type GetV1EfacturaJobsResend = {
   eligible: boolean;
   refusalReason: GetV1EfacturaJobsRefusalReason | null;
-  request: EfacturaGetV1EfacturaJobsRequest | null;
+  request: EfacturaJobsGetV1EfacturaJobsRequest | null;
 };
 
 export type GetV1EfacturaJobsJob = {
@@ -568,8 +568,8 @@ export const GetV1EfacturaJobsActorKind$inboundSchema: z.ZodMiniType<
 > = openEnums.inboundSchema(GetV1EfacturaJobsActorKind);
 
 /** @internal */
-export const EfacturaGetV1EfacturaJobsRequest$inboundSchema: z.ZodMiniType<
-  EfacturaGetV1EfacturaJobsRequest,
+export const EfacturaJobsGetV1EfacturaJobsRequest$inboundSchema: z.ZodMiniType<
+  EfacturaJobsGetV1EfacturaJobsRequest,
   unknown
 > = z.object({
   evidenceVersion: types.number(),
@@ -583,13 +583,14 @@ export const EfacturaGetV1EfacturaJobsRequest$inboundSchema: z.ZodMiniType<
   decidedAt: types.nullable(types.date()),
 });
 
-export function efacturaGetV1EfacturaJobsRequestFromJSON(
+export function efacturaJobsGetV1EfacturaJobsRequestFromJSON(
   jsonString: string,
-): SafeParseResult<EfacturaGetV1EfacturaJobsRequest, SDKValidationError> {
+): SafeParseResult<EfacturaJobsGetV1EfacturaJobsRequest, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => EfacturaGetV1EfacturaJobsRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EfacturaGetV1EfacturaJobsRequest' from JSON`,
+    (x) =>
+      EfacturaJobsGetV1EfacturaJobsRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EfacturaJobsGetV1EfacturaJobsRequest' from JSON`,
   );
 }
 
@@ -601,7 +602,7 @@ export const GetV1EfacturaJobsResend$inboundSchema: z.ZodMiniType<
   eligible: types.boolean(),
   refusalReason: types.nullable(GetV1EfacturaJobsRefusalReason$inboundSchema),
   request: types.nullable(
-    z.lazy(() => EfacturaGetV1EfacturaJobsRequest$inboundSchema),
+    z.lazy(() => EfacturaJobsGetV1EfacturaJobsRequest$inboundSchema),
   ),
 });
 

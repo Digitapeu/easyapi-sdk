@@ -1,18 +1,18 @@
-# EfacturaPostV1EfacturaJobsIdCancelRequest
+# EfacturaJobsPostV1EfacturaJobsIdCancelRequest
 
 ## Example Usage
 
 ```typescript
-import { EfacturaPostV1EfacturaJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
+import { EfacturaJobsPostV1EfacturaJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
 
-let value: EfacturaPostV1EfacturaJobsIdCancelRequest = {
-  evidenceVersion: 589495,
+let value: EfacturaJobsPostV1EfacturaJobsIdCancelRequest = {
+  evidenceVersion: 393302,
   state: "refused",
-  refusalReason: "duplicate_detected",
-  actorKind: "operator",
+  refusalReason: "listing_found",
+  actorKind: "customer",
   actorRole: "<value>",
-  requestedAt: new Date("2025-03-03T09:56:35.006Z"),
-  decidedAt: new Date("2025-11-27T04:01:04.586Z"),
+  requestedAt: new Date("2024-02-10T11:23:45.870Z"),
+  decidedAt: new Date("2025-09-30T11:00:25.675Z"),
 };
 ```
 

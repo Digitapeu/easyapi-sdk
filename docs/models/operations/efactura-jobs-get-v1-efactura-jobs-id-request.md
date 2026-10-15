@@ -1,18 +1,18 @@
-# EfacturaGetV1EfacturaJobsIdRequest
+# EfacturaJobsGetV1EfacturaJobsIdRequest
 
 ## Example Usage
 
 ```typescript
-import { EfacturaGetV1EfacturaJobsIdRequest } from "@digitap.eu/easyapi/models/operations";
+import { EfacturaJobsGetV1EfacturaJobsIdRequest } from "@digitap.eu/easyapi/models/operations";
 
-let value: EfacturaGetV1EfacturaJobsIdRequest = {
-  evidenceVersion: 833657,
+let value: EfacturaJobsGetV1EfacturaJobsIdRequest = {
+  evidenceVersion: 914950,
   state: "pending",
-  refusalReason: null,
-  actorKind: "operator",
-  actorRole: null,
-  requestedAt: new Date("2025-11-20T06:24:35.786Z"),
-  decidedAt: new Date("2024-12-28T07:54:43.059Z"),
+  refusalReason: "conflict",
+  actorKind: "customer",
+  actorRole: "<value>",
+  requestedAt: new Date("2024-07-26T16:20:37.166Z"),
+  decidedAt: new Date("2025-02-18T17:12:27.229Z"),
 };
 ```
 

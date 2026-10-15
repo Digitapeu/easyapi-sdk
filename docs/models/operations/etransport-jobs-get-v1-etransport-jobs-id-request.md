@@ -1,18 +1,18 @@
-# EtransportGetV1EtransportJobsIdRequest
+# EtransportJobsGetV1EtransportJobsIdRequest
 
 ## Example Usage
 
 ```typescript
-import { EtransportGetV1EtransportJobsIdRequest } from "@digitap.eu/easyapi/models/operations";
+import { EtransportJobsGetV1EtransportJobsIdRequest } from "@digitap.eu/easyapi/models/operations";
 
-let value: EtransportGetV1EtransportJobsIdRequest = {
-  evidenceVersion: 361074,
-  state: "pending",
-  refusalReason: "listing_unavailable",
-  actorKind: "operator",
+let value: EtransportJobsGetV1EtransportJobsIdRequest = {
+  evidenceVersion: 450827,
+  state: "authorized",
+  refusalReason: null,
+  actorKind: "customer",
   actorRole: "<value>",
-  requestedAt: new Date("2024-05-17T11:39:06.477Z"),
-  decidedAt: new Date("2026-03-08T07:16:04.968Z"),
+  requestedAt: new Date("2025-07-03T17:43:12.417Z"),
+  decidedAt: new Date("2026-01-06T07:18:44.344Z"),
 };
 ```
 

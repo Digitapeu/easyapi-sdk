@@ -438,6 +438,36 @@ actions:
           - '503'
           - '504'
         retryConnectionErrors: true
+  - target: '$.paths[''/v1/efactura/jobs''].get'
+    description: 'efactura.jobs.list'
+    update:
+      x-speakeasy-group: efactura.jobs
+      x-speakeasy-name-override: list
+  - target: '$.paths[''/v1/efactura/jobs/{id}''].get'
+    description: 'efactura.jobs.get'
+    update:
+      x-speakeasy-group: efactura.jobs
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/efactura/jobs/{id}/cancel''].post'
+    description: 'efactura.jobs.cancel'
+    update:
+      x-speakeasy-group: efactura.jobs
+      x-speakeasy-name-override: cancel
+  - target: '$.paths[''/v1/etransport/jobs''].get'
+    description: 'etransport.jobs.list'
+    update:
+      x-speakeasy-group: etransport.jobs
+      x-speakeasy-name-override: list
+  - target: '$.paths[''/v1/etransport/jobs/{id}''].get'
+    description: 'etransport.jobs.get'
+    update:
+      x-speakeasy-group: etransport.jobs
+      x-speakeasy-name-override: get
+  - target: '$.paths[''/v1/etransport/jobs/{id}/cancel''].post'
+    description: 'etransport.jobs.cancel'
+    update:
+      x-speakeasy-group: etransport.jobs
+      x-speakeasy-name-override: cancel
   - target: '$.paths[''/v1/reges/jobs/{id}''].get'
     description: 'reges.jobs.get'
     update:
