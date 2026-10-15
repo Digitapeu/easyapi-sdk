@@ -1,0 +1,29 @@
+# EtransportPostV1EtransportDeclarationsRequest
+
+## Example Usage
+
+```typescript
+import { EtransportPostV1EtransportDeclarationsRequest } from "@digitap.eu/easyapi/models/operations";
+
+let value: EtransportPostV1EtransportDeclarationsRequest = {
+  evidenceVersion: 167482,
+  state: "authorized",
+  refusalReason: null,
+  actorKind: "operator",
+  actorRole: "<value>",
+  requestedAt: new Date("2026-04-13T05:05:50.604Z"),
+  decidedAt: new Date("2026-01-23T13:10:26.450Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                            | Type                                                                                                                                             | Required                                                                                                                                         | Description                                                                                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `evidenceVersion`                                                                                                                                | *number*                                                                                                                                         | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `state`                                                                                                                                          | [operations.PostV1EtransportDeclarationsState](../../models/operations/post-v1-etransport-declarations-state.md)                                 | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `refusalReason`                                                                                                                                  | [operations.PostV1EtransportDeclarationsRequestRefusalReason](../../models/operations/post-v1-etransport-declarations-request-refusal-reason.md) | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `actorKind`                                                                                                                                      | [operations.PostV1EtransportDeclarationsActorKind](../../models/operations/post-v1-etransport-declarations-actor-kind.md)                        | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `actorRole`                                                                                                                                      | *string*                                                                                                                                         | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `requestedAt`                                                                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                    | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |
+| `decidedAt`                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                    | :heavy_check_mark:                                                                                                                               | N/A                                                                                                                                              |

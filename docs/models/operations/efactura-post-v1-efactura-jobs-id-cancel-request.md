@@ -1,0 +1,29 @@
+# EfacturaPostV1EfacturaJobsIdCancelRequest
+
+## Example Usage
+
+```typescript
+import { EfacturaPostV1EfacturaJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
+
+let value: EfacturaPostV1EfacturaJobsIdCancelRequest = {
+  evidenceVersion: 589495,
+  state: "refused",
+  refusalReason: "duplicate_detected",
+  actorKind: "operator",
+  actorRole: "<value>",
+  requestedAt: new Date("2025-03-03T09:56:35.006Z"),
+  decidedAt: new Date("2025-11-27T04:01:04.586Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                          | Type                                                                                                                                           | Required                                                                                                                                       | Description                                                                                                                                    |
+| ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `evidenceVersion`                                                                                                                              | *number*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `state`                                                                                                                                        | [operations.PostV1EfacturaJobsIdCancelState](../../models/operations/post-v1-efactura-jobs-id-cancel-state.md)                                 | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `refusalReason`                                                                                                                                | [operations.PostV1EfacturaJobsIdCancelRequestRefusalReason](../../models/operations/post-v1-efactura-jobs-id-cancel-request-refusal-reason.md) | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `actorKind`                                                                                                                                    | [operations.PostV1EfacturaJobsIdCancelActorKind](../../models/operations/post-v1-efactura-jobs-id-cancel-actor-kind.md)                        | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `actorRole`                                                                                                                                    | *string*                                                                                                                                       | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `requestedAt`                                                                                                                                  | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |
+| `decidedAt`                                                                                                                                    | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                  | :heavy_check_mark:                                                                                                                             | N/A                                                                                                                                            |

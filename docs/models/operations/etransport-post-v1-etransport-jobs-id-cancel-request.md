@@ -1,0 +1,29 @@
+# EtransportPostV1EtransportJobsIdCancelRequest
+
+## Example Usage
+
+```typescript
+import { EtransportPostV1EtransportJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
+
+let value: EtransportPostV1EtransportJobsIdCancelRequest = {
+  evidenceVersion: 745938,
+  state: "pending",
+  refusalReason: "rejected_attempt",
+  actorKind: "customer",
+  actorRole: null,
+  requestedAt: new Date("2024-04-27T16:10:52.619Z"),
+  decidedAt: new Date("2025-05-31T07:18:01.076Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                              | Type                                                                                                                                               | Required                                                                                                                                           | Description                                                                                                                                        |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `evidenceVersion`                                                                                                                                  | *number*                                                                                                                                           | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `state`                                                                                                                                            | [operations.PostV1EtransportJobsIdCancelState](../../models/operations/post-v1-etransport-jobs-id-cancel-state.md)                                 | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `refusalReason`                                                                                                                                    | [operations.PostV1EtransportJobsIdCancelRequestRefusalReason](../../models/operations/post-v1-etransport-jobs-id-cancel-request-refusal-reason.md) | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `actorKind`                                                                                                                                        | [operations.PostV1EtransportJobsIdCancelActorKind](../../models/operations/post-v1-etransport-jobs-id-cancel-actor-kind.md)                        | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `actorRole`                                                                                                                                        | *string*                                                                                                                                           | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `requestedAt`                                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                      | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |
+| `decidedAt`                                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                                      | :heavy_check_mark:                                                                                                                                 | N/A                                                                                                                                                |

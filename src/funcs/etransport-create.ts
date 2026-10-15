@@ -82,7 +82,7 @@ async function $do(
     APICall,
   ]
 > {
-  const input: operations.PostV1EtransportDeclarationsRequest = {
+  const input: operations.PostV1EtransportDeclarationsRequestRequest = {
     body: body,
     idempotencyKey: idempotencyKey,
   };
@@ -91,7 +91,7 @@ async function $do(
     input,
     (value) =>
       z.parse(
-        operations.PostV1EtransportDeclarationsRequest$outboundSchema,
+        operations.PostV1EtransportDeclarationsRequestRequest$outboundSchema,
         value,
       ),
     "Input validation failed",
@@ -187,6 +187,9 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, operations.PostV1EtransportDeclarationsResponse$inboundSchema, {
+      key: "Result",
+    }),
+    M.json(202, operations.PostV1EtransportDeclarationsResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404, 409], errors.ErrorEnvelope$inboundSchema),

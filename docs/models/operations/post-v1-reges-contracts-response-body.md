@@ -10,7 +10,7 @@ import { PostV1RegesContractsResponseBody } from "@digitap.eu/easyapi/models/ope
 let value: PostV1RegesContractsResponseBody = {
   data: {
     jobId: "8f4c5bab-be79-4527-a791-9a43ba1bb840",
-    status: "error",
+    status: "unknown",
   },
 };
 ```

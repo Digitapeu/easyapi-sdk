@@ -1,0 +1,35 @@
+# PostV1EtransportDeclarationsCopy
+
+## Example Usage
+
+```typescript
+import { PostV1EtransportDeclarationsCopy } from "@digitap.eu/easyapi/models/operations";
+
+let value: PostV1EtransportDeclarationsCopy = {
+  uploadIndex: "<value>",
+  downloadId: "<id>",
+  uit: "<value>",
+  result: "ok",
+  receivedSource: "operator",
+  resultSource: "<value>",
+  attemptSeq: 188876,
+  dataCreare: "<value>",
+  firstListedAt: new Date("2024-02-21T00:08:45.767Z"),
+  recordedAt: new Date("2025-04-12T07:14:01.174Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                               | Type                                                                                                                                | Required                                                                                                                            | Description                                                                                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `uploadIndex`                                                                                                                       | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `downloadId`                                                                                                                        | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `uit`                                                                                                                               | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `result`                                                                                                                            | [operations.PostV1EtransportDeclarationsResult](../../models/operations/post-v1-etransport-declarations-result.md)                  | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `receivedSource`                                                                                                                    | [operations.PostV1EtransportDeclarationsReceivedSource](../../models/operations/post-v1-etransport-declarations-received-source.md) | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `resultSource`                                                                                                                      | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `attemptSeq`                                                                                                                        | *number*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `dataCreare`                                                                                                                        | *string*                                                                                                                            | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `firstListedAt`                                                                                                                     | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                       | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |
+| `recordedAt`                                                                                                                        | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                       | :heavy_check_mark:                                                                                                                  | N/A                                                                                                                                 |

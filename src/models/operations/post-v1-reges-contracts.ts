@@ -30,6 +30,8 @@ export const PostV1RegesContractsStatus = {
   Done: "done",
   Error: "error",
   Unknown: "unknown",
+  NeedsReview: "needs_review",
+  Cancelled: "cancelled",
 } as const;
 export type PostV1RegesContractsStatus = OpenEnum<
   typeof PostV1RegesContractsStatus

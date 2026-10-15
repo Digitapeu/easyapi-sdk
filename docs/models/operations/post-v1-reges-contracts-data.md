@@ -7,7 +7,7 @@ import { PostV1RegesContractsData } from "@digitap.eu/easyapi/models/operations"
 
 let value: PostV1RegesContractsData = {
   jobId: "001df4dc-dc8f-4bc8-9531-1416adef76c3",
-  status: "unknown",
+  status: "needs_review",
 };
 ```
 

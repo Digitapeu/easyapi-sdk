@@ -34,6 +34,7 @@ export const ErrorCode = {
   ConnectionUnauthorized: "connection_unauthorized",
   FeatureDisabled: "feature_disabled",
   FeatureStateUnknown: "feature_state_unknown",
+  SubmissionsPaused: "submissions_paused",
   ValidatorUnavailable: "validator_unavailable",
   AuthenticationUnavailable: "authentication_unavailable",
   VaultUnavailable: "vault_unavailable",

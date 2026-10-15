@@ -1,0 +1,35 @@
+# PostV1EtransportJobsIdCancelCopy
+
+## Example Usage
+
+```typescript
+import { PostV1EtransportJobsIdCancelCopy } from "@digitap.eu/easyapi/models/operations";
+
+let value: PostV1EtransportJobsIdCancelCopy = {
+  uploadIndex: "<value>",
+  downloadId: "<id>",
+  uit: "<value>",
+  result: "ok",
+  receivedSource: "late_response",
+  resultSource: "<value>",
+  attemptSeq: 948255,
+  dataCreare: "<value>",
+  firstListedAt: new Date("2025-02-13T22:46:25.339Z"),
+  recordedAt: new Date("2025-01-01T18:40:06.282Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                                 | Type                                                                                                                                  | Required                                                                                                                              | Description                                                                                                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| `uploadIndex`                                                                                                                         | *string*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `downloadId`                                                                                                                          | *string*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `uit`                                                                                                                                 | *string*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `result`                                                                                                                              | [operations.PostV1EtransportJobsIdCancelResult](../../models/operations/post-v1-etransport-jobs-id-cancel-result.md)                  | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `receivedSource`                                                                                                                      | [operations.PostV1EtransportJobsIdCancelReceivedSource](../../models/operations/post-v1-etransport-jobs-id-cancel-received-source.md) | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `resultSource`                                                                                                                        | *string*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `attemptSeq`                                                                                                                          | *number*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `dataCreare`                                                                                                                          | *string*                                                                                                                              | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `firstListedAt`                                                                                                                       | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                         | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |
+| `recordedAt`                                                                                                                          | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                         | :heavy_check_mark:                                                                                                                    | N/A                                                                                                                                   |

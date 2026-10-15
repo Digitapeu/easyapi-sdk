@@ -22,6 +22,8 @@ export const GetV1RegesJobsIdStatus = {
   Done: "done",
   Error: "error",
   Unknown: "unknown",
+  NeedsReview: "needs_review",
+  Cancelled: "cancelled",
 } as const;
 export type GetV1RegesJobsIdStatus = OpenEnum<typeof GetV1RegesJobsIdStatus>;
 

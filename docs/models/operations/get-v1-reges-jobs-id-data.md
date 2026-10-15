@@ -8,7 +8,7 @@ import { GetV1RegesJobsIdData } from "@digitap.eu/easyapi/models/operations";
 let value: GetV1RegesJobsIdData = {
   jobId: "66cd2007-1cdd-47ef-91d3-6d1073861214",
   kind: "<value>",
-  status: "done",
+  status: "error",
   resourceId: "52548c09-773f-4fb4-b591-9a40c04defbe",
   error: "<value>",
   createdAt: new Date("2026-01-05T17:31:36.970Z"),

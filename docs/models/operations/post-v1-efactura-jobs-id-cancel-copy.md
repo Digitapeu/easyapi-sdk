@@ -1,0 +1,35 @@
+# PostV1EfacturaJobsIdCancelCopy
+
+## Example Usage
+
+```typescript
+import { PostV1EfacturaJobsIdCancelCopy } from "@digitap.eu/easyapi/models/operations";
+
+let value: PostV1EfacturaJobsIdCancelCopy = {
+  uploadIndex: "<value>",
+  downloadId: "<id>",
+  uit: "<value>",
+  result: "ok",
+  receivedSource: "late_response",
+  resultSource: "<value>",
+  attemptSeq: 742198,
+  dataCreare: "<value>",
+  firstListedAt: null,
+  recordedAt: new Date("2026-12-03T18:51:18.063Z"),
+};
+```
+
+## Fields
+
+| Field                                                                                                                             | Type                                                                                                                              | Required                                                                                                                          | Description                                                                                                                       |
+| --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| `uploadIndex`                                                                                                                     | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `downloadId`                                                                                                                      | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `uit`                                                                                                                             | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `result`                                                                                                                          | [operations.PostV1EfacturaJobsIdCancelResult](../../models/operations/post-v1-efactura-jobs-id-cancel-result.md)                  | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `receivedSource`                                                                                                                  | [operations.PostV1EfacturaJobsIdCancelReceivedSource](../../models/operations/post-v1-efactura-jobs-id-cancel-received-source.md) | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `resultSource`                                                                                                                    | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `attemptSeq`                                                                                                                      | *number*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `dataCreare`                                                                                                                      | *string*                                                                                                                          | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `firstListedAt`                                                                                                                   | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                     | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |
+| `recordedAt`                                                                                                                      | [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)                                     | :heavy_check_mark:                                                                                                                | N/A                                                                                                                               |

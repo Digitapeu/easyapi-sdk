@@ -8,9 +8,9 @@ import { GetV1EfacturaInvoicesIdData } from "@digitap.eu/easyapi/models/operatio
 let value: GetV1EfacturaInvoicesIdData = {
   id: "<id>",
   idIncarcare: "<value>",
-  state: "Massachusetts",
+  state: "Maine",
   downloadId: "<id>",
-  checkedAt: new Date("2026-10-11T06:04:58.640Z"),
+  checkedAt: new Date("2025-11-15T22:23:30.017Z"),
 };
 ```
 

@@ -5,7 +5,10 @@
 
 import { efacturaDownloadZip } from "../funcs/efactura-download-zip.js";
 import { efacturaDownload } from "../funcs/efactura-download.js";
+import { efacturaGetV1EfacturaJobsId } from "../funcs/efactura-get-v1-efactura-jobs-id.js";
+import { efacturaGetV1EfacturaJobs } from "../funcs/efactura-get-v1-efactura-jobs.js";
 import { efacturaListMessages } from "../funcs/efactura-list-messages.js";
+import { efacturaPostV1EfacturaJobsIdCancel } from "../funcs/efactura-post-v1-efactura-jobs-id-cancel.js";
 import { efacturaStatus } from "../funcs/efactura-status.js";
 import { efacturaUpload } from "../funcs/efactura-upload.js";
 import { efacturaValidate } from "../funcs/efactura-validate.js";
@@ -98,6 +101,48 @@ export class Efactura extends ClientSDK {
     return unwrapAsync(efacturaValidate(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * Read one e-Factura submission job
+   */
+  async getV1EfacturaJobsId(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1EfacturaJobsIdResponse> {
+    return unwrapAsync(efacturaGetV1EfacturaJobsId(
+      this,
+      id,
+      options,
+    ));
+  }
+
+  /**
+   * List e-Factura submission jobs, newest first
+   */
+  async getV1EfacturaJobs(
+    request?: operations.GetV1EfacturaJobsRequestRequest | undefined,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1EfacturaJobsResponse> {
+    return unwrapAsync(efacturaGetV1EfacturaJobs(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Cancel an undelivered e-Factura submission job
+   */
+  async postV1EfacturaJobsIdCancel(
+    id: string,
+    options?: RequestOptions,
+  ): Promise<operations.PostV1EfacturaJobsIdCancelResponse> {
+    return unwrapAsync(efacturaPostV1EfacturaJobsIdCancel(
+      this,
+      id,
       options,
     ));
   }

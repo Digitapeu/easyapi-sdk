@@ -5,7 +5,7 @@
 ```typescript
 import { PostV1RegesContractsStatus } from "@digitap.eu/easyapi/models/operations";
 
-let value: PostV1RegesContractsStatus = "done";
+let value: PostV1RegesContractsStatus = "error";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: PostV1RegesContractsStatus = "done";
 ## Values
 
 ```typescript
-"queued" | "processing" | "done" | "error" | "unknown" | Unrecognized<string>
+"queued" | "processing" | "done" | "error" | "unknown" | "needs_review" | "cancelled" | Unrecognized<string>
 ```
