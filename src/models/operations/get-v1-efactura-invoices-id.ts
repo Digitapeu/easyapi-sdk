@@ -16,7 +16,7 @@ export type GetV1EfacturaInvoicesIdRequest = {
 
 export type GetV1EfacturaInvoicesIdData = {
   id: string;
-  idIncarcare: string;
+  idIncarcare: string | null;
   state: string;
   downloadId: string | null;
   checkedAt: Date;
@@ -63,7 +63,7 @@ export const GetV1EfacturaInvoicesIdData$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   id: types.string(),
-  idIncarcare: types.string(),
+  idIncarcare: types.nullable(types.string()),
   state: types.string(),
   downloadId: types.nullable(types.string()),
   checkedAt: types.date(),

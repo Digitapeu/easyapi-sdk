@@ -6,9 +6,11 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
-import { ClosedEnum } from "../../types/enums.js";
+import * as openEnums from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smart-union.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
 export const TypeCode = {
@@ -250,7 +252,7 @@ export type Ubl = {
 
 export type PostV1EfacturaInvoicesRequestBody = Ubl | Json;
 
-export type PostV1EfacturaInvoicesRequest = {
+export type PostV1EfacturaInvoicesRequestRequest = {
   /**
    * Replays the first response for the same key, body and route (24h); a different body under the same key is a 409.
    */
@@ -258,22 +260,334 @@ export type PostV1EfacturaInvoicesRequest = {
   body: Ubl | Json;
 };
 
-export type PostV1EfacturaInvoicesData = {
-  id: string;
-  idIncarcare: string;
-  status: string;
+export const PostV1EfacturaInvoicesKind = {
+  EfacturaSubmit: "efactura.submit",
+  EtransportDeclare: "etransport.declare",
+} as const;
+export type PostV1EfacturaInvoicesKind = OpenEnum<
+  typeof PostV1EfacturaInvoicesKind
+>;
+
+export const PostV1EfacturaInvoicesStatus = {
+  Queued: "queued",
+  Processing: "processing",
+  Done: "done",
+  Error: "error",
+  Unknown: "unknown",
+  NeedsReview: "needs_review",
+  Cancelled: "cancelled",
+} as const;
+export type PostV1EfacturaInvoicesStatus = OpenEnum<
+  typeof PostV1EfacturaInvoicesStatus
+>;
+
+export const PostV1EfacturaInvoicesBlockedReason = {
+  ConnectionError: "connection_error",
+  ConnectionPending: "connection_pending",
+  CredentialStale: "credential_stale",
+  FeatureDisabled: "feature_disabled",
+  ClearanceStalled: "clearance_stalled",
+  ConnectionRevoked: "connection_revoked",
+} as const;
+export type PostV1EfacturaInvoicesBlockedReason = OpenEnum<
+  typeof PostV1EfacturaInvoicesBlockedReason
+>;
+
+export const PostV1EfacturaInvoicesReviewReason = {
+  AttemptCap: "attempt_cap",
+  Horizon: "horizon",
+  NoPayload: "no_payload",
+  PayloadMismatch: "payload_mismatch",
+  IdentityConflict: "identity_conflict",
+  UncorrelatedRejection: "uncorrelated_rejection",
+  CoverageExceeded: "coverage_exceeded",
+  ResultContradiction: "result_contradiction",
+  RejectedAttempt: "rejected_attempt",
+  NoListing: "no_listing",
+  ConnectionRevoked: "connection_revoked",
+  DuplicateDetected: "duplicate_detected",
+  Restore: "restore",
+} as const;
+export type PostV1EfacturaInvoicesReviewReason = OpenEnum<
+  typeof PostV1EfacturaInvoicesReviewReason
+>;
+
+export type PostV1EfacturaInvoicesObservation = {
+  watchFrom: Date | null;
+  until: Date | null;
+  checks: number;
+  inconclusive: number;
+  lastCheckAt: Date | null;
+  lastReason: string | null;
+  lastConclusiveAt: Date | null;
+};
+
+export const PostV1EfacturaInvoicesBasis = {
+  First: "first",
+  NotSentRetry: "not_sent_retry",
+  UnknownWaitElapsed: "unknown_wait_elapsed",
+  HumanResend: "human_resend",
+} as const;
+export type PostV1EfacturaInvoicesBasis = OpenEnum<
+  typeof PostV1EfacturaInvoicesBasis
+>;
+
+export const PostV1EfacturaInvoicesOutcome = {
+  Accepted: "accepted",
+  DefiniteReject: "definite_reject",
+  Ambiguous: "ambiguous",
+  NotSent: "not_sent",
+} as const;
+export type PostV1EfacturaInvoicesOutcome = OpenEnum<
+  typeof PostV1EfacturaInvoicesOutcome
+>;
+
+export const PostV1EfacturaInvoicesLateOutcome = {
+  Accepted: "accepted",
+  DefiniteReject: "definite_reject",
+  NotSent: "not_sent",
+} as const;
+export type PostV1EfacturaInvoicesLateOutcome = OpenEnum<
+  typeof PostV1EfacturaInvoicesLateOutcome
+>;
+
+export const PostV1EfacturaInvoicesRejectionCode = {
+  HeaderErrorMessage: "header_error_message",
+  Http4xx: "http_4xx",
+  LateRejected: "late_rejected",
+} as const;
+export type PostV1EfacturaInvoicesRejectionCode = OpenEnum<
+  typeof PostV1EfacturaInvoicesRejectionCode
+>;
+
+export const PostV1EfacturaInvoicesReasonCode = {
+  Timeout: "timeout",
+  Http5xx: "http_5xx",
+  Http4xx: "http_4xx",
+  Http401403: "http_401_403",
+  Unparseable: "unparseable",
+  MissingUploadId: "missing_upload_id",
+  BreakerOpen: "breaker_open",
+  QueueFull: "queue_full",
+  PoolTimeout: "pool_timeout",
+  TokenStale: "token_stale",
+  TokenRefresh: "token_refresh",
+  TokenPersist: "token_persist",
+  VaultUnavailable: "vault_unavailable",
+  ConnectionPending: "connection_pending",
+  ConnectionError: "connection_error",
+  FeatureDisabled: "feature_disabled",
+  FlagDisabled: "flag_disabled",
+  SiblingDelivered: "sibling_delivered",
+  OwnEvidence: "own_evidence",
+  PrecheckFailed: "precheck_failed",
+  LeaseShort: "lease_short",
+  LeaseExpired: "lease_expired",
+  PayloadExpired: "payload_expired",
+  Crash: "crash",
+  RestoreRearm: "restore_rearm",
+} as const;
+export type PostV1EfacturaInvoicesReasonCode = OpenEnum<
+  typeof PostV1EfacturaInvoicesReasonCode
+>;
+
+export type PostV1EfacturaInvoicesAttempt = {
+  seq: number;
+  basis: PostV1EfacturaInvoicesBasis;
+  startedAt: Date;
+  finishedAt: Date | null;
+  outcome: PostV1EfacturaInvoicesOutcome | null;
+  lateOutcome: PostV1EfacturaInvoicesLateOutcome | null;
+  unresolved: boolean;
+  rejectionCode: PostV1EfacturaInvoicesRejectionCode | null;
+  httpStatus: number | null;
+  uploadIndex: string | null;
+  uit: string | null;
+  errorCode: string | null;
+  reasonCode: PostV1EfacturaInvoicesReasonCode | null;
+};
+
+export const PostV1EfacturaInvoicesResult = {
+  Ok: "ok",
+  Nok: "nok",
+} as const;
+export type PostV1EfacturaInvoicesResult = OpenEnum<
+  typeof PostV1EfacturaInvoicesResult
+>;
+
+export const PostV1EfacturaInvoicesReceivedSource = {
+  Response: "response",
+  LateResponse: "late_response",
+  Listing: "listing",
+  Status: "status",
+  Operator: "operator",
+} as const;
+export type PostV1EfacturaInvoicesReceivedSource = OpenEnum<
+  typeof PostV1EfacturaInvoicesReceivedSource
+>;
+
+export type PostV1EfacturaInvoicesCopy = {
+  uploadIndex: string | null;
+  downloadId: string | null;
+  uit: string | null;
+  result: PostV1EfacturaInvoicesResult | null;
+  receivedSource: PostV1EfacturaInvoicesReceivedSource;
+  resultSource: string | null;
+  attemptSeq: number | null;
+  dataCreare: string | null;
+  firstListedAt: Date | null;
+  recordedAt: Date;
+};
+
+export const PostV1EfacturaInvoicesConflictKind = {
+  IdentityConflict: "identity_conflict",
+  UncorrelatedRejection: "uncorrelated_rejection",
+  CoverageExceeded: "coverage_exceeded",
+  ResultContradiction: "result_contradiction",
+} as const;
+export type PostV1EfacturaInvoicesConflictKind = OpenEnum<
+  typeof PostV1EfacturaInvoicesConflictKind
+>;
+
+export type PostV1EfacturaInvoicesConflict = {
+  kind: PostV1EfacturaInvoicesConflictKind;
+  anafMessageId: string | null;
+  recordedAt: Date;
+};
+
+export const PostV1EfacturaInvoicesRefusalReason = {
+  NotEligibleStatus: "not_eligible_status",
+  CopyExists: "copy_exists",
+  RejectedAttempt: "rejected_attempt",
+  Conflict: "conflict",
+  DuplicateDetected: "duplicate_detected",
+  SiblingDelivered: "sibling_delivered",
+  PayloadUnavailable: "payload_unavailable",
+  AttemptCap: "attempt_cap",
+  ConnectionRevoked: "connection_revoked",
+  FlagDisabled: "flag_disabled",
+  ListingFound: "listing_found",
+  ListingUnavailable: "listing_unavailable",
+  Superseded: "superseded",
+} as const;
+export type PostV1EfacturaInvoicesRefusalReason = OpenEnum<
+  typeof PostV1EfacturaInvoicesRefusalReason
+>;
+
+export const PostV1EfacturaInvoicesState = {
+  Pending: "pending",
+  Authorized: "authorized",
+  Refused: "refused",
+} as const;
+export type PostV1EfacturaInvoicesState = OpenEnum<
+  typeof PostV1EfacturaInvoicesState
+>;
+
+export const PostV1EfacturaInvoicesRequestRefusalReason = {
+  NotEligibleStatus: "not_eligible_status",
+  CopyExists: "copy_exists",
+  RejectedAttempt: "rejected_attempt",
+  Conflict: "conflict",
+  DuplicateDetected: "duplicate_detected",
+  SiblingDelivered: "sibling_delivered",
+  PayloadUnavailable: "payload_unavailable",
+  AttemptCap: "attempt_cap",
+  ConnectionRevoked: "connection_revoked",
+  FlagDisabled: "flag_disabled",
+  ListingFound: "listing_found",
+  ListingUnavailable: "listing_unavailable",
+  Superseded: "superseded",
+} as const;
+export type PostV1EfacturaInvoicesRequestRefusalReason = OpenEnum<
+  typeof PostV1EfacturaInvoicesRequestRefusalReason
+>;
+
+export const PostV1EfacturaInvoicesActorKind = {
+  Customer: "customer",
+  Operator: "operator",
+} as const;
+export type PostV1EfacturaInvoicesActorKind = OpenEnum<
+  typeof PostV1EfacturaInvoicesActorKind
+>;
+
+export type EfacturaPostV1EfacturaInvoicesRequest = {
+  evidenceVersion: number;
+  state: PostV1EfacturaInvoicesState;
+  refusalReason: PostV1EfacturaInvoicesRequestRefusalReason | null;
+  actorKind: PostV1EfacturaInvoicesActorKind;
+  actorRole: string | null;
+  requestedAt: Date;
+  decidedAt: Date | null;
+};
+
+export type PostV1EfacturaInvoicesResend = {
+  eligible: boolean;
+  refusalReason: PostV1EfacturaInvoicesRefusalReason | null;
+  request: EfacturaPostV1EfacturaInvoicesRequest | null;
+};
+
+export type PostV1EfacturaInvoicesData2 = {
+  jobId: string;
+  kind: PostV1EfacturaInvoicesKind;
+  buffered: boolean;
+  status: PostV1EfacturaInvoicesStatus;
+  inFlight: boolean;
+  delivered: boolean;
+  dispatchUncertain: boolean;
+  unresolvedDispatches: number;
+  duplicateDetected: boolean;
+  lineageJobIds: Array<string>;
+  blockedReason: PostV1EfacturaInvoicesBlockedReason | null;
+  reviewReason: PostV1EfacturaInvoicesReviewReason | null;
+  dispatchCount: number;
+  maxDispatches: number;
+  nextAttemptAt: Date | null;
+  unknownSince: Date | null;
+  resendEligibleAt: Date | null;
+  deliveredAt: Date | null;
+  resourceId: string | null;
+  customerRef: string | null;
+  payloadSha256: string | null;
+  observation: PostV1EfacturaInvoicesObservation;
+  evidenceVersion: number;
+  attempts: Array<PostV1EfacturaInvoicesAttempt>;
+  copies: Array<PostV1EfacturaInvoicesCopy>;
+  conflicts: Array<PostV1EfacturaInvoicesConflict>;
+  resend: PostV1EfacturaInvoicesResend;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 /**
  * Success
  */
-export type PostV1EfacturaInvoicesResponseBody = {
-  data: PostV1EfacturaInvoicesData;
+export type PostV1EfacturaInvoicesResponseBody2 = {
+  data: PostV1EfacturaInvoicesData2;
 };
+
+export type PostV1EfacturaInvoicesData1 = {
+  id: string;
+  idIncarcare: string | null;
+  status: string;
+  jobId?: string | undefined;
+};
+
+/**
+ * Success
+ */
+export type PostV1EfacturaInvoicesResponseBody1 = {
+  data: PostV1EfacturaInvoicesData1;
+};
+
+export type PostV1EfacturaInvoicesResponseResult =
+  | PostV1EfacturaInvoicesResponseBody1
+  | PostV1EfacturaInvoicesResponseBody2;
 
 export type PostV1EfacturaInvoicesResponse = {
   headers: { [k: string]: Array<string> };
-  result: PostV1EfacturaInvoicesResponseBody;
+  result:
+    | PostV1EfacturaInvoicesResponseBody1
+    | PostV1EfacturaInvoicesResponseBody2;
 };
 
 /** @internal */
@@ -894,15 +1208,15 @@ export function postV1EfacturaInvoicesRequestBodyToJSON(
 }
 
 /** @internal */
-export type PostV1EfacturaInvoicesRequest$Outbound = {
+export type PostV1EfacturaInvoicesRequestRequest$Outbound = {
   "Idempotency-Key"?: string | undefined;
   body: Ubl$Outbound | Json$Outbound;
 };
 
 /** @internal */
-export const PostV1EfacturaInvoicesRequest$outboundSchema: z.ZodMiniType<
-  PostV1EfacturaInvoicesRequest$Outbound,
-  PostV1EfacturaInvoicesRequest
+export const PostV1EfacturaInvoicesRequestRequest$outboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesRequestRequest$Outbound,
+  PostV1EfacturaInvoicesRequestRequest
 > = z.pipe(
   z.object({
     idempotencyKey: z.optional(z.string()),
@@ -918,52 +1232,393 @@ export const PostV1EfacturaInvoicesRequest$outboundSchema: z.ZodMiniType<
   }),
 );
 
-export function postV1EfacturaInvoicesRequestToJSON(
-  postV1EfacturaInvoicesRequest: PostV1EfacturaInvoicesRequest,
+export function postV1EfacturaInvoicesRequestRequestToJSON(
+  postV1EfacturaInvoicesRequestRequest: PostV1EfacturaInvoicesRequestRequest,
 ): string {
   return JSON.stringify(
-    PostV1EfacturaInvoicesRequest$outboundSchema.parse(
-      postV1EfacturaInvoicesRequest,
+    PostV1EfacturaInvoicesRequestRequest$outboundSchema.parse(
+      postV1EfacturaInvoicesRequestRequest,
     ),
   );
 }
 
 /** @internal */
-export const PostV1EfacturaInvoicesData$inboundSchema: z.ZodMiniType<
-  PostV1EfacturaInvoicesData,
+export const PostV1EfacturaInvoicesKind$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesKind,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesKind);
+
+/** @internal */
+export const PostV1EfacturaInvoicesStatus$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesStatus,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesStatus);
+
+/** @internal */
+export const PostV1EfacturaInvoicesBlockedReason$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesBlockedReason,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesBlockedReason);
+
+/** @internal */
+export const PostV1EfacturaInvoicesReviewReason$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesReviewReason,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesReviewReason);
+
+/** @internal */
+export const PostV1EfacturaInvoicesObservation$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesObservation,
   unknown
 > = z.object({
-  id: types.string(),
-  idIncarcare: types.string(),
-  status: types.string(),
+  watchFrom: types.nullable(types.date()),
+  until: types.nullable(types.date()),
+  checks: types.number(),
+  inconclusive: types.number(),
+  lastCheckAt: types.nullable(types.date()),
+  lastReason: types.nullable(types.string()),
+  lastConclusiveAt: types.nullable(types.date()),
 });
 
-export function postV1EfacturaInvoicesDataFromJSON(
+export function postV1EfacturaInvoicesObservationFromJSON(
   jsonString: string,
-): SafeParseResult<PostV1EfacturaInvoicesData, SDKValidationError> {
+): SafeParseResult<PostV1EfacturaInvoicesObservation, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostV1EfacturaInvoicesData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1EfacturaInvoicesData' from JSON`,
+    (x) => PostV1EfacturaInvoicesObservation$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesObservation' from JSON`,
   );
 }
 
 /** @internal */
-export const PostV1EfacturaInvoicesResponseBody$inboundSchema: z.ZodMiniType<
-  PostV1EfacturaInvoicesResponseBody,
+export const PostV1EfacturaInvoicesBasis$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesBasis,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesBasis);
+
+/** @internal */
+export const PostV1EfacturaInvoicesOutcome$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesOutcome,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesOutcome);
+
+/** @internal */
+export const PostV1EfacturaInvoicesLateOutcome$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesLateOutcome,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesLateOutcome);
+
+/** @internal */
+export const PostV1EfacturaInvoicesRejectionCode$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesRejectionCode,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesRejectionCode);
+
+/** @internal */
+export const PostV1EfacturaInvoicesReasonCode$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesReasonCode,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesReasonCode);
+
+/** @internal */
+export const PostV1EfacturaInvoicesAttempt$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesAttempt,
   unknown
 > = z.object({
-  data: z.lazy(() => PostV1EfacturaInvoicesData$inboundSchema),
+  seq: types.number(),
+  basis: PostV1EfacturaInvoicesBasis$inboundSchema,
+  startedAt: types.date(),
+  finishedAt: types.nullable(types.date()),
+  outcome: types.nullable(PostV1EfacturaInvoicesOutcome$inboundSchema),
+  lateOutcome: types.nullable(PostV1EfacturaInvoicesLateOutcome$inboundSchema),
+  unresolved: types.boolean(),
+  rejectionCode: types.nullable(
+    PostV1EfacturaInvoicesRejectionCode$inboundSchema,
+  ),
+  httpStatus: types.nullable(types.number()),
+  uploadIndex: types.nullable(types.string()),
+  uit: types.nullable(types.string()),
+  errorCode: types.nullable(types.string()),
+  reasonCode: types.nullable(PostV1EfacturaInvoicesReasonCode$inboundSchema),
 });
 
-export function postV1EfacturaInvoicesResponseBodyFromJSON(
+export function postV1EfacturaInvoicesAttemptFromJSON(
   jsonString: string,
-): SafeParseResult<PostV1EfacturaInvoicesResponseBody, SDKValidationError> {
+): SafeParseResult<PostV1EfacturaInvoicesAttempt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesAttempt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesAttempt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesResult$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesResult,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesResult);
+
+/** @internal */
+export const PostV1EfacturaInvoicesReceivedSource$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesReceivedSource,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesReceivedSource);
+
+/** @internal */
+export const PostV1EfacturaInvoicesCopy$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesCopy,
+  unknown
+> = z.object({
+  uploadIndex: types.nullable(types.string()),
+  downloadId: types.nullable(types.string()),
+  uit: types.nullable(types.string()),
+  result: types.nullable(PostV1EfacturaInvoicesResult$inboundSchema),
+  receivedSource: PostV1EfacturaInvoicesReceivedSource$inboundSchema,
+  resultSource: types.nullable(types.string()),
+  attemptSeq: types.nullable(types.number()),
+  dataCreare: types.nullable(types.string()),
+  firstListedAt: types.nullable(types.date()),
+  recordedAt: types.date(),
+});
+
+export function postV1EfacturaInvoicesCopyFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesCopy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesCopy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesCopy' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesConflictKind$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesConflictKind,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesConflictKind);
+
+/** @internal */
+export const PostV1EfacturaInvoicesConflict$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesConflict,
+  unknown
+> = z.object({
+  kind: PostV1EfacturaInvoicesConflictKind$inboundSchema,
+  anafMessageId: types.nullable(types.string()),
+  recordedAt: types.date(),
+});
+
+export function postV1EfacturaInvoicesConflictFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesConflict, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesConflict$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesConflict' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesRefusalReason$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesRefusalReason,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesRefusalReason);
+
+/** @internal */
+export const PostV1EfacturaInvoicesState$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesState,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesState);
+
+/** @internal */
+export const PostV1EfacturaInvoicesRequestRefusalReason$inboundSchema:
+  z.ZodMiniType<PostV1EfacturaInvoicesRequestRefusalReason, unknown> = openEnums
+    .inboundSchema(PostV1EfacturaInvoicesRequestRefusalReason);
+
+/** @internal */
+export const PostV1EfacturaInvoicesActorKind$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesActorKind,
+  unknown
+> = openEnums.inboundSchema(PostV1EfacturaInvoicesActorKind);
+
+/** @internal */
+export const EfacturaPostV1EfacturaInvoicesRequest$inboundSchema: z.ZodMiniType<
+  EfacturaPostV1EfacturaInvoicesRequest,
+  unknown
+> = z.object({
+  evidenceVersion: types.number(),
+  state: PostV1EfacturaInvoicesState$inboundSchema,
+  refusalReason: types.nullable(
+    PostV1EfacturaInvoicesRequestRefusalReason$inboundSchema,
+  ),
+  actorKind: PostV1EfacturaInvoicesActorKind$inboundSchema,
+  actorRole: types.nullable(types.string()),
+  requestedAt: types.date(),
+  decidedAt: types.nullable(types.date()),
+});
+
+export function efacturaPostV1EfacturaInvoicesRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<EfacturaPostV1EfacturaInvoicesRequest, SDKValidationError> {
   return safeParse(
     jsonString,
     (x) =>
-      PostV1EfacturaInvoicesResponseBody$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1EfacturaInvoicesResponseBody' from JSON`,
+      EfacturaPostV1EfacturaInvoicesRequest$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'EfacturaPostV1EfacturaInvoicesRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesResend$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesResend,
+  unknown
+> = z.object({
+  eligible: types.boolean(),
+  refusalReason: types.nullable(
+    PostV1EfacturaInvoicesRefusalReason$inboundSchema,
+  ),
+  request: types.nullable(
+    z.lazy(() => EfacturaPostV1EfacturaInvoicesRequest$inboundSchema),
+  ),
+});
+
+export function postV1EfacturaInvoicesResendFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesResend, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesResend$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesResend' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesData2$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesData2,
+  unknown
+> = z.object({
+  jobId: types.string(),
+  kind: PostV1EfacturaInvoicesKind$inboundSchema,
+  buffered: types.boolean(),
+  status: PostV1EfacturaInvoicesStatus$inboundSchema,
+  inFlight: types.boolean(),
+  delivered: types.boolean(),
+  dispatchUncertain: types.boolean(),
+  unresolvedDispatches: types.number(),
+  duplicateDetected: types.boolean(),
+  lineageJobIds: z.array(types.string()),
+  blockedReason: types.nullable(
+    PostV1EfacturaInvoicesBlockedReason$inboundSchema,
+  ),
+  reviewReason: types.nullable(
+    PostV1EfacturaInvoicesReviewReason$inboundSchema,
+  ),
+  dispatchCount: types.number(),
+  maxDispatches: types.number(),
+  nextAttemptAt: types.nullable(types.date()),
+  unknownSince: types.nullable(types.date()),
+  resendEligibleAt: types.nullable(types.date()),
+  deliveredAt: types.nullable(types.date()),
+  resourceId: types.nullable(types.string()),
+  customerRef: types.nullable(types.string()),
+  payloadSha256: types.nullable(types.string()),
+  observation: z.lazy(() => PostV1EfacturaInvoicesObservation$inboundSchema),
+  evidenceVersion: types.number(),
+  attempts: z.array(z.lazy(() => PostV1EfacturaInvoicesAttempt$inboundSchema)),
+  copies: z.array(z.lazy(() => PostV1EfacturaInvoicesCopy$inboundSchema)),
+  conflicts: z.array(
+    z.lazy(() => PostV1EfacturaInvoicesConflict$inboundSchema),
+  ),
+  resend: z.lazy(() => PostV1EfacturaInvoicesResend$inboundSchema),
+  createdAt: types.date(),
+  updatedAt: types.date(),
+});
+
+export function postV1EfacturaInvoicesData2FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesData2' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesResponseBody2$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesResponseBody2,
+  unknown
+> = z.object({
+  data: z.lazy(() => PostV1EfacturaInvoicesData2$inboundSchema),
+});
+
+export function postV1EfacturaInvoicesResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesResponseBody2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EfacturaInvoicesResponseBody2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesData1$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesData1,
+  unknown
+> = z.object({
+  id: types.string(),
+  idIncarcare: types.nullable(types.string()),
+  status: types.string(),
+  jobId: types.optional(types.string()),
+});
+
+export function postV1EfacturaInvoicesData1FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesData1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EfacturaInvoicesData1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesData1' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesResponseBody1$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesResponseBody1,
+  unknown
+> = z.object({
+  data: z.lazy(() => PostV1EfacturaInvoicesData1$inboundSchema),
+});
+
+export function postV1EfacturaInvoicesResponseBody1FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesResponseBody1, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EfacturaInvoicesResponseBody1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesResponseBody1' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EfacturaInvoicesResponseResult$inboundSchema: z.ZodMiniType<
+  PostV1EfacturaInvoicesResponseResult,
+  unknown
+> = smartUnion([
+  z.lazy(() => PostV1EfacturaInvoicesResponseBody1$inboundSchema),
+  z.lazy(() => PostV1EfacturaInvoicesResponseBody2$inboundSchema),
+]);
+
+export function postV1EfacturaInvoicesResponseResultFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EfacturaInvoicesResponseResult, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EfacturaInvoicesResponseResult$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EfacturaInvoicesResponseResult' from JSON`,
   );
 }
 
@@ -974,7 +1629,10 @@ export const PostV1EfacturaInvoicesResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
-    Result: z.lazy(() => PostV1EfacturaInvoicesResponseBody$inboundSchema),
+    Result: smartUnion([
+      z.lazy(() => PostV1EfacturaInvoicesResponseBody1$inboundSchema),
+      z.lazy(() => PostV1EfacturaInvoicesResponseBody2$inboundSchema),
+    ]),
   }),
   z.transform((v) => {
     return remap$(v, {

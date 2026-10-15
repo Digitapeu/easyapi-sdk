@@ -13,5 +13,5 @@ let value: GetV1RegesJobsIdStatus = "processing";
 ## Values
 
 ```typescript
-"queued" | "processing" | "done" | "error" | "unknown" | Unrecognized<string>
+"queued" | "processing" | "done" | "error" | "unknown" | "needs_review" | "cancelled" | Unrecognized<string>
 ```

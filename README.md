@@ -336,12 +336,18 @@ run();
 * [downloadZip](docs/sdks/efactura/README.md#downloadzip) - Download an invoice's e-Factura result zip through a signed link
 * [listMessages](docs/sdks/efactura/README.md#listmessages) - List e-Factura messages for a connected company
 * [validate](docs/sdks/efactura/README.md#validate) - Validate a UBL invoice offline, and with ?online=true also at ANAF (no ANAF connection required)
+* [getV1EfacturaJobsId](docs/sdks/efactura/README.md#getv1efacturajobsid) - Read one e-Factura submission job
+* [getV1EfacturaJobs](docs/sdks/efactura/README.md#getv1efacturajobs) - List e-Factura submission jobs, newest first
+* [postV1EfacturaJobsIdCancel](docs/sdks/efactura/README.md#postv1efacturajobsidcancel) - Cancel an undelivered e-Factura submission job
 
 ### [Etransport](docs/sdks/etransport/README.md)
 
 * [create](docs/sdks/etransport/README.md#create) - Create an e-Transport declaration
 * [modify](docs/sdks/etransport/README.md#modify) - Modify an e-Transport declaration by UIT
 * [get](docs/sdks/etransport/README.md#get) - Query an e-Transport declaration by UIT
+* [getV1EtransportJobsId](docs/sdks/etransport/README.md#getv1etransportjobsid) - Read one e-Transport submission job
+* [getV1EtransportJobs](docs/sdks/etransport/README.md#getv1etransportjobs) - List e-Transport submission jobs, newest first
+* [postV1EtransportJobsIdCancel](docs/sdks/etransport/README.md#postv1etransportjobsidcancel) - Cancel an undelivered e-Transport submission job
 
 ### [Fx](docs/sdks/fx/README.md)
 
@@ -465,13 +471,19 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`connectionsRevoke`](docs/sdks/connections/README.md#revoke) - Revoke a gov connection and wipe its vault credential
 - [`efacturaDownload`](docs/sdks/efactura/README.md#download) - Get a signed download URL for an invoice's e-Factura result
 - [`efacturaDownloadZip`](docs/sdks/efactura/README.md#downloadzip) - Download an invoice's e-Factura result zip through a signed link
+- [`efacturaGetV1EfacturaJobs`](docs/sdks/efactura/README.md#getv1efacturajobs) - List e-Factura submission jobs, newest first
+- [`efacturaGetV1EfacturaJobsId`](docs/sdks/efactura/README.md#getv1efacturajobsid) - Read one e-Factura submission job
 - [`efacturaListMessages`](docs/sdks/efactura/README.md#listmessages) - List e-Factura messages for a connected company
+- [`efacturaPostV1EfacturaJobsIdCancel`](docs/sdks/efactura/README.md#postv1efacturajobsidcancel) - Cancel an undelivered e-Factura submission job
 - [`efacturaStatus`](docs/sdks/efactura/README.md#status) - Get an invoice's e-Factura clearance state
 - [`efacturaUpload`](docs/sdks/efactura/README.md#upload) - Upload a UBL/JSON invoice to e-Factura
 - [`efacturaValidate`](docs/sdks/efactura/README.md#validate) - Validate a UBL invoice offline, and with ?online=true also at ANAF (no ANAF connection required)
 - [`etransportCreate`](docs/sdks/etransport/README.md#create) - Create an e-Transport declaration
 - [`etransportGet`](docs/sdks/etransport/README.md#get) - Query an e-Transport declaration by UIT
+- [`etransportGetV1EtransportJobs`](docs/sdks/etransport/README.md#getv1etransportjobs) - List e-Transport submission jobs, newest first
+- [`etransportGetV1EtransportJobsId`](docs/sdks/etransport/README.md#getv1etransportjobsid) - Read one e-Transport submission job
 - [`etransportModify`](docs/sdks/etransport/README.md#modify) - Modify an e-Transport declaration by UIT
+- [`etransportPostV1EtransportJobsIdCancel`](docs/sdks/etransport/README.md#postv1etransportjobsidcancel) - Cancel an undelivered e-Transport submission job
 - [`fxConvert`](docs/sdks/fx/README.md#convert) - Convert an amount between currencies at the latest rates
 - [`fxListRates`](docs/sdks/fx/README.md#listrates) - List the latest BNR reference rates
 - [`geoGetParcel`](docs/sdks/geo/README.md#getparcel) - Look up a cadastral parcel by coordinates or INSPIRE id

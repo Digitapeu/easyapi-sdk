@@ -17,7 +17,7 @@ let value: PostV1RegesContractsIdTerminateResponse = {
   result: {
     data: {
       jobId: "c61000fe-63bc-4fd9-b4a2-fe06787af2a9",
-      status: "error",
+      status: "needs_review",
     },
   },
 };

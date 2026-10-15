@@ -24,6 +24,7 @@ export type PatchV1EtransportDeclarationsUitData = {
   uit: string;
   status: string;
   createdAt: Date;
+  jobId?: string | undefined;
 };
 
 /**
@@ -101,6 +102,7 @@ export const PatchV1EtransportDeclarationsUitData$inboundSchema: z.ZodMiniType<
   uit: types.string(),
   status: types.string(),
   createdAt: types.date(),
+  jobId: types.optional(types.string()),
 });
 
 export function patchV1EtransportDeclarationsUitDataFromJSON(

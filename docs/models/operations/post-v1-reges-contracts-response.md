@@ -13,7 +13,7 @@ let value: PostV1RegesContractsResponse = {
   result: {
     data: {
       jobId: "8f4c5bab-be79-4527-a791-9a43ba1bb840",
-      status: "error",
+      status: "unknown",
     },
   },
 };

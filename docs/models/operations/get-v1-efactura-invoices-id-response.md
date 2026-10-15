@@ -19,9 +19,9 @@ let value: GetV1EfacturaInvoicesIdResponse = {
     data: {
       id: "<id>",
       idIncarcare: "<value>",
-      state: "Ohio",
+      state: "Montana",
       downloadId: "<id>",
-      checkedAt: new Date("2026-02-02T11:34:21.545Z"),
+      checkedAt: new Date("2026-09-30T00:36:56.249Z"),
     },
   },
 };

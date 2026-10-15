@@ -82,7 +82,7 @@ async function $do(
     APICall,
   ]
 > {
-  const input: operations.PostV1EfacturaInvoicesRequest = {
+  const input: operations.PostV1EfacturaInvoicesRequestRequest = {
     body: body,
     idempotencyKey: idempotencyKey,
   };
@@ -90,7 +90,10 @@ async function $do(
   const parsed = safeParse(
     input,
     (value) =>
-      z.parse(operations.PostV1EfacturaInvoicesRequest$outboundSchema, value),
+      z.parse(
+        operations.PostV1EfacturaInvoicesRequestRequest$outboundSchema,
+        value,
+      ),
     "Input validation failed",
   );
   if (!parsed.ok) {
@@ -184,6 +187,9 @@ async function $do(
     | SDKValidationError
   >(
     M.json(201, operations.PostV1EfacturaInvoicesResponse$inboundSchema, {
+      key: "Result",
+    }),
+    M.json(202, operations.PostV1EfacturaInvoicesResponse$inboundSchema, {
       key: "Result",
     }),
     M.jsonErr([400, 401, 403, 404, 409], errors.ErrorEnvelope$inboundSchema),

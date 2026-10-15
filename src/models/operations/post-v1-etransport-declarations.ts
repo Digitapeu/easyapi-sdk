@@ -6,15 +6,18 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as openEnums from "../../types/enums.js";
+import { OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
+import { smartUnion } from "../../types/smart-union.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
 export type PostV1EtransportDeclarationsRequestBody = {
   declaration: { [k: string]: any };
 };
 
-export type PostV1EtransportDeclarationsRequest = {
+export type PostV1EtransportDeclarationsRequestRequest = {
   /**
    * Replays the first response for the same key, body and route (24h); a different body under the same key is a 409.
    */
@@ -22,23 +25,335 @@ export type PostV1EtransportDeclarationsRequest = {
   body: PostV1EtransportDeclarationsRequestBody;
 };
 
-export type PostV1EtransportDeclarationsData = {
-  id: string;
-  uit: string;
-  status: string;
+export const PostV1EtransportDeclarationsKind = {
+  EfacturaSubmit: "efactura.submit",
+  EtransportDeclare: "etransport.declare",
+} as const;
+export type PostV1EtransportDeclarationsKind = OpenEnum<
+  typeof PostV1EtransportDeclarationsKind
+>;
+
+export const PostV1EtransportDeclarationsStatus = {
+  Queued: "queued",
+  Processing: "processing",
+  Done: "done",
+  Error: "error",
+  Unknown: "unknown",
+  NeedsReview: "needs_review",
+  Cancelled: "cancelled",
+} as const;
+export type PostV1EtransportDeclarationsStatus = OpenEnum<
+  typeof PostV1EtransportDeclarationsStatus
+>;
+
+export const PostV1EtransportDeclarationsBlockedReason = {
+  ConnectionError: "connection_error",
+  ConnectionPending: "connection_pending",
+  CredentialStale: "credential_stale",
+  FeatureDisabled: "feature_disabled",
+  ClearanceStalled: "clearance_stalled",
+  ConnectionRevoked: "connection_revoked",
+} as const;
+export type PostV1EtransportDeclarationsBlockedReason = OpenEnum<
+  typeof PostV1EtransportDeclarationsBlockedReason
+>;
+
+export const PostV1EtransportDeclarationsReviewReason = {
+  AttemptCap: "attempt_cap",
+  Horizon: "horizon",
+  NoPayload: "no_payload",
+  PayloadMismatch: "payload_mismatch",
+  IdentityConflict: "identity_conflict",
+  UncorrelatedRejection: "uncorrelated_rejection",
+  CoverageExceeded: "coverage_exceeded",
+  ResultContradiction: "result_contradiction",
+  RejectedAttempt: "rejected_attempt",
+  NoListing: "no_listing",
+  ConnectionRevoked: "connection_revoked",
+  DuplicateDetected: "duplicate_detected",
+  Restore: "restore",
+} as const;
+export type PostV1EtransportDeclarationsReviewReason = OpenEnum<
+  typeof PostV1EtransportDeclarationsReviewReason
+>;
+
+export type PostV1EtransportDeclarationsObservation = {
+  watchFrom: Date | null;
+  until: Date | null;
+  checks: number;
+  inconclusive: number;
+  lastCheckAt: Date | null;
+  lastReason: string | null;
+  lastConclusiveAt: Date | null;
+};
+
+export const PostV1EtransportDeclarationsBasis = {
+  First: "first",
+  NotSentRetry: "not_sent_retry",
+  UnknownWaitElapsed: "unknown_wait_elapsed",
+  HumanResend: "human_resend",
+} as const;
+export type PostV1EtransportDeclarationsBasis = OpenEnum<
+  typeof PostV1EtransportDeclarationsBasis
+>;
+
+export const PostV1EtransportDeclarationsOutcome = {
+  Accepted: "accepted",
+  DefiniteReject: "definite_reject",
+  Ambiguous: "ambiguous",
+  NotSent: "not_sent",
+} as const;
+export type PostV1EtransportDeclarationsOutcome = OpenEnum<
+  typeof PostV1EtransportDeclarationsOutcome
+>;
+
+export const PostV1EtransportDeclarationsLateOutcome = {
+  Accepted: "accepted",
+  DefiniteReject: "definite_reject",
+  NotSent: "not_sent",
+} as const;
+export type PostV1EtransportDeclarationsLateOutcome = OpenEnum<
+  typeof PostV1EtransportDeclarationsLateOutcome
+>;
+
+export const PostV1EtransportDeclarationsRejectionCode = {
+  HeaderErrorMessage: "header_error_message",
+  Http4xx: "http_4xx",
+  LateRejected: "late_rejected",
+} as const;
+export type PostV1EtransportDeclarationsRejectionCode = OpenEnum<
+  typeof PostV1EtransportDeclarationsRejectionCode
+>;
+
+export const PostV1EtransportDeclarationsReasonCode = {
+  Timeout: "timeout",
+  Http5xx: "http_5xx",
+  Http4xx: "http_4xx",
+  Http401403: "http_401_403",
+  Unparseable: "unparseable",
+  MissingUploadId: "missing_upload_id",
+  BreakerOpen: "breaker_open",
+  QueueFull: "queue_full",
+  PoolTimeout: "pool_timeout",
+  TokenStale: "token_stale",
+  TokenRefresh: "token_refresh",
+  TokenPersist: "token_persist",
+  VaultUnavailable: "vault_unavailable",
+  ConnectionPending: "connection_pending",
+  ConnectionError: "connection_error",
+  FeatureDisabled: "feature_disabled",
+  FlagDisabled: "flag_disabled",
+  SiblingDelivered: "sibling_delivered",
+  OwnEvidence: "own_evidence",
+  PrecheckFailed: "precheck_failed",
+  LeaseShort: "lease_short",
+  LeaseExpired: "lease_expired",
+  PayloadExpired: "payload_expired",
+  Crash: "crash",
+  RestoreRearm: "restore_rearm",
+} as const;
+export type PostV1EtransportDeclarationsReasonCode = OpenEnum<
+  typeof PostV1EtransportDeclarationsReasonCode
+>;
+
+export type PostV1EtransportDeclarationsAttempt = {
+  seq: number;
+  basis: PostV1EtransportDeclarationsBasis;
+  startedAt: Date;
+  finishedAt: Date | null;
+  outcome: PostV1EtransportDeclarationsOutcome | null;
+  lateOutcome: PostV1EtransportDeclarationsLateOutcome | null;
+  unresolved: boolean;
+  rejectionCode: PostV1EtransportDeclarationsRejectionCode | null;
+  httpStatus: number | null;
+  uploadIndex: string | null;
+  uit: string | null;
+  errorCode: string | null;
+  reasonCode: PostV1EtransportDeclarationsReasonCode | null;
+};
+
+export const PostV1EtransportDeclarationsResult = {
+  Ok: "ok",
+  Nok: "nok",
+} as const;
+export type PostV1EtransportDeclarationsResult = OpenEnum<
+  typeof PostV1EtransportDeclarationsResult
+>;
+
+export const PostV1EtransportDeclarationsReceivedSource = {
+  Response: "response",
+  LateResponse: "late_response",
+  Listing: "listing",
+  Status: "status",
+  Operator: "operator",
+} as const;
+export type PostV1EtransportDeclarationsReceivedSource = OpenEnum<
+  typeof PostV1EtransportDeclarationsReceivedSource
+>;
+
+export type PostV1EtransportDeclarationsCopy = {
+  uploadIndex: string | null;
+  downloadId: string | null;
+  uit: string | null;
+  result: PostV1EtransportDeclarationsResult | null;
+  receivedSource: PostV1EtransportDeclarationsReceivedSource;
+  resultSource: string | null;
+  attemptSeq: number | null;
+  dataCreare: string | null;
+  firstListedAt: Date | null;
+  recordedAt: Date;
+};
+
+export const PostV1EtransportDeclarationsConflictKind = {
+  IdentityConflict: "identity_conflict",
+  UncorrelatedRejection: "uncorrelated_rejection",
+  CoverageExceeded: "coverage_exceeded",
+  ResultContradiction: "result_contradiction",
+} as const;
+export type PostV1EtransportDeclarationsConflictKind = OpenEnum<
+  typeof PostV1EtransportDeclarationsConflictKind
+>;
+
+export type PostV1EtransportDeclarationsConflict = {
+  kind: PostV1EtransportDeclarationsConflictKind;
+  anafMessageId: string | null;
+  recordedAt: Date;
+};
+
+export const PostV1EtransportDeclarationsRefusalReason = {
+  NotEligibleStatus: "not_eligible_status",
+  CopyExists: "copy_exists",
+  RejectedAttempt: "rejected_attempt",
+  Conflict: "conflict",
+  DuplicateDetected: "duplicate_detected",
+  SiblingDelivered: "sibling_delivered",
+  PayloadUnavailable: "payload_unavailable",
+  AttemptCap: "attempt_cap",
+  ConnectionRevoked: "connection_revoked",
+  FlagDisabled: "flag_disabled",
+  ListingFound: "listing_found",
+  ListingUnavailable: "listing_unavailable",
+  Superseded: "superseded",
+} as const;
+export type PostV1EtransportDeclarationsRefusalReason = OpenEnum<
+  typeof PostV1EtransportDeclarationsRefusalReason
+>;
+
+export const PostV1EtransportDeclarationsState = {
+  Pending: "pending",
+  Authorized: "authorized",
+  Refused: "refused",
+} as const;
+export type PostV1EtransportDeclarationsState = OpenEnum<
+  typeof PostV1EtransportDeclarationsState
+>;
+
+export const PostV1EtransportDeclarationsRequestRefusalReason = {
+  NotEligibleStatus: "not_eligible_status",
+  CopyExists: "copy_exists",
+  RejectedAttempt: "rejected_attempt",
+  Conflict: "conflict",
+  DuplicateDetected: "duplicate_detected",
+  SiblingDelivered: "sibling_delivered",
+  PayloadUnavailable: "payload_unavailable",
+  AttemptCap: "attempt_cap",
+  ConnectionRevoked: "connection_revoked",
+  FlagDisabled: "flag_disabled",
+  ListingFound: "listing_found",
+  ListingUnavailable: "listing_unavailable",
+  Superseded: "superseded",
+} as const;
+export type PostV1EtransportDeclarationsRequestRefusalReason = OpenEnum<
+  typeof PostV1EtransportDeclarationsRequestRefusalReason
+>;
+
+export const PostV1EtransportDeclarationsActorKind = {
+  Customer: "customer",
+  Operator: "operator",
+} as const;
+export type PostV1EtransportDeclarationsActorKind = OpenEnum<
+  typeof PostV1EtransportDeclarationsActorKind
+>;
+
+export type EtransportPostV1EtransportDeclarationsRequest = {
+  evidenceVersion: number;
+  state: PostV1EtransportDeclarationsState;
+  refusalReason: PostV1EtransportDeclarationsRequestRefusalReason | null;
+  actorKind: PostV1EtransportDeclarationsActorKind;
+  actorRole: string | null;
+  requestedAt: Date;
+  decidedAt: Date | null;
+};
+
+export type PostV1EtransportDeclarationsResend = {
+  eligible: boolean;
+  refusalReason: PostV1EtransportDeclarationsRefusalReason | null;
+  request: EtransportPostV1EtransportDeclarationsRequest | null;
+};
+
+export type PostV1EtransportDeclarationsData2 = {
+  jobId: string;
+  kind: PostV1EtransportDeclarationsKind;
+  buffered: boolean;
+  status: PostV1EtransportDeclarationsStatus;
+  inFlight: boolean;
+  delivered: boolean;
+  dispatchUncertain: boolean;
+  unresolvedDispatches: number;
+  duplicateDetected: boolean;
+  lineageJobIds: Array<string>;
+  blockedReason: PostV1EtransportDeclarationsBlockedReason | null;
+  reviewReason: PostV1EtransportDeclarationsReviewReason | null;
+  dispatchCount: number;
+  maxDispatches: number;
+  nextAttemptAt: Date | null;
+  unknownSince: Date | null;
+  resendEligibleAt: Date | null;
+  deliveredAt: Date | null;
+  resourceId: string | null;
+  customerRef: string | null;
+  payloadSha256: string | null;
+  observation: PostV1EtransportDeclarationsObservation;
+  evidenceVersion: number;
+  attempts: Array<PostV1EtransportDeclarationsAttempt>;
+  copies: Array<PostV1EtransportDeclarationsCopy>;
+  conflicts: Array<PostV1EtransportDeclarationsConflict>;
+  resend: PostV1EtransportDeclarationsResend;
   createdAt: Date;
+  updatedAt: Date;
 };
 
 /**
  * Success
  */
-export type PostV1EtransportDeclarationsResponseBody = {
-  data: PostV1EtransportDeclarationsData;
+export type PostV1EtransportDeclarationsResponseBody2 = {
+  data: PostV1EtransportDeclarationsData2;
 };
+
+export type PostV1EtransportDeclarationsData1 = {
+  id: string;
+  uit: string;
+  status: string;
+  createdAt: Date;
+  jobId?: string | undefined;
+};
+
+/**
+ * Success
+ */
+export type PostV1EtransportDeclarationsResponseBody1 = {
+  data: PostV1EtransportDeclarationsData1;
+};
+
+export type PostV1EtransportDeclarationsResponseResult =
+  | PostV1EtransportDeclarationsResponseBody1
+  | PostV1EtransportDeclarationsResponseBody2;
 
 export type PostV1EtransportDeclarationsResponse = {
   headers: { [k: string]: Array<string> };
-  result: PostV1EtransportDeclarationsResponseBody;
+  result:
+    | PostV1EtransportDeclarationsResponseBody1
+    | PostV1EtransportDeclarationsResponseBody2;
 };
 
 /** @internal */
@@ -67,77 +382,440 @@ export function postV1EtransportDeclarationsRequestBodyToJSON(
 }
 
 /** @internal */
-export type PostV1EtransportDeclarationsRequest$Outbound = {
+export type PostV1EtransportDeclarationsRequestRequest$Outbound = {
   "Idempotency-Key"?: string | undefined;
   body: PostV1EtransportDeclarationsRequestBody$Outbound;
 };
 
 /** @internal */
-export const PostV1EtransportDeclarationsRequest$outboundSchema: z.ZodMiniType<
-  PostV1EtransportDeclarationsRequest$Outbound,
-  PostV1EtransportDeclarationsRequest
-> = z.pipe(
-  z.object({
-    idempotencyKey: z.optional(z.string()),
-    body: z.lazy(() => PostV1EtransportDeclarationsRequestBody$outboundSchema),
-  }),
-  z.transform((v) => {
-    return remap$(v, {
-      idempotencyKey: "Idempotency-Key",
-    });
-  }),
-);
+export const PostV1EtransportDeclarationsRequestRequest$outboundSchema:
+  z.ZodMiniType<
+    PostV1EtransportDeclarationsRequestRequest$Outbound,
+    PostV1EtransportDeclarationsRequestRequest
+  > = z.pipe(
+    z.object({
+      idempotencyKey: z.optional(z.string()),
+      body: z.lazy(() =>
+        PostV1EtransportDeclarationsRequestBody$outboundSchema
+      ),
+    }),
+    z.transform((v) => {
+      return remap$(v, {
+        idempotencyKey: "Idempotency-Key",
+      });
+    }),
+  );
 
-export function postV1EtransportDeclarationsRequestToJSON(
-  postV1EtransportDeclarationsRequest: PostV1EtransportDeclarationsRequest,
+export function postV1EtransportDeclarationsRequestRequestToJSON(
+  postV1EtransportDeclarationsRequestRequest:
+    PostV1EtransportDeclarationsRequestRequest,
 ): string {
   return JSON.stringify(
-    PostV1EtransportDeclarationsRequest$outboundSchema.parse(
-      postV1EtransportDeclarationsRequest,
+    PostV1EtransportDeclarationsRequestRequest$outboundSchema.parse(
+      postV1EtransportDeclarationsRequestRequest,
     ),
   );
 }
 
 /** @internal */
-export const PostV1EtransportDeclarationsData$inboundSchema: z.ZodMiniType<
-  PostV1EtransportDeclarationsData,
+export const PostV1EtransportDeclarationsKind$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsKind,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsKind);
+
+/** @internal */
+export const PostV1EtransportDeclarationsStatus$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsStatus,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsStatus);
+
+/** @internal */
+export const PostV1EtransportDeclarationsBlockedReason$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsBlockedReason, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsBlockedReason);
+
+/** @internal */
+export const PostV1EtransportDeclarationsReviewReason$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsReviewReason, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsReviewReason);
+
+/** @internal */
+export const PostV1EtransportDeclarationsObservation$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsObservation, unknown> = z.object({
+    watchFrom: types.nullable(types.date()),
+    until: types.nullable(types.date()),
+    checks: types.number(),
+    inconclusive: types.number(),
+    lastCheckAt: types.nullable(types.date()),
+    lastReason: types.nullable(types.string()),
+    lastConclusiveAt: types.nullable(types.date()),
+  });
+
+export function postV1EtransportDeclarationsObservationFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EtransportDeclarationsObservation,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsObservation$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EtransportDeclarationsObservation' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsBasis$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsBasis,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsBasis);
+
+/** @internal */
+export const PostV1EtransportDeclarationsOutcome$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsOutcome,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsOutcome);
+
+/** @internal */
+export const PostV1EtransportDeclarationsLateOutcome$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsLateOutcome, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsLateOutcome);
+
+/** @internal */
+export const PostV1EtransportDeclarationsRejectionCode$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsRejectionCode, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsRejectionCode);
+
+/** @internal */
+export const PostV1EtransportDeclarationsReasonCode$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsReasonCode, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsReasonCode);
+
+/** @internal */
+export const PostV1EtransportDeclarationsAttempt$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsAttempt,
+  unknown
+> = z.object({
+  seq: types.number(),
+  basis: PostV1EtransportDeclarationsBasis$inboundSchema,
+  startedAt: types.date(),
+  finishedAt: types.nullable(types.date()),
+  outcome: types.nullable(PostV1EtransportDeclarationsOutcome$inboundSchema),
+  lateOutcome: types.nullable(
+    PostV1EtransportDeclarationsLateOutcome$inboundSchema,
+  ),
+  unresolved: types.boolean(),
+  rejectionCode: types.nullable(
+    PostV1EtransportDeclarationsRejectionCode$inboundSchema,
+  ),
+  httpStatus: types.nullable(types.number()),
+  uploadIndex: types.nullable(types.string()),
+  uit: types.nullable(types.string()),
+  errorCode: types.nullable(types.string()),
+  reasonCode: types.nullable(
+    PostV1EtransportDeclarationsReasonCode$inboundSchema,
+  ),
+});
+
+export function postV1EtransportDeclarationsAttemptFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EtransportDeclarationsAttempt, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsAttempt$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsAttempt' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsResult$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsResult,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsResult);
+
+/** @internal */
+export const PostV1EtransportDeclarationsReceivedSource$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsReceivedSource, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsReceivedSource);
+
+/** @internal */
+export const PostV1EtransportDeclarationsCopy$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsCopy,
+  unknown
+> = z.object({
+  uploadIndex: types.nullable(types.string()),
+  downloadId: types.nullable(types.string()),
+  uit: types.nullable(types.string()),
+  result: types.nullable(PostV1EtransportDeclarationsResult$inboundSchema),
+  receivedSource: PostV1EtransportDeclarationsReceivedSource$inboundSchema,
+  resultSource: types.nullable(types.string()),
+  attemptSeq: types.nullable(types.number()),
+  dataCreare: types.nullable(types.string()),
+  firstListedAt: types.nullable(types.date()),
+  recordedAt: types.date(),
+});
+
+export function postV1EtransportDeclarationsCopyFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EtransportDeclarationsCopy, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EtransportDeclarationsCopy$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsCopy' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsConflictKind$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsConflictKind, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsConflictKind);
+
+/** @internal */
+export const PostV1EtransportDeclarationsConflict$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsConflict,
+  unknown
+> = z.object({
+  kind: PostV1EtransportDeclarationsConflictKind$inboundSchema,
+  anafMessageId: types.nullable(types.string()),
+  recordedAt: types.date(),
+});
+
+export function postV1EtransportDeclarationsConflictFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EtransportDeclarationsConflict, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsConflict$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsConflict' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsRefusalReason$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsRefusalReason, unknown> = openEnums
+    .inboundSchema(PostV1EtransportDeclarationsRefusalReason);
+
+/** @internal */
+export const PostV1EtransportDeclarationsState$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsState,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsState);
+
+/** @internal */
+export const PostV1EtransportDeclarationsRequestRefusalReason$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsRequestRefusalReason, unknown> =
+    openEnums.inboundSchema(PostV1EtransportDeclarationsRequestRefusalReason);
+
+/** @internal */
+export const PostV1EtransportDeclarationsActorKind$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsActorKind,
+  unknown
+> = openEnums.inboundSchema(PostV1EtransportDeclarationsActorKind);
+
+/** @internal */
+export const EtransportPostV1EtransportDeclarationsRequest$inboundSchema:
+  z.ZodMiniType<EtransportPostV1EtransportDeclarationsRequest, unknown> = z
+    .object({
+      evidenceVersion: types.number(),
+      state: PostV1EtransportDeclarationsState$inboundSchema,
+      refusalReason: types.nullable(
+        PostV1EtransportDeclarationsRequestRefusalReason$inboundSchema,
+      ),
+      actorKind: PostV1EtransportDeclarationsActorKind$inboundSchema,
+      actorRole: types.nullable(types.string()),
+      requestedAt: types.date(),
+      decidedAt: types.nullable(types.date()),
+    });
+
+export function etransportPostV1EtransportDeclarationsRequestFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  EtransportPostV1EtransportDeclarationsRequest,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      EtransportPostV1EtransportDeclarationsRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EtransportPostV1EtransportDeclarationsRequest' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsResend$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsResend,
+  unknown
+> = z.object({
+  eligible: types.boolean(),
+  refusalReason: types.nullable(
+    PostV1EtransportDeclarationsRefusalReason$inboundSchema,
+  ),
+  request: types.nullable(
+    z.lazy(() => EtransportPostV1EtransportDeclarationsRequest$inboundSchema),
+  ),
+});
+
+export function postV1EtransportDeclarationsResendFromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EtransportDeclarationsResend, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsResend$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsResend' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsData2$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsData2,
+  unknown
+> = z.object({
+  jobId: types.string(),
+  kind: PostV1EtransportDeclarationsKind$inboundSchema,
+  buffered: types.boolean(),
+  status: PostV1EtransportDeclarationsStatus$inboundSchema,
+  inFlight: types.boolean(),
+  delivered: types.boolean(),
+  dispatchUncertain: types.boolean(),
+  unresolvedDispatches: types.number(),
+  duplicateDetected: types.boolean(),
+  lineageJobIds: z.array(types.string()),
+  blockedReason: types.nullable(
+    PostV1EtransportDeclarationsBlockedReason$inboundSchema,
+  ),
+  reviewReason: types.nullable(
+    PostV1EtransportDeclarationsReviewReason$inboundSchema,
+  ),
+  dispatchCount: types.number(),
+  maxDispatches: types.number(),
+  nextAttemptAt: types.nullable(types.date()),
+  unknownSince: types.nullable(types.date()),
+  resendEligibleAt: types.nullable(types.date()),
+  deliveredAt: types.nullable(types.date()),
+  resourceId: types.nullable(types.string()),
+  customerRef: types.nullable(types.string()),
+  payloadSha256: types.nullable(types.string()),
+  observation: z.lazy(() =>
+    PostV1EtransportDeclarationsObservation$inboundSchema
+  ),
+  evidenceVersion: types.number(),
+  attempts: z.array(
+    z.lazy(() => PostV1EtransportDeclarationsAttempt$inboundSchema),
+  ),
+  copies: z.array(z.lazy(() => PostV1EtransportDeclarationsCopy$inboundSchema)),
+  conflicts: z.array(
+    z.lazy(() => PostV1EtransportDeclarationsConflict$inboundSchema),
+  ),
+  resend: z.lazy(() => PostV1EtransportDeclarationsResend$inboundSchema),
+  createdAt: types.date(),
+  updatedAt: types.date(),
+});
+
+export function postV1EtransportDeclarationsData2FromJSON(
+  jsonString: string,
+): SafeParseResult<PostV1EtransportDeclarationsData2, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => PostV1EtransportDeclarationsData2$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsData2' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsResponseBody2$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsResponseBody2, unknown> = z.object({
+    data: z.lazy(() => PostV1EtransportDeclarationsData2$inboundSchema),
+  });
+
+export function postV1EtransportDeclarationsResponseBody2FromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EtransportDeclarationsResponseBody2,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsResponseBody2$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EtransportDeclarationsResponseBody2' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsData1$inboundSchema: z.ZodMiniType<
+  PostV1EtransportDeclarationsData1,
   unknown
 > = z.object({
   id: types.string(),
   uit: types.string(),
   status: types.string(),
   createdAt: types.date(),
+  jobId: types.optional(types.string()),
 });
 
-export function postV1EtransportDeclarationsDataFromJSON(
+export function postV1EtransportDeclarationsData1FromJSON(
   jsonString: string,
-): SafeParseResult<PostV1EtransportDeclarationsData, SDKValidationError> {
+): SafeParseResult<PostV1EtransportDeclarationsData1, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => PostV1EtransportDeclarationsData$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'PostV1EtransportDeclarationsData' from JSON`,
+    (x) => PostV1EtransportDeclarationsData1$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'PostV1EtransportDeclarationsData1' from JSON`,
   );
 }
 
 /** @internal */
-export const PostV1EtransportDeclarationsResponseBody$inboundSchema:
-  z.ZodMiniType<PostV1EtransportDeclarationsResponseBody, unknown> = z.object({
-    data: z.lazy(() => PostV1EtransportDeclarationsData$inboundSchema),
+export const PostV1EtransportDeclarationsResponseBody1$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsResponseBody1, unknown> = z.object({
+    data: z.lazy(() => PostV1EtransportDeclarationsData1$inboundSchema),
   });
 
-export function postV1EtransportDeclarationsResponseBodyFromJSON(
+export function postV1EtransportDeclarationsResponseBody1FromJSON(
   jsonString: string,
 ): SafeParseResult<
-  PostV1EtransportDeclarationsResponseBody,
+  PostV1EtransportDeclarationsResponseBody1,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      PostV1EtransportDeclarationsResponseBody$inboundSchema.parse(
+      PostV1EtransportDeclarationsResponseBody1$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'PostV1EtransportDeclarationsResponseBody' from JSON`,
+    `Failed to parse 'PostV1EtransportDeclarationsResponseBody1' from JSON`,
+  );
+}
+
+/** @internal */
+export const PostV1EtransportDeclarationsResponseResult$inboundSchema:
+  z.ZodMiniType<PostV1EtransportDeclarationsResponseResult, unknown> =
+    smartUnion([
+      z.lazy(() => PostV1EtransportDeclarationsResponseBody1$inboundSchema),
+      z.lazy(() => PostV1EtransportDeclarationsResponseBody2$inboundSchema),
+    ]);
+
+export function postV1EtransportDeclarationsResponseResultFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  PostV1EtransportDeclarationsResponseResult,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      PostV1EtransportDeclarationsResponseResult$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'PostV1EtransportDeclarationsResponseResult' from JSON`,
   );
 }
 
@@ -148,9 +826,10 @@ export const PostV1EtransportDeclarationsResponse$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     Headers: z._default(z.record(z.string(), z.array(z.string())), {}),
-    Result: z.lazy(() =>
-      PostV1EtransportDeclarationsResponseBody$inboundSchema
-    ),
+    Result: smartUnion([
+      z.lazy(() => PostV1EtransportDeclarationsResponseBody1$inboundSchema),
+      z.lazy(() => PostV1EtransportDeclarationsResponseBody2$inboundSchema),
+    ]),
   }),
   z.transform((v) => {
     return remap$(v, {

@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 71fb6f95-d3be-4d6a-a157-8d95e8c89923
 management:
-  docChecksum: 06e82625014438ee7ced2e0f4c771fca
+  docChecksum: c2a9d27e28c287e90127916a832dd3e9
   docVersion: 1.0.0
   speakeasyVersion: 1.800.1
   generationVersion: 2.943.0
   releaseVersion: 0.2.0
   configChecksum: 57269bd909d3db5e5332a2f3fa419c76
 persistentEdits:
-  generation_id: 98c5644d-2b6c-429d-8857-0176f7f9460f
-  pristine_commit_hash: 83e77552c0af9a9ff8ce578dc731ac0ad286ab80
-  pristine_tree_hash: 0e2ebc115c8e1cc7ba5039b399e844398d74bda5
+  generation_id: 087d6fb9-9e56-49d5-9ce9-b32ca483b443
+  pristine_commit_hash: e595eeada904400869ddf6fcfec6aa79462ffddf
+  pristine_tree_hash: c20a632669908f59c0bc0f0fd6e61730ee4c7a6a
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -67,8 +67,8 @@ trackedFiles:
     pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
   docs/models/error-code.md:
     id: a7fa0b50b903
-    last_write_checksum: sha1:e693db7d49fa5ba5767011fcb242e1d89d9e9b1e
-    pristine_git_object: 5e9df6e18cbe8c02e329b26b093408a52bf9b984
+    last_write_checksum: sha1:23af6cf0521bdc20b8be3df24b498750f81ed975
+    pristine_git_object: c53da591575655ef8cc44d3a70d01f6403818e9e
   docs/models/error-t.md:
     id: 7fb5e56408dd
     last_write_checksum: sha1:5f63e91db88c1fa7b3ac8c2f4e9143baf1a46b65
@@ -193,10 +193,42 @@ trackedFiles:
     id: d50a5d6e3539
     last_write_checksum: sha1:0f2ec47d5aa5d0eb86c9400c75094586f5df08e3
     pristine_git_object: 72874f6123cc18acc41c3bf0a9ef48e18554c066
+  docs/models/operations/efactura-get-v1-efactura-jobs-id-request.md:
+    id: 3aa1ec321287
+    last_write_checksum: sha1:5853bd8ecf385622a12427cb9c28b1300161b06d
+    pristine_git_object: 894938d3f1288eb3f1fbb7d7a5b6afaeb8754bfa
+  docs/models/operations/efactura-get-v1-efactura-jobs-request.md:
+    id: 0238aa70b7f8
+    last_write_checksum: sha1:31cdc28133c0d3160326f0164f844cfe472a91e9
+    pristine_git_object: fcce231e43d4de0f09446ff578741d9f998729b3
+  docs/models/operations/efactura-post-v1-efactura-invoices-request.md:
+    id: a6670a530a51
+    last_write_checksum: sha1:0baa19359682ebb67bac58b27d81d6d1ff957265
+    pristine_git_object: 1068f5f827b7557cb59c32c72d2ead027ed7e43c
+  docs/models/operations/efactura-post-v1-efactura-jobs-id-cancel-request.md:
+    id: 96d7cc9bcd5c
+    last_write_checksum: sha1:409351b635be4eba965d244f9ab6476593669a4d
+    pristine_git_object: ec83773e79d41dcb743c5ddbac98bfa005b7762a
   docs/models/operations/employee.md:
     id: ac9072fd2ef8
     last_write_checksum: sha1:9ccf93155fa7a9d6ac131e772888eb4f9036a4c0
     pristine_git_object: 8cd79add03e73275ead1606884513a2e25a05de2
+  docs/models/operations/etransport-get-v1-etransport-jobs-id-request.md:
+    id: b3b205af9178
+    last_write_checksum: sha1:070e447263924cb6f1ed5ae346a9fc377029c31f
+    pristine_git_object: ad1f4f72de85b443ead8d468d0f4e16a0653f615
+  docs/models/operations/etransport-get-v1-etransport-jobs-request.md:
+    id: d96f9b0027f7
+    last_write_checksum: sha1:008f6c825a307f1bebbd8917949397eabc70c1a7
+    pristine_git_object: 7eef7a8675843ec3993957bedc6beb8a4a7246b8
+  docs/models/operations/etransport-post-v1-etransport-declarations-request.md:
+    id: 8a6427f83de4
+    last_write_checksum: sha1:05a607f15b1eb6e6100132051035e4965fef82b1
+    pristine_git_object: 3677984188a74f663c3a4d2251ce606929bd5b78
+  docs/models/operations/etransport-post-v1-etransport-jobs-id-cancel-request.md:
+    id: a6030e10edf6
+    last_write_checksum: sha1:1d879de15e5bff515497b27b7d1b57b795a359e2
+    pristine_git_object: 3b65de5b52748798f454a03c37ec40a9ff7dda44
   docs/models/operations/expected-totals.md:
     id: 7a8e48db2710
     last_write_checksum: sha1:380eeb605a2a02544227f86410d00b2b6a17d01d
@@ -499,8 +531,8 @@ trackedFiles:
     pristine_git_object: 4c881a604171ee442560550cb1fbf35d59888ea3
   docs/models/operations/get-v1-efactura-invoices-id-data.md:
     id: 58323af81276
-    last_write_checksum: sha1:d4e80726dba95257ba9f86b7466264549358b385
-    pristine_git_object: 8759d201645be0d9a1233d591b25624b21d36e09
+    last_write_checksum: sha1:15817dddf9ec8e7c2884e13f9e812fd6ead31e8f
+    pristine_git_object: 48aa0c78eaa4459a288575726aefd249530e789e
   docs/models/operations/get-v1-efactura-invoices-id-download-data.md:
     id: b5b5f39861e5
     last_write_checksum: sha1:c93a9f189c119be4204165424f1121c87bcd1f06
@@ -523,12 +555,12 @@ trackedFiles:
     pristine_git_object: e40649e4f448195a65fc64aed7dfba651daa99ed
   docs/models/operations/get-v1-efactura-invoices-id-response-body.md:
     id: d18f9508e67f
-    last_write_checksum: sha1:88cb4db00b06463e9017bc4abe7f77c9a4f99623
-    pristine_git_object: 959d0a93441643555b34ec94fd2f990c3a34cdc8
+    last_write_checksum: sha1:1d52c6a4abcf4f1dfa11651363cd0b47099c4c7c
+    pristine_git_object: 849cab1aa096efd8608ff7e7948bad9f2fc4d444
   docs/models/operations/get-v1-efactura-invoices-id-response.md:
     id: 22305fd286f7
-    last_write_checksum: sha1:8e512fe6767eb42d4beea7b6e6a3dbce6267596e
-    pristine_git_object: b08df22afac9d2ffea78f4bb4b612093d2d83936
+    last_write_checksum: sha1:32532a65b41272b201b070e2b8f3eb0a76944d02
+    pristine_git_object: af99c5546582a9385626b2d48263aa11e1ad6ac6
   docs/models/operations/get-v1-efactura-invoices-id-zip-request.md:
     id: e5185601b40c
     last_write_checksum: sha1:e0506d89135d1df24cbd25903d36c1380a643de0
@@ -537,6 +569,214 @@ trackedFiles:
     id: 83308c7edf69
     last_write_checksum: sha1:b3c70f297842bb08ab3ac4d20516983481113463
     pristine_git_object: 59c92cbfe30512847b4829f6db472c2cbbbe47a2
+  docs/models/operations/get-v1-efactura-jobs-actor-kind.md:
+    id: 29e3f9ac6ee2
+    last_write_checksum: sha1:98e305f6fdf41f3dc458683cea6b36392eb41f37
+    pristine_git_object: 948f167a37fa808b9b3bf5a3c58a7086b627e67e
+  docs/models/operations/get-v1-efactura-jobs-attempt.md:
+    id: 2a0fd731f8a7
+    last_write_checksum: sha1:ea6280930ff2679cf6910ce045a7bd72669fbca8
+    pristine_git_object: 772d74b76094ce70d404e3d2e69901f5165cedda
+  docs/models/operations/get-v1-efactura-jobs-basis.md:
+    id: 4a4d5ba0656f
+    last_write_checksum: sha1:710b907a73e6693e059e719fbce186dce1c80dd6
+    pristine_git_object: be9a65a92577c42c55e829a2fb8a2042b72cb804
+  docs/models/operations/get-v1-efactura-jobs-blocked-reason.md:
+    id: 859535b933cd
+    last_write_checksum: sha1:501a133df838f47ee24a57401b3b4465ca5b5714
+    pristine_git_object: effb2c1f727ad8339126505d534d385cacd3f2a6
+  docs/models/operations/get-v1-efactura-jobs-conflict-kind.md:
+    id: bb3d6db29018
+    last_write_checksum: sha1:de7cf4027a89754cf8147e84ccaf1f1517ae2ecc
+    pristine_git_object: 305f63dd57b601e62dee09c0107091c55e83fc1f
+  docs/models/operations/get-v1-efactura-jobs-conflict.md:
+    id: ab25d86e9ab4
+    last_write_checksum: sha1:8c06e09dec567673ce7ae7b2fb69bbbceaf06bb9
+    pristine_git_object: 4a8fa33479f2baa6403248c7a2af50e09c9da74a
+  docs/models/operations/get-v1-efactura-jobs-copy.md:
+    id: de8b0eb7ff82
+    last_write_checksum: sha1:508016b17f39631e3fc475dd9d68aa1aa0e28a15
+    pristine_git_object: 0c39415f2c0606a996e175d38cc57f235795f43f
+  docs/models/operations/get-v1-efactura-jobs-data.md:
+    id: a3a406bb5ca1
+    last_write_checksum: sha1:e0b3b25a63193823b1ede47f6a3ddc1758c80e60
+    pristine_git_object: de446c96dd86171811ba804296a3441560f10a3f
+  docs/models/operations/get-v1-efactura-jobs-id-actor-kind.md:
+    id: 7ab7cd2542c5
+    last_write_checksum: sha1:bfa378e3cf3dcfb88e8d32099d1d69002059cf68
+    pristine_git_object: e3d683399d9af3956151b5e725f1f13922e14c8a
+  docs/models/operations/get-v1-efactura-jobs-id-attempt.md:
+    id: 33da8de72f7b
+    last_write_checksum: sha1:5db791c32f591921e2e7355affa487b553f32473
+    pristine_git_object: aa5491bc2b3b82446cc0b3fdf6d1a12b93e6b522
+  docs/models/operations/get-v1-efactura-jobs-id-basis.md:
+    id: c99e8be82cf0
+    last_write_checksum: sha1:b7651e9c4dddddc6a3fd2f4653f05a990802c305
+    pristine_git_object: fff33c7ee7dbd189ae2acdef378c23c3bfffa84f
+  docs/models/operations/get-v1-efactura-jobs-id-blocked-reason.md:
+    id: e289fe874343
+    last_write_checksum: sha1:60c8ac9df96382505b333f63026f744c1adcd78a
+    pristine_git_object: 639de55dcde0895a8103c1924b28ac88d3c4792d
+  docs/models/operations/get-v1-efactura-jobs-id-conflict-kind.md:
+    id: 96a14371a8c8
+    last_write_checksum: sha1:96a14184f048ec4288bd7540bf0a221c2535ed56
+    pristine_git_object: 5238f5643ad0e8287f7f393cc183aef45898b812
+  docs/models/operations/get-v1-efactura-jobs-id-conflict.md:
+    id: ff3d3bbb16d2
+    last_write_checksum: sha1:1b682acda45d2c754455adc848d383613d7a18c3
+    pristine_git_object: a93c9188ea58fbdf387623ed8f4e8ba61c92d838
+  docs/models/operations/get-v1-efactura-jobs-id-copy.md:
+    id: fbc28bf8d1ab
+    last_write_checksum: sha1:29a87ae484e3b88a8364401e16846d2419fa7813
+    pristine_git_object: e90f226383eb07db66386f1664b2cd31c0f0095e
+  docs/models/operations/get-v1-efactura-jobs-id-data.md:
+    id: bf724e854dc7
+    last_write_checksum: sha1:28ccfc366cd1d3d69bdadb4797a15af05e838667
+    pristine_git_object: 7568075fa50194b23d4444c4e4395e3720a8c730
+  docs/models/operations/get-v1-efactura-jobs-id-kind.md:
+    id: 10ebc56d45c3
+    last_write_checksum: sha1:4fbeb2c6b7ed0d0e604d780037afa13fde5a769b
+    pristine_git_object: e771be62536d17bbb8e10ceef3fd110c026cd818
+  docs/models/operations/get-v1-efactura-jobs-id-late-outcome.md:
+    id: 26ee367881e1
+    last_write_checksum: sha1:565d48a173dd4c37d651575503a7436dc21547c4
+    pristine_git_object: 68314aa107894a4f3bc8059e32680bad5e63889e
+  docs/models/operations/get-v1-efactura-jobs-id-observation.md:
+    id: 113feb62fc7a
+    last_write_checksum: sha1:735183d3416023f19f9692a2ce21a1fd043eafa7
+    pristine_git_object: b71f5301848e523526adbd0934e99a306c94349d
+  docs/models/operations/get-v1-efactura-jobs-id-outcome.md:
+    id: 61401ccffd38
+    last_write_checksum: sha1:d701403a93aa3165c95bb7a8f927e702adf087cf
+    pristine_git_object: 5cf76d3c064a5cd6d852e5197f455836ccfb70fc
+  docs/models/operations/get-v1-efactura-jobs-id-reason-code.md:
+    id: 2a96a2526004
+    last_write_checksum: sha1:ebacb18c7c55d249f47c982724a884340ec4d8b2
+    pristine_git_object: fbcfbcd0c97a79699057ffb5aa70a27a73500250
+  docs/models/operations/get-v1-efactura-jobs-id-received-source.md:
+    id: 134a372f23ec
+    last_write_checksum: sha1:47aef259a2767be2a6c455d216c7e367701cafb9
+    pristine_git_object: 3be7efc1d297e7f42fbaeeb73b7a1944f3456611
+  docs/models/operations/get-v1-efactura-jobs-id-refusal-reason.md:
+    id: d5a6bf53715d
+    last_write_checksum: sha1:26af092c69f48c29db960e9ffe7ac65200fdc452
+    pristine_git_object: e8d97ebb1ea632b0257891739c0788adc5126049
+  docs/models/operations/get-v1-efactura-jobs-id-rejection-code.md:
+    id: b142f0e65c8f
+    last_write_checksum: sha1:40499bbacd81d33b7c2d41c34c51f9e99b1ae486
+    pristine_git_object: 96dc78f954e7bf37f27aa40ed7f2a8609b5e851b
+  docs/models/operations/get-v1-efactura-jobs-id-request-refusal-reason.md:
+    id: 49333b1844f4
+    last_write_checksum: sha1:baf337df657a70d93c75ac059a47994bfd1429c7
+    pristine_git_object: ed4ce214ac03aa796d06b5bd5b471cf03d084e09
+  docs/models/operations/get-v1-efactura-jobs-id-request-request.md:
+    id: 629c04207702
+    last_write_checksum: sha1:abdb39299ce96d7f6bbf32ad3ad54816a02da405
+    pristine_git_object: 4aad2f8069c96ba93621e7660e5f65590302230d
+  docs/models/operations/get-v1-efactura-jobs-id-resend.md:
+    id: 6ee81e0329a2
+    last_write_checksum: sha1:35431d5e71e90b14196ab792da6983760606a675
+    pristine_git_object: 92a993391d93de4ccf9009634b02e7ac61887f26
+  docs/models/operations/get-v1-efactura-jobs-id-response-body.md:
+    id: "518059921828"
+    last_write_checksum: sha1:4894fb1e24abb5c1aa71b5822070348a13bcd080
+    pristine_git_object: 3c91e65b1a5ef15ff678da6894370fe3de060d66
+  docs/models/operations/get-v1-efactura-jobs-id-response.md:
+    id: 3a81fd452f6d
+    last_write_checksum: sha1:474764edac1c065bd4f0bab077ea426c5f5bf81a
+    pristine_git_object: 504df934a0c2d45d138bc2d58cae518e0f2658db
+  docs/models/operations/get-v1-efactura-jobs-id-result.md:
+    id: 837563e0047e
+    last_write_checksum: sha1:e6aab48be7b78cec9957ca847723af0e79cbc4d1
+    pristine_git_object: ae5379e0f8b3b8feaac3f83c171f9c449784c42b
+  docs/models/operations/get-v1-efactura-jobs-id-review-reason.md:
+    id: 6056269f5a91
+    last_write_checksum: sha1:1b7e499a6344afaba0145f3ef18ad2ac99b612a6
+    pristine_git_object: 55d319d413b2ee2fe693b458c467b30cb6b20ce0
+  docs/models/operations/get-v1-efactura-jobs-id-state.md:
+    id: e0fe33798f89
+    last_write_checksum: sha1:c4d55eb601142dd4106067e38bbfacb93cf9d0a7
+    pristine_git_object: d641a1883f5ba0c702f7c5c8f2504e4a5bc87afa
+  docs/models/operations/get-v1-efactura-jobs-id-status.md:
+    id: a9763ad72185
+    last_write_checksum: sha1:af7263c7d6ee33e00a5815c9da0c83fc9333bc1f
+    pristine_git_object: 3b60d990cb98152845f1e518deeadc7eb276f3fa
+  docs/models/operations/get-v1-efactura-jobs-job-status.md:
+    id: c16084e2eee9
+    last_write_checksum: sha1:7b8919f424f3a1694e51b0979b201540f4329d5c
+    pristine_git_object: 9e056047337c947b3209986192b1eb60b1974a04
+  docs/models/operations/get-v1-efactura-jobs-job.md:
+    id: be1e4e99eb91
+    last_write_checksum: sha1:ac80471518d24772cd466d0e4260ae88ef13a650
+    pristine_git_object: 8932b9e90446f2c480288a2ba28e7b9a75899492
+  docs/models/operations/get-v1-efactura-jobs-kind.md:
+    id: 7905a570fdf8
+    last_write_checksum: sha1:21d31579fab321627fb3963ab442d355934cb020
+    pristine_git_object: c0367c63d000fa0c71550dd0cde8c7dc773de5cd
+  docs/models/operations/get-v1-efactura-jobs-late-outcome.md:
+    id: 7959c91ad621
+    last_write_checksum: sha1:3c1bff64450e43fc31692653a693ac3a803031c0
+    pristine_git_object: 3212147283418ca3aa86ec7b2ffd1646562ba8f4
+  docs/models/operations/get-v1-efactura-jobs-observation.md:
+    id: ef5495a162e0
+    last_write_checksum: sha1:3c4186bdd6d47b5cf00d92ca24662fbca0635196
+    pristine_git_object: eb9b13cfac38af248391e0f042da558f1798a751
+  docs/models/operations/get-v1-efactura-jobs-outcome.md:
+    id: d08da72c70a9
+    last_write_checksum: sha1:9424eb9a3f6a8aeb8dacdd1a562e973f780f29e2
+    pristine_git_object: c25e5532565ebd976f6267edb2bcf912383f8e48
+  docs/models/operations/get-v1-efactura-jobs-query-param-status.md:
+    id: 14dd53284a33
+    last_write_checksum: sha1:10799b95fb7489111f1ce7c9d37e13cd8ee74b67
+    pristine_git_object: 1fdf116b75d73c5ccf0d599e6a1ed5a0e32fb0c2
+  docs/models/operations/get-v1-efactura-jobs-reason-code.md:
+    id: 114ce629c2ff
+    last_write_checksum: sha1:dd1796c3c4de800d2b0dd143d59d25213896b2aa
+    pristine_git_object: 795f75ff01e3239cadb3745c139f099178f1b00d
+  docs/models/operations/get-v1-efactura-jobs-received-source.md:
+    id: 2ab51aa86e45
+    last_write_checksum: sha1:cec319b5716d8c5d5a745ddafc0b83cfb7a4fd91
+    pristine_git_object: 0039d9099b575232f5e2f9faee3e97d302c7e1c8
+  docs/models/operations/get-v1-efactura-jobs-refusal-reason.md:
+    id: 167abc9ab736
+    last_write_checksum: sha1:82a81e6826938e3b2615e4b8b24f23c9f704a115
+    pristine_git_object: 29da154246bab2d12f834c2f77ece4a595624dd4
+  docs/models/operations/get-v1-efactura-jobs-rejection-code.md:
+    id: 5cefc1e3ece4
+    last_write_checksum: sha1:b4ad918c82c775a61d2c289424008e529e4f9819
+    pristine_git_object: f9c85076fe8182bf853f264f9104b7a37e981258
+  docs/models/operations/get-v1-efactura-jobs-request-refusal-reason.md:
+    id: 157f4ea8ace2
+    last_write_checksum: sha1:9e5d7b709377e2afd2b92c1759bac7da8d2c82c5
+    pristine_git_object: 175419faacc0cab56b0ef0143e9a0f125e84b084
+  docs/models/operations/get-v1-efactura-jobs-request-request.md:
+    id: bad995f8c3ef
+    last_write_checksum: sha1:998ab28b6f8bdf77ee39f6343b954a889557ed05
+    pristine_git_object: 0b5ba9e1aa880c101bf4738327710494475da8eb
+  docs/models/operations/get-v1-efactura-jobs-resend.md:
+    id: eff32f5f9c73
+    last_write_checksum: sha1:8bdff8b091dd01f9caee1cb156a4ce979fa6892e
+    pristine_git_object: c2f33329c2854336be75dd23b539947b05c9821e
+  docs/models/operations/get-v1-efactura-jobs-response-body.md:
+    id: 19689493aca2
+    last_write_checksum: sha1:7dde55c023016470d14300e96d376001bc944df8
+    pristine_git_object: 9ac007c1fa7db822982a4cf655f13979972557b8
+  docs/models/operations/get-v1-efactura-jobs-response.md:
+    id: 05f87ade894b
+    last_write_checksum: sha1:dafd7cf889f368b8e3eca806b5adcc03f066f003
+    pristine_git_object: bfe4db6e422f41f5e79468a1212703bcc8780ac5
+  docs/models/operations/get-v1-efactura-jobs-result.md:
+    id: c298d31ff3fd
+    last_write_checksum: sha1:af4eed2777013edefa4aceda36768bedee0ecbfe
+    pristine_git_object: 0ac4144c415026a21b73fd55b33649cde3698661
+  docs/models/operations/get-v1-efactura-jobs-review-reason.md:
+    id: 2760c526c600
+    last_write_checksum: sha1:2f9b80f8b3682d16f4c461038955b914ed1410dc
+    pristine_git_object: ed38219f657e23d82b401bcd438b00d4603b0393
+  docs/models/operations/get-v1-efactura-jobs-state.md:
+    id: 066bf9681616
+    last_write_checksum: sha1:b41df0320e4f46fe19da82992e55941f59a4a027
+    pristine_git_object: d7d22d6deb2be07248a9ed8c46dc4a38614545e9
   docs/models/operations/get-v1-efactura-messages-data.md:
     id: 09c335bffc86
     last_write_checksum: sha1:242813263b805ce97ccc62f74204ef4d0ced2678
@@ -573,6 +813,214 @@ trackedFiles:
     id: 9f36565413d5
     last_write_checksum: sha1:66392460e8eb6361f2d68ef29f9330bec2efdeb5
     pristine_git_object: 4a89bbd30073ef16f5a6fc0368be798d324aa19c
+  docs/models/operations/get-v1-etransport-jobs-actor-kind.md:
+    id: 942daff1292b
+    last_write_checksum: sha1:6e73b9914c535d12df4f15a656e35f67b3de7e66
+    pristine_git_object: b2513e788f401d3cbe5afa98621877c798689c4b
+  docs/models/operations/get-v1-etransport-jobs-attempt.md:
+    id: 3c179bdf946b
+    last_write_checksum: sha1:fd15c09c6bf75139728722711100a3244365078e
+    pristine_git_object: d367431618fd3977111dbe319820380cdde3c738
+  docs/models/operations/get-v1-etransport-jobs-basis.md:
+    id: a12ec852a7ee
+    last_write_checksum: sha1:61e1b4b464407a4f41a44faa3525f411da284bb9
+    pristine_git_object: 261371f9318877e00b8ced1e2686990be76037c7
+  docs/models/operations/get-v1-etransport-jobs-blocked-reason.md:
+    id: c939b5fbfc91
+    last_write_checksum: sha1:4ea4c6321ef6e0e57fc6e1bdf87061b170302f6b
+    pristine_git_object: 652d96d639a20d5647e3813318e326c73e824942
+  docs/models/operations/get-v1-etransport-jobs-conflict-kind.md:
+    id: 1ad4a4d5a70a
+    last_write_checksum: sha1:a8ab3526eba8ba58ab3ded7ed89940a8000b1dc9
+    pristine_git_object: 9be6e76fa98b05186c40e5b05ff2925aa70dcf22
+  docs/models/operations/get-v1-etransport-jobs-conflict.md:
+    id: f609baa1a20e
+    last_write_checksum: sha1:7c2654664347883623d1484cf04281378b7dc093
+    pristine_git_object: ffd7f2ec13b07adfcc942ee73bff3671713fe396
+  docs/models/operations/get-v1-etransport-jobs-copy.md:
+    id: fe0bad7317b6
+    last_write_checksum: sha1:a5077c2cd9086710be39c6d3b3aa0bd54b807da5
+    pristine_git_object: 18c66401698390bf17832815e6b7ad585b32d101
+  docs/models/operations/get-v1-etransport-jobs-data.md:
+    id: d99bcc8b1bd1
+    last_write_checksum: sha1:64278b55c7e07e5d6877c53dd74a409e54cae584
+    pristine_git_object: 9f85335124c4319c0131b43631eae892efff9a95
+  docs/models/operations/get-v1-etransport-jobs-id-actor-kind.md:
+    id: db89463ae6c6
+    last_write_checksum: sha1:51248aeb1e93940181f5f032a173b02dea4144bd
+    pristine_git_object: e66c0e639c1383c0f4c26f824ae16ecdbcf8bdef
+  docs/models/operations/get-v1-etransport-jobs-id-attempt.md:
+    id: d2f8847b73e1
+    last_write_checksum: sha1:df2660ebe61b5b8cd5606994d21aa94f3780a005
+    pristine_git_object: 12d57dab5b5e44f8997464991958b5ded19a86de
+  docs/models/operations/get-v1-etransport-jobs-id-basis.md:
+    id: dbf548268f00
+    last_write_checksum: sha1:07695039624534e52b6d1cdd9ee65b9c8b62752a
+    pristine_git_object: f432bd2efc3d080df9bad6367131dea938fe0a8e
+  docs/models/operations/get-v1-etransport-jobs-id-blocked-reason.md:
+    id: f7c74b38c16c
+    last_write_checksum: sha1:eeb4892799da3b073ad8f171825ef2b647f8c7ae
+    pristine_git_object: 63d86b5a513ec6cf4975ff80f5c4c65e0ee310b3
+  docs/models/operations/get-v1-etransport-jobs-id-conflict-kind.md:
+    id: 5eac2cd87cc6
+    last_write_checksum: sha1:a5da8b9a872df3abb1968893955121b71eec7c20
+    pristine_git_object: 3b36ac92dd0186eb9cc7eacd5a0b8013a3f0f504
+  docs/models/operations/get-v1-etransport-jobs-id-conflict.md:
+    id: 3e2d94f8bbaf
+    last_write_checksum: sha1:e4ce2fdc7dcf54d4a76b837f2aeade2241ff5b9b
+    pristine_git_object: 848e163d2e5ccb90d885d1341f5d0a0d8640920f
+  docs/models/operations/get-v1-etransport-jobs-id-copy.md:
+    id: fbc910365d67
+    last_write_checksum: sha1:0ce9aba775dad71abd6797c21b1d5c2c5427aa4b
+    pristine_git_object: 259d7887582ed2ed23513d57bacae9e7455c1ebd
+  docs/models/operations/get-v1-etransport-jobs-id-data.md:
+    id: d4a8de8b57bf
+    last_write_checksum: sha1:bc9e54a609f9c1ce934f7b943c094a6b9728ebc7
+    pristine_git_object: 4f1a7ce591f816f806a916e03fcae7629af3530e
+  docs/models/operations/get-v1-etransport-jobs-id-kind.md:
+    id: ee09b19f828b
+    last_write_checksum: sha1:2255179d4786420de15cda430643fcada8e2f550
+    pristine_git_object: cbc6c05caa7ba81f72b5c115c6f22f706e2fd02c
+  docs/models/operations/get-v1-etransport-jobs-id-late-outcome.md:
+    id: 02a298835c6a
+    last_write_checksum: sha1:bcde9ac2fe31e653140c5846d20c9e50561470c4
+    pristine_git_object: b8bc2a549b9c60c49b962b9ed5ea3c016bb648c1
+  docs/models/operations/get-v1-etransport-jobs-id-observation.md:
+    id: 101a9a2a2114
+    last_write_checksum: sha1:de2843b8c31acfc2592b069f4567eee7dff6dd63
+    pristine_git_object: df03dbf6db5ba06adf9c932d40677dc279c12e95
+  docs/models/operations/get-v1-etransport-jobs-id-outcome.md:
+    id: 80f2fc2e858a
+    last_write_checksum: sha1:6e1ec4c9e202d5d81138ad99cbb015cb31a6ca47
+    pristine_git_object: 95b49fe6073d2ab0a9f228482118926e13f20677
+  docs/models/operations/get-v1-etransport-jobs-id-reason-code.md:
+    id: bc9e3b3af24c
+    last_write_checksum: sha1:bdee9b97249410be7a0ad186ee4ce64b48c0541a
+    pristine_git_object: a57000d3d5fd4b9eb452acfac9e7e7cf178cb70b
+  docs/models/operations/get-v1-etransport-jobs-id-received-source.md:
+    id: 56addc8824e7
+    last_write_checksum: sha1:bbc8f1f4664eb2888a7a439756435198ee10bbfa
+    pristine_git_object: 34275eb1618ddd45dec28a0cebe4b0a1ea2b736c
+  docs/models/operations/get-v1-etransport-jobs-id-refusal-reason.md:
+    id: 68a51dede9ed
+    last_write_checksum: sha1:9fea839d1df8e3b6d8dad95b265f01dfaff731ff
+    pristine_git_object: 3756ab85e24ec4cfea89ca0e19da241b7f0799c7
+  docs/models/operations/get-v1-etransport-jobs-id-rejection-code.md:
+    id: 6228a0521f46
+    last_write_checksum: sha1:8e85e36a55c0ab1a259ec32458443632f0274ebf
+    pristine_git_object: 34589ec1a356662fb3ca74eb68d60bae1ac19461
+  docs/models/operations/get-v1-etransport-jobs-id-request-refusal-reason.md:
+    id: edf92176064f
+    last_write_checksum: sha1:46475d02e2ab4be090f7caa916ad93823d2d244b
+    pristine_git_object: 92a83c02b84d4db36505dfa5739fef926c307cf9
+  docs/models/operations/get-v1-etransport-jobs-id-request-request.md:
+    id: bb7276c2d392
+    last_write_checksum: sha1:ae21be58a2d9906354a729265cf180c4fc504758
+    pristine_git_object: 46ac49c376754371dc02b549f8f1e8afb054a8bb
+  docs/models/operations/get-v1-etransport-jobs-id-resend.md:
+    id: d0a3fc2695a8
+    last_write_checksum: sha1:8b796d3da2e9ed77a1ed3c4d66c8027c0d7604c4
+    pristine_git_object: 70c390666d4f7a838cb58a77a61e538510dd3990
+  docs/models/operations/get-v1-etransport-jobs-id-response-body.md:
+    id: 972f0c3ec778
+    last_write_checksum: sha1:eb0f610e7f8009c615c8fc19399e57e34ed94547
+    pristine_git_object: a35e39f1cd2d9ed44339b4f400a94976fb79658a
+  docs/models/operations/get-v1-etransport-jobs-id-response.md:
+    id: 19feab294193
+    last_write_checksum: sha1:11a8e9880488a0afa00fb81a7373c304dcd26c9a
+    pristine_git_object: 3388abd911e5b631bff7c396b11b3e0e5dce99f3
+  docs/models/operations/get-v1-etransport-jobs-id-result.md:
+    id: 87de48ebd2e5
+    last_write_checksum: sha1:cbc8c1ca0c689a56d127d3010f82236ef46794c4
+    pristine_git_object: 431f675826fa8571328561c28cd85b0258f026b2
+  docs/models/operations/get-v1-etransport-jobs-id-review-reason.md:
+    id: 4f02db66a0ef
+    last_write_checksum: sha1:f1409a671a807a92b1fba6498ebeb7a3fcbcc3ad
+    pristine_git_object: 9200cff66bce1cee5f016f26d5b359e6691b3976
+  docs/models/operations/get-v1-etransport-jobs-id-state.md:
+    id: 18cc441ff4bd
+    last_write_checksum: sha1:3515a8a08e64cc1518a0bf96e026e86ba7d19723
+    pristine_git_object: df5e1ed2b61c112d995fba2dc42d967d109a4afb
+  docs/models/operations/get-v1-etransport-jobs-id-status.md:
+    id: 8150e7c57cfd
+    last_write_checksum: sha1:c087f34a34b7e5078e87700deca4d8ffb536bebc
+    pristine_git_object: 8c38f468bc27b624503fd5187320f1124a6ad779
+  docs/models/operations/get-v1-etransport-jobs-job-status.md:
+    id: 5325cc96fb47
+    last_write_checksum: sha1:f40013c6eeebd5edeb571160efc19ec060b4e333
+    pristine_git_object: acd522e34963694a6cf151676fe0724a5c2e2582
+  docs/models/operations/get-v1-etransport-jobs-job.md:
+    id: 6256243ee77d
+    last_write_checksum: sha1:d1f15c3e3d6689cc93e1abfa97a980cc9748f948
+    pristine_git_object: c32895147ff394597d894b54ee5f117d371cca30
+  docs/models/operations/get-v1-etransport-jobs-kind.md:
+    id: 84b4136af12f
+    last_write_checksum: sha1:f98de93f7c7290b4e70776e439a5988db5782f36
+    pristine_git_object: 645a4f44a9abd77bb01f8cc7a12e612642d33239
+  docs/models/operations/get-v1-etransport-jobs-late-outcome.md:
+    id: 4c0ee0f7fdca
+    last_write_checksum: sha1:cf166d3154236accb67351abb3b47ceb5bb11ed0
+    pristine_git_object: 2f2868668f0263f0fb92fdac152714d6d0bb5538
+  docs/models/operations/get-v1-etransport-jobs-observation.md:
+    id: 5946f16f0fdd
+    last_write_checksum: sha1:b63d13a85d98b91302dc5b470ff6eda66fe8ac3d
+    pristine_git_object: c76af915fb9a04fb94964aa01120064021f374d3
+  docs/models/operations/get-v1-etransport-jobs-outcome.md:
+    id: f16b31b7f686
+    last_write_checksum: sha1:9f7ef0fcfb8d1fec68c636d0085b43b0dec6df33
+    pristine_git_object: f2865b9ea4e037466f066f21f22ddceb33e95563
+  docs/models/operations/get-v1-etransport-jobs-query-param-status.md:
+    id: 3a8624081076
+    last_write_checksum: sha1:ca39ded3e578bf340da5b9842aeb886d70c1c376
+    pristine_git_object: ff0abf06326f359fa5a03e9c1f882ebe03a71901
+  docs/models/operations/get-v1-etransport-jobs-reason-code.md:
+    id: 7d3192ed086f
+    last_write_checksum: sha1:80e0925769dd67bfb34159ba10dd78819efe23ab
+    pristine_git_object: 1ba75221f0340b66b85197580b51665f363d7576
+  docs/models/operations/get-v1-etransport-jobs-received-source.md:
+    id: 8f7e396e1b13
+    last_write_checksum: sha1:22dabb04f2fcb023563896e432b03e5a4399d845
+    pristine_git_object: e7c2f5414b3594f20f7d9463c57687d132e35733
+  docs/models/operations/get-v1-etransport-jobs-refusal-reason.md:
+    id: 7690dfc69eed
+    last_write_checksum: sha1:ddf0d26b3d7074c9a0d8de100fd015265496c248
+    pristine_git_object: d1bad004c68be8ff78c178dced901b7264ff4480
+  docs/models/operations/get-v1-etransport-jobs-rejection-code.md:
+    id: 28db641d6741
+    last_write_checksum: sha1:0dfca9ad75ef5a2d6bd3f39843f451fb498858cc
+    pristine_git_object: 95305d3cab9c20f1c74563ad5987ecfa9f4fd565
+  docs/models/operations/get-v1-etransport-jobs-request-refusal-reason.md:
+    id: 6c175d1ff28b
+    last_write_checksum: sha1:5d1aa07e435ba6f06e0bd8cf519c1ab354b9f672
+    pristine_git_object: 81f1521f064a50e34db8639596516c6d7778c380
+  docs/models/operations/get-v1-etransport-jobs-request-request.md:
+    id: f6f3b38cf439
+    last_write_checksum: sha1:611f48299de5f575f77543f8d0c67e4992aa7864
+    pristine_git_object: 88f5bc6c40383a0633d98b7b226af332f460d063
+  docs/models/operations/get-v1-etransport-jobs-resend.md:
+    id: c6220bcd10c1
+    last_write_checksum: sha1:437258e0ab048b0278b82b85bad4d2d325216ef2
+    pristine_git_object: 78c0f3df4c7b649e290bac8ac14902eaf865acd0
+  docs/models/operations/get-v1-etransport-jobs-response-body.md:
+    id: 841a9418259a
+    last_write_checksum: sha1:282345c6936accb35cf6eccb41ff387e1c613ec8
+    pristine_git_object: ac0ce319203c8176efc0c0a228d2569fe557a388
+  docs/models/operations/get-v1-etransport-jobs-response.md:
+    id: e4a2bd2ee108
+    last_write_checksum: sha1:267127e5423ff373c1d64537e9282fc93381ca49
+    pristine_git_object: c8f2e5ef02e88ed484716e9fa142acc26e8198a8
+  docs/models/operations/get-v1-etransport-jobs-result.md:
+    id: 7034941bd67b
+    last_write_checksum: sha1:d58b8f39d5e6321fa6007dd639ff115e69b23b59
+    pristine_git_object: a7257ae85f5c43236dc70ec6f4547d247bb106e3
+  docs/models/operations/get-v1-etransport-jobs-review-reason.md:
+    id: 4d51059a96dc
+    last_write_checksum: sha1:11f410ced58ac28a6f2419585409db62e7a83c5d
+    pristine_git_object: 4305b857c6fc590a58bd236a466562a3b4b09f8a
+  docs/models/operations/get-v1-etransport-jobs-state.md:
+    id: 00092d409dd3
+    last_write_checksum: sha1:a8a1a1ef418b4fc9c7336edc9df4c3548c8e2058
+    pristine_git_object: 6af88c875a80fa4dbbb0d3e62eaa3f50fe97db52
   docs/models/operations/get-v1-fx-convert-data.md:
     id: 5553fefcdec3
     last_write_checksum: sha1:fb97e32eb46aeead2cdea9e6fb48ac8aa32b342c
@@ -1347,24 +1795,24 @@ trackedFiles:
     pristine_git_object: 7020f065fdf3d8420c4aab728e00478202052091
   docs/models/operations/get-v1-reges-jobs-id-data.md:
     id: a2c5082b48b7
-    last_write_checksum: sha1:79ed5bde7de8ced1a2a49aa1e4ea50046b7f23e6
-    pristine_git_object: ccf7d393bf5f822e8de8694f2cb60fe24c336b88
+    last_write_checksum: sha1:8585d43201970cee151a7dfaeac11dfdc7d62c2b
+    pristine_git_object: 44fa98227a3b7922b223e7c763054dc41064d309
   docs/models/operations/get-v1-reges-jobs-id-request.md:
     id: 4395f582a53e
     last_write_checksum: sha1:0422316f19f0722486fd05552626407451593599
     pristine_git_object: 822b8502a75bbc4206ec417ef22ba109639c7861
   docs/models/operations/get-v1-reges-jobs-id-response-body.md:
     id: dbe2af0ba5c5
-    last_write_checksum: sha1:f7e883fc345d59cd553972f746eb55250fef1b1d
-    pristine_git_object: e3f0cc4904cfddfc3d515a1edca1da326caccc4b
+    last_write_checksum: sha1:5a020f2ab934226d452fb720fc7cd7a4acb613b9
+    pristine_git_object: c9212e791d58fa546ccc8a763b5642ea6b7e9fe0
   docs/models/operations/get-v1-reges-jobs-id-response.md:
     id: cd7ef79448ec
-    last_write_checksum: sha1:51a31d19400d5bb6dc29d1558465a780b938184d
-    pristine_git_object: 457a880a2430dc4b29e3845f19a1f3859bb336c9
+    last_write_checksum: sha1:469d11eb54effdbbbdeccfe50b51677deed553e2
+    pristine_git_object: 76c37f784ae244e3b37d5a98da90117bd16b6acc
   docs/models/operations/get-v1-reges-jobs-id-status.md:
     id: 5a51293e12d4
-    last_write_checksum: sha1:fca7b1b5d056f76d80c1bef0e27381d4585b69cd
-    pristine_git_object: 277fa0edc498abc3332b54f33218a33c0ff1cf34
+    last_write_checksum: sha1:4262d81a7c34069b63e931590acd310404b86652
+    pristine_git_object: 5f72f0f9bfc00b31c7f0b8bc797be5b69587be81
   docs/models/operations/get-v1-search-data.md:
     id: 6634f7c9a1da
     last_write_checksum: sha1:e87fe59a2629b0d897126e23b2d602416a4c4448
@@ -1555,8 +2003,8 @@ trackedFiles:
     pristine_git_object: b374fc723c99b8edb0133d61e7061aee5faea131
   docs/models/operations/patch-v1-etransport-declarations-uit-data.md:
     id: b54397565444
-    last_write_checksum: sha1:7a21d0a13b35be1b06af18a8da7f6dd9645d0bb2
-    pristine_git_object: 3118e921cfbf828e0628ca00b592c1cfd2428031
+    last_write_checksum: sha1:69bd247c1550e3743ed54e63f9330e687784f5b1
+    pristine_git_object: 62a6e88970aa4c9adc6c5cbde443492772a575e8
   docs/models/operations/patch-v1-etransport-declarations-uit-request-body.md:
     id: b063c556ee6b
     last_write_checksum: sha1:e24693de30402971fe79abe0b1bbace74d5ba3d6
@@ -1641,34 +2089,230 @@ trackedFiles:
     id: 9ec6f26899f0
     last_write_checksum: sha1:6c1394efb8c8718609b586d0e9505ed3a6f26b0f
     pristine_git_object: e689d2b715ceb752383ea2c3bccb0470b5812abb
-  docs/models/operations/post-v1-efactura-invoices-data.md:
-    id: b5ac857a969d
-    last_write_checksum: sha1:7bb513d3466d0538a67bf4584eedc7b82a7eef3a
-    pristine_git_object: 5eeb97eb623b9376526f1b69cb94d2b553213a49
+  docs/models/operations/post-v1-efactura-invoices-actor-kind.md:
+    id: 11eb64fed749
+    last_write_checksum: sha1:c0f0b4825d3536bf5856b0e353b201d5a2a72d31
+    pristine_git_object: 5af184f03ab6eb0584c4d659863157fa9e6e0b05
+  docs/models/operations/post-v1-efactura-invoices-attempt.md:
+    id: 5a21c4d01fd5
+    last_write_checksum: sha1:615b594db9f487eb0b95a6f196c61c3001859e83
+    pristine_git_object: 53a5688bb882fc52fc3343156fa35a2df224ca01
+  docs/models/operations/post-v1-efactura-invoices-basis.md:
+    id: 9f8dceb3d3cb
+    last_write_checksum: sha1:368959bd405de1de50b7d87de81d7593c8bebf83
+    pristine_git_object: 39b8017a203552195d8858fbb88e1978ec70e213
+  docs/models/operations/post-v1-efactura-invoices-blocked-reason.md:
+    id: c2d18f0b2ba6
+    last_write_checksum: sha1:b1d9e214ec49fe5728b921e7bf39c31af31f0738
+    pristine_git_object: 0003f261d672d8e33ebb93f85c60f52bceecf085
+  docs/models/operations/post-v1-efactura-invoices-conflict-kind.md:
+    id: f5bb9444a4e2
+    last_write_checksum: sha1:353996a540b00d9c5e228495111d20b2005d203d
+    pristine_git_object: 0b9c1e78ce41eb30d4e32dbe1bd3fea6b903b52a
+  docs/models/operations/post-v1-efactura-invoices-conflict.md:
+    id: a12656f848de
+    last_write_checksum: sha1:1ac6e1996c538656886cdf209e10dbd4eee086fd
+    pristine_git_object: 90b9bfe05d14c2b13989c6ad13256d149a9e81aa
+  docs/models/operations/post-v1-efactura-invoices-copy.md:
+    id: f252433cca91
+    last_write_checksum: sha1:05a8bbf549204bb4501632fb7d08a1af7be0af5c
+    pristine_git_object: 1d8ab5f8ad3e7c2fd981edac2259c5fd103237d4
+  docs/models/operations/post-v1-efactura-invoices-data1.md:
+    id: 8770f51f02cf
+    last_write_checksum: sha1:15d7b562698296f36f6da0dd07d1a46da094e869
+    pristine_git_object: 61db599fb869e14253dd7d28045d086c536cd274
+  docs/models/operations/post-v1-efactura-invoices-data2.md:
+    id: 962f73a0d647
+    last_write_checksum: sha1:8cda1765d801d85f893f5ccb3316274be51b3f31
+    pristine_git_object: aa800027fb0eb7a5bf42550eb0aa1ab0c84c3f12
   docs/models/operations/post-v1-efactura-invoices-item.md:
     id: c37902ba3981
     last_write_checksum: sha1:908c53a6a72b631fd8a36db8605067619886baee
     pristine_git_object: 6073083e9f04e09823ea46474449a1314bfa7494
+  docs/models/operations/post-v1-efactura-invoices-kind.md:
+    id: 64927c973bb1
+    last_write_checksum: sha1:c3057cadd1a79384d5e88f9cbeba5292ab6b9f3a
+    pristine_git_object: 9ea79dd5410bf6727a5daf49367f43a8e5c08aeb
+  docs/models/operations/post-v1-efactura-invoices-late-outcome.md:
+    id: ded3516ae091
+    last_write_checksum: sha1:a6882a726e3eaad246b3cb6a7fef47a47ae46f0b
+    pristine_git_object: b6c04b34832b779b1a24ae76784282619c8490ce
   docs/models/operations/post-v1-efactura-invoices-line.md:
     id: 3257d195daaf
     last_write_checksum: sha1:d40e8c4dd80a75d92ac8eda6867fa5026cd2f21d
     pristine_git_object: 6519ba7c12f65532d223fad4959a3d11e9fc5574
+  docs/models/operations/post-v1-efactura-invoices-observation.md:
+    id: 4e20e9b71a2f
+    last_write_checksum: sha1:e4527cf01a281ffb488f5296f5c8b6036d3d660b
+    pristine_git_object: 7d5103a02676824edf53966de9e19e314a04117f
+  docs/models/operations/post-v1-efactura-invoices-outcome.md:
+    id: 9239a112fdfa
+    last_write_checksum: sha1:4266c0de67ec362c1484582d176a9a9aa5b968ee
+    pristine_git_object: 977a1b0eb79ea5cf8f331cb789a817b52ed6785c
+  docs/models/operations/post-v1-efactura-invoices-reason-code.md:
+    id: f75ca03cedcf
+    last_write_checksum: sha1:79506e4f39c1f92b564e3b2a7ad76abb53808ab6
+    pristine_git_object: 334bf99f8e8c680891132a59ee4d0264a5f862e7
+  docs/models/operations/post-v1-efactura-invoices-received-source.md:
+    id: 8144a9190797
+    last_write_checksum: sha1:5a0b101b7451436625902640c13d9e03b9f5267c
+    pristine_git_object: a6286a9f26ef83cdf3bfdba443c424b796c4a3df
+  docs/models/operations/post-v1-efactura-invoices-refusal-reason.md:
+    id: c08cd638cf3d
+    last_write_checksum: sha1:eecc139a2b805167e3f45fe0ff1e635500b97a5d
+    pristine_git_object: 287097f43a8fed28db91e696293eaffcc82a620c
+  docs/models/operations/post-v1-efactura-invoices-rejection-code.md:
+    id: 568c49a8e938
+    last_write_checksum: sha1:04eab09998065ea13360462933bf2cfcdfedc05b
+    pristine_git_object: b96850a204e559aab7062c8b76110bee7d02cb84
   docs/models/operations/post-v1-efactura-invoices-request-body.md:
     id: 002361a71ede
     last_write_checksum: sha1:c540cccb6df2a63cd9a4aa005871dd78fa4144d2
     pristine_git_object: f42115b0b163950c312c0231af3d89c4ff4a315c
-  docs/models/operations/post-v1-efactura-invoices-request.md:
-    id: fdabd1762371
-    last_write_checksum: sha1:eb0818f4c409a4827dc5b5df14bcc28dd4db585e
-    pristine_git_object: e63e8f00e07a0284bfdabba39d38579a4fa6bba4
-  docs/models/operations/post-v1-efactura-invoices-response-body.md:
-    id: e4169a29421b
-    last_write_checksum: sha1:3ada622f7889b80fcebee2a25ae0c71a550f59b1
-    pristine_git_object: 8160f143a92b61255ff1b5a6d508e0aa3292927e
+  docs/models/operations/post-v1-efactura-invoices-request-refusal-reason.md:
+    id: aac57c21545a
+    last_write_checksum: sha1:98fdec47b2ba17d8b60b240be08698c5280cac48
+    pristine_git_object: 6b0dba1509a5c14166dbc92cacffb100d6711527
+  docs/models/operations/post-v1-efactura-invoices-request-request.md:
+    id: cfa2c281963d
+    last_write_checksum: sha1:5d0ec2e0bc5b19fdfb6c9b5504f6fde1d140dc80
+    pristine_git_object: c6896bd8276cc5700f875f26a8d2037c7122b7c4
+  docs/models/operations/post-v1-efactura-invoices-resend.md:
+    id: 8d70c040ea5d
+    last_write_checksum: sha1:a1aa190d7717e1e4d3121dd0e75dbae72737d09d
+    pristine_git_object: 7cbfc8e851ec3fad6f3da802e825f9148da11db3
+  docs/models/operations/post-v1-efactura-invoices-response-body1.md:
+    id: a360aeec71b6
+    last_write_checksum: sha1:20eb536506282b4af861973cedea0ebce93be48f
+    pristine_git_object: 2dcef5907d33f106d3c8cf131150157f3c7fc38d
+  docs/models/operations/post-v1-efactura-invoices-response-body2.md:
+    id: 4a627a32888b
+    last_write_checksum: sha1:3b55b4fb7486fd1271f8c9cd64d26f3e6e484dc6
+    pristine_git_object: e6982657dfceb5c49600e83a0b0b798262b19871
+  docs/models/operations/post-v1-efactura-invoices-response-result.md:
+    id: a6ba7398f86d
+    last_write_checksum: sha1:90d7c4a68fd656ff0229cf2831bb30e341070956
+    pristine_git_object: 708d15803cf12af21aab2bbefc01270eab8f2d41
   docs/models/operations/post-v1-efactura-invoices-response.md:
     id: 4e6a01ccacea
-    last_write_checksum: sha1:124d2991c0e6456de8a64650e63613d060388dbe
-    pristine_git_object: 9d241a5e22504c69bdbba5fad632a9de43f87626
+    last_write_checksum: sha1:c1ea9ef04e4a7bac5a422b535419642a124a3453
+    pristine_git_object: f4bbf8711e5cbe76f69eaebd092a90eb452d7f9b
+  docs/models/operations/post-v1-efactura-invoices-result.md:
+    id: 13a5d14c25d1
+    last_write_checksum: sha1:02a276478b4888f0e411aa2df66cc6557ae17bd1
+    pristine_git_object: 11684ec5f6de70fcdc624dd4ad05428c535323cb
+  docs/models/operations/post-v1-efactura-invoices-review-reason.md:
+    id: 6f0d3760817f
+    last_write_checksum: sha1:86f76afd9cfa7fec886af1f20cbdd69cc92d5faa
+    pristine_git_object: 290bd8190c08707f7c9c5ad8983372c9c89a547b
+  docs/models/operations/post-v1-efactura-invoices-state.md:
+    id: fe5cfc4081da
+    last_write_checksum: sha1:9b6b41b45e3e0d4ef6b0a7f1c1de0b1a41449a93
+    pristine_git_object: b34a435a3076b1636788e49e0a7e329554c24558
+  docs/models/operations/post-v1-efactura-invoices-status.md:
+    id: 19575b6d55d9
+    last_write_checksum: sha1:10103ce729205c7d072ee93bccee800c78df8ebb
+    pristine_git_object: 320be6e63c98958ec1e80da2ce843fa7ea105c07
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-actor-kind.md:
+    id: 6f084898fba1
+    last_write_checksum: sha1:4a0d799fb37fd8e18671bf6b9de6f5b3cb22a575
+    pristine_git_object: 991c2433b81368205e67863f8da7afeb1a816de4
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-attempt.md:
+    id: 4210bf38cf26
+    last_write_checksum: sha1:30318ee4cb8574ed0a672aa4966e1f51738eda46
+    pristine_git_object: 4ee065f025e69f22e6b07980187ee41f01c2a434
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-basis.md:
+    id: e81093168416
+    last_write_checksum: sha1:65b2a52386390eb560a7b4231209dbb50d76431d
+    pristine_git_object: 13fc829c54e0ca6e74bd36487af922722af4d63e
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-blocked-reason.md:
+    id: 3355a72fb747
+    last_write_checksum: sha1:ce15bafe5c701a6b30e10ebc296abc9f9daa55b5
+    pristine_git_object: f80f5d94fb870fc978b29a3384ebe518c41b46fa
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-conflict-kind.md:
+    id: f068bbbd1e32
+    last_write_checksum: sha1:538f343923552790a1329231066453f605731ad8
+    pristine_git_object: 4e7b833b025ad98b4c989e7f007d5897c482a921
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-conflict.md:
+    id: 28aad91346ab
+    last_write_checksum: sha1:91994bafb36911b4ad76eb45d2a002226c5c3851
+    pristine_git_object: 32084b4b3cfaa000347fda2b3fded83350530b7f
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-copy.md:
+    id: b8dcd0422896
+    last_write_checksum: sha1:6a2b9aa94b1ce3d4a1ffd76b50f9ecb2de2cb861
+    pristine_git_object: f1d31a679af3e9407fcf6937c76c465762530b47
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-data.md:
+    id: 2af81148b4b1
+    last_write_checksum: sha1:93769f42261aaa4d0b74e47e55e50709e7270b54
+    pristine_git_object: 1e0b6417d5e114f4aa0c142b0bdcf3e2ba62c7b3
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-kind.md:
+    id: b9bd61468706
+    last_write_checksum: sha1:9b6ea89ec24c1dcbc03f58fdb7569ab562caaecd
+    pristine_git_object: de6e9845911d3d0fd5e4507d5fe2959809736881
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-late-outcome.md:
+    id: 6dc44e8183ec
+    last_write_checksum: sha1:70f2650516ef8cd48613f37e3d04fa3ed98442b8
+    pristine_git_object: 8ddbb5ce238db2820846f7bd760eb4d877144125
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-observation.md:
+    id: eadade14afa0
+    last_write_checksum: sha1:7ea4271e333c86bcd4ee45dae93c3ce7f2561fa3
+    pristine_git_object: 85335619e14318e969c8c1f3eac462e937b9014a
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-outcome.md:
+    id: 5a3daabe7ecd
+    last_write_checksum: sha1:d6e16b1f8f36308b566abd6483447919cae15d02
+    pristine_git_object: 7f6de8c4b63e9ba87e5808d313da25c0e8133c55
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-reason-code.md:
+    id: fc921cf115ed
+    last_write_checksum: sha1:818a4153d242a13903ebf84a0fa2c3c91847a99a
+    pristine_git_object: cb8f4749d116b0a0593c5b0673af0ff3838c7b06
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-received-source.md:
+    id: 976b0bb9bd35
+    last_write_checksum: sha1:01f161e7372d0d9d467206a55639d2d9880b4d28
+    pristine_git_object: 9d72734c8d4081d73ecb85a8112a43b04fcb537f
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-refusal-reason.md:
+    id: 118817b3b7cd
+    last_write_checksum: sha1:c49aadb368e688e72edde4c1b1f2b17a03434b8e
+    pristine_git_object: 655b0fe8b9372c4bcc64a3edd70d01c4076dc2a5
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-rejection-code.md:
+    id: 295928d3a62e
+    last_write_checksum: sha1:c3065c12711f118043d04ee4532d09a0482b0768
+    pristine_git_object: ddc6f70faf53eaa790cf94000404b70fa96ed02e
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-request-refusal-reason.md:
+    id: bac06909cff2
+    last_write_checksum: sha1:538a82fbb0a275897bce68db2c7472fec8723a55
+    pristine_git_object: 85cc9549c6c378274aec72565ee6078019ce103e
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-request-request.md:
+    id: 1aa161373320
+    last_write_checksum: sha1:f7d6da4329b5cfbded4ae46822535f146491031c
+    pristine_git_object: 13c854aaf5e656e8b85b9e4003be242d160c613f
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-resend.md:
+    id: a7383fc2b65a
+    last_write_checksum: sha1:d3ef4c9a39dee973f1ad47f5524c743d474d46d6
+    pristine_git_object: f597420bbd0ea4f2db2d6f3e0f5674f01f0bc959
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-response-body.md:
+    id: 0d0f8eafed8b
+    last_write_checksum: sha1:1dbc336d16485c583be52f2ed75bbed751e976ec
+    pristine_git_object: c82c41acd6c27608c8d51d6662f4f2fc43559ee4
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-response.md:
+    id: 416cae39b47c
+    last_write_checksum: sha1:1022e3afaf8bc323a3b06c640c5b2c6f2e03cc05
+    pristine_git_object: 500aa3f84f9b5bb212b7b026777da75e96740d19
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-result.md:
+    id: 5a3a9292d183
+    last_write_checksum: sha1:58261f3a63db42199aaa7cd32398540137baf530
+    pristine_git_object: 5d6641a3551c8041c26b6905ad3585e726313467
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-review-reason.md:
+    id: 5259fa6fb75a
+    last_write_checksum: sha1:587d07ae0169703551dcfe0a9839376a4a93abe6
+    pristine_git_object: 03e76e0c82ffa40abaffdc48e3eb7c95a5ff05a1
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-state.md:
+    id: c4a9fcaf6381
+    last_write_checksum: sha1:320a9bddbac73573f64c7879b9fc60c6a41f716c
+    pristine_git_object: 00db3c6fca9715a22e5a9d43a4e3d4683cb8d986
+  docs/models/operations/post-v1-efactura-jobs-id-cancel-status.md:
+    id: 50ccc2375ade
+    last_write_checksum: sha1:bd9b1ba29428a880c5339162c22c9b40bd18b17e
+    pristine_git_object: d0c5419de2250128d7af3afe695443d84495d955
   docs/models/operations/post-v1-efactura-validate-data1.md:
     id: 3aa07cf40826
     last_write_checksum: sha1:83f8b4497e316955a59b02f3a7c02f7e567e8d54
@@ -1697,34 +2341,230 @@ trackedFiles:
     id: bff9c3d200ff
     last_write_checksum: sha1:e7a2c4b0927f8a4b8680a703d08912bdf9ccc41d
     pristine_git_object: 0d9be186d15523a87c459f3acbaf635a166cc7a4
-  docs/models/operations/post-v1-etransport-declarations-data.md:
-    id: "386436644457"
-    last_write_checksum: sha1:d87239cf5e9b6acf6acb0b1576f1e680e5bf9a8f
-    pristine_git_object: d33c05cb8fdab983ea58ab93e8e11d01ffba2dec
+  docs/models/operations/post-v1-etransport-declarations-actor-kind.md:
+    id: 8ab9225a4ea9
+    last_write_checksum: sha1:a3bb56122c0c52ce11a6b190eb8209667fd1f318
+    pristine_git_object: 1ccb5a8d6723803686187d74ea8b4f4ba9f7c44e
+  docs/models/operations/post-v1-etransport-declarations-attempt.md:
+    id: dd85850d7290
+    last_write_checksum: sha1:4e91d9f740112033d2c2c9f05f0e436835a82620
+    pristine_git_object: 3e81bb11db0b02928ee51940a603e17b775eb6ad
+  docs/models/operations/post-v1-etransport-declarations-basis.md:
+    id: aa8ed78dbd47
+    last_write_checksum: sha1:abbc661df7c682d38a170ff67f4d8510c0e63fc5
+    pristine_git_object: d07cd1cfa124a673c6cf0b441b830d3641f2d326
+  docs/models/operations/post-v1-etransport-declarations-blocked-reason.md:
+    id: bc7f5b1b22c1
+    last_write_checksum: sha1:d3415ea312097945d6ac84cb1c7070e7d74b9442
+    pristine_git_object: e5c020b8c660dc87578164cdaf0052dc17daf3fd
+  docs/models/operations/post-v1-etransport-declarations-conflict-kind.md:
+    id: fb8c2f55ec7d
+    last_write_checksum: sha1:a93b021cc2d78af28e2f04c087ddf0d25cdfab39
+    pristine_git_object: 7908c56b404b9ca2802d0465cfb5ea81c2f7dd5c
+  docs/models/operations/post-v1-etransport-declarations-conflict.md:
+    id: f20ff5a2b276
+    last_write_checksum: sha1:9f52ef1334479cfa4a54e780a263cf5965266f0d
+    pristine_git_object: f04dad8086ba35a14358de83718dad8057455e5e
+  docs/models/operations/post-v1-etransport-declarations-copy.md:
+    id: f26ad3fd8593
+    last_write_checksum: sha1:ff645a269811e534fea1790687d30e59fe3d799e
+    pristine_git_object: b8659c5d2f78ac0017181ae05cae2e692ca3d7a5
+  docs/models/operations/post-v1-etransport-declarations-data1.md:
+    id: 019973ba4c75
+    last_write_checksum: sha1:3d4f8058361bb42e8b0b07acc52821b60fb11821
+    pristine_git_object: 24740d531efa4a88dfca83a6bc280126594e85e5
+  docs/models/operations/post-v1-etransport-declarations-data2.md:
+    id: af10e164ddef
+    last_write_checksum: sha1:3e3b6d43b5bea018c806c667f5588eb63379dbe1
+    pristine_git_object: ad33a84c130c564d3fcf5d0210938982a203485f
+  docs/models/operations/post-v1-etransport-declarations-kind.md:
+    id: 9bc82f6b29df
+    last_write_checksum: sha1:ce28ec73b359e940755a74937dd5fd9307ed73a8
+    pristine_git_object: dc1dacb7423b648230e64eae6fc6a8754dd95ab2
+  docs/models/operations/post-v1-etransport-declarations-late-outcome.md:
+    id: 2272ef465e1b
+    last_write_checksum: sha1:eb961006c5c659a4daa685588b6daaf88003d873
+    pristine_git_object: ed2edd46736f3570950909b78d4dac6cb6fd9e2a
+  docs/models/operations/post-v1-etransport-declarations-observation.md:
+    id: 2a2afd57baa7
+    last_write_checksum: sha1:6393e5fb17278530f2d71d0822208b58191c148a
+    pristine_git_object: b0f059482a775f15bf5a95816c4af5ebb3d82d87
+  docs/models/operations/post-v1-etransport-declarations-outcome.md:
+    id: c521b6c27d9b
+    last_write_checksum: sha1:b4500896ff409d15bb7ae50543864716014aac01
+    pristine_git_object: 50890ad03e4548ed4670772da02a51f65d6f327f
+  docs/models/operations/post-v1-etransport-declarations-reason-code.md:
+    id: 4a0f344ff103
+    last_write_checksum: sha1:423d79ab03d46c167ad40943713d0686ecff44c7
+    pristine_git_object: 9c221c874c197ec0b990c801323401d6384247bb
+  docs/models/operations/post-v1-etransport-declarations-received-source.md:
+    id: "255899613559"
+    last_write_checksum: sha1:3829e09391b1f508e1c0b7225b3bb46596cda610
+    pristine_git_object: 99d1ce44282dd024eb0d660d6308597ca4049a2b
+  docs/models/operations/post-v1-etransport-declarations-refusal-reason.md:
+    id: 272b1e073744
+    last_write_checksum: sha1:ecd44084703f1af73f1508bfa92f9cc9f18864da
+    pristine_git_object: c252d5f354f602a7008853192547a8f32e931950
+  docs/models/operations/post-v1-etransport-declarations-rejection-code.md:
+    id: 5694cf5d0cc9
+    last_write_checksum: sha1:b45a2c267f65d9066f07e621182bc1b93c3f0aef
+    pristine_git_object: 6eae3888de0db5d8c08db39c4da615f82882b6d7
   docs/models/operations/post-v1-etransport-declarations-request-body.md:
     id: 6efb3067e533
     last_write_checksum: sha1:35dfee93605b1d5e2b0992bc27491a43fcfac25e
     pristine_git_object: d8daa8c6739b3be8f29f3704e84afb25d0034a33
-  docs/models/operations/post-v1-etransport-declarations-request.md:
-    id: c6402755c62a
-    last_write_checksum: sha1:35468ec48e6df328f12c363d7a48d33e5203c592
-    pristine_git_object: eb3d7eb7b9345a925a280e08dde7a04d39f9f450
-  docs/models/operations/post-v1-etransport-declarations-response-body.md:
-    id: 65ea28f59903
-    last_write_checksum: sha1:7a8c3d4d30447abda92640bd9c068f0a8d4fe569
-    pristine_git_object: dd48fd2e47bed7d519768883e4f4d7cdcc00d86e
+  docs/models/operations/post-v1-etransport-declarations-request-refusal-reason.md:
+    id: eb3b9fa3e039
+    last_write_checksum: sha1:5a7fd2063490e18e80b081f6fb6f83dd1308d0e7
+    pristine_git_object: 4db874a6ddd973b2caba9102164143e253c32be3
+  docs/models/operations/post-v1-etransport-declarations-request-request.md:
+    id: 59e3a4609971
+    last_write_checksum: sha1:cd61e10c6e219227708b398c817dc9f059585d1e
+    pristine_git_object: 2943cd4ffc45cc3b19d3a77ae3e713324948c3c6
+  docs/models/operations/post-v1-etransport-declarations-resend.md:
+    id: 9e2446dc92db
+    last_write_checksum: sha1:54b12bd9af48149bd56c01497f86b1504f93ebbe
+    pristine_git_object: 7884566a5dfc5930e491983afcaaf193a0011e6a
+  docs/models/operations/post-v1-etransport-declarations-response-body1.md:
+    id: d276bb630219
+    last_write_checksum: sha1:ba9864b17f4bbe9055183ed71fd99152de363d8b
+    pristine_git_object: 4b03b6b0a95b00e83da73a9c5b1595b238c2d44b
+  docs/models/operations/post-v1-etransport-declarations-response-body2.md:
+    id: 8995ffec1441
+    last_write_checksum: sha1:f1c4e8504d3a462ce33493ecaa8f7d8e10c1053c
+    pristine_git_object: 605ad7b9fc164a2dcb786f83a0a3821eab94294f
+  docs/models/operations/post-v1-etransport-declarations-response-result.md:
+    id: 51f2deaec9f8
+    last_write_checksum: sha1:8efcc4eb2d1744a20cdfd754d11a1410509b52a0
+    pristine_git_object: f05a0941dfe12f4c6234ca216cfbe397ae142077
   docs/models/operations/post-v1-etransport-declarations-response.md:
     id: 4e1f8a96a3e7
-    last_write_checksum: sha1:4632ffdb683a9a4285b62987c450a63731e88765
-    pristine_git_object: 635727727c2824413f924b29aa789397d4c5304e
+    last_write_checksum: sha1:b429ebc49c0c2725192173f533ab1d57721a589f
+    pristine_git_object: f05c3a6d391a92a641a2658dcb72df21e865c341
+  docs/models/operations/post-v1-etransport-declarations-result.md:
+    id: bf9ccfd14329
+    last_write_checksum: sha1:08a1fe984bad3c15981d0c5e3987aeb6b99713ac
+    pristine_git_object: 7e00668ebf54bc0c469239cfd2c5ba1dec72be92
+  docs/models/operations/post-v1-etransport-declarations-review-reason.md:
+    id: 8fb461268d37
+    last_write_checksum: sha1:2f949bf4eb220261bbabb8a246a6303b6cad5d45
+    pristine_git_object: 1057877ae92071fe767be628fb31b27e62530d2c
+  docs/models/operations/post-v1-etransport-declarations-state.md:
+    id: 5ca6eb9dbf71
+    last_write_checksum: sha1:3ee79821ae58dd27abbff1cb5cc023c5f096e048
+    pristine_git_object: 1d087dadc604aea4d1c8f02f7e698ff4171f9fc8
+  docs/models/operations/post-v1-etransport-declarations-status.md:
+    id: ad84f48cf53f
+    last_write_checksum: sha1:c130005706caa014a9c85f5d00ac6bc0093a529b
+    pristine_git_object: cc0bfa37b6579b9587592c7075e667ef37ca50ca
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-actor-kind.md:
+    id: 31b729e46f46
+    last_write_checksum: sha1:6f875ab3d60a8b3603b296ff558ce3167895daef
+    pristine_git_object: 72e90abf7a95b11023a74b3a8d75265e632467f8
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-attempt.md:
+    id: 382705e9b177
+    last_write_checksum: sha1:0aa919158e62aa70afa075102d2054366d530f76
+    pristine_git_object: ad1ccd89505478b42eb608a7620e8d1fbaa3df4e
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-basis.md:
+    id: c693c4ee14e7
+    last_write_checksum: sha1:7a4a6da147e9e0f4c8bbc1fd605ca95884651dfe
+    pristine_git_object: c85a9fe2882f942166506bb2fdeafdba2e6a1be2
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-blocked-reason.md:
+    id: 9429cb9c1b9b
+    last_write_checksum: sha1:83ad03128b8441b532a138e3b13f0a1aadd7d5a7
+    pristine_git_object: 6de60960c4920aa92a211ce7cc0707e20c6e16a8
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-conflict-kind.md:
+    id: 52a930fe5881
+    last_write_checksum: sha1:79eac1eaec8527c34fbffd833eced2dc82894069
+    pristine_git_object: 9e9b89a1bac29e3bf79b88bc7d5a4badea56669d
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-conflict.md:
+    id: dba3992938b4
+    last_write_checksum: sha1:782caf6142bfb54e5a83e8cbb69dad8ce70a473b
+    pristine_git_object: 79d07ac771aac6bce6fa6896ee35c4c00c0cfa3e
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-copy.md:
+    id: 849df3bbd935
+    last_write_checksum: sha1:a5b59d1caeda10ab8842bb8213b50bafe83b21fd
+    pristine_git_object: ad3f67fdc3e91f0d91dde8e20470ceb21de1658d
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-data.md:
+    id: f1bc2cede530
+    last_write_checksum: sha1:53246cbdbf91a5855f67ef81dfb13f8450cd8828
+    pristine_git_object: e206d198096c6fdd2c3ef389123a73702863ee27
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-kind.md:
+    id: c619e493b665
+    last_write_checksum: sha1:5a20c5c3f088bd3b87c775080d0da73473d2f0bd
+    pristine_git_object: 85d33295ef5543bb8df3284c97d8419328787768
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-late-outcome.md:
+    id: c1d23837e6d3
+    last_write_checksum: sha1:7d643ee70dbbc3c5f78a6dff1ffd6d460c138e1a
+    pristine_git_object: 98ac80b469b53c10f3e8c7bb17d1c022f26c39a9
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-observation.md:
+    id: 93c4e896ad3a
+    last_write_checksum: sha1:78bef8df710ae41537e26d88ad947dfebe297b68
+    pristine_git_object: e72f4d3bb3ea1bd6322d97cd9862a08042b98ec4
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-outcome.md:
+    id: aca56c1791c7
+    last_write_checksum: sha1:aeca189f14ca4ee84712b28451fb36a14c22a870
+    pristine_git_object: cf3cea1697ae94369a43e14f06c0bc40f56a29b7
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-reason-code.md:
+    id: f76b4fde873f
+    last_write_checksum: sha1:5737d96b619a566f9983f7da10e41d4165b4af79
+    pristine_git_object: 9cd736750f3b86eef9e23ff0027e3cc426a99caa
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-received-source.md:
+    id: d18c8cba5936
+    last_write_checksum: sha1:3e20df191c7b2c27fa1f45cc709e581c9d35c84b
+    pristine_git_object: 404667c336e0ac94aed2fbb148780bdc5aee5778
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-refusal-reason.md:
+    id: 4ff02e3a1a30
+    last_write_checksum: sha1:c0297eee67aede854cb70e10ecb612df6a6fa282
+    pristine_git_object: 58d7451ef86eea56b7ec0551fa4889bec7c9fa44
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-rejection-code.md:
+    id: 1253889f2c25
+    last_write_checksum: sha1:bcc8be635f2dacd8f441597d5161a72e4ade710f
+    pristine_git_object: d2a061dba43319b7b05fb3bc23f1ea089b75a767
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-request-refusal-reason.md:
+    id: 62332c81c4e2
+    last_write_checksum: sha1:c6fc16a44765ff14a71158824ac899c9496efda8
+    pristine_git_object: 2836a130f409aafc2a066163d0e5f1f2c50ba769
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-request-request.md:
+    id: 8bd85db1445f
+    last_write_checksum: sha1:36fdd39689fbadf7ebaf41efa7085859c9341e3a
+    pristine_git_object: 65c218caefa5253c85c3b9d2a8076436e849a190
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-resend.md:
+    id: dd19694f1c0a
+    last_write_checksum: sha1:9927e200d12401d91157aab8606f1512f5971ee3
+    pristine_git_object: 47b14d164e172848d79311f3dc41142f184db9f3
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-response-body.md:
+    id: 011a07d77717
+    last_write_checksum: sha1:55bb202c6f9a659529300b38905d683bb45cc7be
+    pristine_git_object: 777f24041de922855f1c927041962565d3022c4b
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-response.md:
+    id: 6501c52a3eca
+    last_write_checksum: sha1:54a9a856b8aa23af305d4a6cd60e3a042b7a4de7
+    pristine_git_object: b8f44ec0e8686e8f7bd6c0919dcd90925dd5ff53
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-result.md:
+    id: f8d2aa40ac6d
+    last_write_checksum: sha1:d2bc784ec4130ac970b3527c4cb48f5760c370d2
+    pristine_git_object: 593a91a996aa522a33c83e6c2061f388793ddc5f
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-review-reason.md:
+    id: b6111157c5ee
+    last_write_checksum: sha1:42284f983b076e439de885387c82761de9c662dc
+    pristine_git_object: c7ea11916d6abbd91a1f2e15fda97b022f2b08c8
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-state.md:
+    id: 5060a7dec0c9
+    last_write_checksum: sha1:84872e535f938003e8e69378f6a6485d8e1808f3
+    pristine_git_object: 8d1e3b77fdfdfa3d21c81a560cb77f54f2a33914
+  docs/models/operations/post-v1-etransport-jobs-id-cancel-status.md:
+    id: c42e304fb4fc
+    last_write_checksum: sha1:0f0097a72ef8e2b56d521e15ac24d859c8fffa76
+    pristine_git_object: 7f056e1595d8766028ff7f3efc6c147a30c8615a
   docs/models/operations/post-v1-reges-contracts-data.md:
     id: 2b1289ae89b5
-    last_write_checksum: sha1:210c1452593480b832a6d91f1e054e8ff6633cd5
-    pristine_git_object: 4905a416f5393eeee802120946966076ee3f4140
+    last_write_checksum: sha1:958d43c0da61fa5dbf4185f00a7a4b19b7ab5304
+    pristine_git_object: 6475fa1c73dab3dc5654772d04c9124e98b0a40a
   docs/models/operations/post-v1-reges-contracts-id-terminate-data.md:
     id: 5e4702d885e1
-    last_write_checksum: sha1:374f8af90dbf8f2ea9fd9175917d565ec550bb41
-    pristine_git_object: 614f4cd0724807f44ec0912b293058a0f6de70ed
+    last_write_checksum: sha1:95c9bfc50bc4abbcee72d0301f86caee3f5f4bfe
+    pristine_git_object: dcf1bff9856bfa757a67cc0741bb2ae09d341a9f
   docs/models/operations/post-v1-reges-contracts-id-terminate-request-body.md:
     id: 205949f9591e
     last_write_checksum: sha1:d4074b3d3c612b27e3c69409eaea6a06a919e114
@@ -1735,16 +2575,16 @@ trackedFiles:
     pristine_git_object: b7ec18d4a3bb9505d62677df47149c03246a6bbd
   docs/models/operations/post-v1-reges-contracts-id-terminate-response-body.md:
     id: dd2117bec294
-    last_write_checksum: sha1:de3c84952baf7d8f67f3930f5f7758db913be4c6
-    pristine_git_object: 10e71365a3843067cd14bc1e3f74b270bc815d78
+    last_write_checksum: sha1:773f405693134c887cc7aa1a4fd4ddeef8c80509
+    pristine_git_object: 7dfff5b746e394c7ff7ad6d6981600c083229c4b
   docs/models/operations/post-v1-reges-contracts-id-terminate-response.md:
     id: 3ad3cff10453
-    last_write_checksum: sha1:95ccd13265b8fbdd61991c4203dded6d1af97c37
-    pristine_git_object: 3577b4464c47ac6b30c2769ab9e7240a8365ce0c
+    last_write_checksum: sha1:591d8d39d507b049de701d324750b8ffd6c02fbc
+    pristine_git_object: a76bbc9c5fa840a088072f95a00ea2620295cb7a
   docs/models/operations/post-v1-reges-contracts-id-terminate-status.md:
     id: c7edb387418b
-    last_write_checksum: sha1:340a57fb18273498c9346f034621edfeb19d4a95
-    pristine_git_object: 1c25c15de54bca62f190da997814df3597d374d1
+    last_write_checksum: sha1:88c5e42884a3093841de6efc7f2462e15e96a75d
+    pristine_git_object: 9f33c8536233bfb8124c396aed48c09a3520acb1
   docs/models/operations/post-v1-reges-contracts-request-body.md:
     id: 1777396047a5
     last_write_checksum: sha1:d573c47bd31990acc62b5d4dcf34a0902a407b9c
@@ -1755,16 +2595,16 @@ trackedFiles:
     pristine_git_object: 62289e76a378cd15cc9f7e996ef8dc9227e5e2e7
   docs/models/operations/post-v1-reges-contracts-response-body.md:
     id: d37e25945d14
-    last_write_checksum: sha1:066bfc34cd7c03c349b7b6ef466c59258a974b78
-    pristine_git_object: a285584dc72946317641104d1902aa728eeeaabd
+    last_write_checksum: sha1:66fed46eb2210c59b27aa031f306556717ac97b0
+    pristine_git_object: bdfe1e30b788edb0a58c3a68b3dd440c6f9ecc72
   docs/models/operations/post-v1-reges-contracts-response.md:
     id: b38a8c7ee89b
-    last_write_checksum: sha1:7db233675a0f1005802c7d364353ec06994edac9
-    pristine_git_object: 6c9ce65ae6b75ccf67a840ecc7cb53a806950a7f
+    last_write_checksum: sha1:90f950002b02ee402b748abde411e9bfc4430113
+    pristine_git_object: 922b7c48ccd58671bd6515f4a303b37199d6d98a
   docs/models/operations/post-v1-reges-contracts-status.md:
     id: 859e9800b439
-    last_write_checksum: sha1:83fe7fdca81d62a9c3ec67ba80aa3c7da38cba59
-    pristine_git_object: 36419ac26f4fdba5f1455689edff7ae9fc54141c
+    last_write_checksum: sha1:b18ce974ed150b305db699d41b4100a65119ad74
+    pristine_git_object: adbe908a8e90086b993884e3a08f57c7b4dfc7f8
   docs/models/operations/preceding-invoice.md:
     id: dd8b4beee2b4
     last_write_checksum: sha1:c1027aabbc94c112f2fac5f91b0a7d3fb90d81b3
@@ -1887,16 +2727,16 @@ trackedFiles:
     pristine_git_object: becf6cd461947ab852f43e3642a2d4ed34a81aab
   docs/sdks/efactura/README.md:
     id: 55f839481371
-    last_write_checksum: sha1:99352d309a3c94e5fe665c232a07ab9cbc736050
-    pristine_git_object: 421b3e36f98770c0e28c1f03ed6acc27072b5429
+    last_write_checksum: sha1:65601b3cf438f536ad5d1591ab19426905af2b3d
+    pristine_git_object: 0633c8eb40dee93d371e4360773c357f0c5465a7
   docs/sdks/employees/README.md:
     id: 3adbd327ce9d
     last_write_checksum: sha1:f3b6701318c87c3c3d92455564d80bb62b437d17
     pristine_git_object: 2fbe605b33fd49a3f0c0a23c18b9ca998c19cd9e
   docs/sdks/etransport/README.md:
     id: 2334ab5b3bd3
-    last_write_checksum: sha1:01bf7b5227283dce00185804c18e31c70bb6d697
-    pristine_git_object: 8aea97d22511bde30ee57959863a941754059417
+    last_write_checksum: sha1:6f9e6c1f5bb64e0ece949df3669bb20b4b09ccab
+    pristine_git_object: 8b4217593b111eb422e0fb2723572068522ad46a
   docs/sdks/fx/README.md:
     id: 1732c5b9a931
     last_write_checksum: sha1:8ed938e9f25543325927b8929417ff7d8b17203f
@@ -2045,26 +2885,46 @@ trackedFiles:
     id: bf778811fcfb
     last_write_checksum: sha1:5fd424b9f54dd3ad504127f22278ec2205cbcabc
     pristine_git_object: d76bc5060e64d69657172a7587e72d0901502372
+  src/funcs/efactura-get-v1-efactura-jobs-id.ts:
+    id: becb510427ab
+    last_write_checksum: sha1:5ea1de2bd5b89783307898154aa98703a3c0f485
+    pristine_git_object: be1f31c24c212c58978737f1a87d90ce23e34248
+  src/funcs/efactura-get-v1-efactura-jobs.ts:
+    id: 4b551a29639d
+    last_write_checksum: sha1:cc0bdf07405a5f1cd3d3d546a04e0f742c86e170
+    pristine_git_object: 82645d9fadcf0574f632d1e1155e98169bb37295
   src/funcs/efactura-list-messages.ts:
     id: 17978f769ec0
     last_write_checksum: sha1:b90d07c32f8b2f9fa0c9f5d68b7b9958eed5171f
     pristine_git_object: 370f0b6e7007e371789efbbb549544ac722b9daf
+  src/funcs/efactura-post-v1-efactura-jobs-id-cancel.ts:
+    id: 0a5a80e05c58
+    last_write_checksum: sha1:10240beb6a03023c1fb24ffa6377f5a92a1c4a81
+    pristine_git_object: 9f666ed477d2e2e6ec21677bf6ee4e1dc0778369
   src/funcs/efactura-status.ts:
     id: 82f8fa9c8d7f
     last_write_checksum: sha1:087a9d0ad186691b1581768cf9864aed397339c4
     pristine_git_object: 3110e27a8312c6eeb3f333a18fb304f3c08e01d3
   src/funcs/efactura-upload.ts:
     id: 27f979c4e572
-    last_write_checksum: sha1:4a13fc0476ef8c738c4b36c3dc0c19fe0eeb959c
-    pristine_git_object: 0b471adb995c6871b4c274e7c689e349a118b380
+    last_write_checksum: sha1:234f05937ad49a26c0f84e2757ab59824662a2c5
+    pristine_git_object: 5f033410d77b525f7bdaf149cc52d272db1d920c
   src/funcs/efactura-validate.ts:
     id: 64ddd9e8f35f
     last_write_checksum: sha1:429cb451b5811037de3910b75f4085af29245e78
     pristine_git_object: 69006e163f9ff9277db1072ec12cbaa8a5e582c4
   src/funcs/etransport-create.ts:
     id: d71d3b075355
-    last_write_checksum: sha1:de85066f46e50eee2b015ed9fa7922a491ce6765
-    pristine_git_object: 9772c25e58c4c2b13486338162393860146e06d6
+    last_write_checksum: sha1:c08c84534c43f41cf924c4af948eaac93d177b1a
+    pristine_git_object: 89650751f657077ef66dadedd0882f2eaaf3fd74
+  src/funcs/etransport-get-v1-etransport-jobs-id.ts:
+    id: 9a5b45cefd3b
+    last_write_checksum: sha1:90b41bb46c8bda515ff0542b6d3ea6c64a5b99a3
+    pristine_git_object: 0db6ec30ebc8fb8c88e71bb1db446af2f8f202b2
+  src/funcs/etransport-get-v1-etransport-jobs.ts:
+    id: 36ace8a2510c
+    last_write_checksum: sha1:7ae810b25a8395144f3d7d482111ccee09b94ccd
+    pristine_git_object: 9069643d4be24518ec5ddbb6ff482b01f747e28f
   src/funcs/etransport-get.ts:
     id: 0fbcf906c850
     last_write_checksum: sha1:097e522372006a4fd369e2563d5e471b5068310a
@@ -2073,6 +2933,10 @@ trackedFiles:
     id: 55fa083bfb50
     last_write_checksum: sha1:5babd2dd3f341ba820046b1ee45f837a1e4bb98c
     pristine_git_object: 1636cd78c418f9a2a12982c3b6613f082b1c5b65
+  src/funcs/etransport-post-v1-etransport-jobs-id-cancel.ts:
+    id: 053766fb9c3d
+    last_write_checksum: sha1:cb53188d5bd66ece7f29fc8a26d25e5c23ad4e29
+    pristine_git_object: fdb35de37406091b7654fcc6445b6b4b9b19b575
   src/funcs/fx-convert.ts:
     id: 1a1cec044616
     last_write_checksum: sha1:4bcddf8ce429cbb906dfc79501f751fd1971bcdd
@@ -2295,8 +3159,8 @@ trackedFiles:
     pristine_git_object: e4f870ddddfb3745e52ab6b53c168025243e28c3
   src/models/error-code.ts:
     id: 5d75f99d432b
-    last_write_checksum: sha1:b45d30eda69c55fa7df8ec4004eb7ad2e4dad100
-    pristine_git_object: cfca97a5f392f74bdd62500eff70e9a78319cb30
+    last_write_checksum: sha1:f45eef02e1b5e2495dfdf776196bd4b7dc0dcc9b
+    pristine_git_object: b83ef09e554580fbecf560b681e2af8fe05af6c2
   src/models/error-envelope.ts:
     id: 1925d97ab6b3
     last_write_checksum: sha1:03f0e7bdaeb12e74e78e377ca0b800bcf3e02d6d
@@ -2399,8 +3263,16 @@ trackedFiles:
     pristine_git_object: cad4ba63f3dab7464180b5c68e259d58efe6cbee
   src/models/operations/get-v1-efactura-invoices-id.ts:
     id: c8eb49234700
-    last_write_checksum: sha1:14fb7e6f712384c67995cc52a542e95b85b9aece
-    pristine_git_object: aa466984c7fdded4e5c7485da806f26b7d416922
+    last_write_checksum: sha1:2596a0d1f36ef67239cfef794c4f39352d2c9278
+    pristine_git_object: a2ab897544ffc339ec7dbcaab7492b6d9226ad3e
+  src/models/operations/get-v1-efactura-jobs-id.ts:
+    id: df53b2b40923
+    last_write_checksum: sha1:e3d5a30e561e151993acd35de2f7ba5984db0487
+    pristine_git_object: fa2468a5107cb20fca6def8714d285b82fa6d9ef
+  src/models/operations/get-v1-efactura-jobs.ts:
+    id: 044b3c82fd93
+    last_write_checksum: sha1:f1a1588764dbce3416fd9361b6e10ef60ce44e5a
+    pristine_git_object: bbe040d8f0c89780a4618cf9a474e3f2de6e6c90
   src/models/operations/get-v1-efactura-messages.ts:
     id: b5a94bfac67e
     last_write_checksum: sha1:33a1bd0358acc07b5d92eab612ad03de965b5aff
@@ -2409,6 +3281,14 @@ trackedFiles:
     id: f35d4b947289
     last_write_checksum: sha1:4ee8b945fd0b78ef39fa61c7078a7f08b6a4c45c
     pristine_git_object: 08593baef225a60c232629867c032aeba7492e47
+  src/models/operations/get-v1-etransport-jobs-id.ts:
+    id: 64a5dbfe4b3b
+    last_write_checksum: sha1:6fbf81f49437fc2793cadeaeb45a7209e6a48c7f
+    pristine_git_object: 57413e75f6f7f2fdb6377ddaa626f3c93ea49f62
+  src/models/operations/get-v1-etransport-jobs.ts:
+    id: 35f8f7570da7
+    last_write_checksum: sha1:c7adb8e6c2ae8cbc5440275559617d5841356706
+    pristine_git_object: 976b54d0cbffb2ca6a212657c4ef9a212bda8d62
   src/models/operations/get-v1-fx-convert.ts:
     id: 704133c9eda1
     last_write_checksum: sha1:43e27e18b6ebc17c49103df8cbe8f43c07c749f9
@@ -2527,8 +3407,8 @@ trackedFiles:
     pristine_git_object: 4950d61ccffc38bc28959391657389e9561000eb
   src/models/operations/get-v1-reges-jobs-id.ts:
     id: 4a0cb3840503
-    last_write_checksum: sha1:bf5295005c958a1716053cbb4f65245480196ffc
-    pristine_git_object: 442ddd7334ed0a9007b6116781aeefae8b11d367
+    last_write_checksum: sha1:b82f81e99cc0770580e6dc3c8ca3631a74931fed
+    pristine_git_object: f9ca5f82373136145ea7dea874f73ddfa28ca3eb
   src/models/operations/get-v1-search.ts:
     id: 1a8ff9041b87
     last_write_checksum: sha1:df5b0ad1a370774d178d378c370590cb2a2ea2f8
@@ -2555,12 +3435,12 @@ trackedFiles:
     pristine_git_object: 10866e5f31d2196bb9f89df1e71bf6919fde2dcd
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:1597b38013b2ad778c3c6f76b2d1f161e4ef7088
-    pristine_git_object: 26b24f40c2cbf41dc2664584bb1f803ec1857a50
+    last_write_checksum: sha1:6784ffa6487737ad85138c8ab490bc45af1bf472
+    pristine_git_object: 92ca798baeff073019c5adab823c5b4b85dfd74b
   src/models/operations/patch-v1-etransport-declarations-uit.ts:
     id: ee68d58f158b
-    last_write_checksum: sha1:bfc3d0dcb565a2653519a4193bf6ac12e6000d54
-    pristine_git_object: 9b891dfd419832261a3484d9f755783eb8cc8e29
+    last_write_checksum: sha1:173768b564ef83ce3bf2c2d56013bdeb4d5830a0
+    pristine_git_object: d2eb4ea37bbafebee22cfd22f58ab7eeeb719829
   src/models/operations/post-v1-company-batch.ts:
     id: 5e1fc3069c5f
     last_write_checksum: sha1:c20b4f9fdc071bc8cebcb8f87b4316cf52750733
@@ -2571,24 +3451,32 @@ trackedFiles:
     pristine_git_object: c61fae94c6fc49d92c4b1c8f901f1ff74745032f
   src/models/operations/post-v1-efactura-invoices.ts:
     id: f4bc541a5402
-    last_write_checksum: sha1:4c996a244ff43798cdd73e7f9cb88256e6866497
-    pristine_git_object: 38dd0315beb0b59e12f1db812d5e400867586027
+    last_write_checksum: sha1:2b44a88a468d8dde1b423827847c23332086ea0a
+    pristine_git_object: 3873dd5fdb485182e7edc1b1867158050e138464
+  src/models/operations/post-v1-efactura-jobs-id-cancel.ts:
+    id: 2c5f9c5c3b2a
+    last_write_checksum: sha1:6c5a3dadf3a251fe0b8890e4636428a4eacd79ab
+    pristine_git_object: 5d7f47ed816ece64a814855f991b5972a9610581
   src/models/operations/post-v1-efactura-validate.ts:
     id: 7832a1c396c7
     last_write_checksum: sha1:dfcc501f0bbd5b104ad3afc2463cbfdac45d5e3f
     pristine_git_object: 1ecea0ae2d9d2c25529f45447494edcaa7eaba7d
   src/models/operations/post-v1-etransport-declarations.ts:
     id: 2257610b0d91
-    last_write_checksum: sha1:f8977c168d3682c578e299afca9bf1c57b6258e3
-    pristine_git_object: 2b75662c226d7775ed5ca6a4c4ae5efb4c2190c8
+    last_write_checksum: sha1:a3852a0998fc35de667b2217f4ba12cd28d874ca
+    pristine_git_object: 382185a902b2cc57f77622697547864ea4baf7c2
+  src/models/operations/post-v1-etransport-jobs-id-cancel.ts:
+    id: 6b184d2837a2
+    last_write_checksum: sha1:d2012c9ce48e52174a69376dd1d402264704aeb8
+    pristine_git_object: 8d784b468ec2b8acd73deb250c2ba56e81396804
   src/models/operations/post-v1-reges-contracts-id-terminate.ts:
     id: ea0793906fe8
-    last_write_checksum: sha1:e1fd244af18021cfed056b4e3e45a870eefbd533
-    pristine_git_object: 073a8036ccc50f93a42b19e8a239b33e46c85f5f
+    last_write_checksum: sha1:2829d297c933b0fa9a2d97c1f1091f70aecb02bf
+    pristine_git_object: 2d2d3e07d91f3b51e059ccc39d575bfed06685e0
   src/models/operations/post-v1-reges-contracts.ts:
     id: 38a56f0aca12
-    last_write_checksum: sha1:7e3fb6ca6d7e5125df7ae77e3b3679ba9c794a6b
-    pristine_git_object: ee07f99df52432529d17cf01793c9520250a126b
+    last_write_checksum: sha1:fd81bd1ab35cdda757cfa3f11135b3f8dbc868f9
+    pristine_git_object: 7659b510769370b75845224f01bbf9d6c99d0e6f
   src/models/security.ts:
     id: d90c6c784ca5
     last_write_checksum: sha1:b5005229f7399e3b88c45f24bca435ff001f022a
@@ -2623,16 +3511,16 @@ trackedFiles:
     pristine_git_object: c192ca3ef03f22b9603fddc6367162d89d096f18
   src/sdk/efactura.ts:
     id: 70d95793e166
-    last_write_checksum: sha1:94b086c8dc3398b87b5de0a84caa904b45e91243
-    pristine_git_object: 1b02ab7ac57b216892e4c907b51bb3c577e32608
+    last_write_checksum: sha1:cc93eef9a91f61b7e942825a9ac440cf90eaf39c
+    pristine_git_object: bf27400fa9cbaee64a7947987118245b5acb708b
   src/sdk/employees.ts:
     id: c13a0923df24
     last_write_checksum: sha1:1919e7f5c02610d6a010c29526898be6a344f7cb
     pristine_git_object: f7f46b28436346396877913fb1b7ee234359e6be
   src/sdk/etransport.ts:
     id: ffadceca44c1
-    last_write_checksum: sha1:32dd47c2b33883bd806b2b56962331a19d955925
-    pristine_git_object: 4f50919b727488e898cb51827dda4a7585954a44
+    last_write_checksum: sha1:91310491749d405b075895124eea37177ff0b43a
+    pristine_git_object: a79218b8088ce9ae59d2347449a04dbad53843be
   src/sdk/fx.ts:
     id: db68e7313216
     last_write_checksum: sha1:163f84b1c24740d886b4d9e392e020961eca7662
@@ -3480,6 +4368,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
         "503":
           application/json: {"error": {"code": "not_found", "message": "<value>"}}
+        "202":
+          application/json: {"data": {"jobId": "106320d8-bf37-4b25-aa17-30d5a4bcdc20", "kind": "efactura.submit", "buffered": false, "status": "error", "inFlight": true, "delivered": false, "dispatchUncertain": false, "unresolvedDispatches": 720256, "duplicateDetected": true, "lineageJobIds": [], "blockedReason": "feature_disabled", "reviewReason": "rejected_attempt", "dispatchCount": 502383, "maxDispatches": 774822, "nextAttemptAt": null, "unknownSince": "2024-09-17T13:02:14.021Z", "resendEligibleAt": "2024-10-18T12:59:17.925Z", "deliveredAt": "2026-05-28T06:04:55.766Z", "resourceId": null, "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2024-05-28T09:26:40.912Z", "until": "2024-08-10T20:43:06.656Z", "checks": 631313, "inconclusive": 563188, "lastCheckAt": "2026-01-16T05:29:57.491Z", "lastReason": "<value>", "lastConclusiveAt": "2024-11-30T01:30:01.180Z"}, "evidenceVersion": 506309, "attempts": [], "copies": [], "conflicts": [{"kind": "identity_conflict", "anafMessageId": "<id>", "recordedAt": "2026-11-25T00:20:02.300Z"}], "resend": {"eligible": true, "refusalReason": "conflict", "request": {"evidenceVersion": 592961, "state": "authorized", "refusalReason": "rejected_attempt", "actorKind": "customer", "actorRole": "<value>", "requestedAt": "2025-01-30T07:41:26.820Z", "decidedAt": null}}, "createdAt": "2026-02-08T09:45:16.133Z", "updatedAt": "2026-10-05T23:33:15.636Z"}}
   get_v1_efactura_invoices_id:
     speakeasy-default-get-v1-efactura-invoices-id:
       parameters:
@@ -3633,6 +4523,8 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
         "503":
           application/json: {"error": {"code": "passkey_required", "message": "<value>"}}
+        "202":
+          application/json: {"data": {"jobId": "5429fcce-5b82-4d71-abb8-fde93ddb2f0f", "kind": "efactura.submit", "buffered": true, "status": "needs_review", "inFlight": true, "delivered": false, "dispatchUncertain": true, "unresolvedDispatches": 34799, "duplicateDetected": false, "lineageJobIds": ["ac822f81-3da4-4255-9f8a-b330787d0b03", "8cca3d10-27db-40b6-8617-998170194c3f"], "blockedReason": null, "reviewReason": "identity_conflict", "dispatchCount": 783833, "maxDispatches": 955272, "nextAttemptAt": "2025-02-28T04:03:41.169Z", "unknownSince": "2026-09-16T00:07:23.874Z", "resendEligibleAt": "2026-06-19T14:43:57.167Z", "deliveredAt": null, "resourceId": "8ed5b0dc-a3cb-4056-bb2e-d96659b8ee1f", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2026-12-31T00:24:03.430Z", "until": "2024-08-15T13:14:34.602Z", "checks": 407516, "inconclusive": 305933, "lastCheckAt": "2025-07-14T21:29:10.147Z", "lastReason": null, "lastConclusiveAt": "2025-08-27T19:47:08.577Z"}, "evidenceVersion": 168398, "attempts": [{"seq": 728691, "basis": "human_resend", "startedAt": "2024-06-10T15:23:02.504Z", "finishedAt": "2025-09-23T06:48:32.385Z", "outcome": "definite_reject", "lateOutcome": "definite_reject", "unresolved": false, "rejectionCode": "http_4xx", "httpStatus": 952378, "uploadIndex": "<value>", "uit": "<value>", "errorCode": "<value>", "reasonCode": "connection_pending"}], "copies": [{"uploadIndex": "<value>", "downloadId": "<id>", "uit": "<value>", "result": "ok", "receivedSource": "listing", "resultSource": "<value>", "attemptSeq": 851364, "dataCreare": "<value>", "firstListedAt": "2025-03-30T12:59:20.701Z", "recordedAt": "2024-01-28T17:02:47.400Z"}], "conflicts": [], "resend": {"eligible": true, "refusalReason": "not_eligible_status", "request": {"evidenceVersion": 536571, "state": "pending", "refusalReason": null, "actorKind": "customer", "actorRole": "<value>", "requestedAt": "2026-06-26T16:22:30.828Z", "decidedAt": "2024-05-31T10:05:34.555Z"}}, "createdAt": "2026-07-12T18:35:34.281Z", "updatedAt": "2026-12-28T06:08:38.013Z"}}
   patch_v1_etransport_declarations_uit:
     speakeasy-default-patch-v1-etransport-declarations-uit:
       parameters:
@@ -4170,4 +5062,94 @@ examples:
           application/json: {"error": {"code": "<value>", "message": "<value>"}}
         "503":
           application/json: {"error": {"code": "forbidden", "message": "<value>"}}
+  get_v1_efactura_jobs_id:
+    speakeasy-default-get-v1-efactura-jobs-id:
+      parameters:
+        path:
+          id: "81b49a50-8a97-48fc-b87f-bc5a6073923f"
+      responses:
+        "200":
+          application/json: {"data": {"jobId": "f632a373-e4c6-46a9-b852-c1810ed9c74b", "kind": "etransport.declare", "buffered": false, "status": "error", "inFlight": true, "delivered": false, "dispatchUncertain": true, "unresolvedDispatches": 987130, "duplicateDetected": true, "lineageJobIds": [], "blockedReason": "connection_revoked", "reviewReason": "identity_conflict", "dispatchCount": 136452, "maxDispatches": 828047, "nextAttemptAt": "2026-11-23T08:44:09.581Z", "unknownSince": "2026-11-22T07:11:29.335Z", "resendEligibleAt": "2026-10-08T05:19:21.407Z", "deliveredAt": "2024-06-06T17:41:05.140Z", "resourceId": "bec3c8c1-6eab-46c0-85ad-ec3cc6004c72", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2025-06-30T19:41:32.760Z", "until": "2025-01-15T11:06:00.662Z", "checks": 898265, "inconclusive": 718054, "lastCheckAt": "2024-01-17T16:21:10.433Z", "lastReason": "<value>", "lastConclusiveAt": "2025-02-26T09:54:40.036Z"}, "evidenceVersion": 489999, "attempts": [], "copies": [], "conflicts": [{"kind": "identity_conflict", "anafMessageId": null, "recordedAt": "2025-05-17T02:47:02.684Z"}], "resend": {"eligible": true, "refusalReason": "duplicate_detected", "request": {"evidenceVersion": 672801, "state": "authorized", "refusalReason": "payload_unavailable", "actorKind": "operator", "actorRole": "<value>", "requestedAt": "2026-09-11T17:17:01.524Z", "decidedAt": "2026-04-25T01:00:39.168Z"}}, "createdAt": "2025-10-12T22:07:14.993Z", "updatedAt": "2024-08-11T20:26:25.460Z"}}
+        "400":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+  get_v1_efactura_jobs:
+    speakeasy-default-get-v1-efactura-jobs:
+      responses:
+        "200":
+          application/json: {"data": {"jobs": [], "nextCursor": "<value>"}}
+        "400":
+          application/json: {"error": {"code": "not_implemented", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "not_implemented", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "not_implemented", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "not_implemented", "message": "<value>"}}
+  post_v1_efactura_jobs_id_cancel:
+    speakeasy-default-post-v1-efactura-jobs-id-cancel:
+      parameters:
+        path:
+          id: "2a51fde1-7aff-40ca-919c-a01922c419e2"
+      responses:
+        "200":
+          application/json: {"data": {"jobId": "2d10306a-c292-4322-a904-b99b004669c4", "kind": "efactura.submit", "buffered": true, "status": "done", "inFlight": true, "delivered": false, "dispatchUncertain": false, "unresolvedDispatches": 156651, "duplicateDetected": false, "lineageJobIds": ["b6ca8041-ff27-4b8c-80d5-16afc3116f66"], "blockedReason": "connection_revoked", "reviewReason": null, "dispatchCount": 578935, "maxDispatches": 3915, "nextAttemptAt": "2025-06-28T10:13:23.326Z", "unknownSince": "2025-04-03T17:22:19.597Z", "resendEligibleAt": "2026-06-21T22:49:42.671Z", "deliveredAt": "2024-08-07T02:27:32.147Z", "resourceId": "5841a4c6-1983-457f-9c00-285d8ae53e4e", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2026-03-24T16:34:49.825Z", "until": "2024-07-13T04:03:39.040Z", "checks": 861067, "inconclusive": 425218, "lastCheckAt": null, "lastReason": "<value>", "lastConclusiveAt": "2026-03-05T21:03:04.645Z"}, "evidenceVersion": 136160, "attempts": [], "copies": [{"uploadIndex": "<value>", "downloadId": "<id>", "uit": "<value>", "result": "ok", "receivedSource": "late_response", "resultSource": "<value>", "attemptSeq": 958255, "dataCreare": "<value>", "firstListedAt": "2025-04-18T03:54:47.441Z", "recordedAt": "2025-12-28T23:23:19.290Z"}], "conflicts": [], "resend": {"eligible": true, "refusalReason": "superseded", "request": {"evidenceVersion": 570598, "state": "pending", "refusalReason": null, "actorKind": "customer", "actorRole": "<value>", "requestedAt": "2025-03-10T20:46:26.450Z", "decidedAt": "2025-03-17T17:09:21.139Z"}}, "createdAt": "2026-01-27T16:58:19.501Z", "updatedAt": "2025-03-16T01:34:50.940Z"}}
+        "400":
+          application/json: {"error": {"code": "passkey_required", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "passkey_required", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "passkey_required", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "passkey_required", "message": "<value>"}}
+  get_v1_etransport_jobs_id:
+    speakeasy-default-get-v1-etransport-jobs-id:
+      parameters:
+        path:
+          id: "705a12dc-2742-462e-8753-2d7a44ffffb5"
+      responses:
+        "200":
+          application/json: {"data": {"jobId": "14f6729a-630b-4873-ad08-24915a3a7359", "kind": "etransport.declare", "buffered": false, "status": "queued", "inFlight": true, "delivered": false, "dispatchUncertain": false, "unresolvedDispatches": 173730, "duplicateDetected": false, "lineageJobIds": ["74861c85-3877-4738-8ba5-bc28ddc5b3f3", "51004581-54b2-493e-afdf-c3df26623b1e"], "blockedReason": "connection_revoked", "reviewReason": "no_listing", "dispatchCount": 123201, "maxDispatches": 942463, "nextAttemptAt": "2024-09-09T01:54:19.229Z", "unknownSince": "2024-01-16T13:09:48.703Z", "resendEligibleAt": "2025-04-22T05:21:26.256Z", "deliveredAt": "2024-09-29T05:28:49.894Z", "resourceId": "fcb87f50-8ae0-4710-b7da-21782f8debeb", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2026-02-07T02:41:58.177Z", "until": "2024-03-10T17:54:47.930Z", "checks": 556125, "inconclusive": 13666, "lastCheckAt": "2026-01-20T00:50:51.255Z", "lastReason": "<value>", "lastConclusiveAt": "2025-05-19T14:35:00.684Z"}, "evidenceVersion": 582631, "attempts": [{"seq": 986354, "basis": "unknown_wait_elapsed", "startedAt": "2026-07-20T13:42:25.795Z", "finishedAt": "2026-04-26T18:12:01.133Z", "outcome": null, "lateOutcome": "definite_reject", "unresolved": true, "rejectionCode": "late_rejected", "httpStatus": 934890, "uploadIndex": "<value>", "uit": "<value>", "errorCode": "<value>", "reasonCode": "missing_upload_id"}], "copies": [{"uploadIndex": "<value>", "downloadId": "<id>", "uit": "<value>", "result": null, "receivedSource": "late_response", "resultSource": "<value>", "attemptSeq": 709986, "dataCreare": "<value>", "firstListedAt": "2024-02-01T11:45:05.226Z", "recordedAt": "2024-04-29T21:53:49.460Z"}], "conflicts": [{"kind": "result_contradiction", "anafMessageId": "<id>", "recordedAt": "2024-06-14T07:05:52.493Z"}], "resend": {"eligible": false, "refusalReason": "connection_revoked", "request": {"evidenceVersion": 444685, "state": "authorized", "refusalReason": "listing_unavailable", "actorKind": "operator", "actorRole": "<value>", "requestedAt": "2026-05-10T20:23:24.769Z", "decidedAt": "2024-10-02T04:39:19.480Z"}}, "createdAt": "2025-11-01T22:33:56.488Z", "updatedAt": "2026-02-01T07:53:51.002Z"}}
+        "400":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+  get_v1_etransport_jobs:
+    speakeasy-default-get-v1-etransport-jobs:
+      responses:
+        "200":
+          application/json: {"data": {"jobs": [{"jobId": "3b272fea-1c82-4f3f-9046-30e0281fed29", "kind": "efactura.submit", "buffered": false, "status": "queued", "inFlight": false, "delivered": false, "dispatchUncertain": true, "unresolvedDispatches": 196160, "duplicateDetected": false, "lineageJobIds": ["c13c5e7d-8109-4042-9988-b473831bcf31"], "blockedReason": "credential_stale", "reviewReason": "duplicate_detected", "dispatchCount": 369042, "maxDispatches": 671244, "nextAttemptAt": "2024-04-28T19:24:37.260Z", "unknownSince": "2026-12-31T12:59:18.700Z", "resendEligibleAt": "2026-04-04T17:13:59.980Z", "deliveredAt": "2026-10-01T15:33:33.168Z", "resourceId": "40f41ab2-e6b8-4c39-baae-986d64b50661", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2025-03-19T02:37:50.540Z", "until": "2026-10-22T22:58:47.658Z", "checks": 969968, "inconclusive": 818233, "lastCheckAt": "2024-10-26T04:47:12.975Z", "lastReason": "<value>", "lastConclusiveAt": null}, "evidenceVersion": 273994, "attempts": [], "copies": [{"uploadIndex": "<value>", "downloadId": null, "uit": "<value>", "result": "ok", "receivedSource": "status", "resultSource": "<value>", "attemptSeq": null, "dataCreare": "<value>", "firstListedAt": "2024-07-02T17:38:47.418Z", "recordedAt": "2026-04-18T05:49:03.578Z"}], "conflicts": [{"kind": "result_contradiction", "anafMessageId": "<id>", "recordedAt": "2025-07-03T15:58:01.897Z"}], "resend": {"eligible": true, "refusalReason": "not_eligible_status", "request": {"evidenceVersion": 564052, "state": "authorized", "refusalReason": "copy_exists", "actorKind": "customer", "actorRole": "<value>", "requestedAt": "2026-03-03T03:38:06.837Z", "decidedAt": "2024-10-06T12:47:57.016Z"}}, "createdAt": "2024-01-18T11:45:51.823Z", "updatedAt": "2025-10-15T14:20:18.659Z"}], "nextCursor": "<value>"}}
+        "400":
+          application/json: {"error": {"code": "idempotency_key_reuse", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "idempotency_key_reuse", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "idempotency_key_reuse", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "idempotency_key_reuse", "message": "<value>"}}
+  post_v1_etransport_jobs_id_cancel:
+    speakeasy-default-post-v1-etransport-jobs-id-cancel:
+      parameters:
+        path:
+          id: "1327cd7b-97e9-46b3-b9a4-b8c420bb8c66"
+      responses:
+        "200":
+          application/json: {"data": {"jobId": "cab62ba3-fad1-49c5-8c21-6a4e4d67db21", "kind": "efactura.submit", "buffered": false, "status": "unknown", "inFlight": false, "delivered": false, "dispatchUncertain": false, "unresolvedDispatches": 998979, "duplicateDetected": true, "lineageJobIds": ["dd6b2140-da72-4070-b996-67ee12e69cf3", "df8f386a-0932-4310-9839-74d85818429b", "0e30c25e-b77a-43de-a8c9-cd51366471a0"], "blockedReason": "connection_error", "reviewReason": "connection_revoked", "dispatchCount": 920220, "maxDispatches": 585213, "nextAttemptAt": "2026-11-09T18:51:37.013Z", "unknownSince": "2025-01-05T10:44:10.500Z", "resendEligibleAt": "2024-05-03T03:01:10.188Z", "deliveredAt": "2025-02-05T04:36:46.610Z", "resourceId": "3444778a-4f56-49cb-b3a8-c524deaa17e0", "customerRef": "<value>", "payloadSha256": "<value>", "observation": {"watchFrom": "2026-03-26T18:45:52.117Z", "until": "2025-01-04T00:04:53.452Z", "checks": 408182, "inconclusive": 436071, "lastCheckAt": "2024-11-14T16:03:38.222Z", "lastReason": "<value>", "lastConclusiveAt": "2025-11-07T12:49:24.776Z"}, "evidenceVersion": 510688, "attempts": [], "copies": [], "conflicts": [], "resend": {"eligible": false, "refusalReason": "not_eligible_status", "request": {"evidenceVersion": 240573, "state": "pending", "refusalReason": "attempt_cap", "actorKind": "operator", "actorRole": "<value>", "requestedAt": "2024-09-23T07:09:55.736Z", "decidedAt": "2026-05-27T05:10:20.106Z"}}, "createdAt": "2024-06-26T04:16:24.466Z", "updatedAt": "2025-11-04T13:28:24.193Z"}}
+        "400":
+          application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
 examplesVersion: 1.0.2

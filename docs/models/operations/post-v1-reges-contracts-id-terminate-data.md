@@ -7,7 +7,7 @@ import { PostV1RegesContractsIdTerminateData } from "@digitap.eu/easyapi/models/
 
 let value: PostV1RegesContractsIdTerminateData = {
   jobId: "6df35767-f706-47cd-9ead-e17d47b920a3",
-  status: "done",
+  status: "error",
 };
 ```
 

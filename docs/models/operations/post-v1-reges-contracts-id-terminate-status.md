@@ -5,7 +5,7 @@
 ```typescript
 import { PostV1RegesContractsIdTerminateStatus } from "@digitap.eu/easyapi/models/operations";
 
-let value: PostV1RegesContractsIdTerminateStatus = "unknown";
+let value: PostV1RegesContractsIdTerminateStatus = "cancelled";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```
@@ -13,5 +13,5 @@ let value: PostV1RegesContractsIdTerminateStatus = "unknown";
 ## Values
 
 ```typescript
-"queued" | "processing" | "done" | "error" | "unknown" | Unrecognized<string>
+"queued" | "processing" | "done" | "error" | "unknown" | "needs_review" | "cancelled" | Unrecognized<string>
 ```
