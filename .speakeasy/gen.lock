@@ -5,12 +5,12 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.800.1
   generationVersion: 2.943.0
-  releaseVersion: 0.2.0
-  configChecksum: 57269bd909d3db5e5332a2f3fa419c76
+  releaseVersion: 0.3.0
+  configChecksum: d53389ea89e711b523327e6a93813e22
 persistentEdits:
-  generation_id: bac306a6-1c9a-4fe0-a9c0-5f1fd365986f
-  pristine_commit_hash: c2d51c38bbd400c06f8299242c231ec2d0caeb11
-  pristine_tree_hash: 87330fa592f249cc36f19be51d25b53839a3e8be
+  generation_id: aed36dd6-db53-4426-bb92-7eb39dd498dc
+  pristine_commit_hash: 9c5de0d04a8b2e774b9ae1bcda12d9f8c2ced46c
+  pristine_tree_hash: a3a748d5e2ddc63fbbf3c354a1bc0513404cd150
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -2811,12 +2811,12 @@ trackedFiles:
     pristine_git_object: 9b85865b5ec458bcb95a91e81103929980badf1e
   jsr.json:
     id: 7f6ab7767282
-    last_write_checksum: sha1:24b0a06ecac25aea689f0e460e0ac71fa32315ec
-    pristine_git_object: b6ef6b32d40b084a9e777b89af21bca7364f4219
+    last_write_checksum: sha1:93143c34cdbade91b67b8a6d0f1dbd2abb5f2868
+    pristine_git_object: 5ea11bd716fa358287f957bac449856c913e4723
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:1d26c2c5305f9a4fae05b1d984c5f7ce52a760b5
-    pristine_git_object: 99256f51f1232502a2f6b580da1f5b0894696e92
+    last_write_checksum: sha1:0738f7f7ccf83b6feac4271637885d50e8b2d691
+    pristine_git_object: 01c7b243e89112cd995e1e09671d30d208250ae2
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:aafbd7648e5591fac5944b44fbc0e42df88b67f1
@@ -3119,8 +3119,8 @@ trackedFiles:
     pristine_git_object: 0b2543a00780f8844dcd1fbdcbc51a91262d91bc
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:e867239bd0b70cf04122f333c3134cbb237bc5bc
-    pristine_git_object: bd8ba85f783f0cdb2f9d7a8884ef5d13eeb6889b
+    last_write_checksum: sha1:436e758bdb1894a4c02d52df4105a63156cdad90
+    pristine_git_object: eb2b23117b9dd72412f10c5a95f7a8a8d03c77af
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:b68a019ff91cf3d6e99cc0cad3f09c9517133713

@@ -1,6 +1,6 @@
 {
   "name": "@digitap.eu/easyapi",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Daniel Tamas",
   "bin": {
     "easyapi": "./dist/esm/cli/bin.js"
