@@ -6,7 +6,7 @@
 import { ClientSDK } from "../lib/sdks.js";
 import { Contracts } from "./contracts.js";
 import { Employees } from "./employees.js";
-import { Jobs } from "./jobs.js";
+import { RegesJobs } from "./reges-jobs.js";
 
 export class Reges extends ClientSDK {
   private _contracts?: Contracts;
@@ -14,9 +14,9 @@ export class Reges extends ClientSDK {
     return (this._contracts ??= new Contracts(this._options));
   }
 
-  private _jobs?: Jobs;
-  get jobs(): Jobs {
-    return (this._jobs ??= new Jobs(this._options));
+  private _jobs?: RegesJobs;
+  get jobs(): RegesJobs {
+    return (this._jobs ??= new RegesJobs(this._options));
   }
 
   private _employees?: Employees;

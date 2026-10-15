@@ -1,18 +1,18 @@
-# EtransportPostV1EtransportJobsIdCancelRequest
+# EtransportJobsPostV1EtransportJobsIdCancelRequest
 
 ## Example Usage
 
 ```typescript
-import { EtransportPostV1EtransportJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
+import { EtransportJobsPostV1EtransportJobsIdCancelRequest } from "@digitap.eu/easyapi/models/operations";
 
-let value: EtransportPostV1EtransportJobsIdCancelRequest = {
-  evidenceVersion: 745938,
+let value: EtransportJobsPostV1EtransportJobsIdCancelRequest = {
+  evidenceVersion: 478910,
   state: "pending",
-  refusalReason: "rejected_attempt",
+  refusalReason: "connection_revoked",
   actorKind: "customer",
-  actorRole: null,
-  requestedAt: new Date("2024-04-27T16:10:52.619Z"),
-  decidedAt: new Date("2025-05-31T07:18:01.076Z"),
+  actorRole: "<value>",
+  requestedAt: new Date("2024-08-27T21:34:27.152Z"),
+  decidedAt: new Date("2026-02-07T00:28:39.172Z"),
 };
 ```
 

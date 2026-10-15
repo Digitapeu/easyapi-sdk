@@ -266,7 +266,7 @@ export type GetV1EtransportJobsIdActorKind = OpenEnum<
   typeof GetV1EtransportJobsIdActorKind
 >;
 
-export type EtransportGetV1EtransportJobsIdRequest = {
+export type EtransportJobsGetV1EtransportJobsIdRequest = {
   evidenceVersion: number;
   state: GetV1EtransportJobsIdState;
   refusalReason: GetV1EtransportJobsIdRequestRefusalReason | null;
@@ -279,7 +279,7 @@ export type EtransportGetV1EtransportJobsIdRequest = {
 export type GetV1EtransportJobsIdResend = {
   eligible: boolean;
   refusalReason: GetV1EtransportJobsIdRefusalReason | null;
-  request: EtransportGetV1EtransportJobsIdRequest | null;
+  request: EtransportJobsGetV1EtransportJobsIdRequest | null;
 };
 
 export type GetV1EtransportJobsIdData = {
@@ -548,27 +548,34 @@ export const GetV1EtransportJobsIdActorKind$inboundSchema: z.ZodMiniType<
 > = openEnums.inboundSchema(GetV1EtransportJobsIdActorKind);
 
 /** @internal */
-export const EtransportGetV1EtransportJobsIdRequest$inboundSchema:
-  z.ZodMiniType<EtransportGetV1EtransportJobsIdRequest, unknown> = z.object({
-    evidenceVersion: types.number(),
-    state: GetV1EtransportJobsIdState$inboundSchema,
-    refusalReason: types.nullable(
-      GetV1EtransportJobsIdRequestRefusalReason$inboundSchema,
-    ),
-    actorKind: GetV1EtransportJobsIdActorKind$inboundSchema,
-    actorRole: types.nullable(types.string()),
-    requestedAt: types.date(),
-    decidedAt: types.nullable(types.date()),
-  });
+export const EtransportJobsGetV1EtransportJobsIdRequest$inboundSchema:
+  z.ZodMiniType<EtransportJobsGetV1EtransportJobsIdRequest, unknown> = z.object(
+    {
+      evidenceVersion: types.number(),
+      state: GetV1EtransportJobsIdState$inboundSchema,
+      refusalReason: types.nullable(
+        GetV1EtransportJobsIdRequestRefusalReason$inboundSchema,
+      ),
+      actorKind: GetV1EtransportJobsIdActorKind$inboundSchema,
+      actorRole: types.nullable(types.string()),
+      requestedAt: types.date(),
+      decidedAt: types.nullable(types.date()),
+    },
+  );
 
-export function etransportGetV1EtransportJobsIdRequestFromJSON(
+export function etransportJobsGetV1EtransportJobsIdRequestFromJSON(
   jsonString: string,
-): SafeParseResult<EtransportGetV1EtransportJobsIdRequest, SDKValidationError> {
+): SafeParseResult<
+  EtransportJobsGetV1EtransportJobsIdRequest,
+  SDKValidationError
+> {
   return safeParse(
     jsonString,
     (x) =>
-      EtransportGetV1EtransportJobsIdRequest$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'EtransportGetV1EtransportJobsIdRequest' from JSON`,
+      EtransportJobsGetV1EtransportJobsIdRequest$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'EtransportJobsGetV1EtransportJobsIdRequest' from JSON`,
   );
 }
 
@@ -582,7 +589,7 @@ export const GetV1EtransportJobsIdResend$inboundSchema: z.ZodMiniType<
     GetV1EtransportJobsIdRefusalReason$inboundSchema,
   ),
   request: types.nullable(
-    z.lazy(() => EtransportGetV1EtransportJobsIdRequest$inboundSchema),
+    z.lazy(() => EtransportJobsGetV1EtransportJobsIdRequest$inboundSchema),
   ),
 });
 

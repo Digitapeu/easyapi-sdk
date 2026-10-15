@@ -4,16 +4,19 @@
  */
 
 import { etransportCreate } from "../funcs/etransport-create.js";
-import { etransportGetV1EtransportJobsId } from "../funcs/etransport-get-v1-etransport-jobs-id.js";
-import { etransportGetV1EtransportJobs } from "../funcs/etransport-get-v1-etransport-jobs.js";
 import { etransportGet } from "../funcs/etransport-get.js";
 import { etransportModify } from "../funcs/etransport-modify.js";
-import { etransportPostV1EtransportJobsIdCancel } from "../funcs/etransport-post-v1-etransport-jobs-id-cancel.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
+import { EtransportJobs } from "./etransport-jobs.js";
 
 export class Etransport extends ClientSDK {
+  private _jobs?: EtransportJobs;
+  get jobs(): EtransportJobs {
+    return (this._jobs ??= new EtransportJobs(this._options));
+  }
+
   /**
    * Create an e-Transport declaration
    */
@@ -56,48 +59,6 @@ export class Etransport extends ClientSDK {
     return unwrapAsync(etransportGet(
       this,
       uit,
-      options,
-    ));
-  }
-
-  /**
-   * Read one e-Transport submission job
-   */
-  async getV1EtransportJobsId(
-    id: string,
-    options?: RequestOptions,
-  ): Promise<operations.GetV1EtransportJobsIdResponse> {
-    return unwrapAsync(etransportGetV1EtransportJobsId(
-      this,
-      id,
-      options,
-    ));
-  }
-
-  /**
-   * List e-Transport submission jobs, newest first
-   */
-  async getV1EtransportJobs(
-    request?: operations.GetV1EtransportJobsRequestRequest | undefined,
-    options?: RequestOptions,
-  ): Promise<operations.GetV1EtransportJobsResponse> {
-    return unwrapAsync(etransportGetV1EtransportJobs(
-      this,
-      request,
-      options,
-    ));
-  }
-
-  /**
-   * Cancel an undelivered e-Transport submission job
-   */
-  async postV1EtransportJobsIdCancel(
-    id: string,
-    options?: RequestOptions,
-  ): Promise<operations.PostV1EtransportJobsIdCancelResponse> {
-    return unwrapAsync(etransportPostV1EtransportJobsIdCancel(
-      this,
-      id,
       options,
     ));
   }

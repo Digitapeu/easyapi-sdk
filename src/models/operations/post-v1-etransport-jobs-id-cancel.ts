@@ -266,7 +266,7 @@ export type PostV1EtransportJobsIdCancelActorKind = OpenEnum<
   typeof PostV1EtransportJobsIdCancelActorKind
 >;
 
-export type EtransportPostV1EtransportJobsIdCancelRequest = {
+export type EtransportJobsPostV1EtransportJobsIdCancelRequest = {
   evidenceVersion: number;
   state: PostV1EtransportJobsIdCancelState;
   refusalReason: PostV1EtransportJobsIdCancelRequestRefusalReason | null;
@@ -279,7 +279,7 @@ export type EtransportPostV1EtransportJobsIdCancelRequest = {
 export type PostV1EtransportJobsIdCancelResend = {
   eligible: boolean;
   refusalReason: PostV1EtransportJobsIdCancelRefusalReason | null;
-  request: EtransportPostV1EtransportJobsIdCancelRequest | null;
+  request: EtransportJobsPostV1EtransportJobsIdCancelRequest | null;
 };
 
 export type PostV1EtransportJobsIdCancelData = {
@@ -552,8 +552,8 @@ export const PostV1EtransportJobsIdCancelActorKind$inboundSchema: z.ZodMiniType<
 > = openEnums.inboundSchema(PostV1EtransportJobsIdCancelActorKind);
 
 /** @internal */
-export const EtransportPostV1EtransportJobsIdCancelRequest$inboundSchema:
-  z.ZodMiniType<EtransportPostV1EtransportJobsIdCancelRequest, unknown> = z
+export const EtransportJobsPostV1EtransportJobsIdCancelRequest$inboundSchema:
+  z.ZodMiniType<EtransportJobsPostV1EtransportJobsIdCancelRequest, unknown> = z
     .object({
       evidenceVersion: types.number(),
       state: PostV1EtransportJobsIdCancelState$inboundSchema,
@@ -566,19 +566,19 @@ export const EtransportPostV1EtransportJobsIdCancelRequest$inboundSchema:
       decidedAt: types.nullable(types.date()),
     });
 
-export function etransportPostV1EtransportJobsIdCancelRequestFromJSON(
+export function etransportJobsPostV1EtransportJobsIdCancelRequestFromJSON(
   jsonString: string,
 ): SafeParseResult<
-  EtransportPostV1EtransportJobsIdCancelRequest,
+  EtransportJobsPostV1EtransportJobsIdCancelRequest,
   SDKValidationError
 > {
   return safeParse(
     jsonString,
     (x) =>
-      EtransportPostV1EtransportJobsIdCancelRequest$inboundSchema.parse(
+      EtransportJobsPostV1EtransportJobsIdCancelRequest$inboundSchema.parse(
         JSON.parse(x),
       ),
-    `Failed to parse 'EtransportPostV1EtransportJobsIdCancelRequest' from JSON`,
+    `Failed to parse 'EtransportJobsPostV1EtransportJobsIdCancelRequest' from JSON`,
   );
 }
 
@@ -592,7 +592,9 @@ export const PostV1EtransportJobsIdCancelResend$inboundSchema: z.ZodMiniType<
     PostV1EtransportJobsIdCancelRefusalReason$inboundSchema,
   ),
   request: types.nullable(
-    z.lazy(() => EtransportPostV1EtransportJobsIdCancelRequest$inboundSchema),
+    z.lazy(() =>
+      EtransportJobsPostV1EtransportJobsIdCancelRequest$inboundSchema
+    ),
   ),
 });
 
