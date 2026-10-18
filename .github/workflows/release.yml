@@ -136,7 +136,8 @@ jobs:
           ' "$version"; then
             echo "$name@$version is already on JSR; skipping"
           else
-            npx --yes jsr publish
+            # Slow types come from the generator's runtime helpers (src/types/*), which a regen rewrites.
+            npx --yes jsr@0.14.3 publish --allow-slow-types
           fi
 
       - name: Tag, release notes, fast-forward main
