@@ -8690,7 +8690,7 @@
             }
           },
           "403": {
-            "description": "edge_binding_rejected | forbidden | scope_required",
+            "description": "edge_binding_rejected | scope_required",
             "content": {
               "application/json": {
                 "schema": {
@@ -8745,7 +8745,7 @@
             }
           },
           "503": {
-            "description": "authentication_unavailable",
+            "description": "authentication_unavailable | vault_unavailable",
             "headers": {
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
