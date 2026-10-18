@@ -1,0 +1,163 @@
+# DRAFT — apply from a session in the SDK repo; untested here
+# Destination: .github/workflows/release.yml (SDK repo Digitapeu/easyapi-sdk)
+# Design: docs/SDK-RELEASE.md §2 step 3 in the platform repo. Triggered by the push of a release/<sha12>
+# branch made by scripts/sdk-release-request.ts. No long-lived registry token anywhere.
+name: release
+
+on:
+  push:
+    branches: ['release/**']
+
+concurrency:
+  group: sdk-release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    # Unprotected for now; add a required reviewer here to put a human gate before the registries.
+    environment: npm-publish
+    permissions:
+      contents: write   # tag, release, fast-forward main
+      id-token: write   # npm + JSR OIDC trusted publishing
+    env:
+      SPEAKEASY_API_KEY: ${{ secrets.SPEAKEASY_API_KEY }}
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+
+      # Idempotent re-run: main already carries this request's revision, so there is nothing to release.
+      - name: Idempotency check
+        id: gate
+        run: |
+          set -euo pipefail
+          request_revision=$(node -p "require('./openapi/RELEASE_REQUEST.json').revision")
+          branch_revision=$(tr -d '[:space:]' < openapi/SOURCE_REVISION)
+          if [ "$request_revision" != "$branch_revision" ]; then
+            echo "::error::RELEASE_REQUEST.revision ($request_revision) != branch SOURCE_REVISION ($branch_revision)"
+            exit 1
+          fi
+          main_revision=$(git show origin/main:openapi/SOURCE_REVISION | tr -d '[:space:]')
+          if [ "$main_revision" = "$request_revision" ]; then
+            echo "main already at $request_revision; nothing to do"
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
+          echo "version=$(node -p "require('./openapi/RELEASE_REQUEST.json').version")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        if: steps.gate.outputs.skip == 'false'
+        with:
+          node-version: 24   # npm >= 11.5.1 is required for OIDC trusted publishing
+          registry-url: https://registry.npmjs.org
+
+      - uses: oven-sh/setup-bun@4bc047ad259df6fc24a6c9b0f9a0cb08cf17fbe5 # v2.0.1
+        if: steps.gate.outputs.skip == 'false'
+
+      - name: Install Speakeasy (version from .speakeasy/workflow.yaml)
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          version=$(awk '/^speakeasyVersion:/ {print $2}' .speakeasy/workflow.yaml)
+          test -n "$version"
+          base="https://github.com/speakeasy-api/speakeasy/releases/download/v${version}"
+          curl -fsSL -o speakeasy.zip "$base/speakeasy_linux_amd64.zip"
+          curl -fsSL -o checksums.txt "$base/checksums.txt"
+          grep " speakeasy_linux_amd64.zip\$" checksums.txt | sha256sum -c -
+          mkdir -p "$HOME/.local/bin"
+          unzip -o speakeasy.zip speakeasy -d "$HOME/.local/bin"
+          rm speakeasy.zip checksums.txt
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      # The version goes in before generation: generated sources embed it, and check-regen later
+      # regenerates from gen.yaml and must see the same value.
+      - name: Regenerate with the requested version
+        if: steps.gate.outputs.skip == 'false'
+        env:
+          VERSION: ${{ steps.gate.outputs.version }}
+        run: |
+          set -euo pipefail
+          node scripts/set-version.mjs "$VERSION"
+          speakeasy run -y --skip-versioning
+          node scripts/set-version.mjs "$VERSION"
+
+      - name: Install, build, typecheck, test
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          npm ci
+          npm run build
+          npx tsc --noEmit
+          bun test
+
+      # check-regen requires a committed tree, so the regenerated files and version bump are committed
+      # here, on the release branch, before it runs.
+      - name: Commit release
+        if: steps.gate.outputs.skip == 'false'
+        env:
+          VERSION: ${{ steps.gate.outputs.version }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet || git commit -m "chore(release): v${VERSION}"
+
+      - name: Regeneration is a no-op
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          scripts/check-regen.sh
+          git checkout -- .speakeasy/gen.lock
+
+      - name: Pack
+        if: steps.gate.outputs.skip == 'false'
+        run: scripts/pack.sh
+
+      - name: Publish to npm (OIDC, provenance)
+        if: steps.gate.outputs.skip == 'false'
+        run: scripts/publish.sh --ci
+
+      - name: Publish to JSR (OIDC)
+        if: steps.gate.outputs.skip == 'false'
+        run: |
+          set -euo pipefail
+          name=$(node -p "require('./jsr.json').name")
+          version=$(node -p "require('./jsr.json').version")
+          if curl -fsS "https://jsr.io/${name}/meta.json" | node -e '
+            const meta = JSON.parse(require("fs").readFileSync(0, "utf8"));
+            process.exit(Object.hasOwn(meta.versions ?? {}, process.argv[1]) ? 0 : 1);
+          ' "$version"; then
+            echo "$name@$version is already on JSR; skipping"
+          else
+            npx --yes jsr publish
+          fi
+
+      - name: Tag, release notes, fast-forward main
+        if: steps.gate.outputs.skip == 'false'
+        env:
+          VERSION: ${{ steps.gate.outputs.version }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag="v${VERSION}"
+          if ! git rev-parse -q --verify "refs/tags/${tag}" >/dev/null && ! git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null; then
+            git tag "$tag"
+            git push origin "$tag"
+          fi
+          node -e '
+            const r = require("./openapi/RELEASE_REQUEST.json");
+            const lines = [`Spec revision ${r.revision.slice(0, 12)} (${r.level} change, floor ${r.floor}).`, "", ...r.reasons.map((x) => `- ${x}`)];
+            if (r.trailers?.length) lines.push("", "Bump trailers:", ...r.trailers.map((x) => `- ${x}`));
+            require("fs").writeFileSync("release-notes.md", lines.join("\n") + "\n");
+          '
+          gh release view "$tag" >/dev/null 2>&1 || gh release create "$tag" --title "$tag" --notes-file release-notes.md
+          rm release-notes.md
+          # Plain push without --force: fails, rather than overwriting, if main moved since the branch was cut.
+          git push origin HEAD:main
