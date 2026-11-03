@@ -5,6 +5,7 @@
 
 import { ClientSDK } from "../lib/sdks.js";
 import { Bank } from "./bank.js";
+import { CaseLaw } from "./case-law.js";
 import { Company } from "./company.js";
 import { Connections } from "./connections.js";
 import { Efactura } from "./efactura.js";
@@ -56,6 +57,11 @@ export class EasyApi extends ClientSDK {
   private _legislation?: Legislation;
   get legislation(): Legislation {
     return (this._legislation ??= new Legislation(this._options));
+  }
+
+  private _caseLaw?: CaseLaw;
+  get caseLaw(): CaseLaw {
+    return (this._caseLaw ??= new CaseLaw(this._options));
   }
 
   private _search?: Search;
