@@ -53,6 +53,9 @@ typescript:
       - LICENSE
       - README.md
     license: MIT
+    repository:
+      type: git
+      url: git+https://github.com/Digitapeu/easyapi-sdk.git
   additionalScripts: {}
   alwaysIncludeInboundAndOutbound: false
   apiPromiseHelpers: false
