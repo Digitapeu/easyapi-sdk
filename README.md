@@ -312,6 +312,12 @@ run();
 * [getBalances](docs/sdks/accounts/README.md#getbalances) - Get current balances for one AIS-connected bank account
 * [listTransactions](docs/sdks/accounts/README.md#listtransactions) - Get date-windowed transactions for one AIS-connected bank account
 
+### [CaseLaw](docs/sdks/caselaw/README.md)
+
+* [getV1CaseLawDecisions](docs/sdks/caselaw/README.md#getv1caselawdecisions) - List ICCJ and CCR decisions
+* [getV1CaseLawDecisionsChanges](docs/sdks/caselaw/README.md#getv1caselawdecisionschanges) - Poll the court decisions change-feed since a given timestamp
+* [getV1CaseLawDecisionsId](docs/sdks/caselaw/README.md#getv1caselawdecisionsid) - Get one court decision
+
 ### [Company](docs/sdks/company/README.md)
 
 * [get](docs/sdks/company/README.md#get) - Look up a company's identity and VAT status by CUI
@@ -465,6 +471,9 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`bankGetTreasury`](docs/sdks/bank/README.md#gettreasury) - Look up ANAF treasury IBANs for a CUI
 - [`bankListInstitutions`](docs/sdks/bank/README.md#listinstitutions) - List the bank institutions available for a connection
 - [`bankValidateIban`](docs/sdks/bank/README.md#validateiban) - Validate an IBAN's structure and resolve its RO bank code
+- [`caseLawGetV1CaseLawDecisions`](docs/sdks/caselaw/README.md#getv1caselawdecisions) - List ICCJ and CCR decisions
+- [`caseLawGetV1CaseLawDecisionsChanges`](docs/sdks/caselaw/README.md#getv1caselawdecisionschanges) - Poll the court decisions change-feed since a given timestamp
+- [`caseLawGetV1CaseLawDecisionsId`](docs/sdks/caselaw/README.md#getv1caselawdecisionsid) - Get one court decision
 - [`companyBalance`](docs/sdks/company/README.md#balance) - Get a company's last filed bilanț years in one call
 - [`companyBalanceByYear`](docs/sdks/company/README.md#balancebyyear) - Get a company's ANAF bilanț for a single filing year
 - [`companyBatchGet`](docs/sdks/company/README.md#batchget) - Look up up to 100 companies by CUI in one call

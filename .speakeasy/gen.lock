@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 71fb6f95-d3be-4d6a-a157-8d95e8c89923
 management:
-  docChecksum: fce06c71eb3c017fb7d6f9e37bb8243c
+  docChecksum: 81a1610cff9fd5b7cb45ff85408b4048
   docVersion: 1.0.0
   speakeasyVersion: 1.800.1
   generationVersion: 2.943.0
-  releaseVersion: 0.3.1
-  configChecksum: 711771dac4a1385883b4c334be0caa72
+  releaseVersion: 0.3.2
+  configChecksum: 28a1d041d1b6da1276429cc874ff1adf
 persistentEdits:
-  generation_id: 60638213-26ce-416a-ae88-0e73a496b156
-  pristine_commit_hash: 9a3c1d30406d545ff549bc0677c71f73eb91c552
-  pristine_tree_hash: 2e46e1ffb8d5eaf8861b014fa0d17944c28b88c4
+  generation_id: 38ed3407-640c-4bde-9bd1-740ecfddfb70
+  pristine_commit_hash: 5dd66c216578c85a7d42fbac8eb62197529ed7a2
+  pristine_tree_hash: f1867fa0c2925879161af528ebdd51b8e70886a8
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -361,6 +361,90 @@ trackedFiles:
     id: bc6b280e0709
     last_write_checksum: sha1:303bc2b2eef75be5314d40052b96f416df5208c1
     pristine_git_object: f60ecdaa64b39b62f39f5da59e2647dd434d6fe9
+  docs/models/operations/get-v1-case-law-decisions-changes-change-type.md:
+    id: 15bbd9382a44
+    last_write_checksum: sha1:8dfd59dd2a91950264b50cc1db472a1be157de80
+    pristine_git_object: e54db920cb3da57f99da9187a66118db8e225e2c
+  docs/models/operations/get-v1-case-law-decisions-changes-data.md:
+    id: 95a35d222540
+    last_write_checksum: sha1:a36600eb2270be5154a912a38c0acbbe721193e6
+    pristine_git_object: 9cf272857e92fc99aa81703b2614891586776e38
+  docs/models/operations/get-v1-case-law-decisions-changes-item.md:
+    id: f1eac1a1692a
+    last_write_checksum: sha1:76f8b543edecd348100d4b7b578cb87cf6f6befd
+    pristine_git_object: 66dc4c7d31a7d8e3ec84139fda76601692003429
+  docs/models/operations/get-v1-case-law-decisions-changes-request.md:
+    id: 73abba65f5ac
+    last_write_checksum: sha1:0d58cdc332226e3e9836f92dca11029ce642ac2a
+    pristine_git_object: 5245b63cc55bbabe2c51b102938b02c5c428c515
+  docs/models/operations/get-v1-case-law-decisions-changes-response-body.md:
+    id: e062b8cccd10
+    last_write_checksum: sha1:f5ffa765976173c01bb73a5a4afff4ac96c60cba
+    pristine_git_object: f23929b43854faa3e69f63eb652c421f3e3ef0f3
+  docs/models/operations/get-v1-case-law-decisions-changes-response.md:
+    id: 10e6c0aed18b
+    last_write_checksum: sha1:175aa1c7f154c62a990bfbca691d844be29d3c12
+    pristine_git_object: 8766247c9626f5c941fd08a8491ab5627ceb81d0
+  docs/models/operations/get-v1-case-law-decisions-data.md:
+    id: 228619f3027a
+    last_write_checksum: sha1:5194b5b6b3d90110628ea07ac9da7efb90825e00
+    pristine_git_object: 31bedab5064a13c15bdc73ffde0d65e2fbaaa5bc
+  docs/models/operations/get-v1-case-law-decisions-id-court.md:
+    id: 7288d5d6919a
+    last_write_checksum: sha1:19d8f44f55c10df909f0dcbd34bc407a6bbc5cd5
+    pristine_git_object: ec3460b4c2b54ab680103c6c788b5695d73fd69a
+  docs/models/operations/get-v1-case-law-decisions-id-data.md:
+    id: e30a73c6d517
+    last_write_checksum: sha1:041905e9b0d64f7975a16a67d9d5f240600c1e62
+    pristine_git_object: 10f341d133100ff27505ece938976c7f171020d9
+  docs/models/operations/get-v1-case-law-decisions-id-kind.md:
+    id: 7a9ab32b8a2d
+    last_write_checksum: sha1:a85befdbe4097f2e24c417f7bbe6cf89ffaf4b47
+    pristine_git_object: 3297d5d56e53f2851b1fd267825fd099670a1ffa
+  docs/models/operations/get-v1-case-law-decisions-id-list.md:
+    id: 65b08e8b8f23
+    last_write_checksum: sha1:61930177507ddb8cdfdb15bd00e1baa233a6ff8a
+    pristine_git_object: e1e0ac82f722a2acc709c429c54881e04fa2904c
+  docs/models/operations/get-v1-case-law-decisions-id-matter.md:
+    id: d1663587b4bb
+    last_write_checksum: sha1:e0d52f6dbf08e3f7ef57961c714d000770f7bbb6
+    pristine_git_object: 908fcc05bf11bbeb53810aae657f1058f56b6dab
+  docs/models/operations/get-v1-case-law-decisions-id-request.md:
+    id: 68482b39b5b6
+    last_write_checksum: sha1:ae0a4d84115f72995e6c6b6bf0804331bd22e4d3
+    pristine_git_object: 5112be0540b3a24c55fced86336dc542988a9002
+  docs/models/operations/get-v1-case-law-decisions-id-response-body.md:
+    id: 7c900e2bbc5c
+    last_write_checksum: sha1:30025ace83faebfb0f57483a45025c948cf78c5b
+    pristine_git_object: f83beb5c2b95d21bc3b94b86f87cdf059fa1fd79
+  docs/models/operations/get-v1-case-law-decisions-id-response.md:
+    id: d26db63724de
+    last_write_checksum: sha1:e7d7e2f845b6260483f8ac3dc36b9f7196a69ffb
+    pristine_git_object: 03955be53b5e1dfa971057730227c134731ca866
+  docs/models/operations/get-v1-case-law-decisions-item-kind.md:
+    id: f0659038983b
+    last_write_checksum: sha1:5165e26d82eb37e198704319f0ca6e213b2455bf
+    pristine_git_object: ebc282de3d9c920c63bbfcdd6f3a6eedcb19f5a9
+  docs/models/operations/get-v1-case-law-decisions-item.md:
+    id: 657107b153ef
+    last_write_checksum: sha1:57547053b25dcc26b7dba7e6316fed355a7d53f0
+    pristine_git_object: 2b508c5bce4887f3f3242a1e0b1edf15c28e8154
+  docs/models/operations/get-v1-case-law-decisions-list.md:
+    id: 61379893c9ef
+    last_write_checksum: sha1:2c23fd5fc040791d4bc9c08fc71c6ffeb9678ad0
+    pristine_git_object: 1e81c2da92971d90794977042d87b7edc7d78e08
+  docs/models/operations/get-v1-case-law-decisions-request.md:
+    id: 048a61c81cea
+    last_write_checksum: sha1:537bd3193bf3805ded3718c45c3594abb8b2cb2d
+    pristine_git_object: 7cf6d62fedb3c3ff15e470a7bcebfe4294800286
+  docs/models/operations/get-v1-case-law-decisions-response-body.md:
+    id: c01a0023b924
+    last_write_checksum: sha1:ddc12e752abd93826f0db051e51bfccb6a1ba116
+    pristine_git_object: bb2113462bda7729fb999df8ab678e441cffb7b4
+  docs/models/operations/get-v1-case-law-decisions-response.md:
+    id: 76c5f1eef16a
+    last_write_checksum: sha1:608b5f7098ed0c6187b5a1ac5c21e2239e8cb20a
+    pristine_git_object: 5e0faf980292931d250821b34415098c0d4bed6f
   docs/models/operations/get-v1-company-cui-address.md:
     id: 6c1b463a52bf
     last_write_checksum: sha1:3de3d9a02490eff8387cf1c0856bdd48482a9cb2
@@ -1929,6 +2013,14 @@ trackedFiles:
     id: 1ecb844213c6
     last_write_checksum: sha1:b71695295aee41fe56bf9d9de28f2985d17450d8
     pristine_git_object: 1096304a23f77e4f097508ef57f489dc7a7922ba
+  docs/models/operations/item-court.md:
+    id: 8ede181ae471
+    last_write_checksum: sha1:c4804f1ecf6d65ad5b31bba7a15a532a4de930cd
+    pristine_git_object: 0a7df6bf87cddd99917440eb507b8368ad957c89
+  docs/models/operations/item-matter.md:
+    id: 8b2aa54c4604
+    last_write_checksum: sha1:4c6ae8a2162c0b8f932715f24fd0deb0763b27c7
+    pristine_git_object: dd54e43557670f6dc7060b54c7d642ef0ca54b52
   docs/models/operations/json.md:
     id: 0ee7042e0536
     last_write_checksum: sha1:4edc5f2fa417b6dd951b6c0bff7dcb00c4d3e2a3
@@ -1949,6 +2041,10 @@ trackedFiles:
     id: e433179cbc26
     last_write_checksum: sha1:a091a74464dd60327c4d84ddb742ef790090664f
     pristine_git_object: 7bf9aa33d1994698ecdd4aaad25e852758ec3ffe
+  docs/models/operations/linked.md:
+    id: 3f0fcd92225a
+    last_write_checksum: sha1:13519ed6705b16c33d2a84eafa66a6aa891836db
+    pristine_git_object: 6b0e0a55a0456544e341bb95945afcfec89c229e
   docs/models/operations/match-match.md:
     id: 21354a53d05e
     last_write_checksum: sha1:d92915e8791076caa174c22f61389d9f1d6ab789
@@ -2613,6 +2709,18 @@ trackedFiles:
     id: 08f3ef05ecbc
     last_write_checksum: sha1:3c19e189140e64505ba793b6a35d5e110227a638
     pristine_git_object: f9ceb8796826f8e4351bde7a20fb0f5f6f88c4e2
+  docs/models/operations/query-param-court.md:
+    id: 5fcb0fc6dd8f
+    last_write_checksum: sha1:b6cbd598a44b978c076b831290223d43980f274c
+    pristine_git_object: 54db80cf01360dbc1b13096fb6976691ffb99fd9
+  docs/models/operations/query-param-kind.md:
+    id: 2d0d90160fb8
+    last_write_checksum: sha1:5cd3e0fe22b4d1b02a7f69f60ceeab20bea68d89
+    pristine_git_object: c7cc50421cd4ba175fd519f0dfb6372cacb8944b
+  docs/models/operations/query-param-matter.md:
+    id: 930450e9b45d
+    last_write_checksum: sha1:044b9d22e2c1fa14e6e127f164d380b25f0aaf22
+    pristine_git_object: 225270f4b5744d64b902b8d594aceeba2916961e
   docs/models/operations/rate.md:
     id: ed0a0fa3488e
     last_write_checksum: sha1:aa160f9604be49346957f7fd0b2983e81f9a60c1
@@ -2713,6 +2821,10 @@ trackedFiles:
     id: 2a9c97966ab7
     last_write_checksum: sha1:ee83ceb3c79961d681568ab0ca543be21c7915a8
     pristine_git_object: 4c7c0c341483280715ca5e8882855e398a9e00cb
+  docs/sdks/caselaw/README.md:
+    id: d8732785a467
+    last_write_checksum: sha1:d8d115dc7723f477cf763ee5fd0752524d9e594e
+    pristine_git_object: 220029a8e7261ccaa278ef289688b6325deddd32
   docs/sdks/company/README.md:
     id: e71077841b8e
     last_write_checksum: sha1:f57c3e9d08ded528fd32352e6d032fcdd9de9511
@@ -2797,6 +2909,7 @@ trackedFiles:
     id: 52cbe5afed92
     last_write_checksum: sha1:26657fafc7bc45ad91dd16d9ddb0db41c88804e9
     pristine_git_object: a0871c9273af4366cb95fab24eae3cce16009229
+    deleted: true
   examples/README.md:
     id: 9d0f69d6e677
     last_write_checksum: sha1:3e08627262c7e5f16ee3d7c77609a3200c7fb5d8
@@ -2811,8 +2924,8 @@ trackedFiles:
     pristine_git_object: 9b85865b5ec458bcb95a91e81103929980badf1e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:3b6f2045f77523955d44059be1a044e4223e47ac
-    pristine_git_object: 53d429739aab1cf572348850148daa4d3f94f013
+    last_write_checksum: sha1:73719258c4aee16b6ec6a70af2a1d3d6b03078f4
+    pristine_git_object: 39c633db615d49bd52496df65e98670dbef52bd0
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:aafbd7648e5591fac5944b44fbc0e42df88b67f1
@@ -2841,6 +2954,18 @@ trackedFiles:
     id: 568b72ab9068
     last_write_checksum: sha1:f5bbc25c8f3189fdf7c29e916d3b0007ab84594d
     pristine_git_object: 3bbbd7c53e26be902e300064b4d6c2baa5ebcf3d
+  src/funcs/case-law-get-v1-case-law-decisions-changes.ts:
+    id: 4f6b28187f41
+    last_write_checksum: sha1:6fb2c99e7c62c68d35459dd926a175607f2589a0
+    pristine_git_object: eaa5c954a333f826f4603a84b54155e8e0be290e
+  src/funcs/case-law-get-v1-case-law-decisions-id.ts:
+    id: cde859bc1e92
+    last_write_checksum: sha1:18a770268941ab9ce34226d896f543e22fb016f2
+    pristine_git_object: 6b4e4a05f1a71af24fee6ac8e41af4cf14f3a029
+  src/funcs/case-law-get-v1-case-law-decisions.ts:
+    id: 40cb195987e8
+    last_write_checksum: sha1:fe5534c4cdf7f399d2f94900200582a6aa935aed
+    pristine_git_object: 45f6362e9c0b07905519747f8db5506051dc1397
   src/funcs/company-balance-by-year.ts:
     id: ae623e1a7b91
     last_write_checksum: sha1:ae30e818749a53c5042a16c602c9b905d961d725
@@ -3115,8 +3240,8 @@ trackedFiles:
     pristine_git_object: 0b2543a00780f8844dcd1fbdcbc51a91262d91bc
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:3d7afa5409c915ebb14d9274214894bc5da09e5f
-    pristine_git_object: f6cbc114c0226eb2dd20b61d1024bd901e49fc4f
+    last_write_checksum: sha1:80fcf3058a1e4ac87570897056d4e0a8e7e46f07
+    pristine_git_object: bcaea6f50bd44642335a5982faf49c15e5abdb3c
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:b68a019ff91cf3d6e99cc0cad3f09c9517133713
@@ -3229,6 +3354,18 @@ trackedFiles:
     id: 554561105eb4
     last_write_checksum: sha1:c34790003290c427552c5b5403b816729ae6fc9d
     pristine_git_object: eb8eba8cc9310c3eb2cbed7ce233c2d08e1350f6
+  src/models/operations/get-v1-case-law-decisions-changes.ts:
+    id: 69dce4afebab
+    last_write_checksum: sha1:45d42fbaf53ce93a844dbeefe93e9fd1e44b6a6d
+    pristine_git_object: 8d3597502259378402949c45953c0b12a42247d6
+  src/models/operations/get-v1-case-law-decisions-id.ts:
+    id: b0f9464ff74e
+    last_write_checksum: sha1:3f17491316cfe6b8c3ab0a528ca8027b725fdead
+    pristine_git_object: 7f55104b374ef70cd5842093f39e21a25543b942
+  src/models/operations/get-v1-case-law-decisions.ts:
+    id: 08b1799ac91c
+    last_write_checksum: sha1:d1fec4d01d2b10ea55fc10efb12e4877c636f131
+    pristine_git_object: bb1a27f450bcab8d0d93aaa8fa9bc6381541ef64
   src/models/operations/get-v1-company-cui-balance-year.ts:
     id: d922f534edfb
     last_write_checksum: sha1:322ce80f3ff883cd991eec87a6894cec8eecdaaa
@@ -3439,8 +3576,8 @@ trackedFiles:
     pristine_git_object: 10866e5f31d2196bb9f89df1e71bf6919fde2dcd
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:6784ffa6487737ad85138c8ab490bc45af1bf472
-    pristine_git_object: 92ca798baeff073019c5adab823c5b4b85dfd74b
+    last_write_checksum: sha1:7d0bb92ad79b173d499a7dcc3acbd87f6dd3182a
+    pristine_git_object: 60e88042fecb553533fecf808f4cea0b7b4b253e
   src/models/operations/patch-v1-etransport-declarations-uit.ts:
     id: ee68d58f158b
     last_write_checksum: sha1:173768b564ef83ce3bf2c2d56013bdeb4d5830a0
@@ -3501,6 +3638,10 @@ trackedFiles:
     id: bfb7cb6dd91e
     last_write_checksum: sha1:684a8b8e6e542c92eea621a8fd8d2b930f3079aa
     pristine_git_object: b1703e8cd411b1c6ef2635524541a167cbc8dd42
+  src/sdk/case-law.ts:
+    id: 4c218e106bc3
+    last_write_checksum: sha1:1686332d5c4187a318ca69e0f6976bbcc23b613f
+    pristine_git_object: 2582ae7bcf74a1ab406e88da3f763cbfd176d2e1
   src/sdk/company.ts:
     id: 7bf531b021cd
     last_write_checksum: sha1:5fdcb0fc4c07eeed450812a6d1577eb82ae92ad0
@@ -3579,8 +3720,8 @@ trackedFiles:
     pristine_git_object: 66c2df24ae28c27e96d77362650fa6a7f1475435
   src/sdk/sdk.ts:
     id: 784571af2f69
-    last_write_checksum: sha1:fcca3b72799febf2d9310cf331ed738f04188c99
-    pristine_git_object: 4453b520a8f69f8ff344f568f32e42fdb4d25020
+    last_write_checksum: sha1:91308c8b0572db37318d7e64d5416aabf9fa223f
+    pristine_git_object: c64a0b76622a9b6c331b4f2696c4a68d0fb2fdea
   src/sdk/search.ts:
     id: b88871d87236
     last_write_checksum: sha1:717c6bf5400450a628abb37869eefa1652a542f0
@@ -5164,4 +5305,53 @@ examples:
           application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
         "503":
           application/json: {"error": {"code": "vault_unavailable", "message": "<value>"}}
+  get_v1_case_law_decisions:
+    speakeasy-default-get-v1-case-law-decisions:
+      parameters:
+        query:
+          limit: 50
+      responses:
+        "200":
+          application/json: {"data": {"items": [{"id": "<id>", "list": "iccj_hp_civil", "court": "ccr", "kind": "ril", "matter": "civil", "number": "<value>", "pronounced_on": "<value>", "mo_reference": "<value>", "act_id": null, "source_url": "https://helpful-pliers.org/", "first_seen_at": "2025-02-25T21:42:04.885Z", "fetched_at": "2025-04-03T09:33:13.071Z"}], "next_cursor": "<value>"}}
+        "400":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "validation_error", "message": "<value>"}}
+  get_v1_case_law_decisions_changes:
+    speakeasy-default-get-v1-case-law-decisions-changes:
+      parameters:
+        query:
+          limit: 50
+          since: "2024-05-01T05:09:55.115Z"
+      responses:
+        "200":
+          application/json: {"data": {"items": [{"id": "<id>", "change_type": "created", "observed_at": "2026-03-20T16:02:30.012Z"}], "next_cursor": "<value>"}}
+        "400":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "scope_retired", "message": "<value>"}}
+  get_v1_case_law_decisions_id:
+    speakeasy-default-get-v1-case-law-decisions-id:
+      parameters:
+        path:
+          id: "<id>"
+      responses:
+        "200":
+          application/json: {"data": {"id": "<id>", "list": "iccj_ril", "court": "iccj", "kind": "hp", "matter": "civil", "number": "<value>", "pronounced_on": "<value>", "mo_reference": "<value>", "act_id": "<id>", "source_url": "https://golden-meal.biz", "first_seen_at": "2025-08-20T21:40:07.164Z", "fetched_at": "2026-04-20T04:23:42.214Z"}}
+        "400":
+          application/json: {"error": {"code": "forbidden", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "forbidden", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "forbidden", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "forbidden", "message": "<value>"}}
 examplesVersion: 1.0.2
