@@ -1,0 +1,15 @@
+{
+  "revision": "7195dcf29f3fd7a9cfb601e420b70f577f5aad11",
+  "previousRevision": "426d4d2c79c3f05928939fa2eb219062ab66d401",
+  "level": "minor",
+  "version": "0.3.2",
+  "floor": "additive",
+  "reasons": [
+    "GET /v1/case-law/decisions: operation added",
+    "GET /v1/case-law/decisions/changes: operation added",
+    "GET /v1/case-law/decisions/{id}: operation added"
+  ],
+  "trailers": [
+    "minor"
+  ]
+}
