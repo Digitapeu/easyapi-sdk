@@ -67,12 +67,12 @@ jobs:
           version=$(awk '/^speakeasyVersion:/ {print $2}' .speakeasy/workflow.yaml)
           test -n "$version"
           base="https://github.com/speakeasy-api/speakeasy/releases/download/v${version}"
-          curl -fsSL -o speakeasy.zip "$base/speakeasy_linux_amd64.zip"
+          curl -fsSL -o speakeasy_linux_amd64.zip "$base/speakeasy_linux_amd64.zip"
           curl -fsSL -o checksums.txt "$base/checksums.txt"
           grep " speakeasy_linux_amd64.zip\$" checksums.txt | sha256sum -c -
           mkdir -p "$HOME/.local/bin"
-          unzip -o speakeasy.zip speakeasy -d "$HOME/.local/bin"
-          rm speakeasy.zip checksums.txt
+          unzip -o speakeasy_linux_amd64.zip speakeasy -d "$HOME/.local/bin"
+          rm speakeasy_linux_amd64.zip checksums.txt
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       # The version goes in before generation: generated sources embed it, and check-regen later
