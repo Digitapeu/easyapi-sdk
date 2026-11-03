@@ -4,10 +4,10 @@ import {
   SdkClientAssertionClaimsSchema, SdkClientAssertionHeaderSchema, SdkDpopHeaderSchema, SdkEnrollmentClaimsSchema,
   SdkEnrollmentHeaderSchema, SdkReplacementClaimsSchema, SdkResourceDpopClaimsSchema, SdkRotationClaimsSchema,
   SdkTokenDpopClaimsSchema, SdkJtiSchema,
-} from "../contract/sdk-auth.js";
-import { InvalidRequestError } from "../src/errors.js";
-import { generateSigner, sha256Base64Url, thumbprintOf } from "../src/keys.js";
-import { assertCanonicalPath, clientAssertion, enrollmentProof, expandPath, resourceDpopProof, rotationProofs, tokenDpopProof } from "../src/proofs.js";
+} from "../src/machine-auth/contract/sdk-auth.js";
+import { InvalidRequestError } from "../src/machine-auth/errors.js";
+import { generateSigner, sha256Base64Url, thumbprintOf } from "../src/machine-auth/keys.js";
+import { assertCanonicalPath, clientAssertion, enrollmentProof, resourceDpopProof, rotationProofs, tokenDpopProof } from "../src/machine-auth/proofs.js";
 
 const origin = "https://api.example.test";
 const credentialId = "0b0f7b3e-5c3e-4a55-9c1e-2a6f0f6f9d11";
@@ -76,7 +76,7 @@ describe("signed messages", () => {
 describe("request paths", () => {
   test("accepts the contract's accepted examples and preserves percent-encoded data", () => {
     expect(() => assertCanonicalPath("/v1/company/43020532")).not.toThrow();
-    expect(expandPath("/v1/spv/documents/{id}", { id: "a b" })).toBe("/v1/spv/documents/a%20b");
+    expect(() => assertCanonicalPath("/v1/spv/documents/a%20b")).not.toThrow();
   });
 
   test.each(["/v1//me", "/v1/%2e%2e/me", "/v1/%2E/me", "/v1/a%2Fb", "/v1/a%5cb", "/v1/a\\b", "/v1/a%00b", "/v1/a%zz", "/v1/../me", "/v1/me?x=1", "v1/me"])(
@@ -84,11 +84,4 @@ describe("request paths", () => {
       expect(() => assertCanonicalPath(path)).toThrow(InvalidRequestError);
     },
   );
-
-  test("escapes a parameter once and rejects separators and dot segments in it", () => {
-    expect(expandPath("/v1/company/{cui}", { cui: "RO 1" })).toBe("/v1/company/RO%201");
-    expect(() => expandPath("/v1/company/{cui}", { cui: "a/b" })).toThrow(InvalidRequestError);
-    expect(() => expandPath("/v1/company/{cui}", { cui: ".." })).toThrow(InvalidRequestError);
-    expect(() => expandPath("/v1/company/{cui}", {})).toThrow(InvalidRequestError);
-  });
 });

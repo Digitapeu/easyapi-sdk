@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { runCli } from "../src/cli/main.js";
-import { SDK_VERSION, DEFAULT_BASE_URL } from "../src/generated/metadata.js";
+import { SDK_VERSION, DEFAULT_BASE_URL } from "../src/machine-auth/defaults.js";
 import { cliRun, tempConfigDir } from "./helpers.js";
 
 describe("cli arguments", () => {
@@ -43,9 +43,10 @@ describe("cli arguments", () => {
 });
 
 describe("package metadata", () => {
-  test("the generated defaults match package.json", () => {
-    const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as { version: string; easyapi: { defaultBaseUrl: string } };
-    expect(DEFAULT_BASE_URL).toBe(pkg.easyapi.defaultBaseUrl);
+  test("the generated defaults match package.json and the production server in the overlay", () => {
+    const pkg = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")) as { version: string };
+    const overlay = readFileSync(new URL("../openapi/overlay.yaml", import.meta.url), "utf8");
+    expect(DEFAULT_BASE_URL).toBe(/^\s+- url: (\S+)$/m.exec(overlay)?.[1]);
     expect(SDK_VERSION).toBe(pkg.version);
   });
 });

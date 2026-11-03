@@ -2,8 +2,8 @@ import { chmodSync, existsSync, mkdirSync, readFileSync, symlinkSync, writeFileS
 import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import { describe, expect, test } from "bun:test";
-import { ConfigError } from "../src/errors.js";
-import { acquireLock, ensurePrivateDir, readPrivateFile, writePrivateFile } from "../src/fsx.js";
+import { ConfigError } from "../src/machine-auth/errors.js";
+import { acquireLock, ensurePrivateDir, readPrivateFile, writePrivateFile } from "../src/machine-auth/fsx.js";
 import { tempConfigDir } from "./helpers.js";
 
 describe("private files", () => {

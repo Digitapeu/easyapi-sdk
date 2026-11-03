@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { assertValidProfile } from "../../src/profile-store.js";
+import { assertValidProfile } from "../../src/machine-auth/profile-store.js";
 import { runCli } from "../../src/cli/main.js";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
 import { cliRun, enrollEnv, scratch, type Scratch } from "./support.js";

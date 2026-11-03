@@ -2,10 +2,11 @@ import { chmodSync, lstatSync, mkdirSync, readFileSync, statSync, symlinkSync, u
 import { hostname } from "node:os";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { RedirectRefusedError } from "../../src/errors.js";
-import { createClient } from "../../src/index.js";
+import { RedirectRefusedError } from "../../src/machine-auth/errors.js";
 import { runCli } from "../../src/cli/main.js";
+import { UnexpectedClientError } from "../../src/models/errors/index.js";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
+import { machineClient } from "../helpers.js";
 import { cliRun, clientEnv, countPath, enrollEnv, expectNoSecretLeak, runSetup, scratch } from "./support.js";
 
 /**
@@ -195,11 +196,13 @@ describe("vector: symlink, traversal, unsafe ownership, concurrent CLI, redirect
       });
       const meBefore = countPath(gateway, "/v1/me");
       const runtime = { env: clientEnv(box.dir, gateway.origin), cwd: process.cwd(), platform: process.platform as NodeJS.Platform };
-      const failure = await createClient({}, runtime)
-        .request("get", "/v1/fx/convert", { query: { from: "EUR", to: "RON", amount: 1 } })
+      const failure = await machineClient(runtime)
+        .fx.convert({ from: "EUR", to: "RON", amount: 1 })
         .catch((error: unknown) => error);
 
-      expect(failure).toBeInstanceOf(RedirectRefusedError);
+      // The generated client wraps what a hook throws; the refusal is the cause.
+      expect(failure).toBeInstanceOf(UnexpectedClientError);
+      expect((failure as UnexpectedClientError).cause).toBeInstanceOf(RedirectRefusedError);
       // The redirect target never saw the token or the proof.
       expect(countPath(gateway, "/v1/me")).toBe(meBefore);
       expect(readFileSync(join(box.dir, "profiles", "default.json"), "utf8")).toBe(profileRaw);

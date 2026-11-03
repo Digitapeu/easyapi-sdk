@@ -1,9 +1,8 @@
 import { createHash, createPublicKey, verify } from "node:crypto";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import type { FetchLike } from "../../src/http.js";
-import { createClient } from "../../src/index.js";
 import { runCli } from "../../src/cli/main.js";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
+import { litigationData, machineClient, recordingFetch, type Attempt } from "../helpers.js";
 import { cliRun, clientEnv, enrollEnv, scratch } from "./support.js";
 
 /**
@@ -19,26 +18,6 @@ beforeAll(async () => {
   gateway = await startMockGateway();
 });
 afterAll(() => gateway.close());
-
-interface Attempt {
-  method: string;
-  url: string;
-  authorization: string | null;
-  dpop: string | null;
-}
-
-function tappedFetch(attempts: Attempt[]): FetchLike {
-  return async (url, init) => {
-    const headers = new Headers(init?.headers);
-    attempts.push({
-      method: (init?.method ?? "GET").toUpperCase(),
-      url,
-      authorization: headers.get("authorization"),
-      dpop: headers.get("dpop"),
-    });
-    return fetch(url, init);
-  };
-}
 
 const part = (jwt: string, index: 0 | 1 | 2): unknown =>
   JSON.parse(Buffer.from(jwt.split(".")[index] ?? "", "base64url").toString("utf8")) as unknown;
@@ -60,20 +39,20 @@ describe("vector: every emitted DPoP proof matches the client profile", () => {
     try {
       const env = enrollEnv(gateway, box.dir);
       const setup = cliRun(env);
-      setup.ctx.fetch = tappedFetch(attempts);
+      setup.ctx.fetch = recordingFetch(attempts);
       expect(await runCli(["setup"], setup.ctx)).toBe(0);
 
       const runtime = { env: clientEnv(box.dir, gateway.origin), cwd: process.cwd(), platform: process.platform as NodeJS.Platform };
-      const client = createClient({ fetch: tappedFetch(attempts) }, runtime);
+      const client = machineClient(runtime, {}, { attempts });
       gateway.onResource("GET", "/v1/company/43020532/litigation", (res) => {
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ data: { cui: "43020532" } }));
+        res.end(JSON.stringify({ data: litigationData("43020532") }));
       });
       // A read with a query string: the proof's htu must exclude it.
-      await client.request("get", "/v1/company/{cui}/litigation", { path: { cui: "43020532" }, query: { court: "Bucharest" } });
+      await client.company.litigation({ cui: "43020532", court: "Bucharest" });
 
       const rotate = cliRun(clientEnv(box.dir, gateway.origin));
-      rotate.ctx.fetch = tappedFetch(attempts);
+      rotate.ctx.fetch = recordingFetch(attempts);
       expect(await runCli(["rotate"], rotate.ctx)).toBe(0);
 
       const proofs = attempts.filter((attempt) => attempt.dpop !== null);

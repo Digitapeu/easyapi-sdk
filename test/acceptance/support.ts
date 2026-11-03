@@ -4,7 +4,7 @@ import { join } from "node:path";
 import { expect } from "bun:test";
 import type { CliContext } from "../../src/cli/context.js";
 import { runCli } from "../../src/cli/main.js";
-import { SetupError } from "../../src/errors.js";
+import { SetupError } from "../../src/machine-auth/errors.js";
 import type { MockGateway } from "../harness/mock-gateway.js";
 
 /**

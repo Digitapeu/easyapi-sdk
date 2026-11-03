@@ -1,8 +1,9 @@
-import { existsSync, readFileSync } from "node:fs";
+import { cpSync, existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { createClient } from "../src/index.js";
 import { runCli } from "../src/cli/main.js";
-import { cliRun, tempConfigDir } from "./helpers.js";
+import { cliRun, machineClient, tempConfigDir } from "./helpers.js";
 import { startMockGateway, type MockGateway } from "./harness/mock-gateway.js";
 
 let gateway: MockGateway;
@@ -28,8 +29,7 @@ describe("harness smoke: setup -> token -> /v1/me -> rotate", () => {
       expect(await runCli(["status"], status.ctx)).toBe(0);
 
       const runtime = { env, cwd: process.cwd(), platform: process.platform };
-      const client = createClient({}, runtime);
-      const me = await client.me();
+      const me = (await machineClient(runtime).me.get()).result.data;
       expect(me.authentication).toMatchObject({ method: "dpop", generation: 1 });
 
       const oldKeyPath = profile.privateKeyPath as string;
@@ -41,7 +41,7 @@ describe("harness smoke: setup -> token -> /v1/me -> rotate", () => {
       expect(existsSync(oldKeyPath)).toBe(false);
 
       // A fresh client picks up the rotated key from the profile; the old client's token died with the old signer.
-      const afterRotation = await createClient({}, runtime).me();
+      const afterRotation = (await machineClient(runtime).me.get()).result.data;
       expect(afterRotation.authentication).toMatchObject({ method: "dpop", generation: 2 });
     } finally {
       config.cleanup();
@@ -55,7 +55,7 @@ describe("harness smoke: setup -> token -> /v1/me -> rotate", () => {
       gateway.dropNextResponse("enroll");
       const first = cliRun(env);
       expect(await runCli(["setup"], first.ctx)).toBe(1);
-      expect(first.stderr.join("\n")).toContain("run `easyapi setup` again");
+      expect(first.stderr.join("\n")).toMatch(/run `easyapi setup` again/i);
       expect(first.stderr.join("\n")).not.toContain(env.EASYAPI_API_KEY);
       const pending = readProfileJson(config.dir);
       expect(pending.status).toBe("pending");
@@ -87,15 +87,27 @@ describe("harness smoke: setup -> token -> /v1/me -> rotate", () => {
     try {
       const env = { EASYAPI_API_KEY: gateway.createParentKey(), EASYAPI_CONFIG_DIR: config.dir, EASYAPI_BASE_URL: gateway.origin };
       expect(await runCli(["setup"], cliRun(env).ctx)).toBe(0);
-      gateway.onResource("GET", "/v1/company/43020532", (res) => {
+      gateway.onResource("GET", "/v1/company/43020532/vat-status", (res) => {
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ data: { cui: "43020532", name: "Example SRL", vat: { vatActive: true } } }));
+        res.end(JSON.stringify({ data: { cui: "43020532", vatActive: true, vatOnPayment: false, vatNumber: "RO43020532", active: true, checkedAt: "2026-11-03T12:00:00.000Z" } }));
       });
       const { EASYAPI_API_KEY: _bootstrap, ...clientEnv } = env;
-      const run = Bun.spawnSync(["bun", "examples/first-request.ts"], { env: { ...process.env, ...clientEnv }, cwd: new URL("..", import.meta.url).pathname });
-      expect(String(run.stderr)).toBe("");
-      expect(run.stdout.toString()).toContain("Mock Business SRL on tier pro");
-      expect(run.stdout.toString()).toContain("Example SRL (VAT active: true)");
+      // The example imports the package by name: give it a throwaway project whose node_modules links to this one.
+      const repo = new URL("..", import.meta.url).pathname;
+      const project = mkdtempSync(join(tmpdir(), "easyapi-example-"));
+      try {
+        mkdirSync(join(project, "node_modules", "@digitap.eu"), { recursive: true });
+        symlinkSync(repo, join(project, "node_modules", "@digitap.eu", "easyapi"));
+        cpSync(join(repo, "examples", "first-request.ts"), join(project, "first-request.ts"));
+        // Async spawn: the gateway lives in this process and must keep answering while the example runs.
+        const child = Bun.spawn(["bun", "first-request.ts"], { env: { ...process.env, ...clientEnv }, cwd: project, stdout: "pipe", stderr: "pipe" });
+        const [stdout, stderr] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
+        expect(stderr).toBe("");
+        expect(stdout).toContain("Mock Business SRL on tier pro");
+        expect(stdout).toContain("vatActive: true");
+      } finally {
+        rmSync(project, { recursive: true, force: true });
+      }
     } finally {
       config.cleanup();
     }

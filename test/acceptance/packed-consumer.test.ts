@@ -1,8 +1,9 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, symlinkSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
+import { companyData } from "../helpers.js";
 import { clientEnv, enrollEnv, runSetup, scratch } from "./support.js";
 
 /**
@@ -17,6 +18,8 @@ import { clientEnv, enrollEnv, runSetup, scratch } from "./support.js";
  */
 
 const REPO = new URL("../..", import.meta.url).pathname;
+// The published name comes from the manifest, not from a literal in this file.
+const PACKAGE_NAME = (JSON.parse(readFileSync(join(REPO, "package.json"), "utf8")) as { name: string }).name;
 
 let gateway: MockGateway;
 beforeAll(async () => {
@@ -29,6 +32,13 @@ const sh = (args: string[], cwd: string, env?: Record<string, string>): { code: 
   expect(run.stdout).toBeDefined();
   expect(run.stderr).toBeDefined();
   return { code: run.exitCode, out: run.stdout.toString(), err: run.stderr.toString() };
+};
+
+/** The consumer calls the in-process gateway, so the parent event loop must stay free while it runs. */
+const shAsync = async (args: string[], cwd: string, env?: Record<string, string>): Promise<{ code: number; out: string; err: string }> => {
+  const child = Bun.spawn(args, { cwd, env: { ...process.env, ...env }, stdout: "pipe", stderr: "pipe" });
+  const [out, err, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
+  return { code, out, err };
 };
 
 describe("vector: packed consumer", () => {
@@ -67,71 +77,74 @@ describe("vector: packed consumer", () => {
           inner.startsWith("dist/");
         expect(allowed).toBe(true);
       }
-      expect(entries.some((entry) => entry === "package/dist/esm/src/index.js")).toBe(true);
-      expect(entries.some((entry) => entry === "package/dist/cjs/src/index.js")).toBe(true);
+      expect(entries.some((entry) => entry === "package/dist/esm/index.js")).toBe(true);
+      expect(entries.some((entry) => entry === "package/dist/commonjs/index.js")).toBe(true);
       for (const banned of ["package/src/", "package/scripts/", "package/contract/", "package/test/", "package/.ship/"]) {
         expect(entries.some((entry) => entry.startsWith(banned))).toBe(false);
       }
 
       // 3. Install the tarball into a temp consumer project without network.
       writeFileSync(join(consumer, "package.json"), JSON.stringify({ name: "packed-consumer", version: "0.0.0" }));
+      const installed = join(consumer, "node_modules", PACKAGE_NAME);
       const offline = sh(["npm", "install", "--offline", "--no-audit", "--no-fund", tarball], consumer);
       if (offline.code !== 0) {
         // npm's cache cannot satisfy zod offline: unpack the tarball and link the
         // repo's node_modules instead — still no network, still the packed bytes.
-        mkdirSync(join(consumer, "node_modules", "@easyapi"), { recursive: true });
+        mkdirSync(join(consumer, "node_modules", dirname(PACKAGE_NAME)), { recursive: true });
         expect(sh(["tar", "-xzf", tarball, "-C", join(consumer, "node_modules")], consumer).code).toBe(0);
-        Bun.spawnSync(["mv", join(consumer, "node_modules", "package"), join(consumer, "node_modules", "@easyapi", "sdk")]);
+        Bun.spawnSync(["mv", join(consumer, "node_modules", "package"), installed]);
         symlinkSync(join(REPO, "node_modules", "zod"), join(consumer, "node_modules", "zod"));
       }
-      expect(existsSync(join(consumer, "node_modules", "@easyapi", "sdk", "package.json"))).toBe(true);
+      expect(existsSync(join(installed, "package.json"))).toBe(true);
 
       // 4. A live identity for the consumer to call with.
       expect((await runSetup(enrollEnv(gateway, box.dir))).code).toBe(0);
       gateway.onResource("GET", "/v1/company/43020532", (res) => {
         res.writeHead(200, { "Content-Type": "application/json" });
-        res.end(JSON.stringify({ data: { cui: "43020532", name: "Example SRL" } }));
+        res.end(JSON.stringify({ data: companyData("43020532") }));
       });
 
       // 5. ESM import of the public exports + a live authenticated call.
       writeFileSync(join(consumer, "check-esm.mjs"), [
-        `import { createClient, ApiError, OAuthError, ConfigError } from "@easyapi/sdk";`,
-        `if (typeof createClient !== "function") throw new Error("createClient missing");`,
-        `for (const name of ["ApiError", "OAuthError", "ConfigError"]) {`,
-        `  if (typeof (await import("@easyapi/sdk"))[name] !== "function") throw new Error(name + " missing");`,
+        `import * as sdk from "${PACKAGE_NAME}";`,
+        `for (const name of ["fromMachineCredential", "OAuthError", "ConfigError"]) {`,
+        `  if (typeof sdk[name] !== "function") throw new Error(name + " missing");`,
         `}`,
-        `const me = await createClient({}).me();`,
-        `if (me?.authentication?.method !== "dpop") throw new Error("expected dpop me");`,
-        `const company = await createClient({}).company.get("43020532");`,
-        `if (company?.cui !== "43020532") throw new Error("expected company payload");`,
+        `const client = await sdk.fromMachineCredential();`,
+        `const me = (await client.me.get()).result.data;`,
+        `if (me.authentication.method !== "dpop") throw new Error("expected dpop me");`,
+        `const company = (await client.company.get("43020532")).result.data;`,
+        `if (company.cui !== "43020532") throw new Error("expected company payload");`,
         `console.log("esm-ok " + me.businessName);`,
         ``,
       ].join("\n"));
-      const esm = sh(["node", "check-esm.mjs"], consumer, clientEnv(box.dir, gateway.origin));
+      const esm = await shAsync(["node", "check-esm.mjs"], consumer, clientEnv(box.dir, gateway.origin));
       expect(esm.err).toBe("");
       expect(esm.code).toBe(0);
       expect(esm.out).toMatch(/^esm-ok Mock Business SRL/m);
 
-      // 6. CJS require of the public exports.
+      // 6. CJS require of the public exports, then the same live call through the CJS build.
       writeFileSync(join(consumer, "check-cjs.cjs"), [
-        `const sdk = require("@easyapi/sdk");`,
-        `if (typeof sdk.createClient !== "function") throw new Error("createClient missing");`,
-        `for (const name of ["ApiError", "OAuthError", "ConfigError", "SetupError", "NetworkError"]) {`,
+        `const sdk = require("${PACKAGE_NAME}");`,
+        `for (const name of ["fromMachineCredential", "OAuthError", "ConfigError", "SetupError", "NetworkError"]) {`,
         `  if (typeof sdk[name] !== "function") throw new Error(name + " missing");`,
         `}`,
-        `console.log("cjs-ok");`,
+        `sdk.fromMachineCredential().then((client) => client.me.get()).then((response) => {`,
+        `  if (response.result.data.authentication.method !== "dpop") throw new Error("expected dpop me");`,
+        `  console.log("cjs-ok");`,
+        `});`,
         ``,
       ].join("\n"));
-      const cjs = sh(["node", "check-cjs.cjs"], consumer, clientEnv(box.dir, gateway.origin));
+      const cjs = await shAsync(["node", "check-cjs.cjs"], consumer, clientEnv(box.dir, gateway.origin));
       expect(cjs.err).toBe("");
       expect(cjs.code).toBe(0);
       expect(cjs.out).toMatch(/^cjs-ok/m);
 
       // 7. The packed manifest still exposes both entry points.
-      const manifest = JSON.parse(readFileSync(join(consumer, "node_modules", "@easyapi", "sdk", "package.json"), "utf8")) as {
+      const manifest = JSON.parse(readFileSync(join(installed, "package.json"), "utf8")) as {
         main: string; module: string; exports: Record<string, unknown>;
       };
-      expect(manifest.main).toContain("dist/cjs");
+      expect(manifest.main).toContain("dist/commonjs");
       expect(manifest.module).toContain("dist/esm");
       expect(Object.keys(manifest.exports)).toContain(".");
     } finally {

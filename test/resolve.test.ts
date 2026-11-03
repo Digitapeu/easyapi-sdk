@@ -1,12 +1,12 @@
 import { chmodSync, mkdirSync, symlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, test } from "bun:test";
-import { ConfigError } from "../src/errors.js";
-import { generateSigner } from "../src/keys.js";
-import { defaultConfigRoot, keyFilePath, locateProfile, writeProfile } from "../src/profile-store.js";
-import { ensureConfigDirs } from "../src/profile-store.js";
-import { writePrivateFile } from "../src/fsx.js";
-import { resolveIdentity, type Runtime } from "../src/resolve.js";
+import { ConfigError } from "../src/machine-auth/errors.js";
+import { generateSigner } from "../src/machine-auth/keys.js";
+import { defaultConfigRoot, keyFilePath, locateProfile, writeProfile } from "../src/machine-auth/profile-store.js";
+import { ensureConfigDirs } from "../src/machine-auth/profile-store.js";
+import { writePrivateFile } from "../src/machine-auth/fsx.js";
+import { resolveIdentity, type Runtime } from "../src/machine-auth/resolve.js";
 import { tempConfigDir } from "./helpers.js";
 
 const credentialId = "0b0f7b3e-5c3e-4a55-9c1e-2a6f0f6f9d11";

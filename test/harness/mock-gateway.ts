@@ -1,7 +1,7 @@
 import { createHash, createPublicKey, randomBytes, randomUUID, verify } from "node:crypto";
 import { createServer, type IncomingMessage, type Server, type ServerResponse } from "node:http";
 import type { AddressInfo } from "node:net";
-import { z } from "zod";
+import { z } from "zod/v3"; // the contract schemas are zod v3; mixing them into a v4 object throws
 import {
   SDK_AUTH_LIMITS,
   SDK_OAUTH_ERROR_STATUS,
@@ -20,7 +20,7 @@ import {
   SdkTokenRequestSchema,
   type SdkOAuthError,
   type SdkPublicKey,
-} from "../../contract/sdk-auth.js";
+} from "../../src/machine-auth/contract/sdk-auth.js";
 
 /**
  * Offline stand-in for the five SDK routes of the contract (sections 3 and 6): enrollment, token,

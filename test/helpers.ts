@@ -2,8 +2,12 @@ import { mkdtempSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import type { CliContext } from "../src/cli/context.js";
+import { HTTPClient } from "../src/lib/http.js";
+import { createMachineClient, type MachineClientOptions } from "../src/machine-auth/client.js";
+import type { FetchLike } from "../src/machine-auth/http.js";
+import type { EasyApi } from "../src/sdk/sdk.js";
 import { runCli } from "../src/cli/main.js";
-import { SetupError } from "../src/errors.js";
+import { SetupError } from "../src/machine-auth/errors.js";
 import type { MockGateway } from "./harness/mock-gateway.js";
 
 export interface CliRun {
@@ -56,3 +60,68 @@ export async function provision(gateway: MockGateway, now?: () => number): Promi
   const { EASYAPI_API_KEY: _bootstrap, ...clientEnv } = env;
   return { env: clientEnv, runtime: { env: clientEnv, cwd: process.cwd(), platform: process.platform }, configDir: config.dir, cleanup: config.cleanup };
 }
+
+/** One outgoing request as seen on the wire: resource calls and token exchanges alike. */
+export interface Attempt {
+  method: string;
+  url: string;
+  authorization: string | null;
+  dpop: string | null;
+}
+
+type Inner = (input: string | URL | Request, init?: RequestInit) => Promise<Response> | Response;
+
+/** A fetch that records the credential headers of every attempt (string URL or Request alike), then delegates. */
+export function recordingFetch(attempts: Attempt[] | undefined, inner: Inner = (input, init) => fetch(input, init)): FetchLike {
+  return async (input, init) => {
+    const request = input instanceof Request ? input : undefined;
+    const headers = new Headers(request ? request.headers : init?.headers);
+    attempts?.push({
+      method: (request?.method ?? init?.method ?? "GET").toUpperCase(),
+      url: request ? request.url : String(input),
+      authorization: headers.get("authorization"),
+      dpop: headers.get("dpop"),
+    });
+    return inner(input, init);
+  };
+}
+
+/**
+ * A machine client whose token exchange and resource calls both go through one tap that records every
+ * attempt and then delegates to `inner` (the real fetch by default). `inner` is where a test injects
+ * transport failures; the gateway stays the real offline harness.
+ */
+export function machineClient(
+  runtime: Provisioned["runtime"],
+  options: MachineClientOptions = {},
+  tap: { attempts?: Attempt[]; inner?: Inner } = {},
+): EasyApi {
+  const record = recordingFetch(tap.attempts, tap.inner);
+  return createMachineClient({ ...options, fetch: record, sdk: { ...options.sdk, httpClient: new HTTPClient({ fetcher: record }) } }, runtime);
+}
+
+/** A fast, bounded retry policy so retry behaviour can be exercised without waiting on production backoff. */
+export const quickRetries = { strategy: "backoff", backoff: { initialInterval: 1, maxInterval: 5, exponent: 1, maxElapsedTime: 2_000 }, retryConnectionErrors: true } as const;
+
+/** Answer bodies that satisfy the generated client's strict response schemas. */
+const checkedAt = "2026-11-03T12:00:00.000Z";
+export const companyData = (cui: string, name = "Example SRL") => ({
+  cui,
+  name,
+  registrationNumber: null,
+  address: null,
+  vat: { vatActive: true, vatOnPayment: false, vatNumber: null },
+  active: true,
+  checkedAt,
+});
+export const litigationData = (cui: string) => ({
+  company: { cui, name: "Example SRL" },
+  queried: { party: null },
+  matches: [],
+  truncated: false,
+  source: "portal",
+  criminalMattersExcluded: true,
+  checkedAt,
+});
+export const ratesData = () => ({ base: "RON", date: "2026-11-03", rates: [{ currency: "EUR", rate: 5 }], source: "BNR", checkedAt });
+export const batchData = () => ({ companies: [], notFound: [] });

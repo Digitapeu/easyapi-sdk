@@ -1,9 +1,9 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { createClient } from "../../src/index.js";
 import { runCli } from "../../src/cli/main.js";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
+import { machineClient } from "../helpers.js";
 import {
   cliRun,
   clientEnv,
@@ -78,7 +78,7 @@ describe("vector: dropped enrollment response resumes without the bootstrap key"
       expect(gateway.credentials.size).toBe(credentialsBefore + 1);
       expect(countPath(gateway, "/v1/auth/enroll")).toBe(enrollCallsBefore);
 
-      const me = await createClient({}, { env: clientEnv(box.dir, gateway.origin), cwd: process.cwd(), platform: process.platform }).me();
+      const me = (await machineClient({ env: clientEnv(box.dir, gateway.origin), cwd: process.cwd(), platform: process.platform }).me.get()).result.data;
       expect(me.authentication).toMatchObject({ method: "dpop", credentialId: pending.credentialId, generation: 1 });
       expectNoSecretLeak([first.run, second.run], [env.EASYAPI_API_KEY ?? ""]);
     } finally {

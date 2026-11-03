@@ -1,11 +1,12 @@
 import { cpSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { afterAll, beforeAll, describe, expect, test } from "bun:test";
-import { createClient } from "../../src/index.js";
-import { OAuthError } from "../../src/errors.js";
-import { Session } from "../../src/session.js";
-import { loadKeyFile } from "../../src/resolve.js";
+import { OAuthError } from "../../src/machine-auth/errors.js";
+import { Deadline } from "../../src/machine-auth/http.js";
+import { Session } from "../../src/machine-auth/session.js";
+import { loadKeyFile } from "../../src/machine-auth/resolve.js";
 import { startMockGateway, type MockGateway } from "../harness/mock-gateway.js";
+import { machineClient } from "../helpers.js";
 import { clientEnv, enrollEnv, expectNoSecretLeak, runRotate, runSetup, scratch } from "./support.js";
 
 /**
@@ -59,7 +60,7 @@ describe("vector: rotation races and lost responses", () => {
       expect(after.publicKeyThumbprint).not.toBe(before.publicKeyThumbprint);
 
       // The winner verifies the new signer end to end (token + /v1/me).
-      const me = await createClient({}, runtimeFor(box.dir)).me();
+      const me = (await machineClient(runtimeFor(box.dir)).me.get()).result.data;
       expect(me.authentication).toMatchObject({
         method: "dpop",
         credentialId: before.credentialId,
@@ -115,7 +116,7 @@ describe("vector: rotation races and lost responses", () => {
       expect(winner.status).toBe("verified");
       expect(winner.generation).toBe(startGeneration + 1);
       expect(winner.pendingRotation).toBeUndefined();
-      const me = await createClient({}, runtimeFor(winnerDir)).me();
+      const me = (await machineClient(runtimeFor(winnerDir)).me.get()).result.data;
       expect(me.authentication).toMatchObject({
         method: "dpop",
         credentialId: genesis.credentialId,
@@ -138,7 +139,7 @@ describe("vector: rotation races and lost responses", () => {
       // No old-proof exception: the retired signer is simply unknown now (401 invalid_client).
       const oldSigner = loadKeyFile(retained.privateKeyPath, process.cwd());
       const stale = new Session({ origin: gateway.origin, credentialId: genesis.credentialId, signer: oldSigner });
-      const failure = await stale.request({ method: "GET", rawPath: "/v1/me" }).catch((error: unknown) => error);
+      const failure = await stale.authorize("GET", new URL(`${gateway.origin}/v1/me`), new Deadline(10_000), undefined).catch((error: unknown) => error);
       expect(failure).toBeInstanceOf(OAuthError);
       expect(failure).toMatchObject({ error: "invalid_client", status: 401 });
     } finally {
