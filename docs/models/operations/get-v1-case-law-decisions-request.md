@@ -1,0 +1,23 @@
+# GetV1CaseLawDecisionsRequest
+
+## Example Usage
+
+```typescript
+import { GetV1CaseLawDecisionsRequest } from "@digitap.eu/easyapi/models/operations";
+
+let value: GetV1CaseLawDecisionsRequest = {};
+```
+
+## Fields
+
+| Field                                                                        | Type                                                                         | Required                                                                     | Description                                                                  |
+| ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `court`                                                                      | [operations.QueryParamCourt](../../models/operations/query-param-court.md)   | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `kind`                                                                       | [operations.QueryParamKind](../../models/operations/query-param-kind.md)     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `matter`                                                                     | [operations.QueryParamMatter](../../models/operations/query-param-matter.md) | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `number`                                                                     | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `pronouncedFrom`                                                             | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `pronouncedTo`                                                               | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `linked`                                                                     | [operations.Linked](../../models/operations/linked.md)                       | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `cursor`                                                                     | *string*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
+| `limit`                                                                      | *number*                                                                     | :heavy_minus_sign:                                                           | N/A                                                                          |
