@@ -7,15 +7,34 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
+export const GetV1LegislationActsIdVersionsVersionQueryParamKind = {
+  Consolidation: "consolidation",
+  Republication: "republication",
+  Base: "base",
+} as const;
+export type GetV1LegislationActsIdVersionsVersionQueryParamKind = ClosedEnum<
+  typeof GetV1LegislationActsIdVersionsVersionQueryParamKind
+>;
+
 export type GetV1LegislationActsIdVersionsVersionRequest = {
   id: string;
   version: string;
+  kind?: GetV1LegislationActsIdVersionsVersionQueryParamKind | undefined;
 };
+
+export const GetV1LegislationActsIdVersionsVersionKindResponse = {
+  Consolidation: "consolidation",
+  Republication: "republication",
+  Base: "base",
+} as const;
+export type GetV1LegislationActsIdVersionsVersionKindResponse = OpenEnum<
+  typeof GetV1LegislationActsIdVersionsVersionKindResponse
+>;
 
 export const GetV1LegislationActsIdVersionsVersionStatus = {
   Resolved: "resolved",
@@ -32,7 +51,7 @@ export type GetV1LegislationActsIdVersionsVersionAmendingAct = {
   reference: string | null;
 };
 
-export const GetV1LegislationActsIdVersionsVersionKind = {
+export const GetV1LegislationActsIdVersionsVersionBodyKind = {
   Title: "title",
   Book: "book",
   Part: "part",
@@ -42,13 +61,13 @@ export const GetV1LegislationActsIdVersionsVersionKind = {
   Paragraph: "paragraph",
   Annex: "annex",
 } as const;
-export type GetV1LegislationActsIdVersionsVersionKind = OpenEnum<
-  typeof GetV1LegislationActsIdVersionsVersionKind
+export type GetV1LegislationActsIdVersionsVersionBodyKind = OpenEnum<
+  typeof GetV1LegislationActsIdVersionsVersionBodyKind
 >;
 
 export type GetV1LegislationActsIdVersionsVersionBody = {
   id: string;
-  kind: GetV1LegislationActsIdVersionsVersionKind;
+  kind: GetV1LegislationActsIdVersionsVersionBodyKind;
   label: string;
   heading: string | null;
   text: string | null;
@@ -67,6 +86,7 @@ export type GetV1LegislationActsIdVersionsVersionSourceKind = OpenEnum<
 
 export type GetV1LegislationActsIdVersionsVersionData = {
   version: string;
+  kind: GetV1LegislationActsIdVersionsVersionKindResponse;
   effectiveOn: string;
   amendingAct: GetV1LegislationActsIdVersionsVersionAmendingAct;
   sourceDocumentId: string;
@@ -93,9 +113,15 @@ export type GetV1LegislationActsIdVersionsVersionResponse = {
 };
 
 /** @internal */
+export const GetV1LegislationActsIdVersionsVersionQueryParamKind$outboundSchema:
+  z.ZodMiniEnum<typeof GetV1LegislationActsIdVersionsVersionQueryParamKind> = z
+    .enum(GetV1LegislationActsIdVersionsVersionQueryParamKind);
+
+/** @internal */
 export type GetV1LegislationActsIdVersionsVersionRequest$Outbound = {
   id: string;
   version: string;
+  kind?: string | undefined;
 };
 
 /** @internal */
@@ -106,6 +132,9 @@ export const GetV1LegislationActsIdVersionsVersionRequest$outboundSchema:
   > = z.object({
     id: z.string(),
     version: z.string(),
+    kind: z.optional(
+      GetV1LegislationActsIdVersionsVersionQueryParamKind$outboundSchema,
+    ),
   });
 
 export function getV1LegislationActsIdVersionsVersionRequestToJSON(
@@ -118,6 +147,11 @@ export function getV1LegislationActsIdVersionsVersionRequestToJSON(
     ),
   );
 }
+
+/** @internal */
+export const GetV1LegislationActsIdVersionsVersionKindResponse$inboundSchema:
+  z.ZodMiniType<GetV1LegislationActsIdVersionsVersionKindResponse, unknown> =
+    openEnums.inboundSchema(GetV1LegislationActsIdVersionsVersionKindResponse);
 
 /** @internal */
 export const GetV1LegislationActsIdVersionsVersionStatus$inboundSchema:
@@ -151,15 +185,15 @@ export function getV1LegislationActsIdVersionsVersionAmendingActFromJSON(
 }
 
 /** @internal */
-export const GetV1LegislationActsIdVersionsVersionKind$inboundSchema:
-  z.ZodMiniType<GetV1LegislationActsIdVersionsVersionKind, unknown> = openEnums
-    .inboundSchema(GetV1LegislationActsIdVersionsVersionKind);
+export const GetV1LegislationActsIdVersionsVersionBodyKind$inboundSchema:
+  z.ZodMiniType<GetV1LegislationActsIdVersionsVersionBodyKind, unknown> =
+    openEnums.inboundSchema(GetV1LegislationActsIdVersionsVersionBodyKind);
 
 /** @internal */
 export const GetV1LegislationActsIdVersionsVersionBody$inboundSchema:
   z.ZodMiniType<GetV1LegislationActsIdVersionsVersionBody, unknown> = z.object({
     id: types.string(),
-    kind: GetV1LegislationActsIdVersionsVersionKind$inboundSchema,
+    kind: GetV1LegislationActsIdVersionsVersionBodyKind$inboundSchema,
     label: types.string(),
     heading: types.nullable(types.string()),
     text: types.nullable(types.string()),
@@ -192,6 +226,7 @@ export const GetV1LegislationActsIdVersionsVersionData$inboundSchema:
   z.ZodMiniType<GetV1LegislationActsIdVersionsVersionData, unknown> = z.pipe(
     z.object({
       version: types.string(),
+      kind: GetV1LegislationActsIdVersionsVersionKindResponse$inboundSchema,
       effective_on: types.string(),
       amending_act: z.lazy(() =>
         GetV1LegislationActsIdVersionsVersionAmendingAct$inboundSchema

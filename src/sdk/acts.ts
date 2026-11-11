@@ -64,7 +64,7 @@ export class Acts extends ClientSDK {
   }
 
   /**
-   * List an act's point-in-time versions
+   * List an act's history: consolidations, republications and the base form
    */
   async listVersions(
     id: string,
@@ -81,14 +81,12 @@ export class Acts extends ClientSDK {
    * Get an act's body as it read on a given version date
    */
   async getVersion(
-    id: string,
-    version: string,
+    request: operations.GetV1LegislationActsIdVersionsVersionRequest,
     options?: RequestOptions,
   ): Promise<operations.GetV1LegislationActsIdVersionsVersionResponse> {
     return unwrapAsync(legislationActsGetVersion(
       this,
-      id,
-      version,
+      request,
       options,
     ));
   }

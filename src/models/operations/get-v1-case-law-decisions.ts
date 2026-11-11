@@ -12,18 +12,29 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
+export const QueryParamList = {
+  CcrAdmissions: "ccr_admissions",
+  IccjRil: "iccj_ril",
+  IccjHpCivil: "iccj_hp_civil",
+  IccjHpPenal: "iccj_hp_penal",
+  IccjHpCaf: "iccj_hp_caf",
+} as const;
+export type QueryParamList = ClosedEnum<typeof QueryParamList>;
+
 export const QueryParamCourt = {
   Ccr: "ccr",
   Iccj: "iccj",
 } as const;
 export type QueryParamCourt = ClosedEnum<typeof QueryParamCourt>;
 
-export const QueryParamKind = {
+export const GetV1CaseLawDecisionsQueryParamKind = {
   CcrAdmission: "ccr_admission",
   Ril: "ril",
   Hp: "hp",
 } as const;
-export type QueryParamKind = ClosedEnum<typeof QueryParamKind>;
+export type GetV1CaseLawDecisionsQueryParamKind = ClosedEnum<
+  typeof GetV1CaseLawDecisionsQueryParamKind
+>;
 
 export const QueryParamMatter = {
   Civil: "civil",
@@ -39,8 +50,9 @@ export const Linked = {
 export type Linked = ClosedEnum<typeof Linked>;
 
 export type GetV1CaseLawDecisionsRequest = {
+  list?: QueryParamList | undefined;
   court?: QueryParamCourt | undefined;
-  kind?: QueryParamKind | undefined;
+  kind?: GetV1CaseLawDecisionsQueryParamKind | undefined;
   matter?: QueryParamMatter | undefined;
   number?: string | undefined;
   pronouncedFrom?: string | undefined;
@@ -50,16 +62,14 @@ export type GetV1CaseLawDecisionsRequest = {
   limit?: number | undefined;
 };
 
-export const GetV1CaseLawDecisionsList = {
+export const ItemList = {
   CcrAdmissions: "ccr_admissions",
   IccjRil: "iccj_ril",
   IccjHpCivil: "iccj_hp_civil",
   IccjHpPenal: "iccj_hp_penal",
   IccjHpCaf: "iccj_hp_caf",
 } as const;
-export type GetV1CaseLawDecisionsList = OpenEnum<
-  typeof GetV1CaseLawDecisionsList
->;
+export type ItemList = OpenEnum<typeof ItemList>;
 
 export const ItemCourt = {
   Ccr: "ccr",
@@ -85,7 +95,7 @@ export type ItemMatter = OpenEnum<typeof ItemMatter>;
 
 export type GetV1CaseLawDecisionsItem = {
   id: string;
-  list: GetV1CaseLawDecisionsList;
+  list: ItemList;
   court: ItemCourt;
   kind: GetV1CaseLawDecisionsItemKind;
   matter: ItemMatter | null;
@@ -116,14 +126,19 @@ export type GetV1CaseLawDecisionsResponse = {
 };
 
 /** @internal */
+export const QueryParamList$outboundSchema: z.ZodMiniEnum<
+  typeof QueryParamList
+> = z.enum(QueryParamList);
+
+/** @internal */
 export const QueryParamCourt$outboundSchema: z.ZodMiniEnum<
   typeof QueryParamCourt
 > = z.enum(QueryParamCourt);
 
 /** @internal */
-export const QueryParamKind$outboundSchema: z.ZodMiniEnum<
-  typeof QueryParamKind
-> = z.enum(QueryParamKind);
+export const GetV1CaseLawDecisionsQueryParamKind$outboundSchema: z.ZodMiniEnum<
+  typeof GetV1CaseLawDecisionsQueryParamKind
+> = z.enum(GetV1CaseLawDecisionsQueryParamKind);
 
 /** @internal */
 export const QueryParamMatter$outboundSchema: z.ZodMiniEnum<
@@ -137,6 +152,7 @@ export const Linked$outboundSchema: z.ZodMiniEnum<typeof Linked> = z.enum(
 
 /** @internal */
 export type GetV1CaseLawDecisionsRequest$Outbound = {
+  list?: string | undefined;
   court?: string | undefined;
   kind?: string | undefined;
   matter?: string | undefined;
@@ -154,8 +170,9 @@ export const GetV1CaseLawDecisionsRequest$outboundSchema: z.ZodMiniType<
   GetV1CaseLawDecisionsRequest
 > = z.pipe(
   z.object({
+    list: z.optional(QueryParamList$outboundSchema),
     court: z.optional(QueryParamCourt$outboundSchema),
-    kind: z.optional(QueryParamKind$outboundSchema),
+    kind: z.optional(GetV1CaseLawDecisionsQueryParamKind$outboundSchema),
     matter: z.optional(QueryParamMatter$outboundSchema),
     number: z.optional(z.string()),
     pronouncedFrom: z.optional(z.string()),
@@ -183,10 +200,8 @@ export function getV1CaseLawDecisionsRequestToJSON(
 }
 
 /** @internal */
-export const GetV1CaseLawDecisionsList$inboundSchema: z.ZodMiniType<
-  GetV1CaseLawDecisionsList,
-  unknown
-> = openEnums.inboundSchema(GetV1CaseLawDecisionsList);
+export const ItemList$inboundSchema: z.ZodMiniType<ItemList, unknown> =
+  openEnums.inboundSchema(ItemList);
 
 /** @internal */
 export const ItemCourt$inboundSchema: z.ZodMiniType<ItemCourt, unknown> =
@@ -209,7 +224,7 @@ export const GetV1CaseLawDecisionsItem$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     id: types.string(),
-    list: GetV1CaseLawDecisionsList$inboundSchema,
+    list: ItemList$inboundSchema,
     court: ItemCourt$inboundSchema,
     kind: GetV1CaseLawDecisionsItemKind$inboundSchema,
     matter: types.nullable(ItemMatter$inboundSchema),

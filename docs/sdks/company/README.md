@@ -11,6 +11,8 @@ Company identity, VAT status, balance sheets and litigation by CUI.
 * [balance](#balance) - Get a company's last filed bilanț years in one call
 * [vatStatus](#vatstatus) - Get a company's focused VAT/registry status by CUI
 * [litigation](#litigation) - Find ECRIS court cases matching this company's legal name
+* [getV1CompanyCuiInsolvency](#getv1companycuiinsolvency) - List the insolvency cases (ECRIS) matching this company's legal name
+* [getV1CompanyCuiLei](#getv1companycuilei) - Find the GLEIF LEI record and parent entities for a company by CUI
 * [batchGet](#batchget) - Look up up to 100 companies by CUI in one call
 
 ## get
@@ -372,6 +374,156 @@ run();
 ### Response
 
 **Promise\<[operations.GetV1CompanyCuiLitigationResponse](../../models/operations/get-v1-company-cui-litigation-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorEnvelope       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorEnvelope       | 429                        | application/json           |
+| errors.ErrorEnvelope       | 500, 502                   | application/json           |
+| errors.ErrorEnvelope       | 503                        | application/json           |
+| errors.EasyAPIDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## getV1CompanyCuiInsolvency
+
+List the insolvency cases (ECRIS) matching this company's legal name
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_insolvency" method="get" path="/v1/company/{cui}/insolvency" -->
+```typescript
+import { EasyApi } from "@digitap.eu/easyapi";
+
+const easyApi = new EasyApi({
+  apiKey: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await easyApi.company.getV1CompanyCuiInsolvency({
+    cui: "<value>",
+  });
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyGetV1CompanyCuiInsolvency } from "@digitap.eu/easyapi/funcs/company-get-v1-company-cui-insolvency.js";
+
+// Use `EasyApiCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const easyApi = new EasyApiCore({
+  apiKey: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await companyGetV1CompanyCuiInsolvency(easyApi, {
+    cui: "<value>",
+  });
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyGetV1CompanyCuiInsolvency failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `request`                                                                                                                                                                      | [operations.GetV1CompanyCuiInsolvencyRequest](../../models/operations/get-v1-company-cui-insolvency-request.md)                                                                | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompanyCuiInsolvencyResponse](../../models/operations/get-v1-company-cui-insolvency-response.md)\>**
+
+### Errors
+
+| Error Type                 | Status Code                | Content Type               |
+| -------------------------- | -------------------------- | -------------------------- |
+| errors.ErrorEnvelope       | 400, 401, 403, 404         | application/json           |
+| errors.ErrorEnvelope       | 429                        | application/json           |
+| errors.ErrorEnvelope       | 500, 502                   | application/json           |
+| errors.ErrorEnvelope       | 503                        | application/json           |
+| errors.EasyAPIDefaultError | 4XX, 5XX                   | \*/\*                      |
+
+## getV1CompanyCuiLei
+
+Find the GLEIF LEI record and parent entities for a company by CUI
+
+### Example Usage
+
+<!-- UsageSnippet language="typescript" operationID="get_v1_company_cui_lei" method="get" path="/v1/company/{cui}/lei" -->
+```typescript
+import { EasyApi } from "@digitap.eu/easyapi";
+
+const easyApi = new EasyApi({
+  apiKey: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const result = await easyApi.company.getV1CompanyCuiLei("<value>");
+
+  console.log(result);
+}
+
+run();
+```
+
+### Standalone function
+
+The standalone function version of this method:
+
+```typescript
+import { EasyApiCore } from "@digitap.eu/easyapi/core.js";
+import { companyGetV1CompanyCuiLei } from "@digitap.eu/easyapi/funcs/company-get-v1-company-cui-lei.js";
+
+// Use `EasyApiCore` for best tree-shaking performance.
+// You can create one instance of it to use across an application.
+const easyApi = new EasyApiCore({
+  apiKey: "<YOUR_BEARER_TOKEN_HERE>",
+});
+
+async function run() {
+  const res = await companyGetV1CompanyCuiLei(easyApi, "<value>");
+  if (res.ok) {
+    const { value: result } = res;
+    console.log(result);
+  } else {
+    console.log("companyGetV1CompanyCuiLei failed:", res.error);
+  }
+}
+
+run();
+```
+
+### Parameters
+
+| Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `cui`                                                                                                                                                                          | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
+| `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
+| `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |
+
+### Response
+
+**Promise\<[operations.GetV1CompanyCuiLeiResponse](../../models/operations/get-v1-company-cui-lei-response.md)\>**
 
 ### Errors
 

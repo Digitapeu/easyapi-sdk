@@ -13,6 +13,9 @@ let value: GetV1CompanyCuiLitigationData = {
   queried: {
     party: "<value>",
   },
+  sameName: {
+    status: "skipped",
+  },
   matches: [
     {
       case: {
@@ -59,7 +62,7 @@ let value: GetV1CompanyCuiLitigationData = {
   truncated: false,
   source: "<value>",
   criminalMattersExcluded: true,
-  checkedAt: new Date("2026-10-01T13:03:01.790Z"),
+  checkedAt: new Date("2024-06-11T23:40:43.670Z"),
 };
 ```
 
@@ -68,7 +71,8 @@ let value: GetV1CompanyCuiLitigationData = {
 | Field                                                                                                           | Type                                                                                                            | Required                                                                                                        | Description                                                                                                     |
 | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | `company`                                                                                                       | [operations.GetV1CompanyCuiLitigationCompany](../../models/operations/get-v1-company-cui-litigation-company.md) | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
-| `queried`                                                                                                       | [operations.Queried](../../models/operations/queried.md)                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `queried`                                                                                                       | [operations.GetV1CompanyCuiLitigationQueried](../../models/operations/get-v1-company-cui-litigation-queried.md) | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
+| `sameName`                                                                                                      | *operations.GetV1CompanyCuiLitigationSameNameUnion*                                                             | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 | `matches`                                                                                                       | [operations.Match](../../models/operations/match.md)[]                                                          | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 | `truncated`                                                                                                     | *boolean*                                                                                                       | :heavy_check_mark:                                                                                              | N/A                                                                                                             |
 | `source`                                                                                                        | *string*                                                                                                        | :heavy_check_mark:                                                                                              | N/A                                                                                                             |

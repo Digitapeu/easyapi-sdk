@@ -1,16 +1,16 @@
 lockVersion: 2.0.0
 id: 71fb6f95-d3be-4d6a-a157-8d95e8c89923
 management:
-  docChecksum: 81a1610cff9fd5b7cb45ff85408b4048
+  docChecksum: c7b1ddf20d847bb10b6396b1975ef851
   docVersion: 1.0.0
   speakeasyVersion: 1.800.1
   generationVersion: 2.943.0
-  releaseVersion: 0.3.2
-  configChecksum: 28a1d041d1b6da1276429cc874ff1adf
+  releaseVersion: 0.4.0
+  configChecksum: ee346dca6aeb75dedb8e131719812560
 persistentEdits:
-  generation_id: 38ed3407-640c-4bde-9bd1-740ecfddfb70
-  pristine_commit_hash: 5dd66c216578c85a7d42fbac8eb62197529ed7a2
-  pristine_tree_hash: f1867fa0c2925879161af528ebdd51b8e70886a8
+  generation_id: 965df74f-d644-43d9-abfe-11a85acad6d5
+  pristine_commit_hash: 23781b76e8138a7a0b3deb9a6b93f775ea84dfcf
+  pristine_tree_hash: 00338150d51ccab16eaba57506a98ddfbf222c65
 features:
   typescript:
     additionalDependencies: 0.1.0
@@ -67,8 +67,8 @@ trackedFiles:
     pristine_git_object: 08f95f4552349360b2c0b01802aa71ec3a55d2c2
   docs/models/error-code.md:
     id: a7fa0b50b903
-    last_write_checksum: sha1:23af6cf0521bdc20b8be3df24b498750f81ed975
-    pristine_git_object: c53da591575655ef8cc44d3a70d01f6403818e9e
+    last_write_checksum: sha1:add6134f5b62b45e5b820d730aedf62aa55011e6
+    pristine_git_object: 7c5468abe4f26a787a34de4b9a9212846966a55d
   docs/models/error-t.md:
     id: 7fb5e56408dd
     last_write_checksum: sha1:5f63e91db88c1fa7b3ac8c2f4e9143baf1a46b65
@@ -189,6 +189,22 @@ trackedFiles:
     id: e1c7af6884d2
     last_write_checksum: sha1:f1d0b0006a41d1db9c349668a6ee4ef28eae666a
     pristine_git_object: 594724dbd2fd74bbc0f7fb66d84d93fe12f3704d
+  docs/models/operations/direct-parent-entity.md:
+    id: 832adb7e4516
+    last_write_checksum: sha1:2ba3b7d2c56dad8c22d918b6a7f0eb17f5cfc9b9
+    pristine_git_object: 529dbcfd4f5deb19b301b42ebbc6c66a8e33ed20
+  docs/models/operations/direct-parent-exception.md:
+    id: 303d1ffe9561
+    last_write_checksum: sha1:96b5d3d7f21292e42c8bffdf21bc19a565946985
+    pristine_git_object: 61f50df91a6dd54b033a7dc733b4ba8cf3dcd961
+  docs/models/operations/direct-parent-unreported.md:
+    id: aedb3a68a692
+    last_write_checksum: sha1:f6059334daa76a886c7138865069c515232af0e8
+    pristine_git_object: 50d3ad770c077bc05970103092146c3f68b0ce33
+  docs/models/operations/direct-parent.md:
+    id: 4cf6c9b2eec6
+    last_write_checksum: sha1:4ced9842a4e7d034b5ea7ca944347201d1f30c19
+    pristine_git_object: 918fd60d62d49abf0adfba5e32e5a362c97c4dc1
   docs/models/operations/document-ref.md:
     id: d50a5d6e3539
     last_write_checksum: sha1:0f2ec47d5aa5d0eb86c9400c75094586f5df08e3
@@ -249,6 +265,10 @@ trackedFiles:
     id: a886db2b894c
     last_write_checksum: sha1:f76227d308f3bcf724f2e5c8a6d972d450043120
     pristine_git_object: a22d62c6fa68a7895063495cd81804d6f2d1cd6f
+  docs/models/operations/firm-role.md:
+    id: a583edfec038
+    last_write_checksum: sha1:332b18642edb332bbb32653c7685ba03a39a5722
+    pristine_git_object: 37b23e736a9c15aa5bd2a5c39dabedb6b4e79821
   docs/models/operations/get-v1-bank-accounts-data.md:
     id: 18d900753275
     last_write_checksum: sha1:0eaecd132e3d655c738557e6e779be0d9ba54b7e
@@ -395,8 +415,8 @@ trackedFiles:
     pristine_git_object: ec3460b4c2b54ab680103c6c788b5695d73fd69a
   docs/models/operations/get-v1-case-law-decisions-id-data.md:
     id: e30a73c6d517
-    last_write_checksum: sha1:041905e9b0d64f7975a16a67d9d5f240600c1e62
-    pristine_git_object: 10f341d133100ff27505ece938976c7f171020d9
+    last_write_checksum: sha1:46602d083c7268e06552dda40dfd913bce0e8372
+    pristine_git_object: 3b28279e437e350bfb9dff033713042d128ea68d
   docs/models/operations/get-v1-case-law-decisions-id-kind.md:
     id: 7a9ab32b8a2d
     last_write_checksum: sha1:a85befdbe4097f2e24c417f7bbe6cf89ffaf4b47
@@ -411,8 +431,8 @@ trackedFiles:
     pristine_git_object: 908fcc05bf11bbeb53810aae657f1058f56b6dab
   docs/models/operations/get-v1-case-law-decisions-id-request.md:
     id: 68482b39b5b6
-    last_write_checksum: sha1:ae0a4d84115f72995e6c6b6bf0804331bd22e4d3
-    pristine_git_object: 5112be0540b3a24c55fced86336dc542988a9002
+    last_write_checksum: sha1:7c5830a291103788f03d4e098f8a4f1dd1dfc33c
+    pristine_git_object: 72a13880d4383c5535e0106d72df8b2584d5a0f7
   docs/models/operations/get-v1-case-law-decisions-id-response-body.md:
     id: 7c900e2bbc5c
     last_write_checksum: sha1:30025ace83faebfb0f57483a45025c948cf78c5b
@@ -427,16 +447,16 @@ trackedFiles:
     pristine_git_object: ebc282de3d9c920c63bbfcdd6f3a6eedcb19f5a9
   docs/models/operations/get-v1-case-law-decisions-item.md:
     id: 657107b153ef
-    last_write_checksum: sha1:57547053b25dcc26b7dba7e6316fed355a7d53f0
-    pristine_git_object: 2b508c5bce4887f3f3242a1e0b1edf15c28e8154
-  docs/models/operations/get-v1-case-law-decisions-list.md:
-    id: 61379893c9ef
-    last_write_checksum: sha1:2c23fd5fc040791d4bc9c08fc71c6ffeb9678ad0
-    pristine_git_object: 1e81c2da92971d90794977042d87b7edc7d78e08
+    last_write_checksum: sha1:9d588c1d5eb8d4a9ebfd9ae977c41fd6c191c0b4
+    pristine_git_object: b27ea126810a7562c4606c735fb44debaac8cbfc
+  docs/models/operations/get-v1-case-law-decisions-query-param-kind.md:
+    id: 28a62348eaa7
+    last_write_checksum: sha1:61cf4b5994602f881c1fd266b62927b1b5ba8a99
+    pristine_git_object: 5d286747e6b057a1e89a81317bc6fb28045fbcc9
   docs/models/operations/get-v1-case-law-decisions-request.md:
     id: 048a61c81cea
-    last_write_checksum: sha1:537bd3193bf3805ded3718c45c3594abb8b2cb2d
-    pristine_git_object: 7cf6d62fedb3c3ff15e470a7bcebfe4294800286
+    last_write_checksum: sha1:08d7ae66ee6b76fd7473f9de8e7c3a7367f25fe3
+    pristine_git_object: 939f17916fe2154883ad280637a8e8177f645ed9
   docs/models/operations/get-v1-case-law-decisions-response-body.md:
     id: c01a0023b924
     last_write_checksum: sha1:ddc12e752abd93826f0db051e51bfccb6a1ba116
@@ -493,6 +513,90 @@ trackedFiles:
     id: 0ec52ba4cc5f
     last_write_checksum: sha1:fc20a4e7187e202f266c710e75d11acd213553f9
     pristine_git_object: 97311fa267b9dbc3ab7de7425fcc40ca84551012
+  docs/models/operations/get-v1-company-cui-insolvency-case.md:
+    id: 4db87ee1b20b
+    last_write_checksum: sha1:dfd9bef6894517ca13a29202bff526323b8c1982
+    pristine_git_object: a6c9319eb91ff8039492c8efcf09f0b19eb3f800
+  docs/models/operations/get-v1-company-cui-insolvency-company.md:
+    id: 8431692bb6ee
+    last_write_checksum: sha1:2c461c0c8e7f473d1f5f37a3ca0ea1a695456f89
+    pristine_git_object: d5879db1329b4ec01fd85608d2cab0948a611eaa
+  docs/models/operations/get-v1-company-cui-insolvency-data.md:
+    id: 8ca1980530e7
+    last_write_checksum: sha1:2de4daa2ce9b376480af893b8ba0936172322f3b
+    pristine_git_object: dfd6e453285b2c26efef566d14b909685a3ecddb
+  docs/models/operations/get-v1-company-cui-insolvency-min-confidence.md:
+    id: 260f950f4450
+    last_write_checksum: sha1:51a7b01f6d4c43012d547ffbd9519307b9ca1d46
+    pristine_git_object: d8036d87d84660b9b092dcdd1c076ab3b1f9743a
+  docs/models/operations/get-v1-company-cui-insolvency-queried.md:
+    id: c8db4376a6be
+    last_write_checksum: sha1:621485a018f4e32cae91edc0ef1b50f31f5e5b00
+    pristine_git_object: 7640440e96de380427e4bfc9a09a10b4d8ec80e8
+  docs/models/operations/get-v1-company-cui-insolvency-request.md:
+    id: 51ba6e4cfe4a
+    last_write_checksum: sha1:d7eff04a2ca942ff597a59514f51fd44d53fb765
+    pristine_git_object: bd8f94fde4db25486a02ec746ddfc0ac6d1795ba
+  docs/models/operations/get-v1-company-cui-insolvency-response-body.md:
+    id: 7882a32ac74f
+    last_write_checksum: sha1:8cb254f49386d02bbb5bad650cc1714b71e3ac90
+    pristine_git_object: bfed6090e3b8667388133d462a4f1e00628af223
+  docs/models/operations/get-v1-company-cui-insolvency-response.md:
+    id: f44aedcb5b45
+    last_write_checksum: sha1:4c071fb7104005d40a1421b4382fdd4cccc81517
+    pristine_git_object: 3cff7fabcf868aa4109220b1fa2aa59c6759338d
+  docs/models/operations/get-v1-company-cui-insolvency-same-name-checked.md:
+    id: b423ccf392c2
+    last_write_checksum: sha1:04b9c51930235a5d288758534fa7ded7e34f5fd3
+    pristine_git_object: 17ec819daea38989fd264e0389cedc49f411fd12
+  docs/models/operations/get-v1-company-cui-insolvency-same-name-company.md:
+    id: 3bdec2d6b735
+    last_write_checksum: sha1:d04577f40f6d5277679b488b6f7d9c4f3ed878d9
+    pristine_git_object: 77bdc799d5a6b9ffdb724df31d5a969a58697480
+  docs/models/operations/get-v1-company-cui-insolvency-same-name-skipped.md:
+    id: 525d5f037e83
+    last_write_checksum: sha1:22972ca36e7dbc62d05dd9262ad1b39d430a6635
+    pristine_git_object: 548f561c9aafc95148e7e83949630929ef5c0242
+  docs/models/operations/get-v1-company-cui-insolvency-same-name-unavailable.md:
+    id: 8821efb7665c
+    last_write_checksum: sha1:795d8ddcc087fcb10d9c38e3cccf77cc9b95c841
+    pristine_git_object: 1dd38162320b68b13495f2f7efcf52c62f2a651e
+  docs/models/operations/get-v1-company-cui-insolvency-same-name-union.md:
+    id: a2b970868c1e
+    last_write_checksum: sha1:2417ab2b1aad7f4a3888d62793011057375f0d07
+    pristine_git_object: 4b71b0c84eedf0cf4d67dfb251bf1265223f5e93
+  docs/models/operations/get-v1-company-cui-insolvency-skipped.md:
+    id: 05a790c7519d
+    last_write_checksum: sha1:573957b43675713f88941016d7f462f5cfce739b
+    pristine_git_object: 97f1db333c2da3f98d66159b2b2432ab96f2e6a2
+  docs/models/operations/get-v1-company-cui-insolvency-summary.md:
+    id: a3231b741469
+    last_write_checksum: sha1:8ace1549f65832ec27007e86f9eb6cfd40dacbaa
+    pristine_git_object: 8822ab93bef78bdbe0241a97318edb1246caf3be
+  docs/models/operations/get-v1-company-cui-lei-company.md:
+    id: 8a85fb5223cb
+    last_write_checksum: sha1:b7d36f3cbe8e2e49973cdce5d1a35a414d326516
+    pristine_git_object: 12ee9988802d741d82fd11d08177cee502615bc8
+  docs/models/operations/get-v1-company-cui-lei-data.md:
+    id: 42a6a4328a13
+    last_write_checksum: sha1:158ae6f8a566094d44c857d7f15a11771c12b416
+    pristine_git_object: d4e755068f6bc3ee181f756c8075d5e342062f6b
+  docs/models/operations/get-v1-company-cui-lei-queried.md:
+    id: 57b51943533e
+    last_write_checksum: sha1:f447634e7268d6d290b6ae662ee38815f61ed569
+    pristine_git_object: 4b4424889635285cc49df78fd9be19b3e29253f9
+  docs/models/operations/get-v1-company-cui-lei-request.md:
+    id: 207925e99ec5
+    last_write_checksum: sha1:cce0fe213d99b38f1b813e1dc48a9e034cfdef57
+    pristine_git_object: 1674640b68640e07c4185761c08f0bee111597f4
+  docs/models/operations/get-v1-company-cui-lei-response-body.md:
+    id: f83ff5748023
+    last_write_checksum: sha1:8aecac01436a8c6dfef5321bbea373286bb4d0df
+    pristine_git_object: ac4f5c67de5fdd64c1e90bd4683db821bc46f6d8
+  docs/models/operations/get-v1-company-cui-lei-response.md:
+    id: 66da6fe99358
+    last_write_checksum: sha1:56ad778d107badb6a4564aeac80eba47360490b4
+    pristine_git_object: 0317d07fde65c170d8d9efd6c603e50603564d29
   docs/models/operations/get-v1-company-cui-litigation-appeal.md:
     id: e88f4e28272f
     last_write_checksum: sha1:eeaa38e322cc71f6c14dd0c88d688e27a2b141f3
@@ -511,28 +615,60 @@ trackedFiles:
     pristine_git_object: 5f3262ecd8e337c9ec96e3d9ee0170b66121f1d1
   docs/models/operations/get-v1-company-cui-litigation-data.md:
     id: ca52a5c19f99
-    last_write_checksum: sha1:49aad5b7319acc1d8d961f5ee26c3fe70e82b84f
-    pristine_git_object: 7737dad7fdb34d80dee12cd86a649de722117458
+    last_write_checksum: sha1:e9c855bf50e8e5d264687f709149a4861705bb7e
+    pristine_git_object: f85b67eaad4d7167d2ebb6a78b1df219b8ca90e5
   docs/models/operations/get-v1-company-cui-litigation-hearing.md:
     id: da09ad805dfd
     last_write_checksum: sha1:26463f030c79f0393e35c1060686a0f0d067f169
     pristine_git_object: 022ecbf2972e6d5781e68af8f0679e3ada97ed38
+  docs/models/operations/get-v1-company-cui-litigation-min-confidence.md:
+    id: 949d52ce40a7
+    last_write_checksum: sha1:877678290fa0f040351b52966a2ed82a1bb70f07
+    pristine_git_object: 7f9c5e99664ca792ec81d856954dafc3452530da
   docs/models/operations/get-v1-company-cui-litigation-party.md:
     id: 771c82cb37f4
     last_write_checksum: sha1:cc04e6e2c20bdd0edaeead01eb1c945e3c1ca180
     pristine_git_object: 4624647429f6bd76d611fded01a6da905c5c99c6
+  docs/models/operations/get-v1-company-cui-litigation-queried.md:
+    id: 66272a30d099
+    last_write_checksum: sha1:b21fe6d51921a17ffb0170f1b04774f47df90ed9
+    pristine_git_object: 6dcb187cf42f381040c87e679eb62173ddbec7c9
   docs/models/operations/get-v1-company-cui-litigation-request.md:
     id: 0ec15eef2335
-    last_write_checksum: sha1:24093d4ec6c8880c1ff12928b54b93adea0a0624
-    pristine_git_object: 3f5205e2be9396b34bef2ddde0faae6542fc7b03
+    last_write_checksum: sha1:61cd85a04aa28d2692563063743c89d9112b4862
+    pristine_git_object: c8ef5fecca4be750863f8531bda0c2ddce3880cb
   docs/models/operations/get-v1-company-cui-litigation-response-body.md:
     id: 2ec3b4d4479e
-    last_write_checksum: sha1:80b7bf2925ec00d6823312833a2c2d2c121f52e9
-    pristine_git_object: 37ab85f8ca4431f725eed98ca729bd50e91bc164
+    last_write_checksum: sha1:aa294c008880d3b414a6dafdda2e08ec1fd3f65e
+    pristine_git_object: 640501d7a65108f7cf8ec84c31bae10f95dc9fbd
   docs/models/operations/get-v1-company-cui-litigation-response.md:
     id: 5e4492c76d00
-    last_write_checksum: sha1:1c232dfb3f21b4161781748f7c3fdb8fa8254941
-    pristine_git_object: 6a3303d854cbc8872cc2025a96bd15d5762b7eed
+    last_write_checksum: sha1:6467468aa3ffd68c40904e5e689d3dde05dcd74b
+    pristine_git_object: 669c6c433404c5cb7f0f0f9819405efc1f1ae43f
+  docs/models/operations/get-v1-company-cui-litigation-same-name-checked.md:
+    id: 2d7c27ab18ab
+    last_write_checksum: sha1:396a5860737444c910e9cf474a0af5164d4ae741
+    pristine_git_object: 2b77d55cd78e61a6c7e341542404480f3262e286
+  docs/models/operations/get-v1-company-cui-litigation-same-name-company.md:
+    id: c7640660baea
+    last_write_checksum: sha1:9ed5b1da3be08838b0541f4bb7b6e9b5bd01338a
+    pristine_git_object: dd52dcabff97adfd4b2db90cf9eb231dfc1a41a5
+  docs/models/operations/get-v1-company-cui-litigation-same-name-skipped.md:
+    id: 7e23980342ed
+    last_write_checksum: sha1:df804487635f716a792aff06db4429c3cb772faf
+    pristine_git_object: bd3f3900c501ca99a34926f68ef469156269cba0
+  docs/models/operations/get-v1-company-cui-litigation-same-name-unavailable.md:
+    id: a8bfc291b298
+    last_write_checksum: sha1:39965df8472d6439d564e84885bc48a99aebc190
+    pristine_git_object: 6a47a9c0d43ce01ec78d83a9184832a20185c813
+  docs/models/operations/get-v1-company-cui-litigation-same-name-union.md:
+    id: 7ce3ecb2ecfe
+    last_write_checksum: sha1:cfe6dffd5f07e91655e2354fdf053cf048e1536c
+    pristine_git_object: 645406daacaea8aa2dd357c319100684a0b172c8
+  docs/models/operations/get-v1-company-cui-litigation-skipped.md:
+    id: da23a6ae5fef
+    last_write_checksum: sha1:7d6e27100eab6f19b6a62396337c348859de2b0c
+    pristine_git_object: db8dec649d97a89da2b7b4ecf5e09ddaba941e1a
   docs/models/operations/get-v1-company-cui-request.md:
     id: 00d227426d9d
     last_write_checksum: sha1:465fe433a817f16e758effb90e482f4903c7be44
@@ -1351,12 +1487,16 @@ trackedFiles:
     pristine_git_object: 7ced4769c2c876557c86ad243310436f8a762b16
   docs/models/operations/get-v1-legislation-acts-id-versions-data.md:
     id: 4261a13b5d71
-    last_write_checksum: sha1:7d9194c0c825e489f52e8989173d96fac0d9bb6b
-    pristine_git_object: 4a17d56bb002dc53b5aa55ef466bc59909c67007
+    last_write_checksum: sha1:3969828b477d3201133e75c18dafefcadc8d11cd
+    pristine_git_object: 0a968460b4950f22e2a182000cb62f45afb2ef8e
   docs/models/operations/get-v1-legislation-acts-id-versions-item.md:
     id: 71f011f36dff
-    last_write_checksum: sha1:52c6fd8f7104e8c5ffcc7b632703034c94dbcbc2
-    pristine_git_object: 0bad76a8f6d23eec62120949648406fc12c1d7b3
+    last_write_checksum: sha1:a1e55fdb5e2e7014ea163c65c7c6128406b49ae3
+    pristine_git_object: 4643a0a978f105b7084b1ea473d5ded11031c2c5
+  docs/models/operations/get-v1-legislation-acts-id-versions-kind.md:
+    id: 8fdf56308f70
+    last_write_checksum: sha1:380b96d9276ca78446113a223e245dda41e8a213
+    pristine_git_object: 0e487ce65845a7230b7e6b2cdc46786148d6eff4
   docs/models/operations/get-v1-legislation-acts-id-versions-request.md:
     id: 4adf13049b15
     last_write_checksum: sha1:4c7efb7f17ea439a2376a4bf540aed24c71edd27
@@ -1377,30 +1517,38 @@ trackedFiles:
     id: c4f8be31cf24
     last_write_checksum: sha1:1f6b08afe62619a422f79d59e60c566c9c1b9750
     pristine_git_object: 42a6ec47d6a08c80b9f114551f94069558de1b54
+  docs/models/operations/get-v1-legislation-acts-id-versions-version-body-kind.md:
+    id: 01ebbc851730
+    last_write_checksum: sha1:a9aa66ae50a403cf4da1deeed4fc0f8ad69feb00
+    pristine_git_object: ee8c92823b1911f4f9281a33b5e52ec269c45704
   docs/models/operations/get-v1-legislation-acts-id-versions-version-body.md:
     id: fd1f996cb57e
-    last_write_checksum: sha1:f63a5e6b0ac1f7158afc2af83d7321ae5ed683e1
-    pristine_git_object: e2c383cf3e351d58a02150272074aa46bd437c9f
+    last_write_checksum: sha1:0c44487a9043840245d61b1bf2470b434bc3d989
+    pristine_git_object: 1b3d1f99403fba95267c5dec6ff7c11836eefb04
   docs/models/operations/get-v1-legislation-acts-id-versions-version-data.md:
     id: 77835359cb3a
-    last_write_checksum: sha1:491363454d78254eebab24ec004c579348273a2d
-    pristine_git_object: e6eb9ed0eca0327083462ba1740b00c4170928c7
-  docs/models/operations/get-v1-legislation-acts-id-versions-version-kind.md:
-    id: 5f5256e23415
-    last_write_checksum: sha1:d243126fe631164dd8277e58b1c8e052d8e1e634
-    pristine_git_object: e97b4b44e09196da4c7dd091da626dc1efddd0f7
+    last_write_checksum: sha1:2d1be490c1198b472fef89ee672abf5b95e7f3e8
+    pristine_git_object: 23ce9fff90b18fc2b865531a0c87afe2a707c9af
+  docs/models/operations/get-v1-legislation-acts-id-versions-version-kind-response.md:
+    id: b95263532b33
+    last_write_checksum: sha1:1ef127c61c0b1f7a551aa4575a68cfb42cef8147
+    pristine_git_object: c6452a080fc0b5df9bd056dc04317dd446088858
+  docs/models/operations/get-v1-legislation-acts-id-versions-version-query-param-kind.md:
+    id: 121d31174d2b
+    last_write_checksum: sha1:3be671c323ee5f6a7f39ea9ace3483d8d8043ba6
+    pristine_git_object: 7ec4610c7a0c2135a43807f33be9f9e6dab81ef3
   docs/models/operations/get-v1-legislation-acts-id-versions-version-request.md:
     id: a9c32447c79d
-    last_write_checksum: sha1:bd7761d8f8c06e011ef3005096ae5120902a4647
-    pristine_git_object: 916e3216d30c084676d1d46e0c463a59fc32d9da
+    last_write_checksum: sha1:b326ea46358ee84da39a23b372c99c1e3462a19f
+    pristine_git_object: 685b53f831df60fdbc7762bf575e42b00acfa064
   docs/models/operations/get-v1-legislation-acts-id-versions-version-response-body.md:
     id: f5f37524fe2a
-    last_write_checksum: sha1:d51c01fe167762722b03505b361ef4e2f57f7aff
-    pristine_git_object: 186b1fe9eb0dc1adc793cac6c36fb95fc1bfef70
+    last_write_checksum: sha1:3b50bbed7bbcb701684c2a866c41aff96d4bfa33
+    pristine_git_object: 978f6b18c450dc718c10d0fbb40a4644772b2d4a
   docs/models/operations/get-v1-legislation-acts-id-versions-version-response.md:
     id: 99269da2822a
-    last_write_checksum: sha1:deb67af0789817098bc573b06793d10e4889a65d
-    pristine_git_object: a298775169e944984a4ff09db516b0cd00b18df4
+    last_write_checksum: sha1:4f4611f46dd972e0df9c7e5d8e0cc2a5ef16768b
+    pristine_git_object: e38f9b16eb5101f4cd38cdaa84128b3218725c14
   docs/models/operations/get-v1-legislation-acts-id-versions-version-source-kind.md:
     id: cb91bd55835e
     last_write_checksum: sha1:42fd0b2a74ad2baf92f1ed97bd7efaff32574da0
@@ -1997,6 +2145,10 @@ trackedFiles:
     id: cd6041cc7da1
     last_write_checksum: sha1:dbc54ed9e79945f18cc04d653f75dc9e492cb576
     pristine_git_object: d9592eddbec967e741ea9571ee33996be3f579a2
+  docs/models/operations/include.md:
+    id: c5fad3f54823
+    last_write_checksum: sha1:f2f596c44793e0bf3491dbdee9e671554b94c009
+    pristine_git_object: 31289dcfa9cf184c686be980dd3434e1531f58f0
   docs/models/operations/institution.md:
     id: 0480a66a4e59
     last_write_checksum: sha1:d110411ddfd9f599ec345a7b0b1d04710e74daf5
@@ -2017,6 +2169,10 @@ trackedFiles:
     id: 8ede181ae471
     last_write_checksum: sha1:c4804f1ecf6d65ad5b31bba7a15a532a4de930cd
     pristine_git_object: 0a7df6bf87cddd99917440eb507b8368ad957c89
+  docs/models/operations/item-list.md:
+    id: 950cec6821b6
+    last_write_checksum: sha1:cebd502dcf054846f2dafae592705eaa6f1dfb24
+    pristine_git_object: 7653b4d8dfdcf28b8dbb7635ccca87d186d20c35
   docs/models/operations/item-matter.md:
     id: 8b2aa54c4604
     last_write_checksum: sha1:4c6ae8a2162c0b8f932715f24fd0deb0763b27c7
@@ -2025,6 +2181,10 @@ trackedFiles:
     id: 0ee7042e0536
     last_write_checksum: sha1:4edc5f2fa417b6dd951b6c0bff7dcb00c4d3e2a3
     pristine_git_object: d922d5114ca7af9c361708db285153fd8069e63b
+  docs/models/operations/latest-hearing.md:
+    id: 97d20628477c
+    last_write_checksum: sha1:f041fe93f160a52e90dc1db7510640a15718f5be
+    pristine_git_object: e6d2960167ac1914f5b7fc74d12cdbb33c11c8a7
   docs/models/operations/limits.md:
     id: 105131dd9257
     last_write_checksum: sha1:e12c234e9668c88c6d5ccc5e2de48bb4c80e85cb
@@ -2045,6 +2205,10 @@ trackedFiles:
     id: 3f0fcd92225a
     last_write_checksum: sha1:13519ed6705b16c33d2a84eafa66a6aa891836db
     pristine_git_object: 6b0e0a55a0456544e341bb95945afcfec89c229e
+  docs/models/operations/match-confidence.md:
+    id: 5d5d96facea2
+    last_write_checksum: sha1:efbeea300e76d13a5aca19c1658b13b3df2d79c9
+    pristine_git_object: accc389a3d5897120e68032df0c810494a0cae9d
   docs/models/operations/match-match.md:
     id: 21354a53d05e
     last_write_checksum: sha1:d92915e8791076caa174c22f61389d9f1d6ab789
@@ -2053,10 +2217,10 @@ trackedFiles:
     id: fd9cbd6b7dd7
     last_write_checksum: sha1:3431ef23948a38c012c467542cd16843177ec550
     pristine_git_object: 5e9445a0b0d17d0929f1a2e7776c9b5a8a27ed0d
-  docs/models/operations/min-confidence.md:
-    id: daa0c5419419
-    last_write_checksum: sha1:2595c43ae072df693c846dac52d9eda533b5510c
-    pristine_git_object: 0b304f0e1a64ab72d27524b0cbe728c2ab7ab0f5
+  docs/models/operations/matched-on.md:
+    id: b10d7cacd9fc
+    last_write_checksum: sha1:d27256eb7e3ad1112d090d8626f761e74aa028bd
+    pristine_git_object: 653c7803cd88dcd0f7e19df53ed416805a5f3d17
   docs/models/operations/online-enum.md:
     id: 8fb23881bb79
     last_write_checksum: sha1:696ecbaa22caa25c1eb84378e44b1e3a0a8e943c
@@ -2093,6 +2257,10 @@ trackedFiles:
     id: d05fcd0f2787
     last_write_checksum: sha1:d5cf195c9299ce5b4d7d45bbb1828b86d7867884
     pristine_git_object: d81935526433093d262dddd036c79fa5411b6019
+  docs/models/operations/page.md:
+    id: f4ce13fe1e1b
+    last_write_checksum: sha1:92bb3c8fc82ed43a86b16f059f50cc31ef9aa6a5
+    pristine_git_object: 7c0e37c0a896788ec714d352d87ea2fbd3af540d
   docs/models/operations/parcel.md:
     id: b6128a51575f
     last_write_checksum: sha1:ad4953bf43267e88f11ad1acb411a0fe5ba336de
@@ -2705,18 +2873,14 @@ trackedFiles:
     id: dd8b4beee2b4
     last_write_checksum: sha1:c1027aabbc94c112f2fac5f91b0a7d3fb90d81b3
     pristine_git_object: 4091ee8ab2b8243b3617e2713055b1cf8001f2fd
-  docs/models/operations/queried.md:
-    id: 08f3ef05ecbc
-    last_write_checksum: sha1:3c19e189140e64505ba793b6a35d5e110227a638
-    pristine_git_object: f9ceb8796826f8e4351bde7a20fb0f5f6f88c4e2
   docs/models/operations/query-param-court.md:
     id: 5fcb0fc6dd8f
     last_write_checksum: sha1:b6cbd598a44b978c076b831290223d43980f274c
     pristine_git_object: 54db80cf01360dbc1b13096fb6976691ffb99fd9
-  docs/models/operations/query-param-kind.md:
-    id: 2d0d90160fb8
-    last_write_checksum: sha1:5cd3e0fe22b4d1b02a7f69f60ceeab20bea68d89
-    pristine_git_object: c7cc50421cd4ba175fd519f0dfb6372cacb8944b
+  docs/models/operations/query-param-list.md:
+    id: 6523de134359
+    last_write_checksum: sha1:90703f61e396627c1b91ce11327891d01ca8b7fa
+    pristine_git_object: d62c6e3808ccf67a21dbeccbd9c7ee87b32085bc
   docs/models/operations/query-param-matter.md:
     id: 930450e9b45d
     last_write_checksum: sha1:044b9d22e2c1fa14e6e127f164d380b25f0aaf22
@@ -2725,6 +2889,10 @@ trackedFiles:
     id: ed0a0fa3488e
     last_write_checksum: sha1:aa160f9604be49346957f7fd0b2983e81f9a60c1
     pristine_git_object: 01ab9dfb3c2bc475af3e45aa8d1dbca337c2f7d5
+  docs/models/operations/record-t.md:
+    id: 0a7e4aeeb9b3
+    last_write_checksum: sha1:fab8d0cd55bac8fce5572e5995e9111a6cf929b9
+    pristine_git_object: 08dac88aef8754bdc203ae756288aaa53ef20067
   docs/models/operations/redis.md:
     id: 3692450e13b3
     last_write_checksum: sha1:ff403713d0f508b75f4e1eee287c7aa702f277dc
@@ -2765,10 +2933,6 @@ trackedFiles:
     id: e4ce4cb5e948
     last_write_checksum: sha1:0eee764518ae679b5103c7d44885ee0bd5cd65e0
     pristine_git_object: 6166373a3f69d9600aa7134452482b22f5112c6b
-  docs/models/operations/skipped.md:
-    id: "422830217332"
-    last_write_checksum: sha1:4138e9c159962599e82d9bb14dfd1d95be1c43b0
-    pristine_git_object: 69cd548cea99dcad387acd10f838326e7ec15511
   docs/models/operations/tier.md:
     id: f05b5197ece5
     last_write_checksum: sha1:77d5f440cf2d3efaa267ed5442de1077b7b7814c
@@ -2785,6 +2949,22 @@ trackedFiles:
     id: b9be4a21455b
     last_write_checksum: sha1:3366f5b046362a5618aace421d8484576d0d9b93
     pristine_git_object: 1e1196f881510a1eb862c6e6ac8960bc472ff718
+  docs/models/operations/ultimate-parent-entity.md:
+    id: 0d41003ed2ab
+    last_write_checksum: sha1:c1b50260995d5baf4343b48783551af0e4be57a9
+    pristine_git_object: 348fbe94e371dbdc63200bc100790013e5728fad
+  docs/models/operations/ultimate-parent-exception.md:
+    id: 03737f22baf8
+    last_write_checksum: sha1:4414f73eb1499c4d2f0e08b562cfdfc0d8914eb6
+    pristine_git_object: c97f4d9d073f775207578d298916a4e46af030a5
+  docs/models/operations/ultimate-parent-unreported.md:
+    id: 56a3fe2a8caa
+    last_write_checksum: sha1:d1ed53fec0eaa18e237730a38530fe79c6a3a5fc
+    pristine_git_object: 2307d69b9832c8e233bf9f328eadbeb6f3a3d868
+  docs/models/operations/ultimate-parent.md:
+    id: c77ed6c73370
+    last_write_checksum: sha1:98a0908040981061655fe1127c18f1a29a11f7f1
+    pristine_git_object: 68bcf164f244b63a04307cba8a0d99dfc41bafc6
   docs/models/operations/vat-exemption-vat-category.md:
     id: 5653f3aa85da
     last_write_checksum: sha1:161b4666d9047445dd37f040512d022ebbf47673
@@ -2811,8 +2991,8 @@ trackedFiles:
     pristine_git_object: 911c164fa9cbb0fdbdb15c944bc72e2c89755622
   docs/sdks/acts/README.md:
     id: 5ce80df1108b
-    last_write_checksum: sha1:f8e6972e1e37ddbb229c79e6656c25c4e72903f6
-    pristine_git_object: ed68c8e660046409bf512f1a9a535265b9e807f9
+    last_write_checksum: sha1:c782ef9b033545d59c9e61b25cbce5731e4e1dcf
+    pristine_git_object: df2016dff7a84245084c7b6f093cdfb14ccb0d51
   docs/sdks/bank/README.md:
     id: 98605a22e732
     last_write_checksum: sha1:bc568efecabe02c587757c8c0b3a58a6a8a7cf19
@@ -2823,12 +3003,12 @@ trackedFiles:
     pristine_git_object: 4c7c0c341483280715ca5e8882855e398a9e00cb
   docs/sdks/caselaw/README.md:
     id: d8732785a467
-    last_write_checksum: sha1:d8d115dc7723f477cf763ee5fd0752524d9e594e
-    pristine_git_object: 220029a8e7261ccaa278ef289688b6325deddd32
+    last_write_checksum: sha1:d47a1153c69302f858537701a45fdba04d8c61e2
+    pristine_git_object: 13ec2396b82899731e38fc69163c8953cb197a2b
   docs/sdks/company/README.md:
     id: e71077841b8e
-    last_write_checksum: sha1:f57c3e9d08ded528fd32352e6d032fcdd9de9511
-    pristine_git_object: c15ff1b2c2d11f5a75b01635deefc092db23e0e7
+    last_write_checksum: sha1:e56c480d39c261ad7cddffd0e8e36ee8c9b29cdc
+    pristine_git_object: 5f21ae4d65d483bc093b26f2a8337deab525b2ee
   docs/sdks/connections/README.md:
     id: 3ef8931411ea
     last_write_checksum: sha1:72df86b6340ea5e150851484d38dfa0d371ad809
@@ -2924,8 +3104,8 @@ trackedFiles:
     pristine_git_object: 9b85865b5ec458bcb95a91e81103929980badf1e
   package.json:
     id: 7030d0b2f71b
-    last_write_checksum: sha1:73719258c4aee16b6ec6a70af2a1d3d6b03078f4
-    pristine_git_object: 39c633db615d49bd52496df65e98670dbef52bd0
+    last_write_checksum: sha1:9c20978d14c7fb8b2cf9340a20a3c758133437de
+    pristine_git_object: 3350bf395f3085ce8ef006b4124456d8e55856cb
   src/core.ts:
     id: f431fdbcd144
     last_write_checksum: sha1:aafbd7648e5591fac5944b44fbc0e42df88b67f1
@@ -2960,12 +3140,12 @@ trackedFiles:
     pristine_git_object: eaa5c954a333f826f4603a84b54155e8e0be290e
   src/funcs/case-law-get-v1-case-law-decisions-id.ts:
     id: cde859bc1e92
-    last_write_checksum: sha1:18a770268941ab9ce34226d896f543e22fb016f2
-    pristine_git_object: 6b4e4a05f1a71af24fee6ac8e41af4cf14f3a029
+    last_write_checksum: sha1:6c4fda82701e2b130b98e24b9ef283ae7f34f2bf
+    pristine_git_object: 5e2bee0c56e22ba82546a2f0545fee0a4058b806
   src/funcs/case-law-get-v1-case-law-decisions.ts:
     id: 40cb195987e8
-    last_write_checksum: sha1:fe5534c4cdf7f399d2f94900200582a6aa935aed
-    pristine_git_object: 45f6362e9c0b07905519747f8db5506051dc1397
+    last_write_checksum: sha1:dda748f95b53bd2be3f47ecc1696b95dda82679a
+    pristine_git_object: ee405b8dbae53790371e41ec271c6e4b88e30e2e
   src/funcs/company-balance-by-year.ts:
     id: ae623e1a7b91
     last_write_checksum: sha1:ae30e818749a53c5042a16c602c9b905d961d725
@@ -2978,6 +3158,14 @@ trackedFiles:
     id: 775025dd6718
     last_write_checksum: sha1:6e7cd79707f674c68cd8576540b57c8bd18ae136
     pristine_git_object: 3077c7916995c02e738652d63a645e8405543c0b
+  src/funcs/company-get-v1-company-cui-insolvency.ts:
+    id: 7cfd1ff0c217
+    last_write_checksum: sha1:6fd58b024efcd7d38c4898a1c61f77ca45091008
+    pristine_git_object: 458ac27481c13c5762905e5e4430270f120004c6
+  src/funcs/company-get-v1-company-cui-lei.ts:
+    id: 070faecaeb78
+    last_write_checksum: sha1:10a02eaf6c525b149b5bf12d2e3b4a59c51a82e8
+    pristine_git_object: 760c25ad218ad6773c10a9c9927a9f78864c5509
   src/funcs/company-get.ts:
     id: c2b17e482a5f
     last_write_checksum: sha1:b388d8189aa2ca280a695af37efff7cbfce807fe
@@ -3100,20 +3288,20 @@ trackedFiles:
     pristine_git_object: a6b9760f606e0fda4b4b2db2761627c5fef9bea7
   src/funcs/legislation-acts-get-version.ts:
     id: ced7e1e6c542
-    last_write_checksum: sha1:bbd48dad9d8ed81a2e7337c4e6837342141dd713
-    pristine_git_object: 82e70ece1405f9bb723c3621a79ef5eec2dd9014
+    last_write_checksum: sha1:b45f95334f6269a47bb4ba0895fa943bcca3b2b8
+    pristine_git_object: 2c9d1e25e4bf6c0a634b28621966df3bbfb9c914
   src/funcs/legislation-acts-get.ts:
     id: 9879573d3dbd
-    last_write_checksum: sha1:327935503d3810f30e1923c5bc30c752dcbb2943
-    pristine_git_object: 41213a9e6f10765e0c1d84a4d3c29b3471d3a999
+    last_write_checksum: sha1:6b874acd5f719b47ff202651bb1e8b2978c0877c
+    pristine_git_object: 474d0fde9a12b101800c60649f83fd17109c6109
   src/funcs/legislation-acts-list-changes.ts:
     id: 61ea11f0515f
     last_write_checksum: sha1:aea90533958d62bd6f54d1802ea8ab397a8f8b99
     pristine_git_object: 52caa0d2eecb717462fbc372b28ff175f35afd57
   src/funcs/legislation-acts-list-versions.ts:
     id: 02c4c68dc49d
-    last_write_checksum: sha1:f849e2b2fc49a6dfc1bedb860006ebc37b0a8595
-    pristine_git_object: 2e3a68ccaf1889b3ffeee9255345a3cce3acf202
+    last_write_checksum: sha1:c5589ca2fb021159908e439c785591a443931e67
+    pristine_git_object: 1b4ff9b12f536f98365ef70711657a816818463b
   src/funcs/legislation-acts-list.ts:
     id: fead973ef55e
     last_write_checksum: sha1:fe077fbd1c92963e1edfc5480b3dc0e6f989c069
@@ -3240,8 +3428,8 @@ trackedFiles:
     pristine_git_object: 0b2543a00780f8844dcd1fbdcbc51a91262d91bc
   src/lib/config.ts:
     id: 320761608fb3
-    last_write_checksum: sha1:80fcf3058a1e4ac87570897056d4e0a8e7e46f07
-    pristine_git_object: bcaea6f50bd44642335a5982faf49c15e5abdb3c
+    last_write_checksum: sha1:f932b6f228f08458b62b429ec85713750a1bf0e9
+    pristine_git_object: dd657b7390fb0316b7814737a6b7c1419145b1fb
   src/lib/encodings.ts:
     id: 3bd8ead98afd
     last_write_checksum: sha1:b68a019ff91cf3d6e99cc0cad3f09c9517133713
@@ -3288,8 +3476,8 @@ trackedFiles:
     pristine_git_object: e4f870ddddfb3745e52ab6b53c168025243e28c3
   src/models/error-code.ts:
     id: 5d75f99d432b
-    last_write_checksum: sha1:f45eef02e1b5e2495dfdf776196bd4b7dc0dcc9b
-    pristine_git_object: b83ef09e554580fbecf560b681e2af8fe05af6c2
+    last_write_checksum: sha1:a380e442d0e073c9191c87fe6f699d97daee13c4
+    pristine_git_object: c8a0c2861503758b05dedb2a7e217af72155ccae
   src/models/error-envelope.ts:
     id: 1925d97ab6b3
     last_write_checksum: sha1:03f0e7bdaeb12e74e78e377ca0b800bcf3e02d6d
@@ -3360,12 +3548,12 @@ trackedFiles:
     pristine_git_object: 8d3597502259378402949c45953c0b12a42247d6
   src/models/operations/get-v1-case-law-decisions-id.ts:
     id: b0f9464ff74e
-    last_write_checksum: sha1:3f17491316cfe6b8c3ab0a528ca8027b725fdead
-    pristine_git_object: 7f55104b374ef70cd5842093f39e21a25543b942
+    last_write_checksum: sha1:a997ebac4f0b67da9b4db98f73af9cfa6749c34f
+    pristine_git_object: d769978cb18e0b70d1e32503b9b04b94c57b1049
   src/models/operations/get-v1-case-law-decisions.ts:
     id: 08b1799ac91c
-    last_write_checksum: sha1:d1fec4d01d2b10ea55fc10efb12e4877c636f131
-    pristine_git_object: bb1a27f450bcab8d0d93aaa8fa9bc6381541ef64
+    last_write_checksum: sha1:06dce700b00d6d5dd5458a81663ec5d23377eb33
+    pristine_git_object: a2cec9b819b5f65dd9a3e4a1d86cdd562401814a
   src/models/operations/get-v1-company-cui-balance-year.ts:
     id: d922f534edfb
     last_write_checksum: sha1:322ce80f3ff883cd991eec87a6894cec8eecdaaa
@@ -3374,10 +3562,18 @@ trackedFiles:
     id: 8a6e3b96ad2f
     last_write_checksum: sha1:121eaa76ef645883169f6959df506dba69266c72
     pristine_git_object: 9def37127877bd89c7ef5865211b346c79296a60
+  src/models/operations/get-v1-company-cui-insolvency.ts:
+    id: 9a74509b3393
+    last_write_checksum: sha1:ee0c76a1f49c5a1dad9c77d601b0dc1b3d95fe75
+    pristine_git_object: f6f7ff16a32d0f28bb3f108d4652f658983c73d9
+  src/models/operations/get-v1-company-cui-lei.ts:
+    id: 1c5d7c305644
+    last_write_checksum: sha1:d4ad03d08d1712ab30b7ae493b6c1d568c0dc01e
+    pristine_git_object: 5e5707acaa7e8485bd35ad965a8797f5216b6cb0
   src/models/operations/get-v1-company-cui-litigation.ts:
     id: a375e2239924
-    last_write_checksum: sha1:b29187e03df07714a9e74d10909bb4f5fa3de163
-    pristine_git_object: 5e7e9b6af56a6544d0809a91f565310cd72b53a7
+    last_write_checksum: sha1:411d6f330e600e5d0cd1bd515d01bf7ec3a2d919
+    pristine_git_object: cae32933181e69c78457590d144aa815ebc01e3e
   src/models/operations/get-v1-company-cui-vat-status.ts:
     id: a2230df7318b
     last_write_checksum: sha1:31504421ed4c8c0ffb35f18b832dd87df600d57a
@@ -3468,12 +3664,12 @@ trackedFiles:
     pristine_git_object: f7cda9fdc36235a1316998b821c9217a03594f05
   src/models/operations/get-v1-legislation-acts-id-versions-version.ts:
     id: 4b0e5506f512
-    last_write_checksum: sha1:8ef56ec2db79b8ef827d6a7c782a65e83a0200e7
-    pristine_git_object: ef70a07e58a338bac01ce0b1174e4c36e71d74d7
+    last_write_checksum: sha1:91b0ff90df12bbd32ad73f7686ef6f6cd45a2b66
+    pristine_git_object: ff3f3e93dd4bd6c264c872e526e716fa2fe19e6a
   src/models/operations/get-v1-legislation-acts-id-versions.ts:
     id: 776f21875f23
-    last_write_checksum: sha1:d82c6fcc4845098307ec722cc94bc8c2c66659f3
-    pristine_git_object: 7e9f2b09df85b748377999cd3324f164c91a8f3e
+    last_write_checksum: sha1:c01c95f872d23c5856c7af4d6baf3a52e5617c40
+    pristine_git_object: aa1b7b0806abd245c8d95ba6e0e74a5b5fb8f2be
   src/models/operations/get-v1-legislation-acts-id.ts:
     id: e44a0fa3321f
     last_write_checksum: sha1:3da3b37852939c03e4c4297a7b08a86c7c95d655
@@ -3576,8 +3772,8 @@ trackedFiles:
     pristine_git_object: 10866e5f31d2196bb9f89df1e71bf6919fde2dcd
   src/models/operations/index.ts:
     id: 0d9ffaf774d2
-    last_write_checksum: sha1:7d0bb92ad79b173d499a7dcc3acbd87f6dd3182a
-    pristine_git_object: 60e88042fecb553533fecf808f4cea0b7b4b253e
+    last_write_checksum: sha1:220f3fcddaf5ed9bc1d8eeb81c414f86b29b085d
+    pristine_git_object: d53390a878c9eaf452d28e9f2a9caa8af018e461
   src/models/operations/patch-v1-etransport-declarations-uit.ts:
     id: ee68d58f158b
     last_write_checksum: sha1:173768b564ef83ce3bf2c2d56013bdeb4d5830a0
@@ -3628,8 +3824,8 @@ trackedFiles:
     pristine_git_object: 083d039b8c927d580ccb8c7d33fe87ee6bf58678
   src/sdk/acts.ts:
     id: bda42bf2c95c
-    last_write_checksum: sha1:834861b08e46b789497723dd20ebf7722436f1a4
-    pristine_git_object: 4104b73dbc703f64fdfa146b92dce47c45568a05
+    last_write_checksum: sha1:81b96255d04a0ddda53102e5710b2336dcf070ce
+    pristine_git_object: f51b07a768cd19ad96e75885675b2e7d665a1737
   src/sdk/bank.ts:
     id: 0b72bf54cc1b
     last_write_checksum: sha1:98d9ee4513a279db4eeb55dc4943de311d04af8f
@@ -3640,12 +3836,12 @@ trackedFiles:
     pristine_git_object: b1703e8cd411b1c6ef2635524541a167cbc8dd42
   src/sdk/case-law.ts:
     id: 4c218e106bc3
-    last_write_checksum: sha1:1686332d5c4187a318ca69e0f6976bbcc23b613f
-    pristine_git_object: 2582ae7bcf74a1ab406e88da3f763cbfd176d2e1
+    last_write_checksum: sha1:c9ad967ea3e3d2dbe79d0de8e36d32711212a0f7
+    pristine_git_object: e762b1d94a9b5230560d3d87a109f34af7a907e8
   src/sdk/company.ts:
     id: 7bf531b021cd
-    last_write_checksum: sha1:5fdcb0fc4c07eeed450812a6d1577eb82ae92ad0
-    pristine_git_object: 2c3907671e289bc74f60f969c3b0e3ad8c12c034
+    last_write_checksum: sha1:9d5f7407f2d5c2bce5d5c5b24e6f1d01630682b4
+    pristine_git_object: 873cf9bfbb8627719ce5f39f5de4542927729234
   src/sdk/connections.ts:
     id: 5992fff3b5cd
     last_write_checksum: sha1:f498a6afd1d2035a88ef51d2f6a93b6b90006db2
@@ -3925,7 +4121,7 @@ examples:
           minConfidence: "strong"
       responses:
         "200":
-          application/json: {"data": {"company": {"cui": "<value>", "name": "<value>"}, "queried": {"party": "<value>"}, "matches": [{"case": {"number": "<value>", "oldNumber": null, "date": "2024-01-21", "modifiedAt": "<value>", "court": "<value>", "department": "<value>", "category": "<value>", "stage": "<value>", "subject": "<value>", "parties": [{"name": "<value>", "role": "<value>"}], "hearings": [{"date": "2024-12-19", "time": null, "solution": "<value>", "panel": "<value>", "solutionSummary": "<value>", "pronouncedAt": null, "documentType": "<value>", "documentNumber": null, "documentDate": "<value>"}], "appeals": []}, "match": {"confidence": "exact", "party": {"name": "<value>", "role": "<value>"}}}], "truncated": false, "source": "<value>", "criminalMattersExcluded": true, "checkedAt": "2025-04-03T06:22:22.126Z"}}
+          application/json: {"data": {"company": {"cui": "<value>", "name": "<value>"}, "queried": {"party": "<value>"}, "sameName": {"status": "checked", "count": 926103, "listed": true, "companies": []}, "matches": [{"case": {"number": "<value>", "oldNumber": null, "date": "2024-01-21", "modifiedAt": "<value>", "court": "<value>", "department": "<value>", "category": "<value>", "stage": "<value>", "subject": "<value>", "parties": [{"name": "<value>", "role": "<value>"}], "hearings": [{"date": "2024-12-19", "time": null, "solution": "<value>", "panel": "<value>", "solutionSummary": "<value>", "pronouncedAt": null, "documentType": "<value>", "documentNumber": null, "documentDate": "<value>"}], "appeals": []}, "match": {"confidence": "exact", "party": {"name": "<value>", "role": "<value>"}}}], "truncated": false, "source": "<value>", "criminalMattersExcluded": true, "checkedAt": "2025-04-03T06:22:22.126Z"}}
         "400":
           application/json: {"error": {"code": "impersonation_readonly", "message": "<value>"}}
         "401":
@@ -4291,7 +4487,7 @@ examples:
           id: "<id>"
       responses:
         "200":
-          application/json: {"data": {"items": [{"version": "<value>", "effective_on": "<value>", "amending_act": {"id": "<id>", "status": "unresolved", "reason": "<value>", "reference": "<value>"}, "source_document_id": "<id>", "content_hash": "<value>"}]}}
+          application/json: {"data": {"items": [{"version": "<value>", "kind": "republication", "effective_on": "<value>", "amending_act": {"id": "<id>", "status": "unresolved", "reason": "<value>", "reference": "<value>"}, "source_document_id": "<id>", "content_hash": "<value>", "stored": false, "coverage_note": "<value>"}]}}
         "400":
           application/json: {"error": {"code": "connection_unsupported", "message": "<value>"}}
         "401":
@@ -4312,7 +4508,7 @@ examples:
           version: "<value>"
       responses:
         "200":
-          application/json: {"data": {"version": "<value>", "effective_on": "<value>", "amending_act": {"id": "<id>", "status": "resolved", "reason": "<value>", "reference": "<value>"}, "source_document_id": "<id>", "content_hash": "<value>", "body": [], "body_text": "<value>", "source_url": "https://funny-countess.biz", "source_kind": "portal_legislativ", "document_version": "<value>", "retrieved_at": "2025-03-17T01:40:48.772Z", "coverage_note": "<value>"}}
+          application/json: {"data": {"version": "<value>", "kind": "base", "effective_on": "<value>", "amending_act": {"id": "<id>", "status": "resolved", "reason": "<value>", "reference": "<value>"}, "source_document_id": "<id>", "content_hash": "<value>", "body": [], "body_text": "<value>", "source_url": "https://funny-countess.biz", "source_kind": "portal_legislativ", "document_version": "<value>", "retrieved_at": "2025-03-17T01:40:48.772Z", "coverage_note": "<value>"}}
         "400":
           application/json: {"error": {"code": "authentication_unavailable", "message": "<value>"}}
         "401":
@@ -5354,4 +5550,38 @@ examples:
           application/json: {"error": {"code": "forbidden", "message": "<value>"}}
         "503":
           application/json: {"error": {"code": "forbidden", "message": "<value>"}}
+  get_v1_company_cui_insolvency:
+    speakeasy-default-get-v1-company-cui-insolvency:
+      parameters:
+        path:
+          cui: "<value>"
+        query:
+          minConfidence: "strong"
+      responses:
+        "200":
+          application/json: {"data": {"company": {"cui": "<value>", "name": "<value>"}, "queried": {"party": "<value>"}, "sameName": {"status": "unavailable"}, "summary": {"asDebtor": 959448, "asCreditor": 976605, "asPractitioner": 480045, "other": 558096}, "cases": [{"number": "<value>", "court": "<value>", "category": "<value>", "stage": "<value>", "subject": "<value>", "modifiedAt": "<value>", "firmRole": "creditor", "partyRole": "<value>", "matchConfidence": "strong", "latestHearing": {"date": "2024-08-17", "solution": "<value>"}}], "complete": false, "completenessNote": "Derived from ECRIS court cases matched by company name. BPI (Buletinul Procedurilor de Insolventa) is the register of record and is not consulted.", "truncated": true, "source": "<value>", "criminalMattersExcluded": true, "checkedAt": "2025-05-28T15:21:27.169Z"}}
+        "400":
+          application/json: {"error": {"code": "feature_disabled", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "feature_disabled", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "feature_disabled", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "feature_disabled", "message": "<value>"}}
+  get_v1_company_cui_lei:
+    speakeasy-default-get-v1-company-cui-lei:
+      parameters:
+        path:
+          cui: "<value>"
+      responses:
+        "200":
+          application/json: {"data": {"company": {"cui": "<value>", "name": "<value>", "registrationNumber": "<value>"}, "queried": {"identifiers": ["<value 1>", "<value 2>"], "skipped": "natural_person_entity"}, "records": [{"lei": "<value>", "legalName": "<value>", "legalForm": "<value>", "entityStatus": "<value>", "registrationStatus": "<value>", "registeredAs": "<value>", "matchedOn": "registrationNumber", "initialRegistrationDate": "<value>", "lastUpdateDate": "<value>", "nextRenewalDate": "<value>", "corroborationLevel": "<value>", "directParent": {"kind": "exception", "reason": "<value>"}, "ultimateParent": {"kind": "exception", "reason": "<value>"}}], "ambiguous": false, "source": "<value>", "sourceUrl": "https://dramatic-understanding.net/", "licence": "<value>", "goldenCopyPublishedAt": "<value>", "checkedAt": "2025-04-30T11:46:53.973Z"}}
+        "400":
+          application/json: {"error": {"code": "submissions_paused", "message": "<value>"}}
+        "429":
+          application/json: {"error": {"code": "submissions_paused", "message": "<value>"}}
+        "500":
+          application/json: {"error": {"code": "submissions_paused", "message": "<value>"}}
+        "503":
+          application/json: {"error": {"code": "submissions_paused", "message": "<value>"}}
 examplesVersion: 1.0.2

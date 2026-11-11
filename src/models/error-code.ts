@@ -35,6 +35,7 @@ export const ErrorCode = {
   FeatureDisabled: "feature_disabled",
   FeatureStateUnknown: "feature_state_unknown",
   SubmissionsPaused: "submissions_paused",
+  SourceUnavailable: "source_unavailable",
   ValidatorUnavailable: "validator_unavailable",
   AuthenticationUnavailable: "authentication_unavailable",
   VaultUnavailable: "vault_unavailable",

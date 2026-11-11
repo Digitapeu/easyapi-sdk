@@ -1,11 +1,11 @@
-# GetV1CaseLawDecisionsList
+# ItemList
 
 ## Example Usage
 
 ```typescript
-import { GetV1CaseLawDecisionsList } from "@digitap.eu/easyapi/models/operations";
+import { ItemList } from "@digitap.eu/easyapi/models/operations";
 
-let value: GetV1CaseLawDecisionsList = "iccj_hp_penal";
+let value: ItemList = "iccj_hp_penal";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

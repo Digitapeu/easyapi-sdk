@@ -325,6 +325,8 @@ run();
 * [balance](docs/sdks/company/README.md#balance) - Get a company's last filed bilanț years in one call
 * [vatStatus](docs/sdks/company/README.md#vatstatus) - Get a company's focused VAT/registry status by CUI
 * [litigation](docs/sdks/company/README.md#litigation) - Find ECRIS court cases matching this company's legal name
+* [getV1CompanyCuiInsolvency](docs/sdks/company/README.md#getv1companycuiinsolvency) - List the insolvency cases (ECRIS) matching this company's legal name
+* [getV1CompanyCuiLei](docs/sdks/company/README.md#getv1companycuilei) - Find the GLEIF LEI record and parent entities for a company by CUI
 * [batchGet](docs/sdks/company/README.md#batchget) - Look up up to 100 companies by CUI in one call
 
 ### [Connections](docs/sdks/connections/README.md)
@@ -386,7 +388,7 @@ run();
 * [list](docs/sdks/acts/README.md#list) - List consolidated normative acts
 * [listChanges](docs/sdks/acts/README.md#listchanges) - Poll the acts change-feed since a given timestamp
 * [get](docs/sdks/acts/README.md#get) - Get an act's current consolidated form
-* [listVersions](docs/sdks/acts/README.md#listversions) - List an act's point-in-time versions
+* [listVersions](docs/sdks/acts/README.md#listversions) - List an act's history: consolidations, republications and the base form
 * [getVersion](docs/sdks/acts/README.md#getversion) - Get an act's body as it read on a given version date
 
 ### [Legislation.Bills](docs/sdks/bills/README.md)
@@ -478,6 +480,8 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`companyBalanceByYear`](docs/sdks/company/README.md#balancebyyear) - Get a company's ANAF bilanț for a single filing year
 - [`companyBatchGet`](docs/sdks/company/README.md#batchget) - Look up up to 100 companies by CUI in one call
 - [`companyGet`](docs/sdks/company/README.md#get) - Look up a company's identity and VAT status by CUI
+- [`companyGetV1CompanyCuiInsolvency`](docs/sdks/company/README.md#getv1companycuiinsolvency) - List the insolvency cases (ECRIS) matching this company's legal name
+- [`companyGetV1CompanyCuiLei`](docs/sdks/company/README.md#getv1companycuilei) - Find the GLEIF LEI record and parent entities for a company by CUI
 - [`companyLitigation`](docs/sdks/company/README.md#litigation) - Find ECRIS court cases matching this company's legal name
 - [`companyVatStatus`](docs/sdks/company/README.md#vatstatus) - Get a company's focused VAT/registry status by CUI
 - [`connectionsCreate`](docs/sdks/connections/README.md#create) - Request a gov connection (returns the dashboard consent URL)
@@ -511,7 +515,7 @@ To read more about standalone functions, check [FUNCTIONS.md](./FUNCTIONS.md).
 - [`legislationActsGetVersion`](docs/sdks/acts/README.md#getversion) - Get an act's body as it read on a given version date
 - [`legislationActsList`](docs/sdks/acts/README.md#list) - List consolidated normative acts
 - [`legislationActsListChanges`](docs/sdks/acts/README.md#listchanges) - Poll the acts change-feed since a given timestamp
-- [`legislationActsListVersions`](docs/sdks/acts/README.md#listversions) - List an act's point-in-time versions
+- [`legislationActsListVersions`](docs/sdks/acts/README.md#listversions) - List an act's history: consolidations, republications and the base form
 - [`legislationBillsGet`](docs/sdks/bills/README.md#get) - Get a single parliamentary bill
 - [`legislationBillsList`](docs/sdks/bills/README.md#list) - List parliamentary bills
 - [`legislationBillsListChanges`](docs/sdks/bills/README.md#listchanges) - Poll the bills change-feed since a given timestamp

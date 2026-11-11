@@ -5,7 +5,7 @@
 
 import * as z from "zod/v4-mini";
 import { EasyApiCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -36,6 +36,7 @@ import { Result } from "../types/fp.js";
 export function caseLawGetV1CaseLawDecisionsId(
   client: EasyApiCore,
   id: string,
+  include?: operations.Include | undefined,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,6 +55,7 @@ export function caseLawGetV1CaseLawDecisionsId(
   return new APIPromise($do(
     client,
     id,
+    include,
     options,
   ));
 }
@@ -61,6 +63,7 @@ export function caseLawGetV1CaseLawDecisionsId(
 async function $do(
   client: EasyApiCore,
   id: string,
+  include?: operations.Include | undefined,
   options?: RequestOptions,
 ): Promise<
   [
@@ -81,6 +84,7 @@ async function $do(
 > {
   const input: operations.GetV1CaseLawDecisionsIdRequest = {
     id: id,
+    include: include,
   };
 
   const parsed = safeParse(
@@ -102,6 +106,10 @@ async function $do(
     }),
   };
   const path = pathToFunc("/v1/case-law/decisions/{id}")(pathParams);
+
+  const query = encodeFormQuery({
+    "include": payload.include,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -142,6 +150,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
