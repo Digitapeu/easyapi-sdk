@@ -1,15 +1,27 @@
 {
-  "revision": "7195dcf29f3fd7a9cfb601e420b70f577f5aad11",
+  "revision": "61febf53e06ad629e430c8d3c3698c934c5ead62",
   "previousRevision": "426d4d2c79c3f05928939fa2eb219062ab66d401",
-  "level": "minor",
-  "version": "0.3.2",
-  "floor": "additive",
+  "level": "major",
+  "version": "0.4.0",
+  "floor": "breaking",
   "reasons": [
+    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].amending_act type changed object -> null|object",
+    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].content_hash type changed string -> null|string",
     "GET /v1/case-law/decisions: operation added",
     "GET /v1/case-law/decisions/changes: operation added",
-    "GET /v1/case-law/decisions/{id}: operation added"
+    "GET /v1/case-law/decisions/{id}: operation added",
+    "GET /v1/company/{cui}/insolvency: operation added",
+    "GET /v1/company/{cui}/lei: operation added",
+    "GET /v1/company/{cui}/litigation: response 200 application/json field data.sameName added",
+    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].kind added",
+    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].stored added",
+    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].coverage_note added",
+    "GET /v1/legislation/acts/{id}/versions/{version}: optional parameter query:kind added",
+    "GET /v1/legislation/acts/{id}/versions/{version}: response 200 application/json field data.kind added"
   ],
   "trailers": [
+    "minor",
+    "minor",
     "minor"
   ]
 }

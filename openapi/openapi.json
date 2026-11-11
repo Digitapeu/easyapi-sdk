@@ -1383,6 +1383,93 @@
                           ],
                           "additionalProperties": false
                         },
+                        "sameName": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "checked"
+                                },
+                                "count": {
+                                  "type": "integer",
+                                  "minimum": 0
+                                },
+                                "listed": {
+                                  "type": "boolean"
+                                },
+                                "companies": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "cui": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "maxLength": 12,
+                                        "pattern": "^[0-9]+$"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "county": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "cui",
+                                      "name",
+                                      "county",
+                                      "status"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "maxItems": 20
+                                }
+                              },
+                              "required": [
+                                "status",
+                                "count",
+                                "listed",
+                                "companies"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "unavailable"
+                                }
+                              },
+                              "required": [
+                                "status"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "skipped"
+                                }
+                              },
+                              "required": [
+                                "status"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        },
                         "matches": {
                           "type": "array",
                           "items": {
@@ -1650,6 +1737,7 @@
                       "required": [
                         "company",
                         "queried",
+                        "sameName",
                         "matches",
                         "truncated",
                         "source",
@@ -1817,6 +1905,916 @@
           }
         ],
         "x-required-scope": "justice:read"
+      }
+    },
+    "/v1/company/{cui}/insolvency": {
+      "get": {
+        "summary": "List the insolvency cases (ECRIS) matching this company's legal name",
+        "tags": [
+          "company"
+        ],
+        "operationId": "get_v1_company_cui_insolvency",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "company": {
+                          "type": "object",
+                          "properties": {
+                            "cui": {
+                              "type": "string",
+                              "minLength": 2,
+                              "maxLength": 12,
+                              "pattern": "^[0-9]+$"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "cui",
+                            "name"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "queried": {
+                          "type": "object",
+                          "properties": {
+                            "party": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            },
+                            "skipped": {
+                              "type": "string",
+                              "enum": [
+                                "natural_person_entity",
+                                "no_distinctive_name"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "party"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "sameName": {
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "checked"
+                                },
+                                "count": {
+                                  "type": "integer",
+                                  "minimum": 0
+                                },
+                                "listed": {
+                                  "type": "boolean"
+                                },
+                                "companies": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "cui": {
+                                        "type": "string",
+                                        "minLength": 2,
+                                        "maxLength": 12,
+                                        "pattern": "^[0-9]+$"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "county": {
+                                        "type": "string"
+                                      },
+                                      "status": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "cui",
+                                      "name",
+                                      "county",
+                                      "status"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  "maxItems": 20
+                                }
+                              },
+                              "required": [
+                                "status",
+                                "count",
+                                "listed",
+                                "companies"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "unavailable"
+                                }
+                              },
+                              "required": [
+                                "status"
+                              ],
+                              "additionalProperties": false
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "status": {
+                                  "type": "string",
+                                  "const": "skipped"
+                                }
+                              },
+                              "required": [
+                                "status"
+                              ],
+                              "additionalProperties": false
+                            }
+                          ]
+                        },
+                        "summary": {
+                          "type": "object",
+                          "properties": {
+                            "asDebtor": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "asCreditor": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "asPractitioner": {
+                              "type": "integer",
+                              "minimum": 0
+                            },
+                            "other": {
+                              "type": "integer",
+                              "minimum": 0
+                            }
+                          },
+                          "required": [
+                            "asDebtor",
+                            "asCreditor",
+                            "asPractitioner",
+                            "other"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "cases": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "number": {
+                                "type": "string"
+                              },
+                              "court": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "category": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "stage": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "subject": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "modifiedAt": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "firmRole": {
+                                "type": "string",
+                                "enum": [
+                                  "debtor",
+                                  "creditor",
+                                  "practitioner",
+                                  "other"
+                                ]
+                              },
+                              "partyRole": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "matchConfidence": {
+                                "type": "string",
+                                "enum": [
+                                  "exact",
+                                  "strong",
+                                  "weak"
+                                ]
+                              },
+                              "latestHearing": {
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "date": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "solution": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "date",
+                                      "solution"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "number",
+                              "court",
+                              "category",
+                              "stage",
+                              "subject",
+                              "modifiedAt",
+                              "firmRole",
+                              "partyRole",
+                              "matchConfidence",
+                              "latestHearing"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "complete": {
+                          "type": "boolean",
+                          "const": false
+                        },
+                        "completenessNote": {
+                          "type": "string",
+                          "const": "Derived from ECRIS court cases matched by company name. BPI (Buletinul Procedurilor de Insolventa) is the register of record and is not consulted."
+                        },
+                        "truncated": {
+                          "type": "boolean"
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "criminalMattersExcluded": {
+                          "type": "boolean",
+                          "const": true
+                        },
+                        "checkedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "company",
+                        "queried",
+                        "sameName",
+                        "summary",
+                        "cases",
+                        "complete",
+                        "completenessNote",
+                        "truncated",
+                        "source",
+                        "criminalMattersExcluded",
+                        "checkedAt"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cui",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 12,
+              "pattern": "^[0-9]+$"
+            }
+          },
+          {
+            "name": "court",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "maxLength": 200
+            }
+          },
+          {
+            "name": "minConfidence",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "exact",
+                "strong",
+                "weak"
+              ],
+              "default": "strong"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "justice:read"
+      }
+    },
+    "/v1/company/{cui}/lei": {
+      "get": {
+        "summary": "Find the GLEIF LEI record and parent entities for a company by CUI",
+        "tags": [
+          "company"
+        ],
+        "operationId": "get_v1_company_cui_lei",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "company": {
+                          "type": "object",
+                          "properties": {
+                            "cui": {
+                              "type": "string",
+                              "minLength": 2,
+                              "maxLength": 12,
+                              "pattern": "^[0-9]+$"
+                            },
+                            "name": {
+                              "type": "string"
+                            },
+                            "registrationNumber": {
+                              "type": [
+                                "string",
+                                "null"
+                              ]
+                            }
+                          },
+                          "required": [
+                            "cui",
+                            "name",
+                            "registrationNumber"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "queried": {
+                          "type": "object",
+                          "properties": {
+                            "identifiers": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "skipped": {
+                              "type": "string",
+                              "const": "natural_person_entity"
+                            }
+                          },
+                          "required": [
+                            "identifiers"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "records": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "lei": {
+                                "type": "string"
+                              },
+                              "legalName": {
+                                "type": "string"
+                              },
+                              "legalForm": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "entityStatus": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "registrationStatus": {
+                                "type": "string"
+                              },
+                              "registeredAs": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "matchedOn": {
+                                "type": "string",
+                                "enum": [
+                                  "cui",
+                                  "registrationNumber"
+                                ]
+                              },
+                              "initialRegistrationDate": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "lastUpdateDate": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "nextRenewalDate": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "corroborationLevel": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "directParent": {
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "entity"
+                                      },
+                                      "lei": {
+                                        "type": "string"
+                                      },
+                                      "legalName": {
+                                        "type": "string"
+                                      },
+                                      "country": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "lei",
+                                      "legalName",
+                                      "country"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "exception"
+                                      },
+                                      "reason": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "reason"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "unreported"
+                                      }
+                                    },
+                                    "required": [
+                                      "kind"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                ]
+                              },
+                              "ultimateParent": {
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "entity"
+                                      },
+                                      "lei": {
+                                        "type": "string"
+                                      },
+                                      "legalName": {
+                                        "type": "string"
+                                      },
+                                      "country": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "lei",
+                                      "legalName",
+                                      "country"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "exception"
+                                      },
+                                      "reason": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "required": [
+                                      "kind",
+                                      "reason"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "kind": {
+                                        "type": "string",
+                                        "const": "unreported"
+                                      }
+                                    },
+                                    "required": [
+                                      "kind"
+                                    ],
+                                    "additionalProperties": false
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "lei",
+                              "legalName",
+                              "legalForm",
+                              "entityStatus",
+                              "registrationStatus",
+                              "registeredAs",
+                              "matchedOn",
+                              "initialRegistrationDate",
+                              "lastUpdateDate",
+                              "nextRenewalDate",
+                              "corroborationLevel",
+                              "directParent",
+                              "ultimateParent"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "ambiguous": {
+                          "type": "boolean"
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "sourceUrl": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        },
+                        "goldenCopyPublishedAt": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "checkedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "company",
+                        "queried",
+                        "records",
+                        "ambiguous",
+                        "source",
+                        "sourceUrl",
+                        "licence",
+                        "goldenCopyPublishedAt",
+                        "checkedAt"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "cui",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 12,
+              "pattern": "^[0-9]+$"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
       }
     },
     "/v1/company/batch": {
@@ -6496,7 +7494,7 @@
     },
     "/v1/legislation/acts/{id}/versions": {
       "get": {
-        "summary": "List an act's point-in-time versions",
+        "summary": "List an act's history: consolidations, republications and the base form",
         "tags": [
           "legislation"
         ],
@@ -6524,61 +7522,95 @@
                                 "type": "string",
                                 "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                               },
+                              "kind": {
+                                "type": "string",
+                                "enum": [
+                                  "consolidation",
+                                  "republication",
+                                  "base"
+                                ]
+                              },
                               "effective_on": {
                                 "type": "string",
                                 "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                               },
                               "amending_act": {
-                                "type": "object",
-                                "properties": {
-                                  "id": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "status": {
+                                        "type": "string",
+                                        "enum": [
+                                          "resolved",
+                                          "unresolved"
+                                        ]
+                                      },
+                                      "reason": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "reference": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "id",
+                                      "status",
+                                      "reason",
+                                      "reference"
+                                    ],
+                                    "additionalProperties": false
                                   },
-                                  "status": {
-                                    "type": "string",
-                                    "enum": [
-                                      "resolved",
-                                      "unresolved"
-                                    ]
-                                  },
-                                  "reason": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
-                                  },
-                                  "reference": {
-                                    "type": [
-                                      "string",
-                                      "null"
-                                    ]
+                                  {
+                                    "type": "null"
                                   }
-                                },
-                                "required": [
-                                  "id",
-                                  "status",
-                                  "reason",
-                                  "reference"
-                                ],
-                                "additionalProperties": false
+                                ]
                               },
                               "source_document_id": {
                                 "type": "string"
                               },
                               "content_hash": {
-                                "type": "string",
-                                "pattern": "^[0-9a-fA-F]{64}$"
+                                "anyOf": [
+                                  {
+                                    "type": "string",
+                                    "pattern": "^[0-9a-fA-F]{64}$"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "stored": {
+                                "type": "boolean"
+                              },
+                              "coverage_note": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
                               }
                             },
                             "required": [
                               "version",
+                              "kind",
                               "effective_on",
                               "amending_act",
                               "source_document_id",
-                              "content_hash"
+                              "content_hash",
+                              "stored",
+                              "coverage_note"
                             ],
                             "additionalProperties": false
                           }
@@ -6722,6 +7754,14 @@
                           "type": "string",
                           "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                         },
+                        "kind": {
+                          "type": "string",
+                          "enum": [
+                            "consolidation",
+                            "republication",
+                            "base"
+                          ]
+                        },
                         "effective_on": {
                           "type": "string",
                           "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
@@ -6854,6 +7894,7 @@
                       },
                       "required": [
                         "version",
+                        "kind",
                         "effective_on",
                         "amending_act",
                         "source_document_id",
@@ -6938,6 +7979,16 @@
               }
             }
           },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
           "503": {
             "description": "authentication_unavailable",
             "headers": {
@@ -6972,6 +8023,19 @@
             "schema": {
               "type": "string",
               "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            }
+          },
+          {
+            "name": "kind",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "consolidation",
+                "republication",
+                "base"
+              ]
             }
           },
           {
