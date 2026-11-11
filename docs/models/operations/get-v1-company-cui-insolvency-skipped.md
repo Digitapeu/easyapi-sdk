@@ -1,11 +1,11 @@
-# Skipped
+# GetV1CompanyCuiInsolvencySkipped
 
 ## Example Usage
 
 ```typescript
-import { Skipped } from "@digitap.eu/easyapi/models/operations";
+import { GetV1CompanyCuiInsolvencySkipped } from "@digitap.eu/easyapi/models/operations";
 
-let value: Skipped = "natural_person_entity";
+let value: GetV1CompanyCuiInsolvencySkipped = "no_distinctive_name";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

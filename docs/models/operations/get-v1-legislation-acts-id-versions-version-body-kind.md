@@ -1,11 +1,11 @@
-# GetV1LegislationActsIdVersionsVersionKind
+# GetV1LegislationActsIdVersionsVersionBodyKind
 
 ## Example Usage
 
 ```typescript
-import { GetV1LegislationActsIdVersionsVersionKind } from "@digitap.eu/easyapi/models/operations";
+import { GetV1LegislationActsIdVersionsVersionBodyKind } from "@digitap.eu/easyapi/models/operations";
 
-let value: GetV1LegislationActsIdVersionsVersionKind = "title";
+let value: GetV1LegislationActsIdVersionsVersionBodyKind = "section";
 
 // Open enum: unrecognized values are captured as Unrecognized<string>
 ```

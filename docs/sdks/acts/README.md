@@ -7,7 +7,7 @@
 * [list](#list) - List consolidated normative acts
 * [listChanges](#listchanges) - Poll the acts change-feed since a given timestamp
 * [get](#get) - Get an act's current consolidated form
-* [listVersions](#listversions) - List an act's point-in-time versions
+* [listVersions](#listversions) - List an act's history: consolidations, republications and the base form
 * [getVersion](#getversion) - Get an act's body as it read on a given version date
 
 ## list
@@ -237,13 +237,13 @@ run();
 | -------------------------- | -------------------------- | -------------------------- |
 | errors.ErrorEnvelope       | 400, 401, 403, 404         | application/json           |
 | errors.ErrorEnvelope       | 429                        | application/json           |
-| errors.ErrorEnvelope       | 500, 502                   | application/json           |
+| errors.ErrorEnvelope       | 500                        | application/json           |
 | errors.ErrorEnvelope       | 503                        | application/json           |
 | errors.EasyAPIDefaultError | 4XX, 5XX                   | \*/\*                      |
 
 ## listVersions
 
-List an act's point-in-time versions
+List an act's history: consolidations, republications and the base form
 
 ### Example Usage
 
@@ -329,7 +329,10 @@ const easyApi = new EasyApi({
 });
 
 async function run() {
-  const result = await easyApi.legislation.acts.getVersion("<id>", "<value>");
+  const result = await easyApi.legislation.acts.getVersion({
+    id: "<id>",
+    version: "<value>",
+  });
 
   console.log(result);
 }
@@ -352,7 +355,10 @@ const easyApi = new EasyApiCore({
 });
 
 async function run() {
-  const res = await legislationActsGetVersion(easyApi, "<id>", "<value>");
+  const res = await legislationActsGetVersion(easyApi, {
+    id: "<id>",
+    version: "<value>",
+  });
   if (res.ok) {
     const { value: result } = res;
     console.log(result);
@@ -368,8 +374,7 @@ run();
 
 | Parameter                                                                                                                                                                      | Type                                                                                                                                                                           | Required                                                                                                                                                                       | Description                                                                                                                                                                    |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `id`                                                                                                                                                                           | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
-| `version`                                                                                                                                                                      | *string*                                                                                                                                                                       | :heavy_check_mark:                                                                                                                                                             | N/A                                                                                                                                                                            |
+| `request`                                                                                                                                                                      | [operations.GetV1LegislationActsIdVersionsVersionRequest](../../models/operations/get-v1-legislation-acts-id-versions-version-request.md)                                      | :heavy_check_mark:                                                                                                                                                             | The request object to use for the request.                                                                                                                                     |
 | `options`                                                                                                                                                                      | RequestOptions                                                                                                                                                                 | :heavy_minus_sign:                                                                                                                                                             | Used to set various options for making HTTP requests.                                                                                                                          |
 | `options.fetchOptions`                                                                                                                                                         | [RequestInit](https://developer.mozilla.org/en-US/docs/Web/API/Request/Request#options)                                                                                        | :heavy_minus_sign:                                                                                                                                                             | Options that are passed to the underlying HTTP request. This can be used to inject extra headers for examples. All `Request` options, except `method` and `body`, are allowed. |
 | `options.retries`                                                                                                                                                              | [RetryConfig](../../lib/utils/retryconfig.md)                                                                                                                                  | :heavy_minus_sign:                                                                                                                                                             | Enables retrying HTTP requests under certain failure conditions.                                                                                                               |

@@ -15,10 +15,11 @@ let value: GetV1LegislationActsIdVersionsVersionResponse = {
   result: {
     data: {
       version: "<value>",
+      kind: "consolidation",
       effectiveOn: "<value>",
       amendingAct: {
         id: "<id>",
-        status: "resolved",
+        status: "unresolved",
         reason: "<value>",
         reference: "<value>",
       },
@@ -26,10 +27,10 @@ let value: GetV1LegislationActsIdVersionsVersionResponse = {
       contentHash: "<value>",
       body: [],
       bodyText: "<value>",
-      sourceUrl: "https://fussy-pick.biz/",
-      sourceKind: "senat",
+      sourceUrl: "https://rapid-conservation.biz/",
+      sourceKind: "cdep",
       documentVersion: "<value>",
-      retrievedAt: new Date("2024-05-27T10:41:00.060Z"),
+      retrievedAt: new Date("2026-03-17T20:19:22.731Z"),
       coverageNote: "<value>",
     },
   },
