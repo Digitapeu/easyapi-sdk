@@ -15,6 +15,8 @@ export * from "./get-v1-case-law-decisions-id.js";
 export * from "./get-v1-case-law-decisions.js";
 export * from "./get-v1-company-cui-balance-year.js";
 export * from "./get-v1-company-cui-balance.js";
+export * from "./get-v1-company-cui-insolvency.js";
+export * from "./get-v1-company-cui-lei.js";
 export * from "./get-v1-company-cui-litigation.js";
 export * from "./get-v1-company-cui-vat-status.js";
 export * from "./get-v1-company-cui.js";

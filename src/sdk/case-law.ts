@@ -44,11 +44,13 @@ export class CaseLaw extends ClientSDK {
    */
   async getV1CaseLawDecisionsId(
     id: string,
+    include?: operations.Include | undefined,
     options?: RequestOptions,
   ): Promise<operations.GetV1CaseLawDecisionsIdResponse> {
     return unwrapAsync(caseLawGetV1CaseLawDecisionsId(
       this,
       id,
+      include,
       options,
     ));
   }

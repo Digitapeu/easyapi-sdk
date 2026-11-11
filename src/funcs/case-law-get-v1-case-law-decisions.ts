@@ -102,6 +102,7 @@ async function $do(
     "kind": payload?.kind,
     "limit": payload?.limit,
     "linked": payload?.linked,
+    "list": payload?.list,
     "matter": payload?.matter,
     "number": payload?.number,
     "pronounced_from": payload?.pronounced_from,

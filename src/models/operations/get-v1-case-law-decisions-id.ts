@@ -7,13 +7,19 @@ import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
 import * as openEnums from "../../types/enums.js";
-import { OpenEnum } from "../../types/enums.js";
+import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
+export const Include = {
+  Page: "page",
+} as const;
+export type Include = ClosedEnum<typeof Include>;
+
 export type GetV1CaseLawDecisionsIdRequest = {
   id: string;
+  include?: Include | undefined;
 };
 
 export const GetV1CaseLawDecisionsIdList = {
@@ -53,6 +59,12 @@ export type GetV1CaseLawDecisionsIdMatter = OpenEnum<
   typeof GetV1CaseLawDecisionsIdMatter
 >;
 
+export type Page = {
+  url: string;
+  html: string;
+  fetchedAt: Date;
+};
+
 export type GetV1CaseLawDecisionsIdData = {
   id: string;
   list: GetV1CaseLawDecisionsIdList;
@@ -66,6 +78,7 @@ export type GetV1CaseLawDecisionsIdData = {
   sourceUrl: string;
   firstSeenAt: Date;
   fetchedAt: Date;
+  page?: Page | null | undefined;
 };
 
 /**
@@ -81,8 +94,14 @@ export type GetV1CaseLawDecisionsIdResponse = {
 };
 
 /** @internal */
+export const Include$outboundSchema: z.ZodMiniEnum<typeof Include> = z.enum(
+  Include,
+);
+
+/** @internal */
 export type GetV1CaseLawDecisionsIdRequest$Outbound = {
   id: string;
+  include?: string | undefined;
 };
 
 /** @internal */
@@ -91,6 +110,7 @@ export const GetV1CaseLawDecisionsIdRequest$outboundSchema: z.ZodMiniType<
   GetV1CaseLawDecisionsIdRequest
 > = z.object({
   id: z.string(),
+  include: z.optional(Include$outboundSchema),
 });
 
 export function getV1CaseLawDecisionsIdRequestToJSON(
@@ -128,6 +148,30 @@ export const GetV1CaseLawDecisionsIdMatter$inboundSchema: z.ZodMiniType<
 > = openEnums.inboundSchema(GetV1CaseLawDecisionsIdMatter);
 
 /** @internal */
+export const Page$inboundSchema: z.ZodMiniType<Page, unknown> = z.pipe(
+  z.object({
+    url: types.string(),
+    html: types.string(),
+    fetched_at: types.date(),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "fetched_at": "fetchedAt",
+    });
+  }),
+);
+
+export function pageFromJSON(
+  jsonString: string,
+): SafeParseResult<Page, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) => Page$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'Page' from JSON`,
+  );
+}
+
+/** @internal */
 export const GetV1CaseLawDecisionsIdData$inboundSchema: z.ZodMiniType<
   GetV1CaseLawDecisionsIdData,
   unknown
@@ -145,6 +189,7 @@ export const GetV1CaseLawDecisionsIdData$inboundSchema: z.ZodMiniType<
     source_url: types.string(),
     first_seen_at: types.date(),
     fetched_at: types.date(),
+    page: z.optional(z.nullable(z.lazy(() => Page$inboundSchema))),
   }),
   z.transform((v) => {
     return remap$(v, {
