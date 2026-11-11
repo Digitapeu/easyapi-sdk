@@ -117,6 +117,7 @@ export const companyData = (cui: string, name = "Example SRL") => ({
 export const litigationData = (cui: string) => ({
   company: { cui, name: "Example SRL" },
   queried: { party: null },
+  sameName: { status: "checked", count: 0, listed: false, companies: [] },
   matches: [],
   truncated: false,
   source: "portal",
