@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * List an act's point-in-time versions
+ * List an act's history: consolidations, republications and the base form
  *
  * If set, this operation will use {@link Security.apiKey} from the global security.
  */

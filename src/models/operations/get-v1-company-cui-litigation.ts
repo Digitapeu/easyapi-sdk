@@ -6,24 +6,28 @@
 import * as z from "zod/v4-mini";
 import { remap as remap$ } from "../../lib/primitives.js";
 import { safeParse } from "../../lib/schemas.js";
+import * as discriminatedUnionTypes from "../../types/discriminated-union.js";
+import { discriminatedUnion } from "../../types/discriminated-union.js";
 import * as openEnums from "../../types/enums.js";
 import { ClosedEnum, OpenEnum } from "../../types/enums.js";
 import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
-export const MinConfidence = {
+export const GetV1CompanyCuiLitigationMinConfidence = {
   Exact: "exact",
   Strong: "strong",
   Weak: "weak",
 } as const;
-export type MinConfidence = ClosedEnum<typeof MinConfidence>;
+export type GetV1CompanyCuiLitigationMinConfidence = ClosedEnum<
+  typeof GetV1CompanyCuiLitigationMinConfidence
+>;
 
 export type GetV1CompanyCuiLitigationRequest = {
   cui: string;
   modifiedSince?: string | undefined;
   court?: string | undefined;
-  minConfidence?: MinConfidence | undefined;
+  minConfidence?: GetV1CompanyCuiLitigationMinConfidence | undefined;
 };
 
 export type GetV1CompanyCuiLitigationCompany = {
@@ -31,16 +35,46 @@ export type GetV1CompanyCuiLitigationCompany = {
   name: string;
 };
 
-export const Skipped = {
+export const GetV1CompanyCuiLitigationSkipped = {
   NaturalPersonEntity: "natural_person_entity",
   NoDistinctiveName: "no_distinctive_name",
 } as const;
-export type Skipped = OpenEnum<typeof Skipped>;
+export type GetV1CompanyCuiLitigationSkipped = OpenEnum<
+  typeof GetV1CompanyCuiLitigationSkipped
+>;
 
-export type Queried = {
+export type GetV1CompanyCuiLitigationQueried = {
   party: string | null;
-  skipped?: Skipped | undefined;
+  skipped?: GetV1CompanyCuiLitigationSkipped | undefined;
 };
+
+export type GetV1CompanyCuiLitigationSameNameSkipped = {
+  status: "skipped";
+};
+
+export type GetV1CompanyCuiLitigationSameNameUnavailable = {
+  status: "unavailable";
+};
+
+export type GetV1CompanyCuiLitigationSameNameCompany = {
+  cui: string;
+  name: string;
+  county: string;
+  status: string | null;
+};
+
+export type GetV1CompanyCuiLitigationSameNameChecked = {
+  status: "checked";
+  count: number;
+  listed: boolean;
+  companies: Array<GetV1CompanyCuiLitigationSameNameCompany>;
+};
+
+export type GetV1CompanyCuiLitigationSameNameUnion =
+  | GetV1CompanyCuiLitigationSameNameChecked
+  | GetV1CompanyCuiLitigationSameNameUnavailable
+  | GetV1CompanyCuiLitigationSameNameSkipped
+  | discriminatedUnionTypes.Unknown<"status">;
 
 export type GetV1CompanyCuiLitigationCaseParty = {
   name: string;
@@ -104,7 +138,12 @@ export type Match = {
 
 export type GetV1CompanyCuiLitigationData = {
   company: GetV1CompanyCuiLitigationCompany;
-  queried: Queried;
+  queried: GetV1CompanyCuiLitigationQueried;
+  sameName:
+    | GetV1CompanyCuiLitigationSameNameChecked
+    | GetV1CompanyCuiLitigationSameNameUnavailable
+    | GetV1CompanyCuiLitigationSameNameSkipped
+    | discriminatedUnionTypes.Unknown<"status">;
   matches: Array<Match>;
   truncated: boolean;
   source: string;
@@ -125,8 +164,10 @@ export type GetV1CompanyCuiLitigationResponse = {
 };
 
 /** @internal */
-export const MinConfidence$outboundSchema: z.ZodMiniEnum<typeof MinConfidence> =
-  z.enum(MinConfidence);
+export const GetV1CompanyCuiLitigationMinConfidence$outboundSchema:
+  z.ZodMiniEnum<typeof GetV1CompanyCuiLitigationMinConfidence> = z.enum(
+    GetV1CompanyCuiLitigationMinConfidence,
+  );
 
 /** @internal */
 export type GetV1CompanyCuiLitigationRequest$Outbound = {
@@ -144,7 +185,10 @@ export const GetV1CompanyCuiLitigationRequest$outboundSchema: z.ZodMiniType<
   cui: z.string(),
   modifiedSince: z.optional(z.string()),
   court: z.optional(z.string()),
-  minConfidence: z._default(MinConfidence$outboundSchema, "strong"),
+  minConfidence: z._default(
+    GetV1CompanyCuiLitigationMinConfidence$outboundSchema,
+    "strong",
+  ),
 });
 
 export function getV1CompanyCuiLitigationRequestToJSON(
@@ -177,22 +221,150 @@ export function getV1CompanyCuiLitigationCompanyFromJSON(
 }
 
 /** @internal */
-export const Skipped$inboundSchema: z.ZodMiniType<Skipped, unknown> = openEnums
-  .inboundSchema(Skipped);
+export const GetV1CompanyCuiLitigationSkipped$inboundSchema: z.ZodMiniType<
+  GetV1CompanyCuiLitigationSkipped,
+  unknown
+> = openEnums.inboundSchema(GetV1CompanyCuiLitigationSkipped);
 
 /** @internal */
-export const Queried$inboundSchema: z.ZodMiniType<Queried, unknown> = z.object({
+export const GetV1CompanyCuiLitigationQueried$inboundSchema: z.ZodMiniType<
+  GetV1CompanyCuiLitigationQueried,
+  unknown
+> = z.object({
   party: types.nullable(types.string()),
-  skipped: types.optional(Skipped$inboundSchema),
+  skipped: types.optional(GetV1CompanyCuiLitigationSkipped$inboundSchema),
 });
 
-export function queriedFromJSON(
+export function getV1CompanyCuiLitigationQueriedFromJSON(
   jsonString: string,
-): SafeParseResult<Queried, SDKValidationError> {
+): SafeParseResult<GetV1CompanyCuiLitigationQueried, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Queried$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Queried' from JSON`,
+    (x) => GetV1CompanyCuiLitigationQueried$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyCuiLitigationQueried' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationSameNameSkipped$inboundSchema:
+  z.ZodMiniType<GetV1CompanyCuiLitigationSameNameSkipped, unknown> = z.object({
+    status: types.literal("skipped"),
+  });
+
+export function getV1CompanyCuiLitigationSameNameSkippedFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompanyCuiLitigationSameNameSkipped,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyCuiLitigationSameNameSkipped$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompanyCuiLitigationSameNameSkipped' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationSameNameUnavailable$inboundSchema:
+  z.ZodMiniType<GetV1CompanyCuiLitigationSameNameUnavailable, unknown> = z
+    .object({
+      status: types.literal("unavailable"),
+    });
+
+export function getV1CompanyCuiLitigationSameNameUnavailableFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompanyCuiLitigationSameNameUnavailable,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyCuiLitigationSameNameUnavailable$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompanyCuiLitigationSameNameUnavailable' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationSameNameCompany$inboundSchema:
+  z.ZodMiniType<GetV1CompanyCuiLitigationSameNameCompany, unknown> = z.object({
+    cui: types.string(),
+    name: types.string(),
+    county: types.string(),
+    status: types.nullable(types.string()),
+  });
+
+export function getV1CompanyCuiLitigationSameNameCompanyFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompanyCuiLitigationSameNameCompany,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyCuiLitigationSameNameCompany$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompanyCuiLitigationSameNameCompany' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationSameNameChecked$inboundSchema:
+  z.ZodMiniType<GetV1CompanyCuiLitigationSameNameChecked, unknown> = z.object({
+    status: types.literal("checked"),
+    count: types.number(),
+    listed: types.boolean(),
+    companies: z.array(
+      z.lazy(() => GetV1CompanyCuiLitigationSameNameCompany$inboundSchema),
+    ),
+  });
+
+export function getV1CompanyCuiLitigationSameNameCheckedFromJSON(
+  jsonString: string,
+): SafeParseResult<
+  GetV1CompanyCuiLitigationSameNameChecked,
+  SDKValidationError
+> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyCuiLitigationSameNameChecked$inboundSchema.parse(
+        JSON.parse(x),
+      ),
+    `Failed to parse 'GetV1CompanyCuiLitigationSameNameChecked' from JSON`,
+  );
+}
+
+/** @internal */
+export const GetV1CompanyCuiLitigationSameNameUnion$inboundSchema:
+  z.ZodMiniType<GetV1CompanyCuiLitigationSameNameUnion, unknown> =
+    discriminatedUnion("status", {
+      checked: z.lazy(() =>
+        GetV1CompanyCuiLitigationSameNameChecked$inboundSchema
+      ),
+      unavailable: z.lazy(() =>
+        GetV1CompanyCuiLitigationSameNameUnavailable$inboundSchema
+      ),
+      skipped: z.lazy(() =>
+        GetV1CompanyCuiLitigationSameNameSkipped$inboundSchema
+      ),
+    });
+
+export function getV1CompanyCuiLitigationSameNameUnionFromJSON(
+  jsonString: string,
+): SafeParseResult<GetV1CompanyCuiLitigationSameNameUnion, SDKValidationError> {
+  return safeParse(
+    jsonString,
+    (x) =>
+      GetV1CompanyCuiLitigationSameNameUnion$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1CompanyCuiLitigationSameNameUnion' from JSON`,
   );
 }
 
@@ -357,7 +529,18 @@ export const GetV1CompanyCuiLitigationData$inboundSchema: z.ZodMiniType<
   unknown
 > = z.object({
   company: z.lazy(() => GetV1CompanyCuiLitigationCompany$inboundSchema),
-  queried: z.lazy(() => Queried$inboundSchema),
+  queried: z.lazy(() => GetV1CompanyCuiLitigationQueried$inboundSchema),
+  sameName: discriminatedUnion("status", {
+    checked: z.lazy(() =>
+      GetV1CompanyCuiLitigationSameNameChecked$inboundSchema
+    ),
+    unavailable: z.lazy(() =>
+      GetV1CompanyCuiLitigationSameNameUnavailable$inboundSchema
+    ),
+    skipped: z.lazy(() =>
+      GetV1CompanyCuiLitigationSameNameSkipped$inboundSchema
+    ),
+  }),
   matches: z.array(z.lazy(() => Match$inboundSchema)),
   truncated: types.boolean(),
   source: types.string(),

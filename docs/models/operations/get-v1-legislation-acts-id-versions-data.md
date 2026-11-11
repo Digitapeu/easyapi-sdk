@@ -9,15 +9,18 @@ let value: GetV1LegislationActsIdVersionsData = {
   items: [
     {
       version: "<value>",
+      kind: "republication",
       effectiveOn: "<value>",
       amendingAct: {
         id: "<id>",
         status: "resolved",
         reason: "<value>",
-        reference: null,
+        reference: "<value>",
       },
       sourceDocumentId: "<id>",
       contentHash: "<value>",
+      stored: false,
+      coverageNote: "<value>",
     },
   ],
 };

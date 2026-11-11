@@ -18,12 +18,14 @@ export const QueryParamCourt = {
 } as const;
 export type QueryParamCourt = ClosedEnum<typeof QueryParamCourt>;
 
-export const QueryParamKind = {
+export const GetV1CaseLawDecisionsQueryParamKind = {
   CcrAdmission: "ccr_admission",
   Ril: "ril",
   Hp: "hp",
 } as const;
-export type QueryParamKind = ClosedEnum<typeof QueryParamKind>;
+export type GetV1CaseLawDecisionsQueryParamKind = ClosedEnum<
+  typeof GetV1CaseLawDecisionsQueryParamKind
+>;
 
 export const QueryParamMatter = {
   Civil: "civil",
@@ -40,7 +42,7 @@ export type Linked = ClosedEnum<typeof Linked>;
 
 export type GetV1CaseLawDecisionsRequest = {
   court?: QueryParamCourt | undefined;
-  kind?: QueryParamKind | undefined;
+  kind?: GetV1CaseLawDecisionsQueryParamKind | undefined;
   matter?: QueryParamMatter | undefined;
   number?: string | undefined;
   pronouncedFrom?: string | undefined;
@@ -121,9 +123,9 @@ export const QueryParamCourt$outboundSchema: z.ZodMiniEnum<
 > = z.enum(QueryParamCourt);
 
 /** @internal */
-export const QueryParamKind$outboundSchema: z.ZodMiniEnum<
-  typeof QueryParamKind
-> = z.enum(QueryParamKind);
+export const GetV1CaseLawDecisionsQueryParamKind$outboundSchema: z.ZodMiniEnum<
+  typeof GetV1CaseLawDecisionsQueryParamKind
+> = z.enum(GetV1CaseLawDecisionsQueryParamKind);
 
 /** @internal */
 export const QueryParamMatter$outboundSchema: z.ZodMiniEnum<
@@ -155,7 +157,7 @@ export const GetV1CaseLawDecisionsRequest$outboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     court: z.optional(QueryParamCourt$outboundSchema),
-    kind: z.optional(QueryParamKind$outboundSchema),
+    kind: z.optional(GetV1CaseLawDecisionsQueryParamKind$outboundSchema),
     matter: z.optional(QueryParamMatter$outboundSchema),
     number: z.optional(z.string()),
     pronouncedFrom: z.optional(z.string()),

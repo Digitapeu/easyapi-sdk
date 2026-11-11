@@ -6,6 +6,8 @@
 import { companyBalanceByYear } from "../funcs/company-balance-by-year.js";
 import { companyBalance } from "../funcs/company-balance.js";
 import { companyBatchGet } from "../funcs/company-batch-get.js";
+import { companyGetV1CompanyCuiInsolvency } from "../funcs/company-get-v1-company-cui-insolvency.js";
+import { companyGetV1CompanyCuiLei } from "../funcs/company-get-v1-company-cui-lei.js";
 import { companyGet } from "../funcs/company-get.js";
 import { companyLitigation } from "../funcs/company-litigation.js";
 import { companyVatStatus } from "../funcs/company-vat-status.js";
@@ -82,6 +84,34 @@ export class Company extends ClientSDK {
     return unwrapAsync(companyLitigation(
       this,
       request,
+      options,
+    ));
+  }
+
+  /**
+   * List the insolvency cases (ECRIS) matching this company's legal name
+   */
+  async getV1CompanyCuiInsolvency(
+    request: operations.GetV1CompanyCuiInsolvencyRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1CompanyCuiInsolvencyResponse> {
+    return unwrapAsync(companyGetV1CompanyCuiInsolvency(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Find the GLEIF LEI record and parent entities for a company by CUI
+   */
+  async getV1CompanyCuiLei(
+    cui: string,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1CompanyCuiLeiResponse> {
+    return unwrapAsync(companyGetV1CompanyCuiLei(
+      this,
+      cui,
       options,
     ));
   }

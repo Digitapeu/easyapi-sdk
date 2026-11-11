@@ -16,6 +16,15 @@ export type GetV1LegislationActsIdVersionsRequest = {
   id: string;
 };
 
+export const GetV1LegislationActsIdVersionsKind = {
+  Consolidation: "consolidation",
+  Republication: "republication",
+  Base: "base",
+} as const;
+export type GetV1LegislationActsIdVersionsKind = OpenEnum<
+  typeof GetV1LegislationActsIdVersionsKind
+>;
+
 export const GetV1LegislationActsIdVersionsStatus = {
   Resolved: "resolved",
   Unresolved: "unresolved",
@@ -33,10 +42,13 @@ export type GetV1LegislationActsIdVersionsAmendingAct = {
 
 export type GetV1LegislationActsIdVersionsItem = {
   version: string;
+  kind: GetV1LegislationActsIdVersionsKind;
   effectiveOn: string;
-  amendingAct: GetV1LegislationActsIdVersionsAmendingAct;
+  amendingAct: GetV1LegislationActsIdVersionsAmendingAct | null;
   sourceDocumentId: string;
-  contentHash: string;
+  contentHash: string | null;
+  stored: boolean;
+  coverageNote: string | null;
 };
 
 export type GetV1LegislationActsIdVersionsData = {
@@ -80,6 +92,12 @@ export function getV1LegislationActsIdVersionsRequestToJSON(
 }
 
 /** @internal */
+export const GetV1LegislationActsIdVersionsKind$inboundSchema: z.ZodMiniType<
+  GetV1LegislationActsIdVersionsKind,
+  unknown
+> = openEnums.inboundSchema(GetV1LegislationActsIdVersionsKind);
+
+/** @internal */
 export const GetV1LegislationActsIdVersionsStatus$inboundSchema: z.ZodMiniType<
   GetV1LegislationActsIdVersionsStatus,
   unknown
@@ -117,12 +135,15 @@ export const GetV1LegislationActsIdVersionsItem$inboundSchema: z.ZodMiniType<
 > = z.pipe(
   z.object({
     version: types.string(),
+    kind: GetV1LegislationActsIdVersionsKind$inboundSchema,
     effective_on: types.string(),
-    amending_act: z.lazy(() =>
-      GetV1LegislationActsIdVersionsAmendingAct$inboundSchema
+    amending_act: types.nullable(
+      z.lazy(() => GetV1LegislationActsIdVersionsAmendingAct$inboundSchema),
     ),
     source_document_id: types.string(),
-    content_hash: types.string(),
+    content_hash: types.nullable(types.string()),
+    stored: types.boolean(),
+    coverage_note: types.nullable(types.string()),
   }),
   z.transform((v) => {
     return remap$(v, {
@@ -130,6 +151,7 @@ export const GetV1LegislationActsIdVersionsItem$inboundSchema: z.ZodMiniType<
       "amending_act": "amendingAct",
       "source_document_id": "sourceDocumentId",
       "content_hash": "contentHash",
+      "coverage_note": "coverageNote",
     });
   }),
 );

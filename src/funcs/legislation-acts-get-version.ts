@@ -5,7 +5,7 @@
 
 import * as z from "zod/v4-mini";
 import { EasyApiCore } from "../core.js";
-import { encodeSimple } from "../lib/encodings.js";
+import { encodeFormQuery, encodeSimple } from "../lib/encodings.js";
 import { matchStatusCode } from "../lib/http.js";
 import * as M from "../lib/matchers.js";
 import { compactMap } from "../lib/primitives.js";
@@ -35,8 +35,7 @@ import { Result } from "../types/fp.js";
  */
 export function legislationActsGetVersion(
   client: EasyApiCore,
-  id: string,
-  version: string,
+  request: operations.GetV1LegislationActsIdVersionsVersionRequest,
   options?: RequestOptions,
 ): APIPromise<
   Result<
@@ -54,16 +53,14 @@ export function legislationActsGetVersion(
 > {
   return new APIPromise($do(
     client,
-    id,
-    version,
+    request,
     options,
   ));
 }
 
 async function $do(
   client: EasyApiCore,
-  id: string,
-  version: string,
+  request: operations.GetV1LegislationActsIdVersionsVersionRequest,
   options?: RequestOptions,
 ): Promise<
   [
@@ -82,13 +79,8 @@ async function $do(
     APICall,
   ]
 > {
-  const input: operations.GetV1LegislationActsIdVersionsVersionRequest = {
-    id: id,
-    version: version,
-  };
-
   const parsed = safeParse(
-    input,
+    request,
     (value) =>
       z.parse(
         operations.GetV1LegislationActsIdVersionsVersionRequest$outboundSchema,
@@ -115,6 +107,10 @@ async function $do(
   const path = pathToFunc("/v1/legislation/acts/{id}/versions/{version}")(
     pathParams,
   );
+
+  const query = encodeFormQuery({
+    "kind": payload.kind,
+  });
 
   const headers = new Headers(compactMap({
     Accept: "application/json",
@@ -155,6 +151,7 @@ async function $do(
     baseURL: options?.serverURL,
     path: path,
     headers: headers,
+    query: query,
     body: body,
     userAgent: client._options.userAgent,
     timeoutMs: options?.timeoutMs || client._options.timeoutMs || -1,
@@ -199,7 +196,7 @@ async function $do(
     ),
     M.jsonErr([400, 401, 403, 404], errors.ErrorEnvelope$inboundSchema),
     M.jsonErr(429, errors.ErrorEnvelope$inboundSchema, { hdrs: true }),
-    M.jsonErr(500, errors.ErrorEnvelope$inboundSchema),
+    M.jsonErr([500, 502], errors.ErrorEnvelope$inboundSchema),
     M.jsonErr(503, errors.ErrorEnvelope$inboundSchema, { hdrs: true }),
     M.fail("4XX"),
     M.fail("5XX"),
