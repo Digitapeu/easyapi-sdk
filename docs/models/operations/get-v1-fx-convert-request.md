@@ -19,3 +19,4 @@ let value: GetV1FxConvertRequest = {
 | `from`             | *string*           | :heavy_check_mark: | N/A                |
 | `to`               | *string*           | :heavy_check_mark: | N/A                |
 | `amount`           | *number*           | :heavy_check_mark: | N/A                |
+| `date`             | *string*           | :heavy_minus_sign: | N/A                |

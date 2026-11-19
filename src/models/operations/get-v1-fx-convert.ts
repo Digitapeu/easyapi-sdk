@@ -16,6 +16,7 @@ export type GetV1FxConvertRequest = {
   from: string;
   to: string;
   amount: number;
+  date?: string | undefined;
 };
 
 export const GetV1FxConvertSource = {
@@ -31,6 +32,7 @@ export type GetV1FxConvertData = {
   result: number;
   rate: number;
   date: string;
+  requestedDate?: string | undefined;
   source: GetV1FxConvertSource;
   checkedAt: Date;
 };
@@ -52,6 +54,7 @@ export type GetV1FxConvertRequest$Outbound = {
   from: string;
   to: string;
   amount: number;
+  date?: string | undefined;
 };
 
 /** @internal */
@@ -62,6 +65,7 @@ export const GetV1FxConvertRequest$outboundSchema: z.ZodMiniType<
   from: z.string(),
   to: z.string(),
   amount: z.number(),
+  date: z.optional(z.string()),
 });
 
 export function getV1FxConvertRequestToJSON(
@@ -89,6 +93,7 @@ export const GetV1FxConvertData$inboundSchema: z.ZodMiniType<
   result: types.number(),
   rate: types.number(),
   date: types.string(),
+  requestedDate: types.optional(types.string()),
   source: GetV1FxConvertSource$inboundSchema,
   checkedAt: types.date(),
 });
