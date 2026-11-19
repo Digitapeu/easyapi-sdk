@@ -3286,7 +3286,7 @@
     },
     "/v1/fx/rates": {
       "get": {
-        "summary": "List the latest BNR reference rates",
+        "summary": "List the latest BNR reference rates, or the rates for a date",
         "tags": [
           "fx"
         ],
@@ -3310,6 +3310,9 @@
                           "const": "RON"
                         },
                         "date": {
+                          "type": "string"
+                        },
+                        "requestedDate": {
                           "type": "string"
                         },
                         "rates": {
@@ -3354,6 +3357,16 @@
                       "additionalProperties": false
                     }
                   }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
                 }
               }
             }
@@ -3414,7 +3427,7 @@
             }
           },
           "503": {
-            "description": "authentication_unavailable",
+            "description": "authentication_unavailable | source_unavailable",
             "headers": {
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
@@ -3430,6 +3443,231 @@
           }
         },
         "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
+      }
+    },
+    "/v1/fx/rates/series": {
+      "get": {
+        "summary": "List one currency's BNR rate for every publication day in a date range",
+        "tags": [
+          "fx"
+        ],
+        "operationId": "get_v1_fx_rates_series",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "base": {
+                          "type": "string",
+                          "const": "RON"
+                        },
+                        "currency": {
+                          "type": "string"
+                        },
+                        "from": {
+                          "type": "string"
+                        },
+                        "to": {
+                          "type": "string"
+                        },
+                        "points": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "date": {
+                                "type": "string"
+                              },
+                              "rate": {
+                                "type": "number",
+                                "exclusiveMinimum": 0
+                              }
+                            },
+                            "required": [
+                              "date",
+                              "rate"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "source": {
+                          "type": "string",
+                          "const": "BNR"
+                        },
+                        "checkedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      },
+                      "required": [
+                        "base",
+                        "currency",
+                        "from",
+                        "to",
+                        "points",
+                        "source",
+                        "checkedAt"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "not_found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable | source_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "currency",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "pattern": "^[A-Za-z]{3}$"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
           {
             "name": "DPoP",
             "in": "header",
@@ -3453,7 +3691,7 @@
     },
     "/v1/fx/convert": {
       "get": {
-        "summary": "Convert an amount between currencies at the latest rates",
+        "summary": "Convert an amount between currencies at the latest rates, or at the rates for a date",
         "tags": [
           "fx"
         ],
@@ -3488,6 +3726,9 @@
                           "type": "number"
                         },
                         "date": {
+                          "type": "string"
+                        },
+                        "requestedDate": {
                           "type": "string"
                         },
                         "source": {
@@ -3595,7 +3836,7 @@
             }
           },
           "503": {
-            "description": "authentication_unavailable",
+            "description": "authentication_unavailable | source_unavailable",
             "headers": {
               "Retry-After": {
                 "$ref": "#/components/headers/RetryAfter"
@@ -3636,6 +3877,733 @@
             "schema": {
               "type": "number",
               "exclusiveMinimum": 0
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
+      }
+    },
+    "/v1/rates/policy": {
+      "get": {
+        "summary": "Get Romania's policy rate, with the change points in a date range",
+        "tags": [
+          "rates"
+        ],
+        "operationId": "get_v1_rates_policy",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "const": "RO"
+                        },
+                        "rate": {
+                          "type": "number"
+                        },
+                        "effectiveFrom": {
+                          "type": "string"
+                        },
+                        "asOf": {
+                          "type": "string"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "const": "percent_per_year"
+                        },
+                        "changes": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "effectiveFrom": {
+                                "type": "string"
+                              },
+                              "rate": {
+                                "type": "number"
+                              }
+                            },
+                            "required": [
+                              "effectiveFrom",
+                              "rate"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "sourceUrl": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "country",
+                        "rate",
+                        "effectiveFrom",
+                        "asOf",
+                        "unit",
+                        "changes",
+                        "source",
+                        "sourceUrl",
+                        "licence"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable | source_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "First day of the range for `changes`, YYYY-MM-DD. Omit to start at the first observation.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Last day of the range for `changes`, YYYY-MM-DD. Omit to end at `asOf`.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
+      }
+    },
+    "/v1/rates/money-market": {
+      "get": {
+        "summary": "List Romania's interbank money market rates, monthly averages, as published by Eurostat",
+        "tags": [
+          "rates"
+        ],
+        "operationId": "get_v1_rates_money_market",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "country": {
+                          "type": "string",
+                          "const": "RO"
+                        },
+                        "unit": {
+                          "type": "string",
+                          "const": "percent_per_year"
+                        },
+                        "averaging": {
+                          "type": "string",
+                          "const": "monthly_average"
+                        },
+                        "latestMonth": {
+                          "type": "string"
+                        },
+                        "months": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "month": {
+                                "type": "string"
+                              },
+                              "overnight": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "m1": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "m3": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "m6": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              },
+                              "m12": {
+                                "type": [
+                                  "number",
+                                  "null"
+                                ]
+                              }
+                            },
+                            "required": [
+                              "month",
+                              "overnight",
+                              "m1",
+                              "m3",
+                              "m6",
+                              "m12"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "sourceUrl": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        },
+                        "doi": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "country",
+                        "unit",
+                        "averaging",
+                        "latestMonth",
+                        "months",
+                        "source",
+                        "sourceUrl",
+                        "licence",
+                        "doi"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable | source_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "First month, YYYY-MM. Omit for 11 months before the end month.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Last month, YYYY-MM. Omit or pass a later month for the latest month with data.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^\\d{4}-(0[1-9]|1[0-2])$"
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
+      }
+    },
+    "/v1/financial-institutions": {
+      "get": {
+        "summary": "List Romanian monetary financial institutions from the ECB list, optionally by category or name",
+        "tags": [
+          "financial-institutions"
+        ],
+        "operationId": "get_v1_financial_institutions",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "listDate": {
+                          "type": "string"
+                        },
+                        "count": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "institutions": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "riadCode": {
+                                "type": "string"
+                              },
+                              "lei": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "address": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "postalCode": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "city": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "category": {
+                                "type": "string"
+                              },
+                              "head": {
+                                "anyOf": [
+                                  {
+                                    "type": "object",
+                                    "properties": {
+                                      "country": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "name": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "riadCode": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      },
+                                      "lei": {
+                                        "type": [
+                                          "string",
+                                          "null"
+                                        ]
+                                      }
+                                    },
+                                    "required": [
+                                      "country",
+                                      "name",
+                                      "riadCode",
+                                      "lei"
+                                    ],
+                                    "additionalProperties": false
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              }
+                            },
+                            "required": [
+                              "riadCode",
+                              "lei",
+                              "name",
+                              "address",
+                              "postalCode",
+                              "city",
+                              "category",
+                              "head"
+                            ],
+                            "additionalProperties": false
+                          }
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "sourceUrl": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "listDate",
+                        "count",
+                        "institutions",
+                        "source",
+                        "sourceUrl",
+                        "licence"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable | source_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category",
+            "in": "query",
+            "description": "Published category, matched exactly ignoring case, e.g. `Credit Institution`.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 100
+            }
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Substring of the name, ignoring case and Romanian diacritics.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 2,
+              "maxLength": 100
             }
           },
           {
@@ -24776,6 +25744,286 @@
               "additionalProperties": {
                 "type": "string"
               }
+            }
+          },
+          {
+            "name": "DPoP",
+            "in": "header",
+            "required": false,
+            "description": "DPoP proof JWT for this request (RFC 9449); required when Authorization uses the DPoP scheme",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "apiKey": []
+          },
+          {
+            "dpop": []
+          }
+        ],
+        "x-required-scope": "company:read"
+      }
+    },
+    "/v1/stats/ecb": {
+      "get": {
+        "summary": "Get ECB Data Portal series for Romania (datasets BSI, MIR, IRS) by series key and period",
+        "tags": [
+          "stats"
+        ],
+        "operationId": "get_v1_stats_ecb",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "data"
+                  ],
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "dataset": {
+                          "type": "string",
+                          "enum": [
+                            "BSI",
+                            "MIR",
+                            "IRS"
+                          ]
+                        },
+                        "series": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "title": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "titleComplete": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "unit": {
+                                "type": [
+                                  "string",
+                                  "null"
+                                ]
+                              },
+                              "unitMultiplier": {
+                                "anyOf": [
+                                  {
+                                    "type": "integer"
+                                  },
+                                  {
+                                    "type": "null"
+                                  }
+                                ]
+                              },
+                              "frequency": {
+                                "type": "string"
+                              },
+                              "observations": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "period": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": [
+                                        "number",
+                                        "null"
+                                      ]
+                                    },
+                                    "status": {
+                                      "type": [
+                                        "string",
+                                        "null"
+                                      ]
+                                    }
+                                  },
+                                  "required": [
+                                    "period",
+                                    "value",
+                                    "status"
+                                  ],
+                                  "additionalProperties": false
+                                }
+                              }
+                            },
+                            "required": [
+                              "key",
+                              "title",
+                              "titleComplete",
+                              "unit",
+                              "unitMultiplier",
+                              "frequency",
+                              "observations"
+                            ],
+                            "additionalProperties": false
+                          },
+                          "maxItems": 50
+                        },
+                        "source": {
+                          "type": "string"
+                        },
+                        "sourceUrl": {
+                          "type": "string"
+                        },
+                        "licence": {
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "dataset",
+                        "series",
+                        "source",
+                        "sourceUrl",
+                        "licence"
+                      ],
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "validation_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "edge_binding_rejected | scope_required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "rate_limited",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "internal_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "502": {
+            "description": "upstream_error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "authentication_unavailable | source_unavailable",
+            "headers": {
+              "Retry-After": {
+                "$ref": "#/components/headers/RetryAfter"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "dataset",
+            "in": "query",
+            "description": "ECB dataset: BSI, MIR or IRS.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "BSI",
+                "MIR",
+                "IRS"
+              ]
+            }
+          },
+          {
+            "name": "key",
+            "in": "query",
+            "description": "Series key without the dataset prefix, e.g. `M.RO.L.L40.CI.0000.RON.N.Z` for IRS. Segment 2 is RO; empty segments are wildcards.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 200
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "First period: YYYY, YYYY-Sn, YYYY-Qn, YYYY-MM or YYYY-MM-DD.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Last period, same form as `from`.",
+            "required": false,
+            "schema": {
+              "type": "string"
             }
           },
           {

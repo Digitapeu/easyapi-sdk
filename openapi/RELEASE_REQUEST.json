@@ -1,27 +1,21 @@
 {
-  "revision": "b03f94a97d85cc5685b3522142a279bc3b4d17a1",
-  "previousRevision": "426d4d2c79c3f05928939fa2eb219062ab66d401",
-  "level": "major",
-  "version": "0.4.0",
-  "floor": "breaking",
+  "revision": "b86a4c5015a2f5b2933513f64cbe1bf67c7c364f",
+  "previousRevision": "b03f94a97d85cc5685b3522142a279bc3b4d17a1",
+  "level": "minor",
+  "version": "0.4.1",
+  "floor": "additive",
   "reasons": [
-    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].amending_act type changed object -> null|object",
-    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].content_hash type changed string -> null|string",
-    "GET /v1/case-law/decisions: operation added",
-    "GET /v1/case-law/decisions/changes: operation added",
-    "GET /v1/case-law/decisions/{id}: operation added",
-    "GET /v1/company/{cui}/insolvency: operation added",
-    "GET /v1/company/{cui}/lei: operation added",
-    "GET /v1/company/{cui}/litigation: response 200 application/json field data.sameName added",
-    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].kind added",
-    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].stored added",
-    "GET /v1/legislation/acts/{id}/versions: response 200 application/json field data.items[].coverage_note added",
-    "GET /v1/legislation/acts/{id}/versions/{version}: optional parameter query:kind added",
-    "GET /v1/legislation/acts/{id}/versions/{version}: response 200 application/json field data.kind added"
+    "GET /v1/financial-institutions: operation added",
+    "GET /v1/fx/rates/series: operation added",
+    "GET /v1/rates/money-market: operation added",
+    "GET /v1/rates/policy: operation added",
+    "GET /v1/stats/ecb: operation added",
+    "GET /v1/fx/convert: optional parameter query:date added",
+    "GET /v1/fx/convert: response 200 application/json field data.requestedDate added",
+    "GET /v1/fx/rates: optional parameter query:date added",
+    "GET /v1/fx/rates: response 200 application/json field data.requestedDate added"
   ],
   "trailers": [
-    "minor",
-    "minor",
     "minor",
     "minor"
   ]
