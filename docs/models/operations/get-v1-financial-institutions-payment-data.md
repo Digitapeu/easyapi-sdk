@@ -1,0 +1,33 @@
+# GetV1FinancialInstitutionsPaymentData
+
+## Example Usage
+
+```typescript
+import { GetV1FinancialInstitutionsPaymentData } from "@digitap.eu/easyapi/models/operations";
+
+let value: GetV1FinancialInstitutionsPaymentData = {
+  publishedAt: "<value>",
+  checkedAt: "<value>",
+  fileSha256: "<value>",
+  count: 741891,
+  institutions: [],
+  source: "<value>",
+  sourceUrl: "https://brave-jury.name",
+  licence: "<value>",
+  disclaimer: "<value>",
+};
+```
+
+## Fields
+
+| Field                                                                                                                                     | Type                                                                                                                                      | Required                                                                                                                                  | Description                                                                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `publishedAt`                                                                                                                             | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `checkedAt`                                                                                                                               | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `fileSha256`                                                                                                                              | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `count`                                                                                                                                   | *number*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `institutions`                                                                                                                            | [operations.GetV1FinancialInstitutionsPaymentInstitution](../../models/operations/get-v1-financial-institutions-payment-institution.md)[] | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `source`                                                                                                                                  | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `sourceUrl`                                                                                                                               | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `licence`                                                                                                                                 | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |
+| `disclaimer`                                                                                                                              | *string*                                                                                                                                  | :heavy_check_mark:                                                                                                                        | N/A                                                                                                                                       |

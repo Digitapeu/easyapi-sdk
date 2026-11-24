@@ -10,7 +10,7 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
-export type Institution = {
+export type GetV1BankInstitutionsInstitution = {
   id: string;
   name: string;
   bic?: string | null | undefined;
@@ -20,7 +20,7 @@ export type Institution = {
 };
 
 export type GetV1BankInstitutionsData = {
-  institutions: Array<Institution>;
+  institutions: Array<GetV1BankInstitutionsInstitution>;
   count: number;
 };
 
@@ -37,30 +37,32 @@ export type GetV1BankInstitutionsResponse = {
 };
 
 /** @internal */
-export const Institution$inboundSchema: z.ZodMiniType<Institution, unknown> = z
-  .pipe(
-    z.object({
-      id: types.string(),
-      name: types.string(),
-      bic: z.optional(z.nullable(types.string())),
-      logo: z.optional(z.nullable(types.string())),
-      countries: types.optional(z.array(types.string())),
-      max_access_valid_for_days: z.optional(z.nullable(types.number())),
-    }),
-    z.transform((v) => {
-      return remap$(v, {
-        "max_access_valid_for_days": "maxAccessValidForDays",
-      });
-    }),
-  );
+export const GetV1BankInstitutionsInstitution$inboundSchema: z.ZodMiniType<
+  GetV1BankInstitutionsInstitution,
+  unknown
+> = z.pipe(
+  z.object({
+    id: types.string(),
+    name: types.string(),
+    bic: z.optional(z.nullable(types.string())),
+    logo: z.optional(z.nullable(types.string())),
+    countries: types.optional(z.array(types.string())),
+    max_access_valid_for_days: z.optional(z.nullable(types.number())),
+  }),
+  z.transform((v) => {
+    return remap$(v, {
+      "max_access_valid_for_days": "maxAccessValidForDays",
+    });
+  }),
+);
 
-export function institutionFromJSON(
+export function getV1BankInstitutionsInstitutionFromJSON(
   jsonString: string,
-): SafeParseResult<Institution, SDKValidationError> {
+): SafeParseResult<GetV1BankInstitutionsInstitution, SDKValidationError> {
   return safeParse(
     jsonString,
-    (x) => Institution$inboundSchema.parse(JSON.parse(x)),
-    `Failed to parse 'Institution' from JSON`,
+    (x) => GetV1BankInstitutionsInstitution$inboundSchema.parse(JSON.parse(x)),
+    `Failed to parse 'GetV1BankInstitutionsInstitution' from JSON`,
   );
 }
 
@@ -69,7 +71,9 @@ export const GetV1BankInstitutionsData$inboundSchema: z.ZodMiniType<
   GetV1BankInstitutionsData,
   unknown
 > = z.object({
-  institutions: z.array(z.lazy(() => Institution$inboundSchema)),
+  institutions: z.array(
+    z.lazy(() => GetV1BankInstitutionsInstitution$inboundSchema),
+  ),
   count: types.number(),
 });
 

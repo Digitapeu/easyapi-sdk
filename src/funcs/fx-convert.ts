@@ -29,7 +29,7 @@ import { APICall, APIPromise } from "../types/async.js";
 import { Result } from "../types/fp.js";
 
 /**
- * Convert an amount between currencies at the latest rates
+ * Convert an amount between currencies at the latest rates, or at the rates for a date
  *
  * If set, this operation will use {@link Security.apiKey} from the global security.
  */
@@ -94,6 +94,7 @@ async function $do(
 
   const query = encodeFormQuery({
     "amount": payload.amount,
+    "date": payload.date,
     "from": payload.from,
     "to": payload.to,
   });

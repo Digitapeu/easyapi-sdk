@@ -10,6 +10,7 @@ import { Company } from "./company.js";
 import { Connections } from "./connections.js";
 import { Efactura } from "./efactura.js";
 import { Etransport } from "./etransport.js";
+import { FinancialInstitutions } from "./financial-institutions.js";
 import { Fx } from "./fx.js";
 import { Geo } from "./geo.js";
 import { Health } from "./health.js";
@@ -17,6 +18,7 @@ import { Justice } from "./justice.js";
 import { Legislation } from "./legislation.js";
 import { Me } from "./me.js";
 import { Procurement } from "./procurement.js";
+import { Rates } from "./rates.js";
 import { Reges } from "./reges.js";
 import { Search } from "./search.js";
 import { Spv } from "./spv.js";
@@ -47,6 +49,18 @@ export class EasyApi extends ClientSDK {
   private _fx?: Fx;
   get fx(): Fx {
     return (this._fx ??= new Fx(this._options));
+  }
+
+  private _rates?: Rates;
+  get rates(): Rates {
+    return (this._rates ??= new Rates(this._options));
+  }
+
+  private _financialInstitutions?: FinancialInstitutions;
+  get financialInstitutions(): FinancialInstitutions {
+    return (this._financialInstitutions ??= new FinancialInstitutions(
+      this._options,
+    ));
   }
 
   private _justice?: Justice;
