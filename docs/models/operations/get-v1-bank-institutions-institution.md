@@ -1,11 +1,11 @@
-# Institution
+# GetV1BankInstitutionsInstitution
 
 ## Example Usage
 
 ```typescript
-import { Institution } from "@digitap.eu/easyapi/models/operations";
+import { GetV1BankInstitutionsInstitution } from "@digitap.eu/easyapi/models/operations";
 
-let value: Institution = {
+let value: GetV1BankInstitutionsInstitution = {
   id: "<id>",
   name: "<value>",
 };
