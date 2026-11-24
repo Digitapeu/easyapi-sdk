@@ -12,6 +12,10 @@ import { Result as SafeParseResult } from "../../types/fp.js";
 import * as types from "../../types/primitives.js";
 import { SDKValidationError } from "../errors/sdk-validation-error.js";
 
+export type GetV1FxRatesRequest = {
+  date?: string | undefined;
+};
+
 export type Rate = {
   currency: string;
   rate: number;
@@ -26,6 +30,7 @@ export type GetV1FxRatesSource = OpenEnum<typeof GetV1FxRatesSource>;
 export type GetV1FxRatesData = {
   base: "RON";
   date: string;
+  requestedDate?: string | undefined;
   rates: Array<Rate>;
   source: GetV1FxRatesSource;
   checkedAt: Date;
@@ -42,6 +47,27 @@ export type GetV1FxRatesResponse = {
   headers: { [k: string]: Array<string> };
   result: GetV1FxRatesResponseBody;
 };
+
+/** @internal */
+export type GetV1FxRatesRequest$Outbound = {
+  date?: string | undefined;
+};
+
+/** @internal */
+export const GetV1FxRatesRequest$outboundSchema: z.ZodMiniType<
+  GetV1FxRatesRequest$Outbound,
+  GetV1FxRatesRequest
+> = z.object({
+  date: z.optional(z.string()),
+});
+
+export function getV1FxRatesRequestToJSON(
+  getV1FxRatesRequest: GetV1FxRatesRequest,
+): string {
+  return JSON.stringify(
+    GetV1FxRatesRequest$outboundSchema.parse(getV1FxRatesRequest),
+  );
+}
 
 /** @internal */
 export const Rate$inboundSchema: z.ZodMiniType<Rate, unknown> = z.object({
@@ -72,6 +98,7 @@ export const GetV1FxRatesData$inboundSchema: z.ZodMiniType<
 > = z.object({
   base: types.literal("RON"),
   date: types.string(),
+  requestedDate: types.optional(types.string()),
   rates: z.array(z.lazy(() => Rate$inboundSchema)),
   source: GetV1FxRatesSource$inboundSchema,
   checkedAt: types.date(),

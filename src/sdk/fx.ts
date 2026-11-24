@@ -4,6 +4,7 @@
  */
 
 import { fxConvert } from "../funcs/fx-convert.js";
+import { fxGetV1FxRatesSeries } from "../funcs/fx-get-v1-fx-rates-series.js";
 import { fxListRates } from "../funcs/fx-list-rates.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
@@ -11,19 +12,35 @@ import { unwrapAsync } from "../types/fp.js";
 
 export class Fx extends ClientSDK {
   /**
-   * List the latest BNR reference rates
+   * List the latest BNR reference rates, or the rates for a date
    */
   async listRates(
+    date?: string | undefined,
     options?: RequestOptions,
   ): Promise<operations.GetV1FxRatesResponse> {
     return unwrapAsync(fxListRates(
       this,
+      date,
       options,
     ));
   }
 
   /**
-   * Convert an amount between currencies at the latest rates
+   * List one currency's BNR rate for every publication day in a date range
+   */
+  async getV1FxRatesSeries(
+    request: operations.GetV1FxRatesSeriesRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1FxRatesSeriesResponse> {
+    return unwrapAsync(fxGetV1FxRatesSeries(
+      this,
+      request,
+      options,
+    ));
+  }
+
+  /**
+   * Convert an amount between currencies at the latest rates, or at the rates for a date
    */
   async convert(
     request: operations.GetV1FxConvertRequest,
