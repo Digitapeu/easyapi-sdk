@@ -4,6 +4,7 @@
  */
 
 import { statsGetMatrix } from "../funcs/stats-get-matrix.js";
+import { statsGetV1StatsEcb } from "../funcs/stats-get-v1-stats-ecb.js";
 import { ClientSDK, RequestOptions } from "../lib/sdks.js";
 import * as operations from "../models/operations/index.js";
 import { unwrapAsync } from "../types/fp.js";
@@ -21,6 +22,20 @@ export class Stats extends ClientSDK {
       this,
       matrix,
       filters,
+      options,
+    ));
+  }
+
+  /**
+   * Get ECB Data Portal series for Romania (datasets BSI, MIR, IRS) by series key and period
+   */
+  async getV1StatsEcb(
+    request: operations.GetV1StatsEcbRequest,
+    options?: RequestOptions,
+  ): Promise<operations.GetV1StatsEcbResponse> {
+    return unwrapAsync(statsGetV1StatsEcb(
+      this,
+      request,
       options,
     ));
   }
